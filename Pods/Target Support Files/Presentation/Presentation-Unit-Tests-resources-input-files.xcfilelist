@@ -1,0 +1,4 @@
+${PODS_ROOT}/Target Support Files/Presentation/Presentation-Unit-Tests-resources.sh
+${PODS_ROOT}/../Modules/Presentation/Presentation/MoviesScene/MovieDetails/View/MovieDetailsViewController.storyboard
+${PODS_ROOT}/../Modules/Presentation/Presentation/MoviesScene/MoviesList/View/MoviesListViewController.storyboard
+${PODS_ROOT}/../Modules/Presentation/Presentation/MoviesScene/MoviesQueriesList/View/MoviesQueriesTableViewController.storyboard
