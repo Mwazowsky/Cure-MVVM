@@ -109,6 +109,18 @@
 		1FFFC836221B0041007D99D2 /* MoviesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFFC830221B0041007D99D2 /* MoviesRepository.swift */; };
 		26EC7307F6E04BE4B6530176 /* Pods_ExampleMVVM_ExampleMVVMUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D97106B1EA40EF137283F30 /* Pods_ExampleMVVM_ExampleMVVMUITests.framework */; };
 		508801769C7E5908AFE3EB6A /* Pods_ExampleMVVM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFA1382D3CA33A13F11F5283 /* Pods_ExampleMVVM.framework */; };
+		642A928C2D894E2500E34BDA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642A928B2D894E1C00E34BDA /* User.swift */; };
+		642A928D2D894E2500E34BDA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642A928B2D894E1C00E34BDA /* User.swift */; };
+		642A92902D894E9F00E34BDA /* AuthenticationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642A928F2D894E9900E34BDA /* AuthenticationError.swift */; };
+		642A92912D894E9F00E34BDA /* AuthenticationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642A928F2D894E9900E34BDA /* AuthenticationError.swift */; };
+		642A92932D894F2C00E34BDA /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642A92922D894F2700E34BDA /* AuthRepository.swift */; };
+		642A92942D894F2C00E34BDA /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642A92922D894F2700E34BDA /* AuthRepository.swift */; };
+		642A92962D89526300E34BDA /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642A92952D89525C00E34BDA /* LoginUseCase.swift */; };
+		642A92972D89526300E34BDA /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642A92952D89525C00E34BDA /* LoginUseCase.swift */; };
+		644944C82D89555C006B11C1 /* RegisterUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644944C72D89555C006B11C1 /* RegisterUseCase.swift */; };
+		644944C92D89555C006B11C1 /* RegisterUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644944C72D89555C006B11C1 /* RegisterUseCase.swift */; };
+		644944CB2D89625E006B11C1 /* ResetPasswordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644944CA2D89625E006B11C1 /* ResetPasswordUseCase.swift */; };
+		644944CC2D89625E006B11C1 /* ResetPasswordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644944CA2D89625E006B11C1 /* ResetPasswordUseCase.swift */; };
 		649027022D55AD68005B5C7A /* MoviesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649027012D55AD68005B5C7A /* MoviesListView.swift */; };
 		649027032D55AD68005B5C7A /* MoviesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649027012D55AD68005B5C7A /* MoviesListView.swift */; };
 		649027042D55AD68005B5C7A /* MoviesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649027012D55AD68005B5C7A /* MoviesListView.swift */; };
@@ -224,6 +236,12 @@
 		1FFFC830221B0041007D99D2 /* MoviesRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesRepository.swift; sourceTree = "<group>"; };
 		1FFFC83D221B02BA007D99D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ExampleMVVMTests/Info.plist; sourceTree = SOURCE_ROOT; };
 		3D97106B1EA40EF137283F30 /* Pods_ExampleMVVM_ExampleMVVMUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ExampleMVVM_ExampleMVVMUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		642A928B2D894E1C00E34BDA /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		642A928F2D894E9900E34BDA /* AuthenticationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationError.swift; sourceTree = "<group>"; };
+		642A92922D894F2700E34BDA /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
+		642A92952D89525C00E34BDA /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
+		644944C72D89555C006B11C1 /* RegisterUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUseCase.swift; sourceTree = "<group>"; };
+		644944CA2D89625E006B11C1 /* ResetPasswordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordUseCase.swift; sourceTree = "<group>"; };
 		649027012D55AD68005B5C7A /* MoviesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListView.swift; sourceTree = "<group>"; };
 		6C0F72E129CF0F5A0005020A /* DispatchQueueType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueType.swift; sourceTree = "<group>"; };
 		6C0F72E429CF12180005020A /* DispatchQueueTypeMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueTypeMock.swift; sourceTree = "<group>"; };
@@ -328,6 +346,7 @@
 		1F474F4A223666700092DB4B /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				642A92922D894F2700E34BDA /* AuthRepository.swift */,
 				1FFFC830221B0041007D99D2 /* MoviesRepository.swift */,
 				1FFFC828221B0041007D99D2 /* MoviesQueriesRepository.swift */,
 				1FFFC82C221B0041007D99D2 /* PosterImagesRepository.swift */,
@@ -543,8 +562,9 @@
 		1FA533D2201EF21000747E55 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				1FA533B1201EE2A500747E55 /* Movie.swift */,
-				FC7408192165574400FE52A5 /* MovieQuery.swift */,
+				642A928E2D894E8A00E34BDA /* Authentication */,
+				642A928A2D894DF200E34BDA /* User */,
+				64F9DEA42D894D7A008F3A35 /* Movie */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -564,8 +584,11 @@
 		1FA533D8201EF2F100747E55 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				642A92952D89525C00E34BDA /* LoginUseCase.swift */,
 				1F05A6CB2220A2CB001E2801 /* SearchMoviesUseCase.swift */,
 				1F84DECF23006BDA00139F73 /* FetchRecentMovieQueriesUseCase.swift */,
+				644944C72D89555C006B11C1 /* RegisterUseCase.swift */,
+				644944CA2D89625E006B11C1 /* ResetPasswordUseCase.swift */,
 				1F4102F2240BEE5800EC014A /* Protocol */,
 			);
 			path = UseCases;
@@ -858,6 +881,31 @@
 				1F6B52142363002C002FCDE9 /* Utils */,
 			);
 			path = Repositories;
+			sourceTree = "<group>";
+		};
+		642A928A2D894DF200E34BDA /* User */ = {
+			isa = PBXGroup;
+			children = (
+				642A928B2D894E1C00E34BDA /* User.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		642A928E2D894E8A00E34BDA /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				642A928F2D894E9900E34BDA /* AuthenticationError.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		64F9DEA42D894D7A008F3A35 /* Movie */ = {
+			isa = PBXGroup;
+			children = (
+				1FA533B1201EE2A500747E55 /* Movie.swift */,
+				FC7408192165574400FE52A5 /* MovieQuery.swift */,
+			);
+			path = Movie;
 			sourceTree = "<group>";
 		};
 		6C0F72E729CF14CD0005020A /* Stubs */ = {
@@ -1154,6 +1202,7 @@
 				1FFF12A72439FA9E00937EE4 /* CoreDataMoviesResponseStorage.swift in Sources */,
 				1FFFC835221B0041007D99D2 /* DefaultMoviesRepository.swift in Sources */,
 				1FE49D8B230AA7C200D1D42E /* MoviesListTableViewController.swift in Sources */,
+				642A92942D894F2C00E34BDA /* AuthRepository.swift in Sources */,
 				1FA533E2201EF5F700747E55 /* APIEndpoints.swift in Sources */,
 				1F77930F222C0DF2004E034C /* StoryboardInstantiable.swift in Sources */,
 				1FE49D84230AA7C200D1D42E /* MoviesQueriesItemCell.swift in Sources */,
@@ -1170,15 +1219,19 @@
 				1FEE31622218B17E00C160B9 /* Observable.swift in Sources */,
 				1FFFC836221B0041007D99D2 /* MoviesRepository.swift in Sources */,
 				1F57F8D223C656F600981E09 /* AccessibilityIdentifier.swift in Sources */,
+				642A92902D894E9F00E34BDA /* AuthenticationError.swift in Sources */,
 				1F0CEFCF23436B67004141FA /* ConnectionError.swift in Sources */,
 				1F05A6CC2220A2CB001E2801 /* SearchMoviesUseCase.swift in Sources */,
+				644944CC2D89625E006B11C1 /* ResetPasswordUseCase.swift in Sources */,
 				1FA533D7201EF2B500747E55 /* AppDIContainer.swift in Sources */,
+				642A928C2D894E2500E34BDA /* User.swift in Sources */,
 				1F6B521323630016002FCDE9 /* RepositoryTask.swift in Sources */,
 				1F9034DF2307464700DEA4BD /* MoviesQueriesStorage.swift in Sources */,
 				1FE49D8A230AA7C200D1D42E /* MoviesListItemCell.swift in Sources */,
 				1F1FC48B22E3693100BCBA8D /* Endpoint.swift in Sources */,
 				1FFFC831221B0041007D99D2 /* DefaultMoviesQueriesRepository.swift in Sources */,
 				1FD03807239098650016D05F /* CoreDataStorage.xcdatamodeld in Sources */,
+				642A92962D89526300E34BDA /* LoginUseCase.swift in Sources */,
 				1FE49D87230AA7C200D1D42E /* MovieDetailsViewController.swift in Sources */,
 				1FC5B7D0242634EB0086FA8C /* UIImageView+ImageSizeAfterAspectFit.swift in Sources */,
 				1FE49D8C230AA7C200D1D42E /* MoviesListViewController.swift in Sources */,
@@ -1195,6 +1248,7 @@
 				1F474F2222356B1E0092DB4B /* Cancellable.swift in Sources */,
 				6C0F72E229CF0F5B0005020A /* DispatchQueueType.swift in Sources */,
 				1FFFC833221B0041007D99D2 /* DefaultPosterImagesRepository.swift in Sources */,
+				644944C92D89555C006B11C1 /* RegisterUseCase.swift in Sources */,
 				FC740818216555C500FE52A5 /* UserDefaultsMoviesQueriesStorage.swift in Sources */,
 				649027022D55AD68005B5C7A /* MoviesListView.swift in Sources */,
 				1FCE68A1222C873A00CC3074 /* MoviesSceneDIContainer.swift in Sources */,
@@ -1213,6 +1267,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				644944C82D89555C006B11C1 /* RegisterUseCase.swift in Sources */,
 				1F9034C82306FF2D00DEA4BD /* NetworkConfig.swift in Sources */,
 				649027032D55AD68005B5C7A /* MoviesListView.swift in Sources */,
 				1F9034C62306FF2D00DEA4BD /* DataTransferService.swift in Sources */,
@@ -1226,7 +1281,9 @@
 				6C0F72E329CF115F0005020A /* DispatchQueueType.swift in Sources */,
 				1F7C1D19242117910014F011 /* Movie+Stub.swift in Sources */,
 				1F90353A2307716300DEA4BD /* MoviesListViewModelTests.swift in Sources */,
+				642A928D2D894E2500E34BDA /* User.swift in Sources */,
 				1F9034C72306FF2D00DEA4BD /* Endpoint.swift in Sources */,
+				642A92932D894F2C00E34BDA /* AuthRepository.swift in Sources */,
 				1F9034CE230713FC00DEA4BD /* DataTransferServiceTests.swift in Sources */,
 				1FA53A3922F45CD9009A104C /* SearchMoviesUseCaseTests.swift in Sources */,
 				1F474F2B22356C7F0092DB4B /* MovieQuery.swift in Sources */,
@@ -1234,11 +1291,14 @@
 				1F474F2D22356C7F0092DB4B /* SearchMoviesUseCase.swift in Sources */,
 				1F9034C52306FF2D00DEA4BD /* NetworkService.swift in Sources */,
 				1F9034D32307161D00DEA4BD /* NetworkSessionManagerMock.swift in Sources */,
+				642A92912D894E9F00E34BDA /* AuthenticationError.swift in Sources */,
 				1FFF1C10243B9ABB00937EE4 /* MoviesListItemViewModel.swift in Sources */,
 				1F84DECE2300677B00139F73 /* Observable.swift in Sources */,
 				1F474F3022356C7F0092DB4B /* MoviesQueriesRepository.swift in Sources */,
+				644944CB2D89625E006B11C1 /* ResetPasswordUseCase.swift in Sources */,
 				1F9034D1230714B900DEA4BD /* NetworkConfigurableMock.swift in Sources */,
 				6C0F72E629CF12930005020A /* DispatchQueueTypeMock.swift in Sources */,
+				642A92972D89526300E34BDA /* LoginUseCase.swift in Sources */,
 				1F9034DA2307238C00DEA4BD /* MoviesQueriesListViewModelTests.swift in Sources */,
 				1F474F2F22356C7F0092DB4B /* PosterImagesRepository.swift in Sources */,
 				1FE49D9D230AEC5D00D1D42E /* MoviesQueryListViewModel.swift in Sources */,
