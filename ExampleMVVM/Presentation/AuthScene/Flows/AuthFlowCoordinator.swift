@@ -7,14 +7,8 @@
 
 import UIKit
 
-protocol Coordinator: AnyObject {
-    func start()
-    func finish()
-}
-
 protocol AuthFlowCoordinatorDependencies {
     func makeLoginViewController(actions: LoginViewModelActions) -> LoginViewController
-
 }
 
 protocol AuthFlowCoordinatorDelegate: AnyObject {
@@ -42,6 +36,10 @@ final class AuthFlowCoordinator {
         showLogin()
     }
     
+    func finish() {
+        // Clean up if needed
+    }
+    
     private func showLogin() {
         let actions = LoginViewModelActions(
             showRegister: showRegister,
@@ -66,15 +64,7 @@ final class AuthFlowCoordinator {
     }
     
     private func loginDidSucceed(user: LoginResponse) {
-        print("Login Success")
-
-        /// [FIX] Replace this with a proper flow coordinator function, instead of restarting it with movieFlow.start()
-        /// this will treat the hoe view as a navigation stack view instead of seperate main view
-//        let moviesSceneDIContainer = appDIContainer.makeMoviesSceneDIContainer()
-//        let movieFlow = moviesSceneDIContainer.makeMoviesSearchFlowCoordinator(navigationController: navigationController ?? UINavigationController())
-//        
-//        movieFlow.start()
-        
         delegate?.authFlowDidFinish(with: user)
+        finish()
     }
 }
