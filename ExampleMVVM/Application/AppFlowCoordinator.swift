@@ -1,7 +1,7 @@
 import UIKit
 
 final class AppFlowCoordinator {
-
+    
     var navigationController: UINavigationController
     private let appDIContainer: AppDIContainer
     
@@ -12,11 +12,34 @@ final class AppFlowCoordinator {
         self.navigationController = navigationController
         self.appDIContainer = appDIContainer
     }
-
+    
     func start() {
-        // In App Flow we can check if user needs to login, if yes we would run login flow
+        showAuthFlow()
+    }
+    
+    
+    private func showAuthFlow() {
+        let authSceneDIContainer = appDIContainer.makeAuthSceneDIContainer()
+        let authFlow = authSceneDIContainer.makeAuthFlowCoordinator(
+            navigationController: navigationController,
+            delegate: self
+        )
+        authFlow.start()
+    }
+    
+    
+    private func showMoviesFlow() {
         let moviesSceneDIContainer = appDIContainer.makeMoviesSceneDIContainer()
-        let flow = moviesSceneDIContainer.makeMoviesSearchFlowCoordinator(navigationController: navigationController)
-        flow.start()
+        let moviesFlow = moviesSceneDIContainer.makeMoviesSearchFlowCoordinator(
+            navigationController: navigationController
+        )
+        moviesFlow.start()
+    }
+}
+
+
+extension AppFlowCoordinator: AuthFlowCoordinatorDelegate {
+    func authFlowDidFinish(with user: LoginResponse) {
+        showMoviesFlow()
     }
 }

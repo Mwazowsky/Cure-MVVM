@@ -11,7 +11,6 @@ protocol MoviesSearchFlowCoordinatorDependencies  {
 }
 
 final class MoviesSearchFlowCoordinator {
-    
     private weak var navigationController: UINavigationController?
     private let dependencies: MoviesSearchFlowCoordinatorDependencies
 
@@ -31,7 +30,7 @@ final class MoviesSearchFlowCoordinator {
                                                  closeMovieQueriesSuggestions: closeMovieQueriesSuggestions)
         let vc = dependencies.makeMoviesListViewController(actions: actions)
 
-        navigationController?.pushViewController(vc, animated: false)
+        navigationController?.pushViewController(vc, animated: true)
         moviesListVC = vc
     }
 

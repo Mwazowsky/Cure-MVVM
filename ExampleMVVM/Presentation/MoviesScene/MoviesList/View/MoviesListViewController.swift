@@ -56,7 +56,6 @@ final class MoviesListViewController: UIViewController, StoryboardInstantiable, 
     }
 
     // MARK: - Private
-
     private func setupViews() {
         title = viewModel.screenTitle
         emptyDataLabel.text = viewModel.emptyDataTitle

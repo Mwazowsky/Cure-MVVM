@@ -22,7 +22,19 @@ final class DefaultResetPasswordUseCase: ResetPasswordUseCase {
         self.authRepository = authRepository
     }
     
-    func execute(requestValue: ResetPasswordUseCaseRequestValue, completion: @escaping (Result<Bool, AuthenticationError>) -> Void) {
-        <#code#>
+    func execute(
+        requestValue: ResetPasswordUseCaseRequestValue,
+        completion: @escaping (Result<Bool, AuthenticationError>) -> Void
+    ) {
+        guard !requestValue.email.isEmpty else {
+            completion(.failure(.invalidCredentials))
+            
+            return
+        }
+        
+        return authRepository.resetPassword(
+            email: requestValue.email,
+            completion: completion
+        )
     }
 }

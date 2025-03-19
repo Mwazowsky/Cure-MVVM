@@ -7,7 +7,7 @@ enum DataTransferError: Error {
     case resolvedNetworkFailure(Error)
 }
 
-protocol DataTransferDispatchQueue {
+protocol DataTransferDispatchQueue { 
     func asyncExecute(work: @escaping () -> Void)
 }
 
@@ -199,3 +199,5 @@ class RawDataResponseDecoder: ResponseDecoder {
         }
     }
 }
+
+

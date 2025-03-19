@@ -25,4 +25,24 @@ struct APIEndpoints {
             responseDecoder: RawDataResponseDecoder()
         )
     }
+    
+    static func login(with loginRequestDTO: LoginRequestDTO) -> Endpoint<LoginResponseDTO> {
+        print("Login API Call Function")
+        // Change this with your own login url
+        return Endpoint(
+            path: "3/search/movie",
+            method: .get,
+            queryParametersEncodable: loginRequestDTO
+        )
+    }
+    
+    static func register(with registerRequestDto: RegisterRequestDTO) -> Endpoint<RegisterResponseDTO> {
+        print("Login API Call Function")
+        // Change this with your own login url
+        return Endpoint(
+            path: "3/search/movie",
+            method: .get,
+            queryParametersEncodable: registerRequestDto
+        )
+    }
 }

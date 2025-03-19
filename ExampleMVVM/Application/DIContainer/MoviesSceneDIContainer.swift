@@ -44,16 +44,21 @@ final class MoviesSceneDIContainer: MoviesSearchFlowCoordinatorDependencies {
             cache: moviesResponseCache
         )
     }
+    
+    
     func makeMoviesQueriesRepository() -> MoviesQueriesRepository {
         DefaultMoviesQueriesRepository(
             moviesQueriesPersistentStorage: moviesQueriesStorage
         )
     }
+    
+    
     func makePosterImagesRepository() -> PosterImagesRepository {
         DefaultPosterImagesRepository(
             dataTransferService: dependencies.imageDataTransferService
         )
     }
+    
     
     // MARK: - Movies List
     func makeMoviesListViewController(actions: MoviesListViewModelActions) -> MoviesListViewController {
@@ -63,12 +68,14 @@ final class MoviesSceneDIContainer: MoviesSearchFlowCoordinatorDependencies {
         )
     }
     
+    
     func makeMoviesListViewModel(actions: MoviesListViewModelActions) -> MoviesListViewModel {
         DefaultMoviesListViewModel(
             searchMoviesUseCase: makeSearchMoviesUseCase(),
             actions: actions
         )
     }
+    
     
     // MARK: - Movie Details
     func makeMoviesDetailsViewController(movie: Movie) -> UIViewController {
@@ -77,12 +84,14 @@ final class MoviesSceneDIContainer: MoviesSearchFlowCoordinatorDependencies {
         )
     }
     
+    
     func makeMoviesDetailsViewModel(movie: Movie) -> MovieDetailsViewModel {
         DefaultMovieDetailsViewModel(
             movie: movie,
             posterImagesRepository: makePosterImagesRepository()
         )
     }
+    
     
     // MARK: - Movies Queries Suggestions List
     func makeMoviesQueriesSuggestionsListViewController(didSelect: @escaping MoviesQueryListViewModelDidSelectAction) -> UIViewController {
@@ -98,6 +107,7 @@ final class MoviesSceneDIContainer: MoviesSearchFlowCoordinatorDependencies {
         }
     }
     
+    
     func makeMoviesQueryListViewModel(didSelect: @escaping MoviesQueryListViewModelDidSelectAction) -> MoviesQueryListViewModel {
         DefaultMoviesQueryListViewModel(
             numberOfQueriesToShow: 10,
@@ -106,6 +116,7 @@ final class MoviesSceneDIContainer: MoviesSearchFlowCoordinatorDependencies {
         )
     }
 
+    
     @available(iOS 13.0, *)
     func makeMoviesQueryListViewModelWrapper(
         didSelect: @escaping MoviesQueryListViewModelDidSelectAction
@@ -115,8 +126,11 @@ final class MoviesSceneDIContainer: MoviesSearchFlowCoordinatorDependencies {
         )
     }
 
+    
     // MARK: - Flow Coordinators
-    func makeMoviesSearchFlowCoordinator(navigationController: UINavigationController) -> MoviesSearchFlowCoordinator {
+    func makeMoviesSearchFlowCoordinator(
+        navigationController: UINavigationController
+    ) -> MoviesSearchFlowCoordinator {
         MoviesSearchFlowCoordinator(
             navigationController: navigationController,
             dependencies: self

@@ -8,7 +8,7 @@
 import Foundation
 
 protocol RegisterUseCase {
-    func execute(requestValue: RegisterUseCaseRequestValue, completion: @escaping (Result<User, AuthenticationError>) -> Void)
+    func execute(requestValue: RegisterUseCaseRequestValue, completion: @escaping (Result<RegisterResponse, AuthenticationError>) -> Void)
 }
 
 
@@ -27,7 +27,7 @@ final class DefaultRegisterUseCase: RegisterUseCase {
         self.authRepository = authRepository
     }
     
-    func execute(requestValue: RegisterUseCaseRequestValue, completion: @escaping (Result<User, AuthenticationError>) -> Void) {
+    func execute(requestValue: RegisterUseCaseRequestValue, completion: @escaping (Result<RegisterResponse, AuthenticationError>) -> Void) {
         guard !requestValue.username.isEmpty,
               !requestValue.email.isEmpty,
               !requestValue.password.isEmpty,
@@ -47,10 +47,14 @@ final class DefaultRegisterUseCase: RegisterUseCase {
             return
         }
         
-        return authRepository.register(
+        let requestData: RegisterRequestDTO = RegisterRequestDTO(
             username: requestValue.username,
             email: requestValue.email,
-            password: requestValue.password,
+            password: requestValue.password
+        )
+        
+        return authRepository.register(
+            request: requestData,
             completion: completion
         )
     }
