@@ -2,9 +2,8 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    let appDIContainer = AppDIContainer()
-    var appFlowCoordinator: AppFlowCoordinator?
+    var appFlowCoordinator: AppFlowCoordinator? // Main Coordinator
+    
     var window: UIWindow?
     
     func application(
@@ -15,15 +14,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AppAppearance.setupAppearance()
         
         window = UIWindow(frame: UIScreen.main.bounds)
+        
+        let windowManager = WindowManager(window: window!)
+        
         let navigationController = UINavigationController()
-
-        window?.rootViewController = navigationController
+        let appDIContainer = AppDIContainer(windowManager: windowManager)
+        
         appFlowCoordinator = AppFlowCoordinator(
             navigationController: navigationController,
             appDIContainer: appDIContainer
         )
-        appFlowCoordinator?.start()
+        
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
+        appFlowCoordinator?.start()
     
         return true
     }

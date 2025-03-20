@@ -4,6 +4,16 @@ final class AppDIContainer {
     
     lazy var appConfiguration = AppConfiguration()
     
+    private let windowManager: WindowManageable
+    
+    init(windowManager: WindowManageable) {
+        self.windowManager = windowManager
+    }
+    
+    func makeWindowManager() -> WindowManageable {
+        return windowManager
+    }
+    
     // MARK: - Network
     lazy var apiDataTransferService: DataTransferService = {
         let config = ApiDataNetworkConfig(

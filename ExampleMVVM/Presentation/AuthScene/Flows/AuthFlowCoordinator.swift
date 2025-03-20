@@ -15,10 +15,14 @@ protocol AuthFlowCoordinatorDelegate: AnyObject {
     func authFlowDidFinish(with user: LoginResponse)
 }
 
-final class AuthFlowCoordinator {
-    private weak var navigationController: UINavigationController?
+final class AuthFlowCoordinator: Coordinator {
+    var childCoordinators: [Coordinator] = [Coordinator]()
+    
+    weak var navigationController: UINavigationController?
     private let dependencies: AuthFlowCoordinatorDependencies
     private weak var delegate: AuthFlowCoordinatorDelegate?
+    
+    weak var parentCoordinator: AppFlowCoordinator?
     
     private weak var loginVC: LoginViewController?
     
@@ -37,7 +41,8 @@ final class AuthFlowCoordinator {
     }
     
     func finish() {
-        // Clean up if needed
+        print("Entered AuthflowCoordinator > Finish")
+        parentCoordinator?.childDidFinish(self)
     }
     
     private func showLogin() {
@@ -65,6 +70,6 @@ final class AuthFlowCoordinator {
     
     private func loginDidSucceed(user: LoginResponse) {
         delegate?.authFlowDidFinish(with: user)
-        finish()
+        self.finish()
     }
 }
