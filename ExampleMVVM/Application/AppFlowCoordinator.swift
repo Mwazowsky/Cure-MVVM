@@ -24,7 +24,7 @@ final class AppFlowCoordinator {
     }
     
     func start() {
-        showAuthFlow()
+        handlingNavigation(token: false)
     }
     
     private func showAuthFlow() {
@@ -57,6 +57,15 @@ final class AppFlowCoordinator {
         moviesFlow.parentCoordinator = self
         
         moviesFlow.start()
+    }
+    
+    
+    func handlingNavigation(token: Bool) {
+        if (token == true) {
+            showMoviesFlow()
+        } else {
+            showAuthFlow()
+        }
     }
 }
 

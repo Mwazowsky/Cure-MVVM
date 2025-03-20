@@ -35,16 +35,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         CoreDataStorage.shared.saveContext()
     }
-    
-    func handlingNavigation(token: Bool) {
-        if (token == true) {
-            let vc = MoviesListViewController()
-            let navigationController = UINavigationController(rootViewController: vc)
-            self.window?.rootViewController = navigationController
-        } else {
-            let vc = LoginViewController()
-            let navigationController = UINavigationController(rootViewController: vc)
-            self.window?.rootViewController = navigationController
-        }
-    }
 }
