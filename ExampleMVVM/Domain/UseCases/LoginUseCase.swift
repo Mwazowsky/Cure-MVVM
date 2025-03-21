@@ -10,7 +10,7 @@ protocol LoginUseCase {
 }
 
 struct LoginUseCaseRequestValue {
-    let email: String
+    let username: String
     let password: String
 }
 
@@ -22,14 +22,16 @@ final class DefaultLoginUseCase: LoginUseCase {
     }
     
     func execute(requestValue: LoginUseCaseRequestValue, completion: @escaping (Result<LoginResponse, AuthenticationError>) -> Void) {
-        guard !requestValue.email.isEmpty, !requestValue.password.isEmpty else {
+        guard !requestValue.username.isEmpty, !requestValue.password.isEmpty else {
             completion(.failure(.invalidCredentials))
             return
         }
         
         let requestData: LoginRequestDTO = LoginRequestDTO(
-            email: requestValue.email, password: requestValue.password
+            username: requestValue.username, password: requestValue.password
         )
+        
+        print("request data [loginUseCase.execute()]: ", requestData)
         
         return authRepository.login(
             request: requestData,

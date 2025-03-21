@@ -12,7 +12,7 @@ import Foundation
 struct UserResponseDTO: Decodable {
     private enum CodingKeys: String, CodingKey {
         case id = "id"
-        case username, email
+        case username, namaLengkap
         case role = "role"
     }
     enum RoleDTO: String, Decodable {
@@ -21,7 +21,7 @@ struct UserResponseDTO: Decodable {
     }
     let id: String
     let username: String
-    let email: String
+    let namaLengkap: String
     let role: RoleDTO
     // Other User details from api response here
 }

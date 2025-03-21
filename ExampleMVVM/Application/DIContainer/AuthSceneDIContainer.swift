@@ -11,7 +11,7 @@ import SwiftUI
 
 final class AuthSceneDIContainer {
     struct Dependencies {
-        let apiDataTransferService: DataTransferService
+        let newApiDataTransferervice: DataTransferService
     }
     
     private let dependencies: Dependencies
@@ -31,14 +31,14 @@ final class AuthSceneDIContainer {
     // MARK: - Repositories
     private func makeAuthRepository() -> AuthRepository {
         return DefaultAuthRepository(
-            dataTransferService: dependencies.apiDataTransferService,
+            dataTransferService: dependencies.newApiDataTransferervice,
             cache: moviesResponseCache
         )
     }
     
     private func makeUserRepository() -> UsersRepository {
         return DefaultUsersRepository(
-            dataTransferService: dependencies.apiDataTransferService,
+            dataTransferService: dependencies.newApiDataTransferervice,
             cache: moviesResponseCache
         )
     }

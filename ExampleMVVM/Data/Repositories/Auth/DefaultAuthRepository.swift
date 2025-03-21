@@ -28,7 +28,7 @@ extension DefaultAuthRepository: AuthRepository {
         request: LoginRequestDTO,
         completion: @escaping (Result<LoginResponse, AuthenticationError>) -> Void
     ) {
-        let requestDTO = LoginRequestDTO(email: request.email, password: request.password)
+        let requestDTO = LoginRequestDTO(username: request.username, password: request.password)
         let task = RepositoryTask()
         
         let endpoint = APIEndpoints.login(with: requestDTO)
@@ -51,7 +51,7 @@ extension DefaultAuthRepository: AuthRepository {
         request: RegisterRequestDTO,
         completion: @escaping (Result<RegisterResponse, AuthenticationError>) -> Void
     ) {
-        let requestDTO = RegisterRequestDTO(username: request.username, email: request.email, password: request.password)
+        let requestDTO = RegisterRequestDTO(namaLengkap: request.namaLengkap, username: request.username, password: request.password)
         let task = RepositoryTask()
         
         let endpoint = APIEndpoints.register(with: requestDTO)
@@ -70,7 +70,7 @@ extension DefaultAuthRepository: AuthRepository {
         }
     }
     
-    func resetPassword(email: String, completion: @escaping (Result<Bool, AuthenticationError>) -> Void) {
+    func resetPassword(username: String, completion: @escaping (Result<Bool, AuthenticationError>) -> Void) {
         print("Implementation of DefaultAuthRepository.resetPassword")
     }
     
@@ -85,7 +85,7 @@ extension DefaultAuthRepository {
     private func mapToDomain(response: LoginResponseDTO) -> LoginResponse {
         return LoginResponse(
             id: response.id,
-            email: response.email,
+            username: response.username,
             role: UserResponseDTO.RoleDTO(rawValue: response.role.rawValue) ?? .staff,
             token: response.token
         )
@@ -96,7 +96,7 @@ extension DefaultAuthRepository {
         return RegisterResponse(
             id: response.id,
             username: response.username,
-            email: response.email,
+            namaLengkap: response.namaLengkap,
             password: response.password,
             role: UserResponseDTO.RoleDTO(rawValue: response.role.rawValue) ?? .staff
         )
@@ -107,7 +107,7 @@ extension DefaultAuthRepository {
         return User(
             id: response.id,
             username: response.username,
-            email: response.email,
+            namaLengkap: response.namaLengkap,
             role: response.role
         )
     }

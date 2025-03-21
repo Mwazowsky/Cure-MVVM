@@ -1698,6 +1698,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				NEW_API_BASE_URL = "https://api.saranalintasmedika.co.id";
 				PRODUCT_BUNDLE_IDENTIFIER = "Oleh-Kudinov.ExampleMVVM";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1726,6 +1727,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				NEW_API_BASE_URL = "https://api.saranalintasmedika.co.id";
 				PRODUCT_BUNDLE_IDENTIFIER = "Oleh-Kudinov.ExampleMVVM";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

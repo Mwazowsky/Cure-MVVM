@@ -15,6 +15,8 @@ final class AppDIContainer {
     }
     
     // MARK: - Network
+    /// This is data service based on the base url, if there are many different base urls, add more of this
+    /// in here I have 3 base urls
     lazy var apiDataTransferService: DataTransferService = {
         let config = ApiDataNetworkConfig(
             baseURL: URL(string: appConfiguration.apiBaseURL)!,
@@ -22,6 +24,15 @@ final class AppDIContainer {
                 "api_key": appConfiguration.apiKey,
                 "language": NSLocale.preferredLanguages.first ?? "en"
             ]
+        )
+        
+        let apiDataNetwork = DefaultNetworkService(config: config)
+        return DefaultDataTransferService(with: apiDataNetwork)
+    }()
+    
+    lazy var newApiDataTransferService: DataTransferService = {
+        let config = ApiDataNetworkConfig(
+            baseURL: URL(string: appConfiguration.newApiBaseURL)!
         )
         
         let apiDataNetwork = DefaultNetworkService(config: config)
@@ -39,7 +50,7 @@ final class AppDIContainer {
     // MARK: - DIContainers of scenes
     func makeAuthSceneDIContainer() -> AuthSceneDIContainer {
         let dependencies = AuthSceneDIContainer.Dependencies(
-            apiDataTransferService: apiDataTransferService
+            newApiDataTransferervice: newApiDataTransferService
         )
         return AuthSceneDIContainer(dependencies: dependencies)
     }

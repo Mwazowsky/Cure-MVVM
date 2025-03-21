@@ -8,7 +8,7 @@
 struct User: Equatable, Identifiable {
     let id: String
     let username: String
-    let email: String
+    let namaLengkap: String
     let role: UserResponseDTO.RoleDTO
     // Other User details here
 }

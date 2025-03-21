@@ -12,7 +12,7 @@ protocol ResetPasswordUseCase {
 }
 
 struct ResetPasswordUseCaseRequestValue {
-    let email: String
+    let username: String
 }
 
 final class DefaultResetPasswordUseCase: ResetPasswordUseCase {
@@ -26,14 +26,14 @@ final class DefaultResetPasswordUseCase: ResetPasswordUseCase {
         requestValue: ResetPasswordUseCaseRequestValue,
         completion: @escaping (Result<Bool, AuthenticationError>) -> Void
     ) {
-        guard !requestValue.email.isEmpty else {
+        guard !requestValue.username.isEmpty else {
             completion(.failure(.invalidCredentials))
             
             return
         }
         
         return authRepository.resetPassword(
-            email: requestValue.email,
+            username: requestValue.username,
             completion: completion
         )
     }

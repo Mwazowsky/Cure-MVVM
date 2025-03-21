@@ -8,7 +8,7 @@
 enum AuthenticationError: Error {
     case invalidCredentials
     case networkFailure
-    case emailAlreadyExist
+    case usernameAlreadyExist
     case weakPassword
     case serverError(String)
     case unknownError
@@ -16,7 +16,7 @@ enum AuthenticationError: Error {
 
 struct LoginResponse {
     let id: String
-    let email: String
+    let username: String
     let role: UserResponseDTO.RoleDTO
     let token: String
 }
@@ -25,7 +25,7 @@ struct LoginResponse {
 struct RegisterResponse {
     let id: String
     let username: String
-    let email: String
+    let namaLengkap: String
     let password: String
     let role: UserResponseDTO.RoleDTO?
 }

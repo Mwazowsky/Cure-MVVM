@@ -9,12 +9,12 @@ import Foundation
 
 // MARK: - Data Transfer Object
 struct LoginRequestDTO: Encodable {
-    let email: String
+    let username: String
     let password: String
 }
 
 struct RegisterRequestDTO: Encodable {
+    let namaLengkap: String
     let username: String
-    let email: String
     let password: String
 }

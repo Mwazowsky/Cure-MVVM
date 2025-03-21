@@ -14,7 +14,7 @@ protocol RegisterUseCase {
 
 struct RegisterUseCaseRequestValue {
     let username: String
-    let email: String
+    let namaLengkap: String
     let password: String
     let confirmPassword: String
 }
@@ -29,7 +29,7 @@ final class DefaultRegisterUseCase: RegisterUseCase {
     
     func execute(requestValue: RegisterUseCaseRequestValue, completion: @escaping (Result<RegisterResponse, AuthenticationError>) -> Void) {
         guard !requestValue.username.isEmpty,
-              !requestValue.email.isEmpty,
+              !requestValue.username.isEmpty,
               !requestValue.password.isEmpty,
               !requestValue.confirmPassword.isEmpty else {
             completion(.failure(.invalidCredentials))
@@ -48,8 +48,8 @@ final class DefaultRegisterUseCase: RegisterUseCase {
         }
         
         let requestData: RegisterRequestDTO = RegisterRequestDTO(
+            namaLengkap: requestValue.namaLengkap,
             username: requestValue.username,
-            email: requestValue.email,
             password: requestValue.password
         )
         

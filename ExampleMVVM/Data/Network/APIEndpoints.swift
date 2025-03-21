@@ -1,5 +1,7 @@
 import Foundation
 
+
+/// Note: This could potentially be a humongous file, if there is a bunch of endpoints
 struct APIEndpoints {
     
     static func getMovies(with moviesRequestDTO: MoviesRequestDTO) -> Endpoint<MoviesResponseDTO> {
@@ -26,19 +28,25 @@ struct APIEndpoints {
         )
     }
     
+    
     static func login(with loginRequestDTO: LoginRequestDTO) -> Endpoint<LoginResponseDTO> {
-        print("Login API Call Function")
-        // Change this with your own login url
+        
+        let headerParameters = [
+            "accept": "*/*",
+            "Content-Type": "application/json"
+        ]
+        
         return Endpoint(
-            path: "3/search/movie",
-            method: .get,
-            queryParametersEncodable: loginRequestDTO
+            path: "app/hris/auth/login",
+            method: .post,
+            headerParameters: headerParameters,
+            bodyParametersEncodable: loginRequestDTO
         )
     }
     
+    
     static func register(with registerRequestDto: RegisterRequestDTO) -> Endpoint<RegisterResponseDTO> {
-        print("Login API Call Function")
-        // Change this with your own login url
+
         return Endpoint(
             path: "3/search/movie",
             method: .get,
