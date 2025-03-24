@@ -15,9 +15,6 @@ final class AuthSceneDIContainer {
     }
     
     private let dependencies: Dependencies
-//    private lazy var authPersistenceService: AuthPersistenceService = {
-//        return DefaultAuthPersistenceService()
-//    }()
     
     // Replace: Replace with a proper keychain storage to store user login response data
     lazy var moviesQueriesStorage: MoviesQueriesStorage  = CoreDataMoviesQueriesStorage(maxStorageLimit: 10)

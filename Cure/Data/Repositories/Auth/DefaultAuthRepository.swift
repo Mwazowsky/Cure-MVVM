@@ -70,7 +70,7 @@ extension DefaultAuthRepository: AuthRepository {
         }
     }
     
-    func resetPassword(username: String, completion: @escaping (Result<Bool, AuthenticationError>) -> Void) {
+    func resetPassword(email: String, completion: @escaping (Result<Bool, AuthenticationError>) -> Void) {
         print("Implementation of DefaultAuthRepository.resetPassword")
     }
     
