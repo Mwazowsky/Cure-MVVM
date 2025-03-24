@@ -1,6 +1,6 @@
 platform :ios, '12.0'
 
-target 'ExampleMVVM' do
+target 'Cure' do
   use_frameworks!
   
   # Local Pods
@@ -14,7 +14,7 @@ target 'ExampleMVVM' do
   # pod 'Socket.IO-Client-Swift', '~> 16.1.0'
   
   
-  target 'ExampleMVVMUITests' do
+  target 'CureUITests' do
   end
 
 end
