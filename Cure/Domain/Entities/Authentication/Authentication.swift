@@ -13,19 +13,3 @@ enum AuthenticationError: Error {
     case serverError(String)
     case unknownError
 }
-
-struct LoginResponse {
-    let id: String
-    let username: String
-    let role: UserResponseDTO.RoleDTO
-    let token: String
-}
-
-
-struct RegisterResponse {
-    let id: String
-    let username: String
-    let namaLengkap: String
-    let password: String
-    let role: UserResponseDTO.RoleDTO?
-}

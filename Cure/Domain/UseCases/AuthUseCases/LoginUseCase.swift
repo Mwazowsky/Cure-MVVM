@@ -6,7 +6,7 @@
 //
 
 protocol LoginUseCase {
-    func execute(requestValue: LoginUseCaseRequestValue, completion: @escaping (Result<LoginResponse, AuthenticationError>) -> Void)
+    func execute(requestValue: LoginUseCaseRequestValue, completion: @escaping (Result<LoginResponseDTO, AuthenticationError>) -> Void)
 }
 
 struct LoginUseCaseRequestValue {
@@ -21,7 +21,7 @@ final class DefaultLoginUseCase: LoginUseCase {
         self.authRepository = authRepository
     }
     
-    func execute(requestValue: LoginUseCaseRequestValue, completion: @escaping (Result<LoginResponse, AuthenticationError>) -> Void) {
+    func execute(requestValue: LoginUseCaseRequestValue, completion: @escaping (Result<LoginResponseDTO, AuthenticationError>) -> Void) {
         guard !requestValue.username.isEmpty, !requestValue.password.isEmpty else {
             completion(.failure(.invalidCredentials))
             return

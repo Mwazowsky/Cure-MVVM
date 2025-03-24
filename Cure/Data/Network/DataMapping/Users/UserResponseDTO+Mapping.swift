@@ -11,19 +11,21 @@ import Foundation
 
 struct UserResponseDTO: Decodable {
     private enum CodingKeys: String, CodingKey {
-        case id = "id"
-        case username, namaLengkap
+        case email = "email"
+        case expiredAt = "expiredAt"
         case role = "role"
+        case token = "accessToken"
     }
+    
     enum RoleDTO: String, Decodable {
         case admin = "ADMIN"
         case staff = "STAFF"
     }
-    let id: String
-    let username: String
-    let namaLengkap: String
+    
+    let email: String
+    let expiredAt: Int
     let role: RoleDTO
-    // Other User details from api response here
+    let token: String
 }
 
 // MARK: - Private

@@ -5,10 +5,10 @@
 //  Created by MacBook Air MII  on 18/03/25.
 //
 
-struct User: Equatable, Identifiable {
-    let id: String
-    let username: String
-    let namaLengkap: String
+struct User: Equatable {
+    let user_id: String
+    let email: String
+    let expiredAt: Int
     let role: UserResponseDTO.RoleDTO
-    // Other User details here
+    let accessToken: String
 }

@@ -41,6 +41,7 @@ final class AuthSceneDIContainer {
     }
     
     // MARK: - Use Cases
+    /// Auth
     func makeLoginUseCase() -> LoginUseCase {
         return DefaultLoginUseCase(authRepository: makeAuthRepository())
     }
@@ -57,14 +58,20 @@ final class AuthSceneDIContainer {
         return DefaultLogoutUseCase(authRepository: makeAuthRepository())
     }
     
-    func makeGetCurrentUserUseCase() -> GetCurrentUserUseCase {
+    /// User Data Save
+    func makeGetCurrentUserUseCase() -> GetUserUseCase {
         return DefaultGetCurrentUserUseCase(userRepository: makeUserRepository())
+    }
+    
+    func makeSaveCurrentUserUseCase() -> SaveUserUseCase {
+        return DefaultSaveUserUseCase(userRepository: makeUserRepository())
     }
     
     // MARK: - View Models
     func makeLoginViewModel(actions: LoginViewModelActions) -> LoginViewModel {
         return DefaultLoginViewModel(
             loginUseCase: makeLoginUseCase(),
+            saveUserDataUseCase: makeSaveCurrentUserUseCase(),
             actions: actions
         )
     }

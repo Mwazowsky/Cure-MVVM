@@ -10,7 +10,7 @@ import Foundation
 struct LoginViewModelActions {
     let showRegister: () -> Void
     let showForgotPassword: () -> Void
-    let loginDidSucceed: (LoginResponse) -> Void
+    let loginDidSucceed: (LoginResponseDTO) -> Void
 }
 
 protocol LoginViewModelInput {
@@ -42,14 +42,17 @@ final class DefaultLoginViewModel: LoginViewModel {
     
     // MARK: - Private
     private let loginUseCase: LoginUseCase
+    private let saveUserDataUseCase: SaveUserUseCase
     private let actions: LoginViewModelActions
     
     // MARK: - Init
     init(
         loginUseCase: LoginUseCase,
+        saveUserDataUseCase: SaveUserUseCase,
         actions: LoginViewModelActions
     ) {
         self.loginUseCase = loginUseCase
+        self.saveUserDataUseCase = saveUserDataUseCase
         self.actions = actions
     }
     
@@ -72,9 +75,10 @@ final class DefaultLoginViewModel: LoginViewModel {
         loginUseCase.execute(requestValue: request) { [weak self] result in
             guard let self = self else { return }
             self.isLoading.value = false
-            
+            print("Result: ", result)
             switch result {
             case .success(let user):
+                print("User: ", user)
                 self.actions.loginDidSucceed(user)
             case .failure(let error):
                 self.error.value = self.mapErrorToMessage(error)

@@ -26,21 +26,18 @@ final class DefaultAuthRepository {
 extension DefaultAuthRepository: AuthRepository {
     func login(
         request: LoginRequestDTO,
-        completion: @escaping (Result<LoginResponse, AuthenticationError>) -> Void
+        completion: @escaping (Result<LoginResponseDTO, AuthenticationError>) -> Void
     ) {
         let requestDTO = LoginRequestDTO(username: request.username, password: request.password)
-        let task = RepositoryTask()
-        
         let endpoint = APIEndpoints.login(with: requestDTO)
-        
-        dataTransferService.request(with: endpoint) { [weak self] (result: Result<LoginResponseDTO, DataTransferError>) in
+        print("Login Endpoint: ", endpoint)
+        dataTransferService.request(with: endpoint) { [weak self] (result:  Result<APIResponse, DataTransferError>) in
             guard let self = self else { return }
             
             switch result {
             case .success(let response):
-                let user = self.mapToDomain(response: response)
-//                self.persistenceService.saveToken(token: response.token)
-                completion(.success(user))
+                print("Login Response: ", response)
+                completion(.success(response))
             case .failure(let error):
                 completion(.failure(self.mapError(error)))
             }
@@ -49,10 +46,10 @@ extension DefaultAuthRepository: AuthRepository {
     
     func register(
         request: RegisterRequestDTO,
-        completion: @escaping (Result<RegisterResponse, AuthenticationError>) -> Void
+        completion: @escaping (Result<RegisterResponseDTO, AuthenticationError>) -> Void
     ) {
         let requestDTO = RegisterRequestDTO(namaLengkap: request.namaLengkap, username: request.username, password: request.password)
-        let task = RepositoryTask()
+//        let task = RepositoryTask()
         
         let endpoint = APIEndpoints.register(with: requestDTO)
         
@@ -61,9 +58,9 @@ extension DefaultAuthRepository: AuthRepository {
             
             switch result {
             case .success(let response):
-                let user = self.mapToDomain(response: response)
+//                let user = self.mapToDomain(response: response)
 //                self.persistenceService.saveToken(token: response.token)
-                completion(.success(user))
+                completion(.success(response))
             case .failure(let error):
                 completion(.failure(self.mapError(error)))
             }
@@ -82,18 +79,19 @@ extension DefaultAuthRepository: AuthRepository {
 
 // MARK: Domain mapper
 extension DefaultAuthRepository {
-    private func mapToDomain(response: LoginResponseDTO) -> LoginResponse {
-        return LoginResponse(
-            id: response.id,
-            username: response.username,
+    private func mapToDomain(response: LoginResponseDTO) -> LoginResponseDTO {
+        return LoginResponseDTO(
+            userId: response.userId,
+            email: response.email,
+            expiredAt: response.expiredAt,
             role: UserResponseDTO.RoleDTO(rawValue: response.role.rawValue) ?? .staff,
             token: response.token
         )
     }
     
     
-    private func mapToDomain(response: RegisterResponseDTO) -> RegisterResponse {
-        return RegisterResponse(
+    private func mapToDomain(response: RegisterResponseDTO) -> RegisterResponseDTO {
+        return RegisterResponseDTO(
             id: response.id,
             username: response.username,
             namaLengkap: response.namaLengkap,
@@ -103,12 +101,13 @@ extension DefaultAuthRepository {
     }
     
     
-    private func mapToDomain(response: UserResponseDTO) -> User {
+    private func mapToDomain(response: LoginResponseDTO) -> User {
         return User(
-            id: response.id,
-            username: response.username,
-            namaLengkap: response.namaLengkap,
-            role: response.role
+            user_id: response.userId,
+            email: response.email,
+            expiredAt: response.expiredAt,
+            role: response.role,
+            accessToken: response.token
         )
     }
     

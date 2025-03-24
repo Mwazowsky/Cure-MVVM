@@ -7,16 +7,33 @@
 
 import Foundation
 
+struct APIResponse<T: Decodable>: Decodable {
+    let message: String
+    let code: Int
+    let meta: MetaData
+    let data: T
+    let path: String
+}
+
+struct MetaData: Decodable {
+    let page: Int
+    let size: Int
+    let totalData: Int
+    let totalPages: Int
+}
+
 struct LoginResponseDTO: Decodable {
     private enum CodingKeys: String, CodingKey {
-        case id = "id"
-        case username
+        case userId = "user_id"
+        case email = "email"
+        case expiredAt = "expiredAt"
         case role = "role"
-        case token = "jwt_token"
+        case token = "accessToken"
     }
     
-    let id: String
-    let username: String
+    let userId: String
+    let email: String
+    let expiredAt: Int
     let role: UserResponseDTO.RoleDTO
     let token: String
 }

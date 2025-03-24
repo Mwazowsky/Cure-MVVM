@@ -8,5 +8,7 @@
 import Foundation
 
 protocol UsersRepository {
-    func getCurrentUser(completion: @escaping (Result<User?, Error>) -> Void)
+    func saveUserData(_ userData: User) -> Bool
+    func getUserData() -> User?
+    func deleteUserData() -> Bool
 }
