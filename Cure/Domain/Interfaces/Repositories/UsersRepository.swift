@@ -8,7 +8,7 @@
 import Foundation
 
 protocol UsersRepository {
-    func saveUserData(_ userData: User) -> Bool
-    func getUserData() -> User?
+    func saveUserData(_ userData: LoginResponseDTO) -> Bool
+    func getUserData() -> LoginResponseDTO?
     func deleteUserData() -> Bool
 }

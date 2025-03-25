@@ -67,10 +67,12 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
     
     init(
         searchMoviesUseCase: SearchMoviesUseCase,
+        getUserDataUseCase: GetUserUseCase,
         actions: MoviesListViewModelActions? = nil,
         mainQueue: DispatchQueueType = DispatchQueue.main
     ) {
         self.searchMoviesUseCase = searchMoviesUseCase
+        self.getUserDataUseCase = getUserDataUseCase
         self.actions = actions
         self.mainQueue = mainQueue
     }
@@ -87,6 +89,8 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
 
         items.value = pages.movies.map(MoviesListItemViewModel.init)
     }
+    
+    private let getUserDataUseCase: GetUserUseCase
 
     private func resetPages() {
         currentPage = 0
@@ -98,6 +102,8 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
     private func load(movieQuery: MovieQuery, loading: MoviesListViewModelLoading) {
         self.loading.value = loading
         query.value = movieQuery.query
+        
+        print("Get Saved User Data: ", getUserDataUseCase.execute() as Any)
 
         moviesLoadTask = searchMoviesUseCase.execute(
             requestValue: .init(query: movieQuery, page: nextPage),
@@ -135,7 +141,9 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
 
 extension DefaultMoviesListViewModel {
 
-    func viewDidLoad() { }
+    func viewDidLoad() {
+        print("Get Saved User Data: ", getUserDataUseCase.execute() as Any)
+    }
 
     func didLoadNextPage() {
         guard hasMorePages, loading.value == .none else { return }

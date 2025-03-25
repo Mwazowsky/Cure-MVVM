@@ -22,7 +22,7 @@ struct MetaData: Decodable {
     let totalPages: Int
 }
 
-struct LoginResponseDTO: Decodable {
+struct LoginResponseDTO: Codable {
     private enum CodingKeys: String, CodingKey {
         case userId = "user_id"
         case email = "email"

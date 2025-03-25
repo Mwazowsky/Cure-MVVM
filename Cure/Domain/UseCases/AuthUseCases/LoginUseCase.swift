@@ -31,8 +31,6 @@ final class DefaultLoginUseCase: LoginUseCase {
             username: requestValue.username, password: requestValue.password
         )
         
-        print("request data [loginUseCase.execute()]: ", requestData)
-        
         return authRepository.login(
             request: requestData,
             completion: completion

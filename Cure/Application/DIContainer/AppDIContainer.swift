@@ -59,6 +59,7 @@ final class AppDIContainer {
     func makeMoviesSceneDIContainer() -> MoviesSceneDIContainer {
         let dependencies = MoviesSceneDIContainer.Dependencies(
             apiDataTransferService: apiDataTransferService,
+            newApiDataTransferervice: newApiDataTransferService,
             imageDataTransferService: imageDataTransferService
         )
         return MoviesSceneDIContainer(dependencies: dependencies)

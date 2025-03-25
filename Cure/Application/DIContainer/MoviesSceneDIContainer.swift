@@ -5,6 +5,7 @@ final class MoviesSceneDIContainer: MoviesSearchFlowCoordinatorDependencies {
     
     struct Dependencies {
         let apiDataTransferService: DataTransferService
+        let newApiDataTransferervice: DataTransferService
         let imageDataTransferService: DataTransferService
     }
     
@@ -37,6 +38,10 @@ final class MoviesSceneDIContainer: MoviesSearchFlowCoordinatorDependencies {
         )
     }
     
+    func makeGetCurrentUserUseCase() -> GetUserUseCase {
+        return DefaultGetCurrentUserUseCase(userRepository: makeUserRepository())
+    }
+    
     // MARK: - Repositories
     func makeMoviesRepository() -> MoviesRepository {
         DefaultMoviesRepository(
@@ -59,6 +64,12 @@ final class MoviesSceneDIContainer: MoviesSearchFlowCoordinatorDependencies {
         )
     }
     
+    private func makeUserRepository() -> UsersRepository {
+        return DefaultUsersRepository(
+            dataTransferService: dependencies.newApiDataTransferervice,
+            cache: moviesResponseCache
+        )
+    }
     
     // MARK: - Movies List
     func makeMoviesListViewController(actions: MoviesListViewModelActions) -> MoviesListViewController {
@@ -68,10 +79,11 @@ final class MoviesSceneDIContainer: MoviesSearchFlowCoordinatorDependencies {
         )
     }
     
-    
+    // Initial or home view, change this to tab bar view or something else depending on your need
     func makeMoviesListViewModel(actions: MoviesListViewModelActions) -> MoviesListViewModel {
         DefaultMoviesListViewModel(
             searchMoviesUseCase: makeSearchMoviesUseCase(),
+            getUserDataUseCase: makeGetCurrentUserUseCase(),
             actions: actions
         )
     }

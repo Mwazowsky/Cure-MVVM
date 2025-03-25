@@ -13,6 +13,7 @@ final class AppFlowCoordinator {
     var navigationController: UINavigationController
     private let appDIContainer: AppDIContainer
     private let windowManager: WindowManageable
+    private let getUserDataUseCase: GetUserUseCase
     
     init(
         navigationController: UINavigationController,
@@ -21,10 +22,12 @@ final class AppFlowCoordinator {
         self.navigationController = navigationController
         self.appDIContainer = appDIContainer
         self.windowManager = appDIContainer.makeWindowManager()
+        self.getUserDataUseCase = appDIContainer.makeMoviesSceneDIContainer().makeGetCurrentUserUseCase()
     }
     
     func start() {
-        handlingNavigation(token: false)
+        let userData = getUserDataUseCase.execute()
+        handlingNavigation(token: userData?.token)
     }
     
     private func showAuthFlow() {
@@ -50,7 +53,7 @@ final class AppFlowCoordinator {
             navigationController: newNavigationController
         )
         
-        windowManager.changeRootViewController(to: newNavigationController, animated: true)
+        windowManager.changeRootViewController(to: newNavigationController, animated: false)
         childCoordinators.removeAll()
         childCoordinators.append(moviesFlow)
         
@@ -60,8 +63,10 @@ final class AppFlowCoordinator {
     }
     
     
-    func handlingNavigation(token: Bool) {
-        if (token == true) {
+    func handlingNavigation(token: String?) {
+        if let token = token,
+           !token.isEmpty,
+           token.trimmingCharacters(in: .whitespacesAndNewlines).count > 0 {
             showMoviesFlow()
         } else {
             showAuthFlow()
@@ -73,7 +78,6 @@ final class AppFlowCoordinator {
 extension AppFlowCoordinator: AuthFlowCoordinatorDelegate {
     func authFlowDidFinish(with user: LoginResponse) {
         showMoviesFlow()
-        print("child coordinators: \(childCoordinators)")
     }
     
     func childDidFinish(_ child: Coordinator?) {

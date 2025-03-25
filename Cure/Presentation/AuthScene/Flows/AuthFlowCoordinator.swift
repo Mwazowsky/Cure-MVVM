@@ -41,7 +41,6 @@ final class AuthFlowCoordinator: Coordinator {
     }
     
     func finish() {
-        print("Entered AuthflowCoordinator > Finish")
         parentCoordinator?.childDidFinish(self)
     }
     

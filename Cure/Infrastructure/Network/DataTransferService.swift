@@ -83,17 +83,13 @@ extension DefaultDataTransferService: DataTransferService {
         on queue: DataTransferDispatchQueue,
         completion: @escaping CompletionHandler<T>
     ) -> NetworkCancellable? where E.Response == T {
-        print("Raw Response Inner0.0")
         return networkService.request(endpoint: endpoint) { result in
-            print("Raw Response Inner0.0: ", result)
             switch result {
             case .success(let data):
-                print("Data Response Inner0.0: ", data as Any)
                 let result: Result<T, DataTransferError> = self.decode(
                     data: data,
                     decoder: endpoint.responseDecoder
                 )
-                print("Result Response Inner0.0: ", result)
                 queue.asyncExecute { completion(result) }
             case .failure(let error):
                 self.errorLogger.log(error: error)
@@ -107,7 +103,6 @@ extension DefaultDataTransferService: DataTransferService {
         with endpoint: E,
         completion: @escaping CompletionHandler<T>
     ) -> NetworkCancellable? where E.Response == T {
-        print("Raw Response Inner0.1: ")
         return request(with: endpoint, on: DispatchQueue.main, completion: completion)
     }
 
@@ -116,11 +111,9 @@ extension DefaultDataTransferService: DataTransferService {
         on queue: DataTransferDispatchQueue,
         completion: @escaping CompletionHandler<Void>
     ) -> NetworkCancellable? where E : ResponseRequestable, E.Response == Void {
-        print("Raw Response Inner1.0: ")
         return networkService.request(endpoint: endpoint) { result in
             switch result {
             case .success:
-                print("Success Response Inner: ", result)
                 queue.asyncExecute { completion(.success(())) }
             case .failure(let error):
                 self.errorLogger.log(error: error)
@@ -145,12 +138,9 @@ extension DefaultDataTransferService: DataTransferService {
     ) -> Result<T, DataTransferError> {
         do {
             guard let data = data else { return .failure(.noResponse) }
-            print("Data parsing b4: ", data)
             let result: T = try decoder.decode(data)
-            print("Data parsing result: ", result)
             return .success(result)
         } catch {
-            print("Data parsing error")
             self.errorLogger.log(error: error)
             return .failure(.parsing(error))
         }

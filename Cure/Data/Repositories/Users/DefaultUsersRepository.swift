@@ -26,22 +26,32 @@ final class DefaultUsersRepository {
 }
 
 extension DefaultUsersRepository: UsersRepository {
-
-    func saveUserData(_ userData: User) -> Bool {
-        let query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: keychainService,
-            kSecAttrAccount as String: "currentUserData",
-            kSecValueData as String: userData
-        ]
-        
-        SecItemDelete(query as CFDictionary)
-        
-        let status = SecItemAdd(query as CFDictionary, nil)
-        return status == errSecSuccess
+    
+    func saveUserData(_ userData: LoginResponseDTO) -> Bool {
+        do {
+            let userData = try JSONEncoder().encode(userData)
+            
+            let query: [String: Any] = [
+                kSecClass as String: kSecClassGenericPassword,
+                kSecAttrService as String: keychainService,
+                kSecAttrAccount as String: "currentUserData",
+                kSecValueData as String: userData
+            ]
+            
+            print("Keychain save query: ", query)
+            
+            SecItemDelete(query as CFDictionary)
+            
+            let status = SecItemAdd(query as CFDictionary, nil)
+            
+            print("Keychain save status: ", status)
+            return status == errSecSuccess
+        } catch {
+            return false
+        }
     }
     
-    func getUserData() -> User? {
+    func getUserData() -> LoginResponseDTO? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: keychainService,
@@ -54,7 +64,15 @@ extension DefaultUsersRepository: UsersRepository {
         let status = SecItemCopyMatching(query as CFDictionary, &dataTypeRef)
         
         guard status == errSecSuccess else { return nil }
-        return dataTypeRef as? User
+        if status == errSecSuccess, let data = dataTypeRef as? Data {
+            do {
+                return try JSONDecoder().decode(LoginResponseDTO.self, from: data)
+            } catch {
+                print("Error decoding user data: \(error)")
+                return nil
+            }
+        }
+        return nil
     }
     
     func deleteUserData() -> Bool {

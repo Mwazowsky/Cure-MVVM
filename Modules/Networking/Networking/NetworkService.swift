@@ -38,7 +38,7 @@ public protocol NetworkSession {
                   completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> Cancellable
 }
 
-extension URLSessionTask: Cancellable { }
+extension URLSessionTask: @retroactive Cancellable { }
 
 extension URLSession: NetworkSession {
     public func loadData(from request: URLRequest,

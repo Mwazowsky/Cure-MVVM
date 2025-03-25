@@ -8,7 +8,7 @@
 import Foundation
 
 protocol SaveUserUseCase {
-    func execute(userData: User) -> Bool
+    func execute(userData: LoginResponseDTO) -> Bool
 }
 
 class DefaultSaveUserUseCase: SaveUserUseCase {
@@ -18,7 +18,7 @@ class DefaultSaveUserUseCase: SaveUserUseCase {
         self.userRepository = userRepository
     }
     
-    func execute(userData: User) -> Bool {
+    func execute(userData: LoginResponseDTO) -> Bool {
         return userRepository.saveUserData(userData)
     }
 }

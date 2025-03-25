@@ -8,7 +8,7 @@
 import Foundation
 
 protocol GetUserUseCase {
-    func execute() -> User?
+    func execute() -> LoginResponseDTO?
 }
 
 final class DefaultGetCurrentUserUseCase: GetUserUseCase {
@@ -18,7 +18,7 @@ final class DefaultGetCurrentUserUseCase: GetUserUseCase {
         self.userRepository = userRepository
     }
     
-    func execute() -> User? {
+    func execute() -> LoginResponseDTO? {
         return userRepository.getUserData()
     }
 }

@@ -59,10 +59,6 @@ final class AuthSceneDIContainer {
     }
     
     /// User Data Save
-    func makeGetCurrentUserUseCase() -> GetUserUseCase {
-        return DefaultGetCurrentUserUseCase(userRepository: makeUserRepository())
-    }
-    
     func makeSaveCurrentUserUseCase() -> SaveUserUseCase {
         return DefaultSaveUserUseCase(userRepository: makeUserRepository())
     }

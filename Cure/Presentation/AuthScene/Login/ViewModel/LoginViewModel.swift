@@ -62,8 +62,6 @@ final class DefaultLoginViewModel: LoginViewModel {
     }
     
     func didTapLoginButton() {
-        print("Login Button Tapped")
-        
         isLoading.value = true
         error.value = nil
         
@@ -75,11 +73,10 @@ final class DefaultLoginViewModel: LoginViewModel {
         loginUseCase.execute(requestValue: request) { [weak self] result in
             guard let self = self else { return }
             self.isLoading.value = false
-            print("Result: ", result)
             switch result {
             case .success(let user):
-                print("User: ", user)
                 self.actions.loginDidSucceed(user)
+                print("IsUser data saved: ", self.saveUserDataUseCase.execute(userData: user.data))
             case .failure(let error):
                 self.error.value = self.mapErrorToMessage(error)
             }

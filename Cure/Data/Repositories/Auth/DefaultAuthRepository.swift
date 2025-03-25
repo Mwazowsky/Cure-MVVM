@@ -36,7 +36,6 @@ extension DefaultAuthRepository: AuthRepository {
             
             switch result {
             case .success(let response):
-                print("Login Response: ", response)
                 completion(.success(response))
             case .failure(let error):
                 completion(.failure(self.mapError(error)))
