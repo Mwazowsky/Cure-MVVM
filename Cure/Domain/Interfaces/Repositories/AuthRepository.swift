@@ -8,7 +8,7 @@
 protocol AuthRepository {
     func login(
         request: LoginRequestDTO,
-        completion: @escaping (Result<LoginResponseDTO, AuthenticationError>) -> Void
+        completion: @escaping (Result<LoginResponse, AuthenticationError>) -> Void
     )
     
     func register(

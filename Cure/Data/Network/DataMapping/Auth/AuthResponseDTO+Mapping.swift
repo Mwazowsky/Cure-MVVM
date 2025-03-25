@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct APIResponse<T: Decodable>: Decodable {
+struct LoginResponse: Decodable {
     let message: String
     let code: Int
     let meta: MetaData
-    let data: T
+    let data: LoginResponseDTO
     let path: String
 }
 

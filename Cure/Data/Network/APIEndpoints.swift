@@ -29,7 +29,7 @@ struct APIEndpoints {
     }
     
     
-    static func login(with loginRequestDTO: LoginRequestDTO) -> Endpoint<LoginResponseDTO> {
+    static func login(with loginRequestDTO: LoginRequestDTO) -> Endpoint<LoginResponse> {
         
         let headerParameters = [
             "accept": "*/*",

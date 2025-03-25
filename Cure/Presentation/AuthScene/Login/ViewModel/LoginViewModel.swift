@@ -10,7 +10,7 @@ import Foundation
 struct LoginViewModelActions {
     let showRegister: () -> Void
     let showForgotPassword: () -> Void
-    let loginDidSucceed: (LoginResponseDTO) -> Void
+    let loginDidSucceed: (LoginResponse) -> Void
 }
 
 protocol LoginViewModelInput {

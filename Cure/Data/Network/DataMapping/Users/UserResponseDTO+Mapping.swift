@@ -18,7 +18,7 @@ struct UserResponseDTO: Decodable {
     }
     
     enum RoleDTO: String, Decodable {
-        case admin = "ADMIN"
+        case admin = "ADMINISTRATOR"
         case staff = "STAFF"
     }
     

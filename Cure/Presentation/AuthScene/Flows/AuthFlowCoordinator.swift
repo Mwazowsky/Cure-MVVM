@@ -12,7 +12,7 @@ protocol AuthFlowCoordinatorDependencies {
 }
 
 protocol AuthFlowCoordinatorDelegate: AnyObject {
-    func authFlowDidFinish(with user: LoginResponseDTO)
+    func authFlowDidFinish(with user: LoginResponse)
 }
 
 final class AuthFlowCoordinator: Coordinator {
@@ -68,7 +68,7 @@ final class AuthFlowCoordinator: Coordinator {
         //        navigationController?.pushViewController(vc, animated: true)
     }
     
-    private func loginDidSucceed(user: LoginResponseDTO) {
+    private func loginDidSucceed(user: LoginResponse) {
         delegate?.authFlowDidFinish(with: user)
         self.finish()
     }

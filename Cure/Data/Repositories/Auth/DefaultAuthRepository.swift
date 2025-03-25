@@ -26,12 +26,12 @@ final class DefaultAuthRepository {
 extension DefaultAuthRepository: AuthRepository {
     func login(
         request: LoginRequestDTO,
-        completion: @escaping (Result<LoginResponseDTO, AuthenticationError>) -> Void
+        completion: @escaping (Result<LoginResponse, AuthenticationError>) -> Void
     ) {
         let requestDTO = LoginRequestDTO(username: request.username, password: request.password)
         let endpoint = APIEndpoints.login(with: requestDTO)
         print("Login Endpoint: ", endpoint)
-        dataTransferService.request(with: endpoint) { [weak self] (result:  Result<APIResponse, DataTransferError>) in
+        dataTransferService.request(with: endpoint) { [weak self] (result:  Result<LoginResponse, DataTransferError>) in
             guard let self = self else { return }
             
             switch result {
@@ -79,13 +79,13 @@ extension DefaultAuthRepository: AuthRepository {
 
 // MARK: Domain mapper
 extension DefaultAuthRepository {
-    private func mapToDomain(response: LoginResponseDTO) -> LoginResponseDTO {
+    private func mapToDomain(response: LoginResponse) -> LoginResponseDTO {
         return LoginResponseDTO(
-            userId: response.userId,
-            email: response.email,
-            expiredAt: response.expiredAt,
-            role: UserResponseDTO.RoleDTO(rawValue: response.role.rawValue) ?? .staff,
-            token: response.token
+            userId: response.data.userId,
+            email: response.data.email,
+            expiredAt: response.data.expiredAt,
+            role: UserResponseDTO.RoleDTO(rawValue: response.data.role.rawValue) ?? .staff,
+            token: response.data.token
         )
     }
     

@@ -71,7 +71,7 @@ final class AppFlowCoordinator {
 
 
 extension AppFlowCoordinator: AuthFlowCoordinatorDelegate {
-    func authFlowDidFinish(with user: LoginResponseDTO) {
+    func authFlowDidFinish(with user: LoginResponse) {
         showMoviesFlow()
         print("child coordinators: \(childCoordinators)")
     }
