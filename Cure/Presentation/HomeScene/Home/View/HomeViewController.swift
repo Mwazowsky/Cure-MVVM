@@ -1,7 +1,8 @@
 import UIKit
 
 final class HomeViewController: UIViewController, Alertable {
-
+    @IBOutlet private(set) var suggestionsListContainer: UIView!
+    
     private var viewModel: HomeViewModel!
     private var searchController = UISearchController(searchResultsController: nil)
 

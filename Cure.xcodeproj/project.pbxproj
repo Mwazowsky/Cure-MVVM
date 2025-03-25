@@ -153,7 +153,7 @@
 		64B740462D8A862300168646 /* AuthSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B740452D8A862300168646 /* AuthSceneDIContainer.swift */; };
 		64BAAFB82D927A7900B70EFF /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BAAFB72D927A7500B70EFF /* UseCase.swift */; };
 		64BAAFB92D927A7900B70EFF /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BAAFB72D927A7500B70EFF /* UseCase.swift */; };
-		64BAAFBB2D927FEF00B70EFF /* HomeDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BAAFBA2D927FEF00B70EFF /* HomeDIContainer.swift */; };
+		64BAAFBB2D927FEF00B70EFF /* HomeSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BAAFBA2D927FEF00B70EFF /* HomeSceneDIContainer.swift */; };
 		64BAAFE12D92804200B70EFF /* MoviesListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BAAFC32D92804200B70EFF /* MoviesListTableViewController.swift */; };
 		64BAAFE62D92804200B70EFF /* MoviesListItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BAAFC42D92804200B70EFF /* MoviesListItemCell.swift */; };
 		64BAAFE82D92804200B70EFF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BAAFC12D92804200B70EFF /* HomeViewController.swift */; };
@@ -313,7 +313,7 @@
 		64B740432D8A860C00168646 /* AuthFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthFlowCoordinator.swift; sourceTree = "<group>"; };
 		64B740452D8A862300168646 /* AuthSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSceneDIContainer.swift; sourceTree = "<group>"; };
 		64BAAFB72D927A7500B70EFF /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
-		64BAAFBA2D927FEF00B70EFF /* HomeDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDIContainer.swift; sourceTree = "<group>"; };
+		64BAAFBA2D927FEF00B70EFF /* HomeSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneDIContainer.swift; sourceTree = "<group>"; };
 		64BAAFBC2D92804200B70EFF /* HomeFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFlowCoordinator.swift; sourceTree = "<group>"; };
 		64BAAFBE2D92804200B70EFF /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		64BAAFC12D92804200B70EFF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -445,7 +445,7 @@
 				1FCE68A0222C873A00CC3074 /* MoviesSceneDIContainer.swift */,
 				64B740452D8A862300168646 /* AuthSceneDIContainer.swift */,
 				1FA533D6201EF2B500747E55 /* AppDIContainer.swift */,
-				64BAAFBA2D927FEF00B70EFF /* HomeDIContainer.swift */,
+				64BAAFBA2D927FEF00B70EFF /* HomeSceneDIContainer.swift */,
 			);
 			path = DIContainer;
 			sourceTree = "<group>";
@@ -1565,7 +1565,7 @@
 				1FB0903A2437651700DBE132 /* UIViewController+AddBehaviors.swift in Sources */,
 				1F5CE1CD242C303700A9CDE3 /* CoreDataStorage.swift in Sources */,
 				64B740382D8A7F1400168646 /* UsersRepository.swift in Sources */,
-				64BAAFBB2D927FEF00B70EFF /* HomeDIContainer.swift in Sources */,
+				64BAAFBB2D927FEF00B70EFF /* HomeSceneDIContainer.swift in Sources */,
 				1FE49D85230AA7C200D1D42E /* MoviesQueriesTableViewController.swift in Sources */,
 				1F160324242693DD00C173C6 /* MoviesSearchFlowCoordinator.swift in Sources */,
 				1F1CD656222368CA00B0143C /* AppConfigurations.swift in Sources */,

@@ -116,5 +116,18 @@ final class HomeSceneDIContainer {
     }
 }
 
-extension HomeSceneDIContainer: HomeFlowCoordinatorDependencies {}
+extension HomeSceneDIContainer: HomeFlowCoordinatorDependencies {
+    func makeHomeQueriesSuggestionsListViewController(didSelect: @escaping MoviesQueryListViewModelDidSelectAction) -> UIViewController {
+        if #available(iOS 13.0, *) { // SwiftUI
+            let view = MoviesQueryListView(
+                viewModelWrapper: makeMoviesQueryListViewModelWrapper(didSelect: didSelect)
+            )
+            return UIHostingController(rootView: view)
+        } else { // UIKit
+            return MoviesQueriesTableViewController.create(
+                with: makeMoviesQueryListViewModel(didSelect: didSelect)
+            )
+        }
+    }
+}
 

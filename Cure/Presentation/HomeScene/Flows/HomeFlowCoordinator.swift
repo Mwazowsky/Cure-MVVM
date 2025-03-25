@@ -4,6 +4,10 @@ protocol HomeFlowCoordinatorDependencies  {
     func makeHomeViewController(
         actions: HomeViewModelActions
     ) -> HomeViewController
+    
+    func makeHomeQueriesSuggestionsListViewController(
+        didSelect: @escaping MoviesQueryListViewModelDidSelectAction
+    ) -> UIViewController
 }
 
 protocol HomeFlowCoordinatorDelegate: AnyObject {
@@ -42,5 +46,17 @@ final class HomeFlowCoordinator: Coordinator {
     func finish() {
         print("Entered HomeFlowCoordinator > Finish")
         parentCoordinator?.childDidFinish(self)
+    }
+    
+    
+    private func showMovieQueriesSuggestions(didSelect: @escaping (MovieQuery) -> Void) {
+        guard let homeViewController = homeVC, homeSearchSuggestionsVC == nil,
+            let container = homeViewController.suggestionsListContainer else { return }
+
+        let vc = dependencies.makeHomeQueriesSuggestionsListViewController(didSelect: didSelect)
+
+        homeViewController.add(child: vc, container: container)
+        homeSearchSuggestionsVC = vc
+        container.isHidden = false
     }
 }
