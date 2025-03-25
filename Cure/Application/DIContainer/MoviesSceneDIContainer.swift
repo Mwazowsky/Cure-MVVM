@@ -70,6 +70,7 @@ final class MoviesSceneDIContainer: MoviesSearchFlowCoordinatorDependencies {
             cache: moviesResponseCache
         )
     }
+
     
     // MARK: - Movies List
     func makeMoviesListViewController(actions: MoviesListViewModelActions) -> MoviesListViewController {
