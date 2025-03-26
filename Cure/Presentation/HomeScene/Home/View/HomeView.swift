@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MoviesListView: UIView {
+class HomeView: UIView {
 
     /*
     // Only override draw() if you perform custom drawing.
@@ -16,5 +16,7 @@ class MoviesListView: UIView {
         // Drawing code
     }
     */
+    
+    
 
 }

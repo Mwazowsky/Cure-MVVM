@@ -4,10 +4,6 @@ protocol HomeFlowCoordinatorDependencies  {
     func makeHomeViewController(
         actions: HomeViewModelActions
     ) -> HomeViewController
-    
-    func makeHomeQueriesSuggestionsListViewController(
-        didSelect: @escaping MoviesQueryListViewModelDidSelectAction
-    ) -> UIViewController
 }
 
 protocol HomeFlowCoordinatorDelegate: AnyObject {
@@ -37,26 +33,16 @@ final class HomeFlowCoordinator: Coordinator {
     
     func start() {
         // Note: here we keep strong reference with actions, this way this flow do not need to be strong referenced
-        let actions = HomeViewModelActions(showHomeQueriesSuggestions: <#(@escaping (MovieQuery) -> Void) -> Void#>, closeMovieQueriesSuggestions: <#() -> Void#>)
+        let actions = HomeViewModelActions()
         let vc = dependencies.makeHomeViewController(actions: actions)
         navigationController?.pushViewController(vc, animated: false)
+//        navigationController?.navigationBar.isHidden = true
+//        navigationController?.setNavigationBarHidden(true, animated: false)
         homeVC = vc
     }
     
     func finish() {
         print("Entered HomeFlowCoordinator > Finish")
         parentCoordinator?.childDidFinish(self)
-    }
-    
-    
-    private func showMovieQueriesSuggestions(didSelect: @escaping (MovieQuery) -> Void) {
-        guard let homeViewController = homeVC, homeSearchSuggestionsVC == nil,
-            let container = homeViewController.suggestionsListContainer else { return }
-
-        let vc = dependencies.makeHomeQueriesSuggestionsListViewController(didSelect: didSelect)
-
-        homeViewController.add(child: vc, container: container)
-        homeSearchSuggestionsVC = vc
-        container.isHidden = false
     }
 }

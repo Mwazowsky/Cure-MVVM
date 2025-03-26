@@ -1,8 +1,6 @@
 import UIKit
 
 final class HomeViewController: UIViewController, Alertable {
-    @IBOutlet private(set) var suggestionsListContainer: UIView!
-    
     private var viewModel: HomeViewModel!
     private var searchController = UISearchController(searchResultsController: nil)
 
@@ -37,14 +35,13 @@ final class HomeViewController: UIViewController, Alertable {
 
     // MARK: - Private
     private func setupViews() {
-        title = viewModel.screenTitle
+//        title = viewModel.screenTitle
 //        emptyDataLabel.text = viewModel.emptyDataTitle
-        setupSearchController()
+//        setupSearchController()
     }
 
     private func setupBehaviours() {
-        addBehaviors([BackButtonEmptyTitleNavigationBarBehavior(),
-                      BlackStyleNavigationBarBehavior()])
+        addBehaviors([])
     }
 
     private func updateItems() {
@@ -52,31 +49,14 @@ final class HomeViewController: UIViewController, Alertable {
     }
 
     private func updateLoading(_ loading: HomeViewModelLoading?) {
-//        emptyDataLabel.isHidden = true
-//        moviesListContainer.isHidden = true
-//        suggestionsListContainer.isHidden = true
         LoadingView.hide()
-
         switch loading {
         case .fullScreen: LoadingView.show()
         case .nextPage:
             print("abc")
         case .none:
-//            moviesListContainer.isHidden = viewModel.isEmpty
-//            emptyDataLabel.isHidden = !viewModel.isEmpty
             print("abc")
         }
-
-//        moviesTableViewController?.updateLoading(loading)
-        updateQueriesSuggestions()
-    }
-
-    private func updateQueriesSuggestions() {
-        guard searchController.searchBar.isFirstResponder else {
-            viewModel.closeQueriesSuggestions()
-            return
-        }
-        viewModel.showQueriesSuggestions()
     }
 
     private func updateSearchQuery(_ query: String) {
@@ -124,15 +104,9 @@ extension HomeViewController: UISearchBarDelegate {
 }
 
 extension HomeViewController: UISearchControllerDelegate {
-    func willPresentSearchController(_ searchController: UISearchController) {
-        updateQueriesSuggestions()
-    }
+    func willPresentSearchController(_ searchController: UISearchController) {}
 
-    func willDismissSearchController(_ searchController: UISearchController) {
-        updateQueriesSuggestions()
-    }
+    func willDismissSearchController(_ searchController: UISearchController) {}
 
-    func didDismissSearchController(_ searchController: UISearchController) {
-        updateQueriesSuggestions()
-    }
+    func didDismissSearchController(_ searchController: UISearchController) {}
 }

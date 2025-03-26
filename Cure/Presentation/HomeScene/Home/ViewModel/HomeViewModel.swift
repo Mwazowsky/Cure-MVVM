@@ -1,8 +1,8 @@
 import Foundation
 
 struct HomeViewModelActions {
-    let showHomeQueriesSuggestions: (@escaping (_ didSelect: MovieQuery) -> Void) -> Void
-    let closeMovieQueriesSuggestions: () -> Void
+//    let showHomeQueriesSuggestions: (@escaping (_ didSelect: HomeQuery) -> Void) -> Void
+//    let closeHomeQueriesSuggestions: () -> Void
 }
 
 enum HomeViewModelLoading {
@@ -14,8 +14,8 @@ protocol HomeViewModelInput {
     func viewDidLoad()
     func didSearch(query: String)
     func didCancelSearch()
-    func showQueriesSuggestions()
-    func closeQueriesSuggestions()
+//    func showQueriesSuggestions()
+//    func closeQueriesSuggestions()
 }
 
 protocol HomeViewModelOutput {
@@ -31,7 +31,6 @@ protocol HomeViewModelOutput {
 typealias HomeViewModel = HomeViewModelInput & HomeViewModelOutput
 
 final class DefaultHomeViewModel: HomeViewModel {
-
 //    private let homeUseCase: HomeUseCase
     private let actions: HomeViewModelActions?
     
@@ -85,7 +84,6 @@ extension DefaultHomeViewModel {
 
     func didSearch(query: String) {
         guard !query.isEmpty else { return }
-//        update(homeQuery: HomeQuery(query: query))
     }
 
     func didCancelSearch() {
@@ -98,6 +96,7 @@ extension DefaultHomeViewModel {
     }
 
     func closeQueriesSuggestions() {
-        actions?.closeMovieQueriesSuggestions()
+//        actions?.closeHomeQueriesSuggestions()
+        print("Show Query Suggestion Closed")
     }
 }

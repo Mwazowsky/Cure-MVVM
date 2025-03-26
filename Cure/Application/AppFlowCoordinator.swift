@@ -22,7 +22,7 @@ final class AppFlowCoordinator {
         self.navigationController = navigationController
         self.appDIContainer = appDIContainer
         self.windowManager = appDIContainer.makeWindowManager()
-        self.getUserDataUseCase = appDIContainer.makeMoviesSceneDIContainer().makeGetCurrentUserUseCase()
+        self.getUserDataUseCase = appDIContainer.makeHomeSceneDIContainer().makeGetCurrentUserUseCase()
     }
     
     func start() {
@@ -45,21 +45,21 @@ final class AppFlowCoordinator {
     }
     
     
-    private func showMoviesFlow() {
+    private func showHomeFlow() {
         let newNavigationController = UINavigationController()
         
-        let moviesSceneDIContainer = appDIContainer.makeMoviesSceneDIContainer()
-        let moviesFlow = moviesSceneDIContainer.makeMoviesSearchFlowCoordinator(
+        let homeSceneDIContainer = appDIContainer.makeHomeSceneDIContainer()
+        let homeFlow = homeSceneDIContainer.makeHomeFlowCoordinator(
             navigationController: newNavigationController
         )
         
         windowManager.changeRootViewController(to: newNavigationController, animated: false)
         childCoordinators.removeAll()
-        childCoordinators.append(moviesFlow)
+        childCoordinators.append(homeFlow)
         
-        moviesFlow.parentCoordinator = self
+        homeFlow.parentCoordinator = self
         
-        moviesFlow.start()
+        homeFlow.start()
     }
     
     
@@ -67,7 +67,7 @@ final class AppFlowCoordinator {
         if let token = token,
            !token.isEmpty,
            token.trimmingCharacters(in: .whitespacesAndNewlines).count > 0 {
-            showMoviesFlow()
+            showHomeFlow()
         } else {
             showAuthFlow()
         }
@@ -77,7 +77,7 @@ final class AppFlowCoordinator {
 
 extension AppFlowCoordinator: AuthFlowCoordinatorDelegate {
     func authFlowDidFinish(with user: LoginResponse) {
-        showMoviesFlow()
+        showHomeFlow()
     }
     
     func childDidFinish(_ child: Coordinator?) {

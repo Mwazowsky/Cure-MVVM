@@ -39,6 +39,12 @@ final class HomeSceneDIContainer {
         )
     }
     
+//    func makeHomeQueriesRepository() -> HomeQueriesRepository {
+//        DefaultMoviesQueriesRepository(
+//            moviesQueriesPersistentStorage: moviesQueriesStorage
+//        )
+//    }
+    
     // MARK: - Use Cases
     /// Auth
     func makeLoginUseCase() -> LoginUseCase {
@@ -62,6 +68,17 @@ final class HomeSceneDIContainer {
         return DefaultGetCurrentUserUseCase(userRepository: makeUserRepository())
     }
     
+//    func makeFetchRecentHomeQueriesUseCase(
+//        requestValue: FetchRecentHomeQueriesUseCase.RequestValue,
+//        completion: @escaping (FetchRecentHomeQueriesUseCase.ResultValue) -> Void
+//    ) -> UseCase {
+//        FetchRecentHomeQueriesUseCase(
+//            requestValue: requestValue,
+//            completion: completion,
+//            homeQueriesRepository: makeMoviesQueriesRepository()
+//        )
+//    }
+    
     // MARK: - View Models
     func makeHomeViewModel(actions: HomeViewModelActions) -> HomeViewModel {
         return DefaultHomeViewModel(
@@ -70,17 +87,34 @@ final class HomeSceneDIContainer {
         )
     }
     
-//    func makeRegisterViewModel(actions: RegisterViewModelActions) -> RegisterViewModel {
-//        return DefaultRegisterViewModel(
-//            registerUseCase: makeRegisterUseCase(),
-//            actions: actions
+//    func makeHomeQueryListViewModel(didSelect: @escaping HomeQueryListViewModelDidSelectAction) -> HomeQueryListViewModel {
+//        DefaultHomeQueryListViewModel(
+//            numberOfQueriesToShow: 10,
+//            fetchRecentHomeQueriesUseCaseFactory: makeFetchRecentMovieQueriesUseCase,
+//            didSelect: didSelect
 //        )
 //    }
-//
-//    func makeResetPasswordViewModel(actions: ResetPasswordViewModelActions) -> ResetPasswordViewModel {
-//        return DefaultResetPasswordViewModel(
-//            resetPasswordUseCase: makeResetPasswordUseCase(),
-//            actions: actions
+    
+    //    func makeRegisterViewModel(actions: RegisterViewModelActions) -> RegisterViewModel {
+    //        return DefaultRegisterViewModel(
+    //            registerUseCase: makeRegisterUseCase(),
+    //            actions: actions
+    //        )
+    //    }
+    //
+    //    func makeResetPasswordViewModel(actions: ResetPasswordViewModelActions) -> ResetPasswordViewModel {
+    //        return DefaultResetPasswordViewModel(
+    //            resetPasswordUseCase: makeResetPasswordUseCase(),
+    //            actions: actions
+    //        )
+    //    }
+    
+//    @available(iOS 13.0, *)
+//    func makeHomeQueryListViewModelWrapper(
+//        didSelect: @escaping HomeQueryListViewModelDidSelectAction
+//    ) -> HomeQueryListViewModelWrapper {
+//        HomeQueryListViewModelWrapper(
+//            viewModel: makeMoviesQueryListViewModel(didSelect: didSelect)
 //        )
 //    }
     
@@ -91,17 +125,30 @@ final class HomeSceneDIContainer {
         )
     }
     
-//    func makeRegisterViewController(actions: RegisterViewModelActions) -> RegisterViewController {
-//        return RegisterViewController.create(
-//            with: makeRegisterViewModel(actions: actions)
-//        )
+//    func makeHomeQueriesSuggestionsListViewController(didSelect: @escaping HomeQueryListViewModelDidSelectAction) -> UIViewController {
+//        if #available(iOS 13.0, *) { // SwiftUI
+//            let view = HomeQueryListView(
+//                viewModelWrapper: makeMoviesQueryListViewModelWrapper(didSelect: didSelect)
+//            )
+//            return UIHostingController(rootView: view)
+//        } else { // UIKit
+//            return MoviesQueriesTableViewController.create(
+//                with: makeMoviesQueryListViewModel(didSelect: didSelect)
+//            )
+//        }
 //    }
-//
-//    func makeResetPasswordViewController(actions: ResetPasswordViewModelActions) -> ResetPasswordViewController {
-//        return ResetPasswordViewController.create(
-//            with: makeResetPasswordViewModel(actions: actions)
-//        )
-//    }
+    
+    //    func makeRegisterViewController(actions: RegisterViewModelActions) -> RegisterViewController {
+    //        return RegisterViewController.create(
+    //            with: makeRegisterViewModel(actions: actions)
+    //        )
+    //    }
+    //
+    //    func makeResetPasswordViewController(actions: ResetPasswordViewModelActions) -> ResetPasswordViewController {
+    //        return ResetPasswordViewController.create(
+    //            with: makeResetPasswordViewModel(actions: actions)
+    //        )
+    //    }
     
     // MARK: - Flow Coordinator
     func makeHomeFlowCoordinator(
@@ -116,18 +163,4 @@ final class HomeSceneDIContainer {
     }
 }
 
-extension HomeSceneDIContainer: HomeFlowCoordinatorDependencies {
-    func makeHomeQueriesSuggestionsListViewController(didSelect: @escaping MoviesQueryListViewModelDidSelectAction) -> UIViewController {
-        if #available(iOS 13.0, *) { // SwiftUI
-            let view = MoviesQueryListView(
-                viewModelWrapper: makeMoviesQueryListViewModelWrapper(didSelect: didSelect)
-            )
-            return UIHostingController(rootView: view)
-        } else { // UIKit
-            return MoviesQueriesTableViewController.create(
-                with: makeMoviesQueryListViewModel(didSelect: didSelect)
-            )
-        }
-    }
-}
-
+extension HomeSceneDIContainer: HomeFlowCoordinatorDependencies {}
