@@ -4,7 +4,14 @@ protocol Coordinator: AnyObject {
     var childCoordinators: [Coordinator] { get set }
     var navigationController: UINavigationController? { get set }
     
+    var type: CoordinatorType { get }
+    
     func start()
+}
+
+// MARK: - CoordinatorType
+enum CoordinatorType {
+    case app, login, tab
 }
 
 final class AppFlowCoordinator {

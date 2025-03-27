@@ -179,8 +179,9 @@
 		64FB943E2D93A72800A5325D /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB943C2D93A72800A5325D /* Home.swift */; };
 		64FB94402D93A80D00A5325D /* HomeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB943F2D93A80D00A5325D /* HomeRepository.swift */; };
 		64FB94412D93A80D00A5325D /* HomeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB943F2D93A80D00A5325D /* HomeRepository.swift */; };
-		64FB94572D93E7A600A5325D /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB94562D93E7A600A5325D /* TabBarView.swift */; };
-		64FB94592D93E80000A5325D /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB94582D93E80000A5325D /* TabBarVC.swift */; };
+		64FB945F2D94F47B00A5325D /* ReadyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB945E2D94F47B00A5325D /* ReadyViewController.swift */; };
+		64FB94652D94F4FB00A5325D /* GoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB94612D94F4FB00A5325D /* GoViewController.swift */; };
+		64FB946B2D94FAD100A5325D /* SteadyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB94672D94FAD100A5325D /* SteadyViewController.swift */; };
 		6C0F72E229CF0F5B0005020A /* DispatchQueueType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0F72E129CF0F5A0005020A /* DispatchQueueType.swift */; };
 		6C0F72E329CF115F0005020A /* DispatchQueueType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0F72E129CF0F5A0005020A /* DispatchQueueType.swift */; };
 		6C0F72E629CF12930005020A /* DispatchQueueTypeMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0F72E429CF12180005020A /* DispatchQueueTypeMock.swift */; };
@@ -348,8 +349,9 @@
 		64FB94392D93A66400A5325D /* HomeQueriesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeQueriesRepository.swift; sourceTree = "<group>"; };
 		64FB943C2D93A72800A5325D /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		64FB943F2D93A80D00A5325D /* HomeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRepository.swift; sourceTree = "<group>"; };
-		64FB94562D93E7A600A5325D /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
-		64FB94582D93E80000A5325D /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
+		64FB945E2D94F47B00A5325D /* ReadyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadyViewController.swift; sourceTree = "<group>"; };
+		64FB94612D94F4FB00A5325D /* GoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoViewController.swift; sourceTree = "<group>"; };
+		64FB94672D94FAD100A5325D /* SteadyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SteadyViewController.swift; sourceTree = "<group>"; };
 		6C0F72E129CF0F5A0005020A /* DispatchQueueType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueType.swift; sourceTree = "<group>"; };
 		6C0F72E429CF12180005020A /* DispatchQueueTypeMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueTypeMock.swift; sourceTree = "<group>"; };
 		71AAC13AE03B395A6D767D19 /* Pods-Cure.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cure.debug.xcconfig"; path = "Target Support Files/Pods-Cure/Pods-Cure.debug.xcconfig"; sourceTree = "<group>"; };
@@ -749,12 +751,14 @@
 		1FE49D63230AA7C200D1D42E /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				64FB945A2D94F43B00A5325D /* ReadyScene */,
+				64FB946A2D94FAD100A5325D /* SteadyScene */,
+				64FB94642D94F4FB00A5325D /* GoScene */,
 				64FB94532D93E62400A5325D /* UIComponents */,
 				64B7403A2D8A7FE500168646 /* AuthScene */,
 				1FE49D7C230AA7C200D1D42E /* MoviesScene */,
 				64BAAFDF2D92804200B70EFF /* HomeScene */,
 				1FC8B6E4230AF89A005DBF44 /* Utils */,
-				64FB94542D93E75500A5325D /* Views */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -1320,21 +1324,100 @@
 			path = UIComponents;
 			sourceTree = "<group>";
 		};
-		64FB94542D93E75500A5325D /* Views */ = {
+		64FB945A2D94F43B00A5325D /* ReadyScene */ = {
 			isa = PBXGroup;
 			children = (
-				64FB94552D93E78A00A5325D /* TabBar */,
+				64FB945C2D94F45900A5325D /* Flows */,
+				64FB945B2D94F45300A5325D /* Ready */,
 			);
-			path = Views;
+			path = ReadyScene;
 			sourceTree = "<group>";
 		};
-		64FB94552D93E78A00A5325D /* TabBar */ = {
+		64FB945B2D94F45300A5325D /* Ready */ = {
 			isa = PBXGroup;
 			children = (
-				64FB94562D93E7A600A5325D /* TabBarView.swift */,
-				64FB94582D93E80000A5325D /* TabBarVC.swift */,
+				64FB945D2D94F46D00A5325D /* View */,
 			);
-			path = TabBar;
+			path = Ready;
+			sourceTree = "<group>";
+		};
+		64FB945C2D94F45900A5325D /* Flows */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Flows;
+			sourceTree = "<group>";
+		};
+		64FB945D2D94F46D00A5325D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				64FB945E2D94F47B00A5325D /* ReadyViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		64FB94602D94F4FB00A5325D /* Flows */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Flows;
+			sourceTree = "<group>";
+		};
+		64FB94622D94F4FB00A5325D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				64FB94612D94F4FB00A5325D /* GoViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		64FB94632D94F4FB00A5325D /* Go */ = {
+			isa = PBXGroup;
+			children = (
+				64FB94622D94F4FB00A5325D /* View */,
+			);
+			path = Go;
+			sourceTree = "<group>";
+		};
+		64FB94642D94F4FB00A5325D /* GoScene */ = {
+			isa = PBXGroup;
+			children = (
+				64FB94602D94F4FB00A5325D /* Flows */,
+				64FB94632D94F4FB00A5325D /* Go */,
+			);
+			path = GoScene;
+			sourceTree = "<group>";
+		};
+		64FB94662D94FAD100A5325D /* Flows */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Flows;
+			sourceTree = "<group>";
+		};
+		64FB94682D94FAD100A5325D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				64FB94672D94FAD100A5325D /* SteadyViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		64FB94692D94FAD100A5325D /* Steady */ = {
+			isa = PBXGroup;
+			children = (
+				64FB94682D94FAD100A5325D /* View */,
+			);
+			path = Steady;
+			sourceTree = "<group>";
+		};
+		64FB946A2D94FAD100A5325D /* SteadyScene */ = {
+			isa = PBXGroup;
+			children = (
+				64FB94662D94FAD100A5325D /* Flows */,
+				64FB94692D94FAD100A5325D /* Steady */,
+			);
+			path = SteadyScene;
 			sourceTree = "<group>";
 		};
 		6C0F72E729CF14CD0005020A /* Stubs */ = {
@@ -1664,6 +1747,7 @@
 				1F77930F222C0DF2004E034C /* StoryboardInstantiable.swift in Sources */,
 				64B740442D8A860C00168646 /* AuthFlowCoordinator.swift in Sources */,
 				1FE49D84230AA7C200D1D42E /* MoviesQueriesItemCell.swift in Sources */,
+				64FB94652D94F4FB00A5325D /* GoViewController.swift in Sources */,
 				1FF53EB423688893008D6CCC /* DataTransferError+ConnectionError.swift in Sources */,
 				64BAAFEC2D92804200B70EFF /* HomeFlowCoordinator.swift in Sources */,
 				64B7402D2D8A71BB00168646 /* AuthResponseDTO+Mapping.swift in Sources */,
@@ -1675,7 +1759,6 @@
 				1F2AB951242789B80010DEEE /* MoviesResponseDTO+Mapping.swift in Sources */,
 				1FFF1AD5243B966600937EE4 /* MoviesListItemViewModel.swift in Sources */,
 				1FC2C9632301FEC0001AE47E /* MovieQueryUDS+Mapping.swift in Sources */,
-				64FB94572D93E7A600A5325D /* TabBarView.swift in Sources */,
 				1FE49D90230AA7C200D1D42E /* MovieDetailsViewModel.swift in Sources */,
 				1F794921247D869700552CC3 /* BlackStyleNavigationBarBehavior.swift in Sources */,
 				1F1FC48A22E3693100BCBA8D /* DataTransferService.swift in Sources */,
@@ -1688,10 +1771,10 @@
 				1F05A6CC2220A2CB001E2801 /* SearchMoviesUseCase.swift in Sources */,
 				64FB942C2D93A42500A5325D /* HomeQueryListView.swift in Sources */,
 				64FB942D2D93A42500A5325D /* HomeQueryListItemViewModel.swift in Sources */,
+				64FB945F2D94F47B00A5325D /* ReadyViewController.swift in Sources */,
 				64FB942E2D93A42500A5325D /* HomeQueriesItemCell.swift in Sources */,
 				64FB942F2D93A42500A5325D /* HomeQueryListViewModel.swift in Sources */,
 				64FB94302D93A42500A5325D /* HomeQueriesTableViewController.swift in Sources */,
-				64FB94592D93E80000A5325D /* TabBarVC.swift in Sources */,
 				644944CC2D89625E006B11C1 /* ResetPasswordUseCase.swift in Sources */,
 				1FA533D7201EF2B500747E55 /* AppDIContainer.swift in Sources */,
 				642A928C2D894E2500E34BDA /* User.swift in Sources */,
@@ -1721,6 +1804,7 @@
 				64B740382D8A7F1400168646 /* UsersRepository.swift in Sources */,
 				64BAAFBB2D927FEF00B70EFF /* HomeSceneDIContainer.swift in Sources */,
 				1FE49D85230AA7C200D1D42E /* MoviesQueriesTableViewController.swift in Sources */,
+				64FB946B2D94FAD100A5325D /* SteadyViewController.swift in Sources */,
 				1F160324242693DD00C173C6 /* MoviesSearchFlowCoordinator.swift in Sources */,
 				1F1CD656222368CA00B0143C /* AppConfigurations.swift in Sources */,
 				64B7402B2D8A70D900168646 /* AuthRequestDTO+Mapping.swift in Sources */,

@@ -11,6 +11,8 @@ protocol MoviesSearchFlowCoordinatorDependencies  {
 }
 
 final class MoviesSearchFlowCoordinator: Coordinator {
+    var type: CoordinatorType { .app }
+    
     var childCoordinators: [Coordinator] = [Coordinator]()
     
     weak var navigationController: UINavigationController?

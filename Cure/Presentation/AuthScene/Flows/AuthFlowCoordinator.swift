@@ -16,6 +16,8 @@ protocol AuthFlowCoordinatorDelegate: AnyObject {
 }
 
 final class AuthFlowCoordinator: Coordinator {
+    var type: CoordinatorType { .login }
+    
     var childCoordinators: [Coordinator] = [Coordinator]()
     
     weak var navigationController: UINavigationController?

@@ -8,6 +8,8 @@ final class MoviesListViewController: UIViewController, StoryboardInstantiable, 
     @IBOutlet private var searchBarContainer: UIView!
     @IBOutlet private var emptyDataLabel: UILabel!
     
+    var didSendEventClosure: ((MoviesListViewController.Event) -> Void)?
+    
     private var viewModel: MoviesListViewModel!
     private var posterImagesRepository: PosterImagesRepository?
 
@@ -152,5 +154,11 @@ extension MoviesListViewController: UISearchControllerDelegate {
 
     func didDismissSearchController(_ searchController: UISearchController) {
         updateQueriesSuggestions()
+    }
+}
+
+extension MoviesListViewController {
+    enum Event {
+        case moviesList
     }
 }
