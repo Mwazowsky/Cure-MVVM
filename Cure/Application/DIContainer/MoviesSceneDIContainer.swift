@@ -39,7 +39,7 @@ final class MoviesSceneDIContainer: MoviesSearchFlowCoordinatorDependencies {
     }
     
     func makeGetCurrentUserUseCase() -> GetUserUseCase {
-        return DefaultGetCurrentUserUseCase(userRepository: makeUserRepository())
+        return DefaultGetCurrentUserUseCase(keychainRepository: makeKeychainRepository())
     }
     
     // MARK: - Repositories
@@ -64,11 +64,8 @@ final class MoviesSceneDIContainer: MoviesSearchFlowCoordinatorDependencies {
         )
     }
     
-    private func makeUserRepository() -> UsersRepository {
-        return DefaultUsersRepository(
-            dataTransferService: dependencies.newApiDataTransferervice,
-            cache: moviesResponseCache
-        )
+    private func makeKeychainRepository() -> KeychainRepository {
+        return DefaultKeychainRepository()
     }
 
     

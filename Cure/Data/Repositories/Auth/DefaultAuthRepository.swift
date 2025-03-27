@@ -9,16 +9,13 @@ import Foundation
 
 final class DefaultAuthRepository {
     private let dataTransferService: DataTransferService
-    private let cache: MoviesResponseStorage // Change this to keychain service storage, since data related to user need to be secured
     private let backgroundQueue: DataTransferDispatchQueue
     
     init(
         dataTransferService: DataTransferService,
-        cache: MoviesResponseStorage,
         backgroundQueue: DataTransferDispatchQueue = DispatchQueue.global(qos: .userInitiated)
     ) {
         self.dataTransferService = dataTransferService
-        self.cache = cache
         self.backgroundQueue = backgroundQueue
     }
 }
@@ -48,7 +45,6 @@ extension DefaultAuthRepository: AuthRepository {
         completion: @escaping (Result<RegisterResponseDTO, AuthenticationError>) -> Void
     ) {
         let requestDTO = RegisterRequestDTO(namaLengkap: request.namaLengkap, username: request.username, password: request.password)
-//        let task = RepositoryTask()
         
         let endpoint = APIEndpoints.register(with: requestDTO)
         
@@ -57,8 +53,6 @@ extension DefaultAuthRepository: AuthRepository {
             
             switch result {
             case .success(let response):
-//                let user = self.mapToDomain(response: response)
-//                self.persistenceService.saveToken(token: response.token)
                 completion(.success(response))
             case .failure(let error):
                 completion(.failure(self.mapError(error)))

@@ -119,7 +119,7 @@ extension MoviesListViewController {
         searchController.searchBar.placeholder = viewModel.searchBarPlaceholder
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.translatesAutoresizingMaskIntoConstraints = true
-        searchController.searchBar.barStyle = .black
+        searchController.searchBar.barStyle = .default
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.frame = searchBarContainer.bounds
         searchController.searchBar.autoresizingMask = [.flexibleWidth]

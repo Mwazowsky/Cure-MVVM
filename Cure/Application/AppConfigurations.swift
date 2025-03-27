@@ -19,6 +19,12 @@ final class AppConfiguration {
         }
         return newApiBaseURL
     }()
+    lazy var keyConnection: String = {
+        guard let keyConnection = Bundle.main.object(forInfoDictionaryKey: "KEY_CONNECTION") as? String else {
+            fatalError("keyConnection must not be empty in plist")
+        }
+        return keyConnection
+    }()
     lazy var imagesBaseURL: String = {
         guard let imageBaseURL = Bundle.main.object(forInfoDictionaryKey: "ImageBaseURL") as? String else {
             fatalError("ApiBaseURL must not be empty in plist")

@@ -18,18 +18,18 @@ protocol HomeFlowCoordinatorProtocol: Coordinator {
 }
 
 enum TabBarItem {
-    case ready
-    case steady
-    case go
+    case dashboard
+    case chats
+    case account
     
     init?(index: Int) {
         switch index {
         case 0:
-            self = .ready
+            self = .dashboard
         case 1:
-            self = .steady
+            self = .chats
         case 2:
-            self = .go
+            self = .account
         default:
             return nil
         }
@@ -37,33 +37,33 @@ enum TabBarItem {
     
     func pageeTitleValue() -> String {
         switch self {
-        case .ready:
-            return "Ready"
-        case .steady:
-            return "Steady"
-        case .go:
-            return "Go"
+        case .dashboard:
+            return "Dashboard"
+        case .chats:
+            return "Chats"
+        case .account:
+            return "Account"
         }
     }
     
     func pageOrderNumber() -> Int {
         switch self {
-        case .ready:
+        case .dashboard:
             return 0
-        case .steady:
+        case .chats:
             return 1
-        case .go:
+        case .account:
             return 2
         }
     }
     
     func pageIconName() -> String {
         switch self {
-        case .ready:
+        case .dashboard:
             return "square.and.arrow.down.fill"
-        case .steady:
+        case .chats:
             return "pencil.circle.fill"
-        case .go:
+        case .account:
             return "eraser.line.dashed.fill"
         }
     }
@@ -82,6 +82,8 @@ enum TabBarItem {
 }
 
 final class HomeFlowCoordinator: NSObject, HomeFlowCoordinatorProtocol {
+    private let appDIContainer: AppDIContainer
+    
     var childCoordinators: [Coordinator] = [Coordinator]()
     var type: CoordinatorType { .tab }
     
@@ -98,10 +100,12 @@ final class HomeFlowCoordinator: NSObject, HomeFlowCoordinatorProtocol {
     
     init(
         navigationController: UINavigationController,
+        appDIContainer: AppDIContainer,
         dependencies: HomeFlowCoordinatorDependencies,
         delegate: HomeFlowCoordinatorDelegate? = nil
     ) {
         self.navigationController = navigationController
+        self.appDIContainer = appDIContainer
         self.dependencies = dependencies
         self.delegate = delegate
         self.tabBarController = .init()
@@ -113,10 +117,10 @@ final class HomeFlowCoordinator: NSObject, HomeFlowCoordinatorProtocol {
     
     func start() {
         // Globally set the navbar hiden or visible
-        navigationController?.navigationBar.isHidden = false
-        navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationController?.navigationBar.isHidden = true
+        navigationController?.setNavigationBarHidden(true, animated: false)
         
-        let pages: [TabBarItem] = [.go, .steady, .ready]
+        let pages: [TabBarItem] = [.dashboard, .chats, .account]
             .sorted(by: {$0.pageOrderNumber() < $1.pageOrderNumber()})
         
         let controllers: [UINavigationController] = pages.map({ getTabBarController($0) })
@@ -134,18 +138,65 @@ final class HomeFlowCoordinator: NSObject, HomeFlowCoordinatorProtocol {
         
         tabBarController.setViewControllers(tabBarControllers, animated: true)
         
-        tabBarController.selectedIndex = TabBarItem.ready.pageOrderNumber()
+        tabBarController.selectedIndex = TabBarItem.chats.pageOrderNumber()
         
-        tabBarController.tabBar.isTranslucent = false
+        let blurEffect = UIBlurEffect(style: .extraLight)
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        
+        blurView.frame = tabBarController.tabBar.bounds
+        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        tabBarController.tabBar.backgroundImage = UIImage()
+        tabBarController.tabBar.shadowImage = UIImage()
+        
+        tabBarController.tabBar.insertSubview(blurView, at: 0)
+        
+        tabBarController.tabBar.isTranslucent = true
+        
+        tabBarController.tabBar.tintColor = .primaryRed
         
         navigationController?.viewControllers = [tabBarController]
+    }
+    
+    private func showMovieFlow(navigationController: UINavigationController) {
+        let moviesSceneDIContainer = appDIContainer.makeMoviesSceneDIContainer()
+        let moviesFlowCoordinator = moviesSceneDIContainer.makeMoviesSearchFlowCoordinator(
+            navigationController: navigationController
+        )
+        
+        moviesFlowCoordinator.parentCoordinator = self
+        moviesFlowCoordinator.start()
+        
+        childCoordinators.append(moviesFlowCoordinator)
+    }
+    
+    private func showAccountFLow(navigationController: UINavigationController) {
+        let accountSceneDIContainer = appDIContainer.makeAccountSceneDIContainer()
+        let accountFlowCoordinator = accountSceneDIContainer.makeAccountFlowCoordinator(
+            navigationController: navigationController
+        )
+        
+        accountFlowCoordinator.parentCoordinator = self
+        accountFlowCoordinator.start()
+        
+        childCoordinators.append(accountFlowCoordinator)
+    }
+    
+    private func showForgotPassword() {
+        //        let vc = dependencies.makeMoviesDetailsViewController(movie: movie)
+        //        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    private func logoutDidSucces() -> Bool {
+        self.finish()
+        
+        return true
     }
     
     private func getTabBarController(_ item: TabBarItem) -> UINavigationController {
         let navController = UINavigationController()
         
-        // View Based set the navbar hidden or visible/potentially diferent navbar type for different tab?
-        navController.setNavigationBarHidden(true, animated: false)
+        navController.setNavigationBarHidden(false, animated: true)
         
         navController.tabBarItem = UITabBarItem.init(
             title: item.pageeTitleValue(),
@@ -154,38 +205,29 @@ final class HomeFlowCoordinator: NSObject, HomeFlowCoordinatorProtocol {
         )
         
         switch item {
-        case .ready:
-            let readyVC = ReadyViewController()
-            readyVC.didSendEventClosure = { [weak self] event in
+        case .dashboard:
+            let dashboardVC = DashboardVC()
+            dashboardVC.didSendEventClosure = { [weak self] event in
                 switch event {
-                case .ready:
-                    self?.selectItem(.ready)
+                case .dashboard:
+                    self?.selectItem(.dashboard)
                 }
             }
             
-            navController.viewControllers = [readyVC]
+            navController.viewControllers = [dashboardVC]
             
-        case .steady:
-            let steadyVC = SteadyViewController()
-            steadyVC.didSendEventClosure = { [weak self] event in
+        case .chats:
+            showMovieFlow(navigationController: navController)
+        case .account:
+            let accountVC = AccountVC()
+            accountVC.didSendEventClosure = { [weak self] event in
                 switch event {
-                case .steady:
-                    self?.selectItem(.steady)
+                case .account:
+                    self?.selectItem(.account)
                 }
             }
             
-            navController.viewControllers = [steadyVC]
-            
-        case .go:
-            let goVC = GoViewController()
-            goVC.didSendEventClosure = { [weak self] event in
-                switch event {
-                case .goEvent:
-                    self?.selectItem(.go)
-                }
-            }
-
-            navController.viewControllers = [goVC]
+            navController.viewControllers = [accountVC]
         }
         
         return navController
@@ -210,6 +252,6 @@ final class HomeFlowCoordinator: NSObject, HomeFlowCoordinatorProtocol {
 extension HomeFlowCoordinator: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController,
                           didSelect viewController: UIViewController) {
-        print("did select")
+        UIView.setAnimationsEnabled(false)
     }
 }

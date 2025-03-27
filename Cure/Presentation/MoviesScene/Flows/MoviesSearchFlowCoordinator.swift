@@ -18,7 +18,7 @@ final class MoviesSearchFlowCoordinator: Coordinator {
     weak var navigationController: UINavigationController?
     private let dependencies: MoviesSearchFlowCoordinatorDependencies
 
-    weak var parentCoordinator: AppFlowCoordinator?
+    weak var parentCoordinator: HomeFlowCoordinator?
     private weak var moviesListVC: MoviesListViewController?
     private weak var moviesQueriesSuggestionsVC: UIViewController?
 
@@ -38,10 +38,10 @@ final class MoviesSearchFlowCoordinator: Coordinator {
         moviesListVC = vc
     }
     
-    func finish() {
-        print("Entered MoviesSearchFlowCoordinator > Finish")
-        parentCoordinator?.childDidFinish(self)
-    }
+//    func finish() {
+//        print("Entered MoviesSearchFlowCoordinator > Finish")
+//        parentCoordinator?.childDidFinish(self)
+//    }
 
     private func showMovieDetails(movie: Movie) {
         let vc = dependencies.makeMoviesDetailsViewController(movie: movie)

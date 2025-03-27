@@ -12,13 +12,13 @@ protocol SaveUserUseCase {
 }
 
 class DefaultSaveUserUseCase: SaveUserUseCase {
-    private let userRepository: UsersRepository
+    private let keychainRepository: KeychainRepository
     
-    init(userRepository: UsersRepository) {
-        self.userRepository = userRepository
+    init(keychainRepository: KeychainRepository) {
+        self.keychainRepository = keychainRepository
     }
     
     func execute(userData: LoginResponseDTO) -> Bool {
-        return userRepository.saveUserData(userData)
+        return keychainRepository.saveUserData(userData)
     }
 }

@@ -28,16 +28,12 @@ final class AuthSceneDIContainer {
     // MARK: - Repositories
     private func makeAuthRepository() -> AuthRepository {
         return DefaultAuthRepository(
-            dataTransferService: dependencies.newApiDataTransferervice,
-            cache: moviesResponseCache
+            dataTransferService: dependencies.newApiDataTransferervice
         )
     }
     
-    private func makeUserRepository() -> UsersRepository {
-        return DefaultUsersRepository(
-            dataTransferService: dependencies.newApiDataTransferervice,
-            cache: moviesResponseCache
-        )
+    private func makeUserRepository() -> KeychainRepository {
+        return DefaultKeychainRepository()
     }
     
     // MARK: - Use Cases
@@ -55,12 +51,12 @@ final class AuthSceneDIContainer {
     }
     
     func makeLogoutUseCase() -> LogoutUseCase {
-        return DefaultLogoutUseCase(authRepository: makeAuthRepository())
+        return DefaultLogoutUseCase(authRepository: makeAuthRepository(), keychainRepository: makeUserRepository())
     }
     
     /// User Data Save
     func makeSaveCurrentUserUseCase() -> SaveUserUseCase {
-        return DefaultSaveUserUseCase(userRepository: makeUserRepository())
+        return DefaultSaveUserUseCase(keychainRepository: makeUserRepository())
     }
     
     // MARK: - View Models

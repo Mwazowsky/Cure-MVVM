@@ -13,58 +13,51 @@ final class HomeSceneDIContainer {
         let newApiDataTransferervice: DataTransferService
     }
     
+    private let windowManager: WindowManageable
+    
     private let dependencies: Dependencies
     
     lazy var moviesQueriesStorage: MoviesQueriesStorage  = CoreDataMoviesQueriesStorage(maxStorageLimit: 10)
     lazy var moviesResponseCache : MoviesResponseStorage = CoreDataMoviesResponseStorage()
     
     
-    init(dependencies: Dependencies) {
+    init(dependencies: Dependencies, windowManager: WindowManageable) {
         self.dependencies = dependencies
+        self.windowManager = windowManager
     }
     
     // MARK: - Repositories
-    private func makeAuthRepository() -> AuthRepository {
-        return DefaultAuthRepository(
-            dataTransferService: dependencies.newApiDataTransferervice,
-            cache: moviesResponseCache
-        )
+    private func makeUserRepository() -> KeychainRepository {
+        return DefaultKeychainRepository()
     }
     
-    private func makeUserRepository() -> UsersRepository {
-        return DefaultUsersRepository(
-            dataTransferService: dependencies.newApiDataTransferervice,
-            cache: moviesResponseCache
+    private func makeAuthRepository() -> AuthRepository {
+        return DefaultAuthRepository(
+            dataTransferService: dependencies.newApiDataTransferervice
         )
     }
     
     // MARK: - Use Cases
-    /// Auth
-    func makeLoginUseCase() -> LoginUseCase {
-        return DefaultLoginUseCase(authRepository: makeAuthRepository())
-    }
-    
-    func makeRegisterUseCase() -> RegisterUseCase {
-        return DefaultRegisterUseCase(authRepository: makeAuthRepository())
-    }
-    
-    func makeResetPasswordUseCase() -> ResetPasswordUseCase {
-        return DefaultResetPasswordUseCase(authRepository: makeAuthRepository())
-    }
-    
-    func makeLogoutUseCase() -> LogoutUseCase {
-        return DefaultLogoutUseCase(authRepository: makeAuthRepository())
-    }
-    
     /// User Data Get
     func makeGetCurrentUserUseCase() -> GetUserUseCase {
-        return DefaultGetCurrentUserUseCase(userRepository: makeUserRepository())
+        return DefaultGetCurrentUserUseCase(keychainRepository: makeUserRepository())
+    }
+    
+    func makeLogoutUserUseCase() -> LogoutUseCase {
+        return DefaultLogoutUseCase(authRepository: makeAuthRepository(), keychainRepository: makeUserRepository())
     }
     
     // MARK: - View Models
     func makeHomeViewModel(actions: HomeViewModelActions) -> HomeViewModel {
         return DefaultHomeViewModel(
             getUserDataUseCase: makeGetCurrentUserUseCase(),
+            actions: actions
+        )
+    }
+    
+    func makeAccountViewModel(actions: AccountViewModelActions) -> AccountViewModel {
+        return DefaultAccountViewModel(
+            logoutUseCase: makeLogoutUserUseCase(),
             actions: actions
         )
     }
@@ -76,6 +69,12 @@ final class HomeSceneDIContainer {
         )
     }
     
+    func makeAccountViewController(actions: AccountViewModelActions) -> AccountVC {
+        return AccountVC.create(
+            with: makeAccountViewModel(actions: actions)
+        )
+    }
+    
     // MARK: - Flow Coordinator
     func makeHomeFlowCoordinator(
         navigationController: UINavigationController,
@@ -83,6 +82,7 @@ final class HomeSceneDIContainer {
     ) -> HomeFlowCoordinator {
         return HomeFlowCoordinator(
             navigationController: navigationController,
+            appDIContainer: AppDIContainer(windowManager: windowManager),
             dependencies: self,
             delegate: delegate
         )

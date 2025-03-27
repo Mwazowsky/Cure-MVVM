@@ -7,25 +7,11 @@
 
 import Foundation
 
-final class DefaultUsersRepository {
-    private let dataTransferService: DataTransferService
-    private let cache: MoviesResponseStorage // Change this to keychain service storage, since data related to user need to be secured
-    private let backgroundQueue: DataTransferDispatchQueue
-    
+final class DefaultKeychainRepository {
     private let keychainService = "com.softwaremediainnovation.CURE.userData"
-    
-    init(
-        dataTransferService: DataTransferService,
-        cache: MoviesResponseStorage,
-        backgroundQueue: DataTransferDispatchQueue = DispatchQueue.global(qos: .userInitiated)
-    ) {
-        self.dataTransferService = dataTransferService
-        self.cache = cache
-        self.backgroundQueue = backgroundQueue
-    }
 }
 
-extension DefaultUsersRepository: UsersRepository {
+extension DefaultKeychainRepository: KeychainRepository {
     
     func saveUserData(_ userData: LoginResponseDTO) -> Bool {
         do {

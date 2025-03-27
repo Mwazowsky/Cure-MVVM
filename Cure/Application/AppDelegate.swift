@@ -1,4 +1,5 @@
 import UIKit
+import LanguageManager_iOS
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,6 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             navigationController: navigationController,
             appDIContainer: appDIContainer
         )
+        
+        LanguageManager.shared.defaultLanguage = .id
         
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()

@@ -12,13 +12,13 @@ protocol GetUserUseCase {
 }
 
 final class DefaultGetCurrentUserUseCase: GetUserUseCase {
-    private let userRepository: UsersRepository
+    private let keychainRepository: KeychainRepository
     
-    init(userRepository: UsersRepository) {
-        self.userRepository = userRepository
+    init(keychainRepository: KeychainRepository) {
+        self.keychainRepository = keychainRepository
     }
     
     func execute() -> LoginResponseDTO? {
-        return userRepository.getUserData()
+        return keychainRepository.getUserData()
     }
 }
