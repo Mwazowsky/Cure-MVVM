@@ -4,7 +4,7 @@ final class AppDIContainer {
     
     lazy var appConfiguration = AppConfiguration()
     
-    private let windowManager: WindowManageable
+    let windowManager: WindowManageable
     
     init(windowManager: WindowManageable) {
         self.windowManager = windowManager
@@ -65,10 +65,10 @@ final class AppDIContainer {
     
     
     func makeAccountSceneDIContainer() -> AccountSceneDIContainer {
-        let dependencies = HomeSceneDIContainer.Dependencies(
+        let dependencies = AccountSceneDIContainer.Dependencies(
             newApiDataTransferervice: newApiDataTransferService
         )
-        return HomeSceneDIContainer(dependencies: dependencies, windowManager: windowManager)
+        return AccountSceneDIContainer(dependencies: dependencies)
     }
     
     

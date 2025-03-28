@@ -27,7 +27,6 @@ extension DefaultAuthRepository: AuthRepository {
     ) {
         let requestDTO = LoginRequestDTO(username: request.username, password: request.password)
         let endpoint = APIEndpoints.login(with: requestDTO)
-        print("Login Endpoint: ", endpoint)
         dataTransferService.request(with: endpoint) { [weak self] (result:  Result<LoginResponse, DataTransferError>) in
             guard let self = self else { return }
             
@@ -66,6 +65,18 @@ extension DefaultAuthRepository: AuthRepository {
     
     func logout(completion: @escaping (Result<Bool, any Error>) -> Void) {
         print("Implementation of DefaultAuthRepository.logout")
+        let endpoint = APIEndpoints.logout()
+        
+        dataTransferService.request(with: endpoint) { [weak self] (result:  Result<LoginResponse, DataTransferError>) in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let response):
+                completion(.success(response.code == 200))
+            case .failure(let error):
+                completion(.failure(self.mapError(error)))
+            }
+        }
     }
 }
 

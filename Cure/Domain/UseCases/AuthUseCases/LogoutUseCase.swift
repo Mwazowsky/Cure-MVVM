@@ -13,16 +13,17 @@ protocol LogoutUseCase {
 
 final class DefaultLogoutUseCase: LogoutUseCase {
     private let authRepository: AuthRepository
-    private let KeychainRepository: KeychainRepository
+    private let keychainRepository: KeychainRepository
     
     init(authRepository: AuthRepository,
          keychainRepository: KeychainRepository) {
-        self.KeychainRepository = keychainRepository
-        
+        self.keychainRepository = keychainRepository
+        self.authRepository = authRepository
     }
     
     func execute(completion: @escaping (Result<Bool, Error>) -> Void) {
-        let isKeychainDataDeleted = KeychainRepository.deleteUserData()
-        return authRepository.logout(completion: completion)
+        keychainRepository.deleteUserData()
+//        return authRepository.logout(completion: completion)
+//        return true
     }
 }

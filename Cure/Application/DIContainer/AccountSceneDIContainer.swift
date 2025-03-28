@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SwiftUI
 
-final class AuthSceneDIContainer {
+final class AccountSceneDIContainer {
     struct Dependencies {
         let newApiDataTransferervice: DataTransferService
     }
@@ -37,33 +37,19 @@ final class AuthSceneDIContainer {
     }
     
     // MARK: - Use Cases
-    /// Auth
-    func makeLoginUseCase() -> LoginUseCase {
-        return DefaultLoginUseCase(authRepository: makeAuthRepository())
-    }
-    
-    func makeRegisterUseCase() -> RegisterUseCase {
-        return DefaultRegisterUseCase(authRepository: makeAuthRepository())
-    }
-    
-    func makeResetPasswordUseCase() -> ResetPasswordUseCase {
-        return DefaultResetPasswordUseCase(authRepository: makeAuthRepository())
-    }
-    
     func makeLogoutUseCase() -> LogoutUseCase {
         return DefaultLogoutUseCase(authRepository: makeAuthRepository(), keychainRepository: makeUserRepository())
     }
     
     /// User Data Save
-    func makeSaveCurrentUserUseCase() -> SaveUserUseCase {
-        return DefaultSaveUserUseCase(keychainRepository: makeUserRepository())
+    func makeDeleteCurrentUserUseCase() -> DeleteUserUseCase {
+        return DefaultDeleteUserUseCase(keychainRepository: makeUserRepository())
     }
     
     // MARK: - View Models
-    func makeLoginViewModel(actions: LoginViewModelActions) -> LoginViewModel {
-        return DefaultLoginViewModel(
-            loginUseCase: makeLoginUseCase(),
-            saveUserDataUseCase: makeSaveCurrentUserUseCase(),
+    func makeAccountViewModel(actions: AccountViewModelActions) -> AccountViewModel {
+        return DefaultAccountViewModel(
+            logoutUseCase: makeLogoutUseCase(),
             actions: actions
         )
     }
@@ -83,9 +69,9 @@ final class AuthSceneDIContainer {
 //    }
     
     // MARK: - View Controllers
-    func makeLoginViewController(actions: LoginViewModelActions) -> LoginViewController {
-        return LoginViewController.create(
-            with: makeLoginViewModel(actions: actions)
+    func makeAccountViewController(actions: AccountViewModelActions) -> AccountVC {
+        return AccountVC.create(
+            with: makeAccountViewModel(actions: actions)
         )
     }
     
@@ -102,11 +88,11 @@ final class AuthSceneDIContainer {
 //    }
     
     // MARK: - Flow Coordinator
-    func makeAuthFlowCoordinator(
+    func makeAccountFlowCoordinator(
         navigationController: UINavigationController,
-        delegate: AuthFlowCoordinatorDelegate? = nil
-    ) -> AuthFlowCoordinator {
-        return AuthFlowCoordinator(
+        delegate: AccountFlowCoordinatorDelegate? = nil
+    ) -> AccountFlowCoordinator {
+        return AccountFlowCoordinator(
             navigationController: navigationController,
             dependencies: self,
             delegate: delegate
@@ -114,4 +100,4 @@ final class AuthSceneDIContainer {
     }
 }
 
-extension AuthSceneDIContainer: AuthFlowCoordinatorDependencies {}
+extension AccountSceneDIContainer: AccountFlowCoordinatorDependencies {}

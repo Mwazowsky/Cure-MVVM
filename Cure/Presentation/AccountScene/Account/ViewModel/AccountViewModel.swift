@@ -49,6 +49,7 @@ final class DefaultAccountViewModel: AccountViewModel {
     }
     
     func didTapLogoutButton() {
+        print("This Logout Buttonjhsdbhb")
         isLoading.value = true
         error.value = nil
         
@@ -58,11 +59,12 @@ final class DefaultAccountViewModel: AccountViewModel {
             switch result {
             case .success(let user):
                 let isloggedOut = self.actions.logoutDidSucceed()
-                print("Success Logout: ", isloggedOut)
             case .failure(let error):
                 self.error.value = self.mapErrorToMessage(error as! AuthenticationError)
             }
         }
+        
+        let isloggedOut = self.actions.logoutDidSucceed()
     }
     
     

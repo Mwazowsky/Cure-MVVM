@@ -10,5 +10,5 @@ import Foundation
 protocol KeychainRepository {
     func saveUserData(_ userData: LoginResponseDTO) -> Bool
     func getUserData() -> LoginResponseDTO?
-    func deleteUserData() -> Bool
+    func deleteUserData() -> Void
 }

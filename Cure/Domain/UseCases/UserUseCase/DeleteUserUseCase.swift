@@ -9,7 +9,7 @@
 import Foundation
 
 protocol DeleteUserUseCase {
-    func execute() -> Bool
+    func execute() -> Void
 }
 
 class DefaultDeleteUserUseCase: DeleteUserUseCase {
@@ -19,7 +19,7 @@ class DefaultDeleteUserUseCase: DeleteUserUseCase {
         self.keychainRepository = keychainRepository
     }
     
-    func execute() -> Bool {
-        return keychainRepository.deleteUserData()
+    func execute() -> Void {
+        keychainRepository.deleteUserData()
     }
 }

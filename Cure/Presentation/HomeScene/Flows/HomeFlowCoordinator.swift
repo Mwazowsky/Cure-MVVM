@@ -7,7 +7,7 @@ protocol HomeFlowCoordinatorDependencies  {
 }
 
 protocol HomeFlowCoordinatorDelegate: AnyObject {
-    func homeFlowDidFinish(with user: LoginResponse)
+    func homeFlowDidFinish()
 }
 
 protocol HomeFlowCoordinatorProtocol: Coordinator {
@@ -98,6 +98,8 @@ final class HomeFlowCoordinator: NSObject, HomeFlowCoordinatorProtocol {
     private weak var homeVC: HomeViewController?
     private weak var homeSearchSuggestionsVC: UIViewController?
     
+    private let windowManager: WindowManageable
+    
     init(
         navigationController: UINavigationController,
         appDIContainer: AppDIContainer,
@@ -109,6 +111,7 @@ final class HomeFlowCoordinator: NSObject, HomeFlowCoordinatorProtocol {
         self.dependencies = dependencies
         self.delegate = delegate
         self.tabBarController = .init()
+        self.windowManager = appDIContainer.windowManager
     }
     
     deinit {
@@ -170,7 +173,7 @@ final class HomeFlowCoordinator: NSObject, HomeFlowCoordinatorProtocol {
         childCoordinators.append(moviesFlowCoordinator)
     }
     
-    private func showAccountFLow(navigationController: UINavigationController) {
+    private func showAccountFlow(navigationController: UINavigationController) {
         let accountSceneDIContainer = appDIContainer.makeAccountSceneDIContainer()
         let accountFlowCoordinator = accountSceneDIContainer.makeAccountFlowCoordinator(
             navigationController: navigationController
@@ -185,12 +188,6 @@ final class HomeFlowCoordinator: NSObject, HomeFlowCoordinatorProtocol {
     private func showForgotPassword() {
         //        let vc = dependencies.makeMoviesDetailsViewController(movie: movie)
         //        navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    private func logoutDidSucces() -> Bool {
-        self.finish()
-        
-        return true
     }
     
     private func getTabBarController(_ item: TabBarItem) -> UINavigationController {
@@ -215,19 +212,10 @@ final class HomeFlowCoordinator: NSObject, HomeFlowCoordinatorProtocol {
             }
             
             navController.viewControllers = [dashboardVC]
-            
         case .chats:
             showMovieFlow(navigationController: navController)
         case .account:
-            let accountVC = AccountVC()
-            accountVC.didSendEventClosure = { [weak self] event in
-                switch event {
-                case .account:
-                    self?.selectItem(.account)
-                }
-            }
-            
-            navController.viewControllers = [accountVC]
+            showAccountFlow(navigationController: navController)
         }
         
         return navController
@@ -253,5 +241,21 @@ extension HomeFlowCoordinator: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController,
                           didSelect viewController: UIViewController) {
         UIView.setAnimationsEnabled(false)
+    }
+}
+
+extension HomeFlowCoordinator: HomeFlowCoordinatorDelegate {
+    func homeFlowDidFinish() {
+        print("Executing start")
+        parentCoordinator?.start()
+    }
+    
+    func childDidFinish(_ child: Coordinator?) {
+        for (index, coordinator) in childCoordinators.enumerated() {
+            if coordinator === child {
+                childCoordinators.remove(at: index)
+                break
+            }
+        }
     }
 }

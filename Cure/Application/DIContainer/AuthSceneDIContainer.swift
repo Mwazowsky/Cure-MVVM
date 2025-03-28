@@ -50,10 +50,6 @@ final class AuthSceneDIContainer {
         return DefaultResetPasswordUseCase(authRepository: makeAuthRepository())
     }
     
-    func makeLogoutUseCase() -> LogoutUseCase {
-        return DefaultLogoutUseCase(authRepository: makeAuthRepository(), keychainRepository: makeUserRepository())
-    }
-    
     /// User Data Save
     func makeSaveCurrentUserUseCase() -> SaveUserUseCase {
         return DefaultSaveUserUseCase(keychainRepository: makeUserRepository())

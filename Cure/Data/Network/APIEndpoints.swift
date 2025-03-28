@@ -44,6 +44,20 @@ struct APIEndpoints {
         )
     }
     
+    static func logout() -> Endpoint<LoginResponse> {
+        
+        let headerParameters = [
+            "accept": "*/*",
+            "Content-Type": "application/json"
+        ]
+        
+        return Endpoint(
+            path: "app/hris/auth/logout",
+            method: .post,
+            headerParameters: headerParameters
+        )
+    }
+    
     
     static func register(with registerRequestDto: RegisterRequestDTO) -> Endpoint<RegisterResponseDTO> {
 

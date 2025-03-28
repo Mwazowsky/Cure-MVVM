@@ -61,15 +61,14 @@ extension DefaultKeychainRepository: KeychainRepository {
         return nil
     }
     
-    func deleteUserData() -> Bool {
+    func deleteUserData() -> Void {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: keychainService,
             kSecAttrAccount as String: "currentUserData"
         ]
         
-        let status = SecItemDelete(query as CFDictionary)
-        return status == errSecSuccess
+        let _ = SecItemDelete(query as CFDictionary)
     }
 }
 
