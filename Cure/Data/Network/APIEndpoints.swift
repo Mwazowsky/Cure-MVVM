@@ -3,9 +3,7 @@ import Foundation
 
 /// Note: This could potentially be a humongous file, if there is a bunch of endpoints
 struct APIEndpoints {
-    
     static func getMovies(with moviesRequestDTO: MoviesRequestDTO) -> Endpoint<MoviesResponseDTO> {
-
         return Endpoint(
             path: "3/search/movie",
             method: .get,
@@ -33,11 +31,12 @@ struct APIEndpoints {
         
         let headerParameters = [
             "accept": "*/*",
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "x-api-key": apiKey
         ]
         
         return Endpoint(
-            path: "app/hris/auth/login",
+            path: "api/auth/login",
             method: .post,
             headerParameters: headerParameters,
             bodyParametersEncodable: loginRequestDTO
@@ -48,11 +47,13 @@ struct APIEndpoints {
         
         let headerParameters = [
             "accept": "*/*",
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": "Bearer \(TokenManager.shared.getToken())",
+            "x-api-key": apiKey
         ]
         
         return Endpoint(
-            path: "app/hris/auth/logout",
+            path: "api/auth/logout",
             method: .post,
             headerParameters: headerParameters
         )

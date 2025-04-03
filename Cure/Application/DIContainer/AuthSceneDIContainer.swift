@@ -32,6 +32,10 @@ final class AuthSceneDIContainer {
         )
     }
     
+    private func makeDeviceInfoRepository() -> DeviceInfoRepository {
+        return DefaultDeviceInfoRepository()
+    }
+    
     private func makeUserRepository() -> KeychainRepository {
         return DefaultKeychainRepository()
     }
@@ -39,7 +43,7 @@ final class AuthSceneDIContainer {
     // MARK: - Use Cases
     /// Auth
     func makeLoginUseCase() -> LoginUseCase {
-        return DefaultLoginUseCase(authRepository: makeAuthRepository())
+        return DefaultLoginUseCase(authRepository: makeAuthRepository(), deviceInfoRepository: makeDeviceInfoRepository())
     }
     
     func makeRegisterUseCase() -> RegisterUseCase {

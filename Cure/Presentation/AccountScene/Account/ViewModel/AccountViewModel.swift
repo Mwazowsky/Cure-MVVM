@@ -9,7 +9,7 @@ import Foundation
 
 struct AccountViewModelActions {
     let showForgotPassword: () -> Void
-    let logoutDidSucceed: () -> Bool
+    let logoutDidSucceed: () -> Void
 }
 
 protocol AccountViewModelInput {
@@ -49,7 +49,6 @@ final class DefaultAccountViewModel: AccountViewModel {
     }
     
     func didTapLogoutButton() {
-        print("This Logout Buttonjhsdbhb")
         isLoading.value = true
         error.value = nil
         
@@ -58,13 +57,11 @@ final class DefaultAccountViewModel: AccountViewModel {
             self.isLoading.value = false
             switch result {
             case .success(let user):
-                let isloggedOut = self.actions.logoutDidSucceed()
+                self.actions.logoutDidSucceed()
             case .failure(let error):
                 self.error.value = self.mapErrorToMessage(error as! AuthenticationError)
             }
         }
-        
-        let isloggedOut = self.actions.logoutDidSucceed()
     }
     
     

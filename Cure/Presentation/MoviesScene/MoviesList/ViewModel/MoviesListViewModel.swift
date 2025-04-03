@@ -102,8 +102,6 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
     private func load(movieQuery: MovieQuery, loading: MoviesListViewModelLoading) {
         self.loading.value = loading
         query.value = movieQuery.query
-        
-        print("Get Saved User Data: ", getUserDataUseCase.execute() as Any)
 
         moviesLoadTask = searchMoviesUseCase.execute(
             requestValue: .init(query: movieQuery, page: nextPage),
@@ -142,7 +140,11 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
 extension DefaultMoviesListViewModel {
 
     func viewDidLoad() {
-        print("Get Saved User Data: ", getUserDataUseCase.execute() as Any)
+        print("Get Saved User Data from ViewDidLoad: ", getUserDataUseCase.execute() as Any)
+        
+        if let token = getUserDataUseCase.execute()?.token {
+            TokenManager.shared.configure(token: token)
+        }
     }
 
     func didLoadNextPage() {

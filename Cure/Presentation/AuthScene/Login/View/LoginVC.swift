@@ -34,14 +34,14 @@ final class LoginViewController: UIViewController {
         return label
     }()
     
-    private lazy var usernameTextField: UITextField = {
+    private lazy var emailTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.placeholder = "username"
+        textField.placeholder = "email"
         textField.keyboardType = .emailAddress
         textField.autocapitalizationType = .none
         textField.borderStyle = .roundedRect
-        textField.addTarget(self, action: #selector(usernameTextChanged), for: .editingChanged)
+        textField.addTarget(self, action: #selector(emailTextChanged), for: .editingChanged)
         return textField
     }()
     
@@ -148,7 +148,7 @@ final class LoginViewController: UIViewController {
         scrollView.addSubview(contentView)
         
         contentView.addSubview(titleLabel)
-        contentView.addSubview(usernameTextField)
+        contentView.addSubview(emailTextField)
         contentView.addSubview(passwordTextField)
         contentView.addSubview(loginButton)
         contentView.addSubview(registerButton)
@@ -172,12 +172,12 @@ final class LoginViewController: UIViewController {
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
-            usernameTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40),
-            usernameTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            usernameTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            usernameTextField.heightAnchor.constraint(equalToConstant: 50),
+            emailTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40),
+            emailTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            emailTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            emailTextField.heightAnchor.constraint(equalToConstant: 50),
             
-            passwordTextField.topAnchor.constraint(equalTo: usernameTextField.bottomAnchor, constant: 20),
+            passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 20),
             passwordTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             passwordTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             passwordTextField.heightAnchor.constraint(equalToConstant: 50),
@@ -235,8 +235,8 @@ final class LoginViewController: UIViewController {
     }
     
     // MARK: - Actions
-    @objc private func usernameTextChanged() {
-        viewModel.updateusername(usernameTextField.text ?? "")
+    @objc private func emailTextChanged() {
+        viewModel.updateEmail(emailTextField.text ?? "")
     }
     
     @objc private func passwordTextChanged() {
@@ -273,7 +273,7 @@ final class LoginViewController: UIViewController {
         var rect = self.view.frame
         rect.size.height -= keyboardSize.height
         
-        if let activeField = [usernameTextField, passwordTextField].first(where: { $0.isFirstResponder }) {
+        if let activeField = [emailTextField, passwordTextField].first(where: { $0.isFirstResponder }) {
             let activeRect = activeField.convert(activeField.bounds, to: scrollView)
             if !rect.contains(activeRect.origin) {
                 scrollView.scrollRectToVisible(activeRect, animated: true)

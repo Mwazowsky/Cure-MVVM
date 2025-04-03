@@ -49,7 +49,7 @@ final class DefaultRegisterUseCase: RegisterUseCase {
         
         let requestData: RegisterRequestDTO = RegisterRequestDTO(
             namaLengkap: requestValue.namaLengkap,
-            username: requestValue.username,
+            email: requestValue.username,
             password: requestValue.password
         )
         

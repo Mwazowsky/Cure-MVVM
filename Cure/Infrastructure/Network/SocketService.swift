@@ -62,9 +62,7 @@ final class DefaultSocketService: SocketService {
     }
     
     private func emit() {
-        
-        
-        if let id = getUserUsecase.execute()?.userId {
+        if let id = getUserUsecase.execute()?.token {
             let payload: [String:Any] = [
                 "employeeID": id,
                 "device": "iOS"

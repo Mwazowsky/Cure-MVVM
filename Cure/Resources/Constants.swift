@@ -9,6 +9,7 @@ import Foundation
 import Alamofire
 
 let appStoreID = "6642695368"
+let apiKey = "mediainovasi"
 
 struct Constants {
     static private let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"

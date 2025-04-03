@@ -8,11 +8,17 @@
 import Foundation
 
 struct LoginResponse: Decodable {
+    let status: Int
     let message: String
-    let code: Int
-    let meta: MetaData
-    let data: LoginResponseDTO
-    let path: String
+    let errors: [String]
+    let error: ErrorDetail?
+    let success: Bool
+    let data: LoginResponseDTO?
+    
+    struct ErrorDetail: Decodable {
+        let name: String
+        let detail: String
+    }
 }
 
 struct MetaData: Decodable {
@@ -24,17 +30,9 @@ struct MetaData: Decodable {
 
 struct LoginResponseDTO: Codable {
     private enum CodingKeys: String, CodingKey {
-        case userId = "user_id"
-        case email = "email"
-        case expiredAt = "expiredAt"
-        case role = "role"
-        case token = "accessToken"
+        case token = "token"
     }
     
-    let userId: String
-    let email: String
-    let expiredAt: Int
-    let role: UserResponseDTO.RoleDTO
     let token: String
 }
 

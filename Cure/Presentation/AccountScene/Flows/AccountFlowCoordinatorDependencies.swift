@@ -64,10 +64,8 @@ final class AccountFlowCoordinator: Coordinator {
         //        navigationController?.pushViewController(vc, animated: true)
     }
     
-    private func logoutDidSucceed() -> Bool {
+    private func logoutDidSucceed() -> Void {
         print("logoutDidSucceed, executing self.finish()")
         self.finish()
-        
-        return true
     }
 }

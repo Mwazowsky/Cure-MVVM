@@ -18,12 +18,12 @@ protocol LoginViewModelInput {
     func didTapLoginButton()
     func didTapRegisterButton()
     func didTapForgotPasswordButton()
-    func updateusername(_ username: String)
+    func updateEmail(_ email: String)
     func updatePassword(_ password: String)
 }
 
 protocol LoginViewModelOutput {
-    var username: Observable<String> { get }
+    var email: Observable<String> { get }
     var password: Observable<String> { get }
     var isLoading: Observable<Bool> { get }
     var error: Observable<String?> { get }
@@ -34,7 +34,7 @@ typealias LoginViewModel = LoginViewModelInput & LoginViewModelOutput
 
 final class DefaultLoginViewModel: LoginViewModel {
     // MARK: - Output
-    let username: Observable<String> = Observable("")
+    let email: Observable<String> = Observable("")
     let password: Observable<String> = Observable("")
     let isLoading: Observable<Bool> = Observable(false)
     let error: Observable<String?> = Observable(nil)
@@ -66,7 +66,7 @@ final class DefaultLoginViewModel: LoginViewModel {
         error.value = nil
         
         let request = LoginUseCaseRequestValue(
-            username: username.value,
+            email: email.value,
             password: password.value
         )
         
@@ -75,8 +75,17 @@ final class DefaultLoginViewModel: LoginViewModel {
             self.isLoading.value = false
             switch result {
             case .success(let user):
-                self.actions.loginDidSucceed(user)
-                print("IsUser data saved: ", self.saveUserDataUseCase.execute(userData: user.data))
+                var isUserSaved: Bool = false
+                if let userData = user.data {
+                    isUserSaved = self.saveUserDataUseCase.execute(userData: userData)
+                }
+                
+                if isUserSaved {
+                    self.actions.loginDidSucceed(user)
+                } else {
+                    self.error.value = "Error: Fail to save user data."
+                }
+                
             case .failure(let error):
                 self.error.value = self.mapErrorToMessage(error)
             }
@@ -94,8 +103,8 @@ final class DefaultLoginViewModel: LoginViewModel {
     }
     
     
-    func updateusername(_ username: String) {
-        self.username.value = username
+    func updateEmail(_ email: String) {
+        self.email.value = email
         validateInputs()
     }
     
@@ -108,10 +117,10 @@ final class DefaultLoginViewModel: LoginViewModel {
     
     // MARK: - Private
     private func validateInputs() {
-        let isusernameValid = !username.value.isEmpty && username.value.contains("@")
+        let isEmailValid = !email.value.isEmpty && email.value.contains("@")
         let isPasswordValid = !password.value.isEmpty && password.value.count >= 6
         
-        isLoginButtonEnabled.value = isusernameValid && isPasswordValid
+        isLoginButtonEnabled.value = isEmailValid && isPasswordValid
     }
     
     

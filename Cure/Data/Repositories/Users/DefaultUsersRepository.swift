@@ -14,6 +14,7 @@ final class DefaultKeychainRepository {
 extension DefaultKeychainRepository: KeychainRepository {
     
     func saveUserData(_ userData: LoginResponseDTO) -> Bool {
+        print("User data params: ", userData)
         do {
             let userData = try JSONEncoder().encode(userData)
             

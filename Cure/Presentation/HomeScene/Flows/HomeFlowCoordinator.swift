@@ -143,17 +143,6 @@ final class HomeFlowCoordinator: NSObject, HomeFlowCoordinatorProtocol {
         
         tabBarController.selectedIndex = TabBarItem.chats.pageOrderNumber()
         
-        let blurEffect = UIBlurEffect(style: .extraLight)
-        let blurView = UIVisualEffectView(effect: blurEffect)
-        
-        blurView.frame = tabBarController.tabBar.bounds
-        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
-        tabBarController.tabBar.backgroundImage = UIImage()
-        tabBarController.tabBar.shadowImage = UIImage()
-        
-        tabBarController.tabBar.insertSubview(blurView, at: 0)
-        
         tabBarController.tabBar.isTranslucent = true
         
         tabBarController.tabBar.tintColor = .primaryRed

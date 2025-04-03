@@ -10,25 +10,42 @@ protocol LoginUseCase {
 }
 
 struct LoginUseCaseRequestValue {
-    let username: String
+    let email: String
     let password: String
 }
 
 final class DefaultLoginUseCase: LoginUseCase {
     private let authRepository: AuthRepository
     
-    init(authRepository: AuthRepository) {
+    private let deviceInfoRepository: DeviceInfoRepository
+    
+    init(
+        authRepository: AuthRepository,
+        deviceInfoRepository: DeviceInfoRepository
+    ) {
         self.authRepository = authRepository
+        self.deviceInfoRepository = deviceInfoRepository
     }
     
     func execute(requestValue: LoginUseCaseRequestValue, completion: @escaping (Result<LoginResponse, AuthenticationError>) -> Void) {
-        guard !requestValue.username.isEmpty, !requestValue.password.isEmpty else {
+        guard !requestValue.email.isEmpty, !requestValue.password.isEmpty else {
             completion(.failure(.invalidCredentials))
             return
         }
         
+        let metadata = LoginMetadataDTO(
+            platform: deviceInfoRepository.platform,
+            version: deviceInfoRepository.version,
+            manufacturer: deviceInfoRepository.manufacturer,
+            model: deviceInfoRepository.model,
+            serial: deviceInfoRepository.serial,
+            fcmToken: "nasdjkansdmadnsaidh99djkkwk"
+        )
+        
         let requestData: LoginRequestDTO = LoginRequestDTO(
-            username: requestValue.username, password: requestValue.password
+            email: requestValue.email,
+            password: requestValue.password,
+            metadata: metadata
         )
         
         return authRepository.login(

@@ -22,8 +22,16 @@ final class DefaultLogoutUseCase: LogoutUseCase {
     }
     
     func execute(completion: @escaping (Result<Bool, Error>) -> Void) {
-        keychainRepository.deleteUserData()
-//        return authRepository.logout(completion: completion)
-//        return true
+        authRepository.logout { result in
+            switch result {
+            case .success(let isSuccess):
+                if isSuccess {
+                    self.keychainRepository.deleteUserData()
+                }
+                completion(.success(isSuccess))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
     }
 }

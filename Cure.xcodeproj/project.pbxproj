@@ -120,6 +120,8 @@
 		644944C92D89555C006B11C1 /* RegisterUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644944C72D89555C006B11C1 /* RegisterUseCase.swift */; };
 		644944CB2D89625E006B11C1 /* ResetPasswordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644944CA2D89625E006B11C1 /* ResetPasswordUseCase.swift */; };
 		644944CC2D89625E006B11C1 /* ResetPasswordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644944CA2D89625E006B11C1 /* ResetPasswordUseCase.swift */; };
+		645CD9F72D9E3578006E01F6 /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645CD9F62D9E3574006E01F6 /* TokenManager.swift */; };
+		645CD9F82D9E3578006E01F6 /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645CD9F62D9E3574006E01F6 /* TokenManager.swift */; };
 		646CB71A2D91032C0009E8F2 /* Opensans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 646CB7132D91032C0009E8F2 /* Opensans-LightItalic.ttf */; };
 		646CB71B2D91032C0009E8F2 /* Opensans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 646CB70F2D91032C0009E8F2 /* Opensans-ExtraBold.ttf */; };
 		646CB71C2D91032C0009E8F2 /* Opensans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 646CB7142D91032C0009E8F2 /* Opensans-Medium.ttf */; };
@@ -137,6 +139,11 @@
 		649027022D55AD68005B5C7A /* MoviesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649027012D55AD68005B5C7A /* MoviesListView.swift */; };
 		649027032D55AD68005B5C7A /* MoviesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649027012D55AD68005B5C7A /* MoviesListView.swift */; };
 		649027042D55AD68005B5C7A /* MoviesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649027012D55AD68005B5C7A /* MoviesListView.swift */; };
+		64A811C02D9CF40E0044BB95 /* DeviceInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A811BF2D9CF4060044BB95 /* DeviceInfoRepository.swift */; };
+		64A811C12D9CF40E0044BB95 /* DeviceInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A811BF2D9CF4060044BB95 /* DeviceInfoRepository.swift */; };
+		64A811C32D9CF4DF0044BB95 /* DefaultDeviceInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A811C22D9CF4D40044BB95 /* DefaultDeviceInfoRepository.swift */; };
+		64A811C52D9CF5DD0044BB95 /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A811C42D9CF5BE0044BB95 /* DeviceInfo.swift */; };
+		64A811C62D9CF5DD0044BB95 /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A811C42D9CF5BE0044BB95 /* DeviceInfo.swift */; };
 		64B740212D8A635A00168646 /* LogoutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B740202D8A635A00168646 /* LogoutUseCase.swift */; };
 		64B740222D8A635A00168646 /* LogoutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B740202D8A635A00168646 /* LogoutUseCase.swift */; };
 		64B740242D8A64C600168646 /* GetUserUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B740232D8A64C600168646 /* GetUserUseCase.swift */; };
@@ -311,6 +318,7 @@
 		642A92952D89525C00E34BDA /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
 		644944C72D89555C006B11C1 /* RegisterUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUseCase.swift; sourceTree = "<group>"; };
 		644944CA2D89625E006B11C1 /* ResetPasswordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordUseCase.swift; sourceTree = "<group>"; };
+		645CD9F62D9E3574006E01F6 /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
 		646CB70D2D91032C0009E8F2 /* Opensans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Opensans-Bold.ttf"; sourceTree = "<group>"; };
 		646CB70E2D91032C0009E8F2 /* Opensans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Opensans-BoldItalic.ttf"; sourceTree = "<group>"; };
 		646CB70F2D91032C0009E8F2 /* Opensans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Opensans-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -326,6 +334,9 @@
 		646CB7262D9107710009E8F2 /* Cure.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cure.entitlements; sourceTree = "<group>"; };
 		646CB9892D91402C0009E8F2 /* SaveUserUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveUserUseCase.swift; sourceTree = "<group>"; };
 		649027012D55AD68005B5C7A /* MoviesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListView.swift; sourceTree = "<group>"; };
+		64A811BF2D9CF4060044BB95 /* DeviceInfoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoRepository.swift; sourceTree = "<group>"; };
+		64A811C22D9CF4D40044BB95 /* DefaultDeviceInfoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDeviceInfoRepository.swift; sourceTree = "<group>"; };
+		64A811C42D9CF5BE0044BB95 /* DeviceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfo.swift; sourceTree = "<group>"; };
 		64B740202D8A635A00168646 /* LogoutUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutUseCase.swift; sourceTree = "<group>"; };
 		64B740232D8A64C600168646 /* GetUserUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserUseCase.swift; sourceTree = "<group>"; };
 		64B740262D8A65D600168646 /* DefaultAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAuthRepository.swift; sourceTree = "<group>"; };
@@ -666,14 +677,14 @@
 		1FA533D1201EF1EC00747E55 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				1FA533D2201EF21000747E55 /* Entities */,
+				1FA533D2201EF21000747E55 /* Models */,
 				1FA533D8201EF2F100747E55 /* UseCases */,
 				1FF3242F2229AC780004E6CC /* Interfaces */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
 		};
-		1FA533D2201EF21000747E55 /* Entities */ = {
+		1FA533D2201EF21000747E55 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				64FB941C2D93A35B00A5325D /* Home */,
@@ -681,7 +692,7 @@
 				642A928A2D894DF200E34BDA /* User */,
 				64F9DEA42D894D7A008F3A35 /* Movie */,
 			);
-			path = Entities;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		1FA533D5201EF29600747E55 /* Application */ = {
@@ -932,6 +943,7 @@
 		1FEED0D520231F72000F4EAA /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				645CD9F62D9E3574006E01F6 /* TokenManager.swift */,
 				6C0F72E129CF0F5A0005020A /* DispatchQueueType.swift */,
 				1F474F2122356B1E0092DB4B /* Cancellable.swift */,
 				1F0CEFCE23436B67004141FA /* ConnectionError.swift */,
@@ -1023,6 +1035,7 @@
 		642A928E2D894E8A00E34BDA /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
+				64A811C42D9CF5BE0044BB95 /* DeviceInfo.swift */,
 				642A928F2D894E9900E34BDA /* Authentication.swift */,
 			);
 			path = Authentication;
@@ -1117,6 +1130,7 @@
 			isa = PBXGroup;
 			children = (
 				64B740262D8A65D600168646 /* DefaultAuthRepository.swift */,
+				64A811C22D9CF4D40044BB95 /* DefaultDeviceInfoRepository.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -1333,6 +1347,7 @@
 		64FB94452D93A83600A5325D /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				64A811BF2D9CF4060044BB95 /* DeviceInfoRepository.swift */,
 				642A92922D894F2700E34BDA /* AuthRepository.swift */,
 			);
 			path = Auth;
@@ -1878,6 +1893,8 @@
 				64FB94382D93A5FE00A5325D /* SearchHomeUseCase.swift in Sources */,
 				1FFFC835221B0041007D99D2 /* DefaultMoviesRepository.swift in Sources */,
 				1FE49D8B230AA7C200D1D42E /* MoviesListTableViewController.swift in Sources */,
+				64A811C12D9CF40E0044BB95 /* DeviceInfoRepository.swift in Sources */,
+				64A811C32D9CF4DF0044BB95 /* DefaultDeviceInfoRepository.swift in Sources */,
 				64B740312D8A777C00168646 /* UserResponseDTO+Mapping.swift in Sources */,
 				642A92942D894F2C00E34BDA /* AuthRepository.swift in Sources */,
 				1FA533E2201EF5F700747E55 /* APIEndpoints.swift in Sources */,
@@ -1926,6 +1943,7 @@
 				1FE49D8A230AA7C200D1D42E /* MoviesListItemCell.swift in Sources */,
 				1F1FC48B22E3693100BCBA8D /* Endpoint.swift in Sources */,
 				64BAAFE82D92804200B70EFF /* HomeViewController.swift in Sources */,
+				645CD9F82D9E3578006E01F6 /* TokenManager.swift in Sources */,
 				1FFFC831221B0041007D99D2 /* DefaultMoviesQueriesRepository.swift in Sources */,
 				64FB943A2D93A66400A5325D /* HomeQueriesRepository.swift in Sources */,
 				1FD03807239098650016D05F /* CoreDataStorage.xcdatamodeld in Sources */,
@@ -1962,6 +1980,7 @@
 				1FCE68A1222C873A00CC3074 /* MoviesSceneDIContainer.swift in Sources */,
 				64BAAFB92D927A7900B70EFF /* UseCase.swift in Sources */,
 				1F2AB95324278CC20010DEEE /* MoviesRequestDTO+Mapping.swift in Sources */,
+				64A811C62D9CF5DD0044BB95 /* DeviceInfo.swift in Sources */,
 				1F903535230759AC00DEA4BD /* MovieQueryEntity+Mapping.swift in Sources */,
 				64B740212D8A635A00168646 /* LogoutUseCase.swift in Sources */,
 				1FE49D8F230AA7C200D1D42E /* MoviesQueryListViewModel.swift in Sources */,
@@ -1988,6 +2007,7 @@
 				1F53E2B923125FAD008D6A05 /* MoviesQueryListItemViewModel.swift in Sources */,
 				1F57F8D323C656F600981E09 /* AccessibilityIdentifier.swift in Sources */,
 				64FB946E2D952FAB00A5325D /* SocketService.swift in Sources */,
+				645CD9F72D9E3578006E01F6 /* TokenManager.swift in Sources */,
 				64B740392D8A7F1400168646 /* KeychainRepository.swift in Sources */,
 				1F9035412307758D00DEA4BD /* PosterImagesRepositoryMock.swift in Sources */,
 				1F474F2E22356C7F0092DB4B /* MoviesRepository.swift in Sources */,
@@ -1996,6 +2016,7 @@
 				1FE49D9B230AEC4F00D1D42E /* MoviesListViewModel.swift in Sources */,
 				64FB943B2D93A66400A5325D /* HomeQueriesRepository.swift in Sources */,
 				64BAAFF52D92804200B70EFF /* HomeViewModel.swift in Sources */,
+				64A811C02D9CF40E0044BB95 /* DeviceInfoRepository.swift in Sources */,
 				6C0F72E329CF115F0005020A /* DispatchQueueType.swift in Sources */,
 				64BAAFB82D927A7900B70EFF /* UseCase.swift in Sources */,
 				1F7C1D19242117910014F011 /* Movie+Stub.swift in Sources */,
@@ -2024,6 +2045,7 @@
 				644944CB2D89625E006B11C1 /* ResetPasswordUseCase.swift in Sources */,
 				1F9034D1230714B900DEA4BD /* NetworkConfigurableMock.swift in Sources */,
 				6C0F72E629CF12930005020A /* DispatchQueueTypeMock.swift in Sources */,
+				64A811C52D9CF5DD0044BB95 /* DeviceInfo.swift in Sources */,
 				642A92972D89526300E34BDA /* LoginUseCase.swift in Sources */,
 				1F9034DA2307238C00DEA4BD /* MoviesQueriesListViewModelTests.swift in Sources */,
 				1F474F2F22356C7F0092DB4B /* PosterImagesRepository.swift in Sources */,
@@ -2275,7 +2297,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 3.0.0;
-				NEW_API_BASE_URL = "https://api.saranalintasmedika.co.id";
+				NEW_API_BASE_URL = "http://cure-api.mediainovasi.id";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.softwaremediainnovation.CURE-Major-IOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2311,7 +2333,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 3.0.0;
-				NEW_API_BASE_URL = "https://api.saranalintasmedika.co.id";
+				NEW_API_BASE_URL = "http://cure-api.mediainovasi.id";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.softwaremediainnovation.CURE-Major-IOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

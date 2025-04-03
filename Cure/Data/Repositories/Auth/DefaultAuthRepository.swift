@@ -25,14 +25,26 @@ extension DefaultAuthRepository: AuthRepository {
         request: LoginRequestDTO,
         completion: @escaping (Result<LoginResponse, AuthenticationError>) -> Void
     ) {
-        let requestDTO = LoginRequestDTO(username: request.username, password: request.password)
+        let requestDTO = LoginRequestDTO(
+            email: request.email,
+            password: request.password,
+            metadata: request.metadata
+        )
         let endpoint = APIEndpoints.login(with: requestDTO)
-        dataTransferService.request(with: endpoint) { [weak self] (result:  Result<LoginResponse, DataTransferError>) in
+        dataTransferService.request(with: endpoint) { [weak self] (result: Result<LoginResponse, DataTransferError>) in
             guard let self = self else { return }
+            print("Login Result: ", result)
             
             switch result {
             case .success(let response):
-                completion(.success(response))
+                if response.success == false || response.status >= 400 {
+                    let errorMessage = response.message
+                    let errorDetail = response.error?.detail ?? ""
+                    let authError = AuthenticationError.serverError(errorMessage + ": " + errorDetail)
+                    completion(.failure(authError))
+                } else {
+                    completion(.success(response))
+                }
             case .failure(let error):
                 completion(.failure(self.mapError(error)))
             }
@@ -43,7 +55,7 @@ extension DefaultAuthRepository: AuthRepository {
         request: RegisterRequestDTO,
         completion: @escaping (Result<RegisterResponseDTO, AuthenticationError>) -> Void
     ) {
-        let requestDTO = RegisterRequestDTO(namaLengkap: request.namaLengkap, username: request.username, password: request.password)
+        let requestDTO = RegisterRequestDTO(namaLengkap: request.namaLengkap, email: request.email, password: request.password)
         
         let endpoint = APIEndpoints.register(with: requestDTO)
         
@@ -64,7 +76,6 @@ extension DefaultAuthRepository: AuthRepository {
     }
     
     func logout(completion: @escaping (Result<Bool, any Error>) -> Void) {
-        print("Implementation of DefaultAuthRepository.logout")
         let endpoint = APIEndpoints.logout()
         
         dataTransferService.request(with: endpoint) { [weak self] (result:  Result<LoginResponse, DataTransferError>) in
@@ -72,7 +83,7 @@ extension DefaultAuthRepository: AuthRepository {
             
             switch result {
             case .success(let response):
-                completion(.success(response.code == 200))
+                completion(.success(response.status == 200))
             case .failure(let error):
                 completion(.failure(self.mapError(error)))
             }
@@ -85,11 +96,7 @@ extension DefaultAuthRepository: AuthRepository {
 extension DefaultAuthRepository {
     private func mapToDomain(response: LoginResponse) -> LoginResponseDTO {
         return LoginResponseDTO(
-            userId: response.data.userId,
-            email: response.data.email,
-            expiredAt: response.data.expiredAt,
-            role: UserResponseDTO.RoleDTO(rawValue: response.data.role.rawValue) ?? .staff,
-            token: response.data.token
+            token: response.data?.token ?? ""
         )
     }
     
@@ -107,11 +114,7 @@ extension DefaultAuthRepository {
     
     private func mapToDomain(response: LoginResponseDTO) -> User {
         return User(
-            user_id: response.userId,
-            email: response.email,
-            expiredAt: response.expiredAt,
-            role: response.role,
-            accessToken: response.token
+            token: response.token
         )
     }
     
