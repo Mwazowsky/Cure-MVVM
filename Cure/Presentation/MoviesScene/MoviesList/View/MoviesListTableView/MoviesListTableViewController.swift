@@ -4,7 +4,7 @@ final class MoviesListTableViewController: UITableViewController {
 
     var viewModel: MoviesListViewModel!
 
-    var posterImagesRepository: PosterImagesRepository?
+    var posterImagesRepository: IPosterImagesRepository?
     var nextPageLoadingSpinner: UIActivityIndicatorView?
 
     // MARK: - Lifecycle

@@ -1,6 +1,6 @@
 import Foundation
 
-protocol HomeQueriesRepository {
+protocol IHomeQueriesRepository {
     func fetchRecentsQueries(
         maxCount: Int,
         completion: @escaping (Result<[HomeQuery], Error>) -> Void

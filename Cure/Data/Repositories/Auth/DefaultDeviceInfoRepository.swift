@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DefaultDeviceInfoRepository: DeviceInfoRepository {
+class DefaultDeviceInfoRepository: IDeviceInfoRepository {
     var platform: String {
         UIDevice.current.systemName
     }

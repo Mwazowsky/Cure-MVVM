@@ -12,11 +12,11 @@ protocol LogoutUseCase {
 }
 
 final class DefaultLogoutUseCase: LogoutUseCase {
-    private let authRepository: AuthRepository
-    private let keychainRepository: KeychainRepository
+    private let authRepository: IAuthRepository
+    private let keychainRepository: IKeychainRepository
     
-    init(authRepository: AuthRepository,
-         keychainRepository: KeychainRepository) {
+    init(authRepository: IAuthRepository,
+         keychainRepository: IKeychainRepository) {
         self.keychainRepository = keychainRepository
         self.authRepository = authRepository
     }
@@ -26,7 +26,7 @@ final class DefaultLogoutUseCase: LogoutUseCase {
             switch result {
             case .success(let isSuccess):
                 if isSuccess {
-                    self.keychainRepository.deleteUserData()
+                    self.keychainRepository.deleteUserTokenData()
                 }
                 completion(.success(isSuccess))
             case .failure(let error):

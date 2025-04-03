@@ -9,12 +9,12 @@ protocol SearchHomeUseCase {
 }
 
 final class DefaultSearchHomeUseCase: SearchHomeUseCase {
-    private let homeRepository: HomeRepository
-    private let homeQueriesRepository: HomeQueriesRepository
+    private let homeRepository: IHomeRepository
+    private let homeQueriesRepository: IHomeQueriesRepository
 
     init(
-        homeRepository: HomeRepository,
-        homeQueriesRepository: HomeQueriesRepository
+        homeRepository: IHomeRepository,
+        homeQueriesRepository: IHomeQueriesRepository
     ) {
         self.homeRepository = homeRepository
         self.homeQueriesRepository = homeQueriesRepository

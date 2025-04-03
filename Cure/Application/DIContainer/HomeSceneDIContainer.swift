@@ -27,11 +27,11 @@ final class HomeSceneDIContainer {
     }
     
     // MARK: - Repositories
-    private func makeUserRepository() -> KeychainRepository {
+    private func makeKeychainRepository() -> IKeychainRepository {
         return DefaultKeychainRepository()
     }
     
-    private func makeAuthRepository() -> AuthRepository {
+    private func makeAuthRepository() -> IAuthRepository {
         return DefaultAuthRepository(
             dataTransferService: dependencies.newApiDataTransferervice
         )
@@ -39,18 +39,18 @@ final class HomeSceneDIContainer {
     
     // MARK: - Use Cases
     /// User Data Get
-    func makeGetCurrentUserUseCase() -> GetUserUseCase {
-        return DefaultGetCurrentUserUseCase(keychainRepository: makeUserRepository())
+    func makeGetCurrentUserTokenUseCase() -> GetUserTokenUseCase {
+        return DefaultGetCurrentUserTokenUseCase(keychainRepository: makeKeychainRepository())
     }
     
     func makeLogoutUserUseCase() -> LogoutUseCase {
-        return DefaultLogoutUseCase(authRepository: makeAuthRepository(), keychainRepository: makeUserRepository())
+        return DefaultLogoutUseCase(authRepository: makeAuthRepository(), keychainRepository: makeKeychainRepository())
     }
     
     // MARK: - View Models
     func makeHomeViewModel(actions: HomeViewModelActions) -> HomeViewModel {
         return DefaultHomeViewModel(
-            getUserDataUseCase: makeGetCurrentUserUseCase(),
+            getUserTokenDataUseCase: makeGetCurrentUserTokenUseCase(),
             actions: actions
         )
     }

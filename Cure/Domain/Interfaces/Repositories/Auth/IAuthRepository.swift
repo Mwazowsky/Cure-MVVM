@@ -5,7 +5,7 @@
 //  Created by MacBook Air MII  on 18/03/25.
 //
 
-protocol AuthRepository {
+protocol IAuthRepository {
     func login(
         request: LoginRequestDTO,
         completion: @escaping (Result<LoginResponse, AuthenticationError>) -> Void

@@ -5,7 +5,7 @@
 //  Created by MacBook Air MII  on 2/4/25.
 //
 
-protocol DeviceInfoRepository {
+protocol IDeviceInfoRepository {
     var platform: String { get }
     var version: String { get }
     var manufacturer: String { get }

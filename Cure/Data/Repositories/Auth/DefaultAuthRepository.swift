@@ -20,7 +20,7 @@ final class DefaultAuthRepository {
     }
 }
 
-extension DefaultAuthRepository: AuthRepository {
+extension DefaultAuthRepository: IAuthRepository {
     func login(
         request: LoginRequestDTO,
         completion: @escaping (Result<LoginResponse, AuthenticationError>) -> Void
@@ -107,7 +107,7 @@ extension DefaultAuthRepository {
             username: response.username,
             namaLengkap: response.namaLengkap,
             password: response.password,
-            role: UserResponseDTO.RoleDTO(rawValue: response.role.rawValue) ?? .staff
+            role: RegisterResponseDTO.RoleDTO(rawValue: response.role.rawValue) ?? .staff
         )
     }
     

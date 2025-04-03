@@ -26,18 +26,24 @@ final class AuthSceneDIContainer {
     }
     
     // MARK: - Repositories
-    private func makeAuthRepository() -> AuthRepository {
+    private func makeAuthRepository() -> IAuthRepository {
         return DefaultAuthRepository(
             dataTransferService: dependencies.newApiDataTransferervice
         )
     }
     
-    private func makeDeviceInfoRepository() -> DeviceInfoRepository {
+    private func makeDeviceInfoRepository() -> IDeviceInfoRepository {
         return DefaultDeviceInfoRepository()
     }
     
-    private func makeUserRepository() -> KeychainRepository {
+    private func makeKeychainRepository() -> IKeychainRepository {
         return DefaultKeychainRepository()
+    }
+    
+    private func makeUserRepository() -> IUserRepository {
+        return DefaultUserRepository(
+            dataTransferService: dependencies.newApiDataTransferervice
+        )
     }
     
     // MARK: - Use Cases
@@ -56,14 +62,19 @@ final class AuthSceneDIContainer {
     
     /// User Data Save
     func makeSaveCurrentUserUseCase() -> SaveUserUseCase {
-        return DefaultSaveUserUseCase(keychainRepository: makeUserRepository())
+        return DefaultSaveUserUseCase(keychainRepository: makeKeychainRepository())
+    }
+
+    func makeFetchUserDetailsUseCase() -> FetchUserDetailsUseCase {
+        return DefaultFetchUserDetailsUseCase(userRepository: makeUserRepository())
     }
     
     // MARK: - View Models
     func makeLoginViewModel(actions: LoginViewModelActions) -> LoginViewModel {
         return DefaultLoginViewModel(
             loginUseCase: makeLoginUseCase(),
-            saveUserDataUseCase: makeSaveCurrentUserUseCase(),
+            fetchUserDetailsUseCase: makeFetchUserDetailsUseCase(),
+            saveUserTokenDataUseCase: makeSaveCurrentUserUseCase(),
             actions: actions
         )
     }

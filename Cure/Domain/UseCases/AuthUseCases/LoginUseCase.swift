@@ -15,13 +15,13 @@ struct LoginUseCaseRequestValue {
 }
 
 final class DefaultLoginUseCase: LoginUseCase {
-    private let authRepository: AuthRepository
+    private let authRepository: IAuthRepository
     
-    private let deviceInfoRepository: DeviceInfoRepository
+    private let deviceInfoRepository: IDeviceInfoRepository
     
     init(
-        authRepository: AuthRepository,
-        deviceInfoRepository: DeviceInfoRepository
+        authRepository: IAuthRepository,
+        deviceInfoRepository: IDeviceInfoRepository
     ) {
         self.authRepository = authRepository
         self.deviceInfoRepository = deviceInfoRepository

@@ -1,6 +1,6 @@
 import Foundation
 
-protocol HomeRepository {
+protocol IHomeRepository {
     @discardableResult
     func fetchHomeList(
         query: HomeQuery,

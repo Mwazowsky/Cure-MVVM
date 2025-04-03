@@ -1,6 +1,6 @@
 import Foundation
 
-protocol MoviesRepository {
+protocol IMoviesRepository {
     @discardableResult
     func fetchMoviesList(
         query: MovieQuery,

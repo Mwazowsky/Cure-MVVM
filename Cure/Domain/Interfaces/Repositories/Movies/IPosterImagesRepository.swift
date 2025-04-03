@@ -1,6 +1,6 @@
 import Foundation
 
-protocol PosterImagesRepository {
+protocol IPosterImagesRepository {
     func fetchImage(
         with imagePath: String,
         width: Int,

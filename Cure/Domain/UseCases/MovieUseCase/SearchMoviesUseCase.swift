@@ -9,12 +9,12 @@ protocol SearchMoviesUseCase {
 }
 
 final class DefaultSearchMoviesUseCase: SearchMoviesUseCase {
-    private let moviesRepository: MoviesRepository
-    private let moviesQueriesRepository: MoviesQueriesRepository
+    private let moviesRepository: IMoviesRepository
+    private let moviesQueriesRepository: IMoviesQueriesRepository
 
     init(
-        moviesRepository: MoviesRepository,
-        moviesQueriesRepository: MoviesQueriesRepository
+        moviesRepository: IMoviesRepository,
+        moviesQueriesRepository: IMoviesQueriesRepository
     ) {
         self.moviesRepository = moviesRepository
         self.moviesQueriesRepository = moviesQueriesRepository

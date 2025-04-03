@@ -1,6 +1,6 @@
 import Foundation
 
-protocol MoviesQueriesRepository {
+protocol IMoviesQueriesRepository {
     func fetchRecentsQueries(
         maxCount: Int,
         completion: @escaping (Result<[MovieQuery], Error>) -> Void

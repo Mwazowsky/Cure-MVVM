@@ -16,9 +16,9 @@ struct ResetPasswordUseCaseRequestValue {
 }
 
 final class DefaultResetPasswordUseCase: ResetPasswordUseCase {
-    private let authRepository: AuthRepository
+    private let authRepository: IAuthRepository
     
-    init(authRepository: AuthRepository) {
+    init(authRepository: IAuthRepository) {
         self.authRepository = authRepository
     }
     

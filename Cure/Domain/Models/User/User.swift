@@ -8,3 +8,4 @@
 struct User: Equatable {
     let token: String
 }
+

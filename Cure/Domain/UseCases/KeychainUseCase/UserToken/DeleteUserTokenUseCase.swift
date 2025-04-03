@@ -13,13 +13,13 @@ protocol DeleteUserUseCase {
 }
 
 class DefaultDeleteUserUseCase: DeleteUserUseCase {
-    private let keychainRepository: KeychainRepository
+    private let keychainRepository: IKeychainRepository
     
-    init(keychainRepository: KeychainRepository) {
+    init(keychainRepository: IKeychainRepository) {
         self.keychainRepository = keychainRepository
     }
     
     func execute() -> Void {
-        keychainRepository.deleteUserData()
+        keychainRepository.deleteUserTokenData()
     }
 }

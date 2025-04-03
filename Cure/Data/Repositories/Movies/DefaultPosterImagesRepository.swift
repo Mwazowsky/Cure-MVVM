@@ -14,7 +14,7 @@ final class DefaultPosterImagesRepository {
     }
 }
 
-extension DefaultPosterImagesRepository: PosterImagesRepository {
+extension DefaultPosterImagesRepository: IPosterImagesRepository {
     
     func fetchImage(
         with imagePath: String,

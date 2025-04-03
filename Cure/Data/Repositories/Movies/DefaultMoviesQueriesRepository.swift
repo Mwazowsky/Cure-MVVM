@@ -9,7 +9,7 @@ final class DefaultMoviesQueriesRepository {
     }
 }
 
-extension DefaultMoviesQueriesRepository: MoviesQueriesRepository {
+extension DefaultMoviesQueriesRepository: IMoviesQueriesRepository {
     
     func fetchRecentsQueries(
         maxCount: Int,

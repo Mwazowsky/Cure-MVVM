@@ -26,13 +26,13 @@ final class AccountSceneDIContainer {
     }
     
     // MARK: - Repositories
-    private func makeAuthRepository() -> AuthRepository {
+    private func makeAuthRepository() -> IAuthRepository {
         return DefaultAuthRepository(
             dataTransferService: dependencies.newApiDataTransferervice
         )
     }
     
-    private func makeUserRepository() -> KeychainRepository {
+    private func makeUserRepository() -> IKeychainRepository {
         return DefaultKeychainRepository()
     }
     

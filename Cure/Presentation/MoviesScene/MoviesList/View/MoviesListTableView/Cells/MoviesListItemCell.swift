@@ -11,13 +11,13 @@ final class MoviesListItemCell: UITableViewCell {
     @IBOutlet private var posterImageView: UIImageView!
 
     private var viewModel: MoviesListItemViewModel!
-    private var posterImagesRepository: PosterImagesRepository?
+    private var posterImagesRepository: IPosterImagesRepository?
     private var imageLoadTask: Cancellable? { willSet { imageLoadTask?.cancel() } }
     private let mainQueue: DispatchQueueType = DispatchQueue.main
 
     func fill(
         with viewModel: MoviesListItemViewModel,
-        posterImagesRepository: PosterImagesRepository?
+        posterImagesRepository: IPosterImagesRepository?
     ) {
         self.viewModel = viewModel
         self.posterImagesRepository = posterImagesRepository

@@ -47,5 +47,10 @@ struct RegisterResponseDTO: Decodable {
     let username: String
     let namaLengkap: String
     let password: String
-    let role: UserResponseDTO.RoleDTO
+    let role: RoleDTO
+    
+    enum RoleDTO: String, Codable {
+        case admin = "ADMINISTRATOR"
+        case staff = "STAFF"
+    }
 }

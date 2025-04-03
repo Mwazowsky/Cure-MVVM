@@ -42,17 +42,20 @@ final class DefaultLoginViewModel: LoginViewModel {
     
     // MARK: - Private
     private let loginUseCase: LoginUseCase
-    private let saveUserDataUseCase: SaveUserUseCase
+    private let fetchUserDetailsUseCase: FetchUserDetailsUseCase
+    private let saveUserTokenDataUseCase: SaveUserUseCase
     private let actions: LoginViewModelActions
     
     // MARK: - Init
     init(
         loginUseCase: LoginUseCase,
-        saveUserDataUseCase: SaveUserUseCase,
+        fetchUserDetailsUseCase: FetchUserDetailsUseCase,
+        saveUserTokenDataUseCase: SaveUserUseCase,
         actions: LoginViewModelActions
     ) {
         self.loginUseCase = loginUseCase
-        self.saveUserDataUseCase = saveUserDataUseCase
+        self.fetchUserDetailsUseCase = fetchUserDetailsUseCase
+        self.saveUserTokenDataUseCase = saveUserTokenDataUseCase
         self.actions = actions
     }
     
@@ -76,16 +79,27 @@ final class DefaultLoginViewModel: LoginViewModel {
             switch result {
             case .success(let user):
                 var isUserSaved: Bool = false
+                
                 if let userData = user.data {
-                    isUserSaved = self.saveUserDataUseCase.execute(userData: userData)
+                    TokenManager.shared.configure(token: userData.token)
+                    isUserSaved = self.saveUserTokenDataUseCase.execute(userData: userData)
                 }
                 
-                if isUserSaved {
-                    self.actions.loginDidSucceed(user)
-                } else {
-                    self.error.value = "Error: Fail to save user data."
+                fetchUserDetailsUseCase.execute() { [weak self] result in
+                    guard let self = self else { return }
+                    
+                    if case .success(let userDetails) = result {
+                        self.actions.loginDidSucceed(user)
+                    }
+                    
+                    
+                    if isUserSaved {
+                        self.actions.loginDidSucceed(user)
+                    } else {
+                        self.error.value = "Error: Fail to save user data."
+                    }
                 }
-                
+                 
             case .failure(let error):
                 self.error.value = self.mapErrorToMessage(error)
             }

@@ -11,7 +11,7 @@ final class MoviesListViewController: UIViewController, StoryboardInstantiable, 
     var didSendEventClosure: ((MoviesListViewController.Event) -> Void)?
     
     private var viewModel: MoviesListViewModel!
-    private var posterImagesRepository: PosterImagesRepository?
+    private var posterImagesRepository: IPosterImagesRepository?
 
     private var moviesTableViewController: MoviesListTableViewController?
     private var searchController = UISearchController(searchResultsController: nil)
@@ -20,7 +20,7 @@ final class MoviesListViewController: UIViewController, StoryboardInstantiable, 
 
     static func create(
         with viewModel: MoviesListViewModel,
-        posterImagesRepository: PosterImagesRepository?
+        posterImagesRepository: IPosterImagesRepository?
     ) -> MoviesListViewController {
         let view = MoviesListViewController.instantiateViewController()
         view.viewModel = viewModel

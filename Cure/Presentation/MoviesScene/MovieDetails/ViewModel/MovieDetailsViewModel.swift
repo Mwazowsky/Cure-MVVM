@@ -16,7 +16,7 @@ protocol MovieDetailsViewModel: MovieDetailsViewModelInput, MovieDetailsViewMode
 final class DefaultMovieDetailsViewModel: MovieDetailsViewModel {
     
     private let posterImagePath: String?
-    private let posterImagesRepository: PosterImagesRepository
+    private let posterImagesRepository: IPosterImagesRepository
     private var imageLoadTask: Cancellable? { willSet { imageLoadTask?.cancel() } }
     private let mainQueue: DispatchQueueType
 
@@ -28,7 +28,7 @@ final class DefaultMovieDetailsViewModel: MovieDetailsViewModel {
     
     init(
         movie: Movie,
-        posterImagesRepository: PosterImagesRepository,
+        posterImagesRepository: IPosterImagesRepository,
         mainQueue: DispatchQueueType = DispatchQueue.main
     ) {
         self.title = movie.title ?? ""

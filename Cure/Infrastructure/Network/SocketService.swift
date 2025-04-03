@@ -26,12 +26,12 @@ final class DefaultSocketService: SocketService {
     private var isConnected: Bool = false
     
     private var appConfiguration: AppConfiguration
-    private let getUserUsecase: DefaultGetCurrentUserUseCase
+    private let getUserTokenUsecase: DefaultGetCurrentUserTokenUseCase
     
     private init() {
         let keychainRepository = DefaultKeychainRepository()
         self.appConfiguration = AppConfiguration()
-        self.getUserUsecase = DefaultGetCurrentUserUseCase(keychainRepository: keychainRepository)
+        self.getUserTokenUsecase = DefaultGetCurrentUserTokenUseCase(keychainRepository: keychainRepository)
         self.manager = SocketManager(socketURL: URL(string: appConfiguration.newApiBaseURL)!)
         self.socket = manager.defaultSocket
         self.key = appConfiguration.keyConnection
@@ -62,7 +62,8 @@ final class DefaultSocketService: SocketService {
     }
     
     private func emit() {
-        if let id = getUserUsecase.execute()?.token {
+        // this should get user/employeeID instead of token
+        if let id = getUserTokenUsecase.execute()?.token {
             let payload: [String:Any] = [
                 "employeeID": id,
                 "device": "iOS"

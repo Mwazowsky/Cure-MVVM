@@ -10,12 +10,12 @@ final class FetchRecentHomeQueriesUseCase: UseCase {
 
     private let requestValue: RequestValue
     private let completion: (ResultValue) -> Void
-    private let homeQueriesRepository: HomeQueriesRepository
+    private let homeQueriesRepository: IHomeQueriesRepository
 
     init(
         requestValue: RequestValue,
         completion: @escaping (ResultValue) -> Void,
-        homeQueriesRepository: HomeQueriesRepository
+        homeQueriesRepository: IHomeQueriesRepository
     ) {
 
         self.requestValue = requestValue

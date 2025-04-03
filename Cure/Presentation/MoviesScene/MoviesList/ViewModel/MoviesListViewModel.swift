@@ -67,12 +67,12 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
     
     init(
         searchMoviesUseCase: SearchMoviesUseCase,
-        getUserDataUseCase: GetUserUseCase,
+        getUserTokenDataUseCase: GetUserTokenUseCase,
         actions: MoviesListViewModelActions? = nil,
         mainQueue: DispatchQueueType = DispatchQueue.main
     ) {
         self.searchMoviesUseCase = searchMoviesUseCase
-        self.getUserDataUseCase = getUserDataUseCase
+        self.getUserTokenDataUseCase = getUserTokenDataUseCase
         self.actions = actions
         self.mainQueue = mainQueue
     }
@@ -90,7 +90,7 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
         items.value = pages.movies.map(MoviesListItemViewModel.init)
     }
     
-    private let getUserDataUseCase: GetUserUseCase
+    private let getUserTokenDataUseCase: GetUserTokenUseCase
 
     private func resetPages() {
         currentPage = 0
@@ -140,9 +140,9 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
 extension DefaultMoviesListViewModel {
 
     func viewDidLoad() {
-        print("Get Saved User Data from ViewDidLoad: ", getUserDataUseCase.execute() as Any)
+        print("Get Saved User Data from ViewDidLoad: ", getUserTokenDataUseCase.execute() as Any)
         
-        if let token = getUserDataUseCase.execute()?.token {
+        if let token = getUserTokenDataUseCase.execute()?.token {
             TokenManager.shared.configure(token: token)
         }
     }

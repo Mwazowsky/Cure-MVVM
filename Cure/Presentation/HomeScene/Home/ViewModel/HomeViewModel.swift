@@ -14,8 +14,6 @@ protocol HomeViewModelInput {
     func viewDidLoad()
     func didSearch(query: String)
     func didCancelSearch()
-    //    func showQueriesSuggestions()
-    //    func closeQueriesSuggestions()
 }
 
 protocol HomeViewModelOutput {
@@ -34,7 +32,7 @@ final class DefaultHomeViewModel: HomeViewModel {
     private let actions: HomeViewModelActions?
     
     // External Use Case
-    private let getUserDataUseCase: GetUserUseCase
+    private let getUserTokenDataUseCase: GetUserTokenUseCase
     
     private var homeLoadTask: Cancellable? { willSet { homeLoadTask?.cancel() } }
     private let mainQueue: DispatchQueueType
@@ -50,11 +48,11 @@ final class DefaultHomeViewModel: HomeViewModel {
     
     // MARK: - Init
     init(
-        getUserDataUseCase: GetUserUseCase,
+        getUserTokenDataUseCase: GetUserTokenUseCase,
         actions: HomeViewModelActions? = nil,
         mainQueue: DispatchQueueType = DispatchQueue.main
     ) {
-        self.getUserDataUseCase = getUserDataUseCase
+        self.getUserTokenDataUseCase = getUserTokenDataUseCase
         self.actions = actions
         self.mainQueue = mainQueue
     }
@@ -70,7 +68,7 @@ final class DefaultHomeViewModel: HomeViewModel {
 extension DefaultHomeViewModel {
     
     func viewDidLoad() {
-        print("Get Saved User Data: ", getUserDataUseCase.execute() as Any)
+        print("Get Saved User Token Data: ", getUserTokenDataUseCase.execute() as Any)
     }
     
     func didLoadNextPage() {

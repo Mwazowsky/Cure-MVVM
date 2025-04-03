@@ -124,7 +124,9 @@ final class HomeFlowCoordinator: NSObject, HomeFlowCoordinatorProtocol {
         navigationController?.setNavigationBarHidden(true, animated: false)
         
         let pages: [TabBarItem] = [.dashboard, .chats, .account]
-            .sorted(by: {$0.pageOrderNumber() < $1.pageOrderNumber()})
+            .sorted(
+                by: {$0.pageOrderNumber() < $1.pageOrderNumber()}
+            )
         
         let controllers: [UINavigationController] = pages.map({ getTabBarController($0) })
         

@@ -38,12 +38,12 @@ final class MoviesSceneDIContainer: MoviesSearchFlowCoordinatorDependencies {
         )
     }
     
-    func makeGetCurrentUserUseCase() -> GetUserUseCase {
-        return DefaultGetCurrentUserUseCase(keychainRepository: makeKeychainRepository())
+    func makeGetCurrentUserTokenUseCase() -> GetUserTokenUseCase {
+        return DefaultGetCurrentUserTokenUseCase(keychainRepository: makeKeychainRepository())
     }
     
     // MARK: - Repositories
-    func makeMoviesRepository() -> MoviesRepository {
+    func makeMoviesRepository() -> IMoviesRepository {
         DefaultMoviesRepository(
             dataTransferService: dependencies.apiDataTransferService,
             cache: moviesResponseCache
@@ -51,20 +51,20 @@ final class MoviesSceneDIContainer: MoviesSearchFlowCoordinatorDependencies {
     }
     
     
-    func makeMoviesQueriesRepository() -> MoviesQueriesRepository {
+    func makeMoviesQueriesRepository() -> IMoviesQueriesRepository {
         DefaultMoviesQueriesRepository(
             moviesQueriesPersistentStorage: moviesQueriesStorage
         )
     }
     
     
-    func makePosterImagesRepository() -> PosterImagesRepository {
+    func makePosterImagesRepository() -> IPosterImagesRepository {
         DefaultPosterImagesRepository(
             dataTransferService: dependencies.imageDataTransferService
         )
     }
     
-    private func makeKeychainRepository() -> KeychainRepository {
+    private func makeKeychainRepository() -> IKeychainRepository {
         return DefaultKeychainRepository()
     }
 
@@ -81,7 +81,7 @@ final class MoviesSceneDIContainer: MoviesSearchFlowCoordinatorDependencies {
     func makeMoviesListViewModel(actions: MoviesListViewModelActions) -> MoviesListViewModel {
         DefaultMoviesListViewModel(
             searchMoviesUseCase: makeSearchMoviesUseCase(),
-            getUserDataUseCase: makeGetCurrentUserUseCase(),
+            getUserTokenDataUseCase: makeGetCurrentUserTokenUseCase(),
             actions: actions
         )
     }

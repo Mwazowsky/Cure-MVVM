@@ -19,7 +19,7 @@ final class DefaultMoviesRepository {
     }
 }
 
-extension DefaultMoviesRepository: MoviesRepository {
+extension DefaultMoviesRepository: IMoviesRepository {
     
     func fetchMoviesList(
         query: MovieQuery,

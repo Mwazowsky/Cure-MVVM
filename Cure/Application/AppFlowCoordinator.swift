@@ -20,7 +20,7 @@ final class AppFlowCoordinator {
     var navigationController: UINavigationController
     private let appDIContainer: AppDIContainer
     private let windowManager: WindowManageable
-    private let getUserDataUseCase: GetUserUseCase
+    private let getUserTokenDataUseCase: GetUserTokenUseCase
     
     init(
         navigationController: UINavigationController,
@@ -29,12 +29,12 @@ final class AppFlowCoordinator {
         self.navigationController = navigationController
         self.appDIContainer = appDIContainer
         self.windowManager = appDIContainer.makeWindowManager()
-        self.getUserDataUseCase = appDIContainer.makeHomeSceneDIContainer().makeGetCurrentUserUseCase()
+        self.getUserTokenDataUseCase = appDIContainer.makeHomeSceneDIContainer().makeGetCurrentUserTokenUseCase()
     }
     
     func start() {
-        let userData = getUserDataUseCase.execute()
-        handlingNavigation(token: userData?.token)
+        let userTokenData = getUserTokenDataUseCase.execute()
+        handlingNavigation(token: userTokenData?.token)
     }
     
     private func showAuthFlow() {

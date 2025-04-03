@@ -12,7 +12,6 @@ struct APIEndpoints {
     }
 
     static func getMoviePoster(path: String, width: Int) -> Endpoint<Data> {
-
         let sizes = [92, 154, 185, 342, 500, 780]
         let closestWidth = sizes
             .enumerated()
@@ -40,6 +39,22 @@ struct APIEndpoints {
             method: .post,
             headerParameters: headerParameters,
             bodyParametersEncodable: loginRequestDTO
+        )
+    }
+    
+    static func getLoginUserProfile() -> Endpoint<UserDetailsDTO> {
+        
+        let headerParameters = [
+            "accept": "*/*",
+            "Content-Type": "application/json",
+            "Authorization": "Bearer \(TokenManager.shared.getToken())",
+            "x-api-key": apiKey
+        ]
+        
+        return Endpoint(
+            path: "api/auth",
+            method: .get,
+            headerParameters: headerParameters
         )
     }
     

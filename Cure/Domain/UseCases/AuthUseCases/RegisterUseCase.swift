@@ -21,9 +21,9 @@ struct RegisterUseCaseRequestValue {
 
 
 final class DefaultRegisterUseCase: RegisterUseCase {
-    private let authRepository: AuthRepository
+    private let authRepository: IAuthRepository
     
-    init(authRepository: AuthRepository) {
+    init(authRepository: IAuthRepository) {
         self.authRepository = authRepository
     }
     
