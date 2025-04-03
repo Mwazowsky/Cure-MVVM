@@ -1,5 +1,4 @@
 import Foundation
-import UIKit
 
 struct HomeViewModelActions {
     //    let showHomeQueriesSuggestions: (@escaping (_ didSelect: HomeQuery) -> Void) -> Void
@@ -27,13 +26,11 @@ protocol HomeViewModelOutput {
     var emptyDataTitle: String { get }
     var errorTitle: String { get }
     var searchBarPlaceholder: String { get }
-    var tabs: [UIViewController] { get }
 }
 
 typealias HomeViewModel = HomeViewModelInput & HomeViewModelOutput
 
 final class DefaultHomeViewModel: HomeViewModel {
-    //    private let homeUseCase: HomeUseCase
     private let actions: HomeViewModelActions?
     
     // External Use Case
@@ -51,34 +48,12 @@ final class DefaultHomeViewModel: HomeViewModel {
     let errorTitle = NSLocalizedString("Error", comment: "")
     let searchBarPlaceholder = NSLocalizedString("Search Chat", comment: "")
     
-    var tabs: [UIViewController] {
-        let homeViewController = HomeViewController()
-        let movieListViewController = MoviesListViewController()
-
-        return [
-            createNavigationController(for: homeViewController, title: "Home", image: getImage(named: "house")),
-            createNavigationController(for: movieListViewController, title: "Profile", image: getImage(named: "person"))
-        ]
-    }
-
-    /// Helper function to support both SF Symbols (iOS 13+) and asset images (iOS 12 and below)
-    private func getImage(named name: String) -> UIImage? {
-        if #available(iOS 13.0, *) {
-            return UIImage(systemName: name) ?? UIImage(named: name)
-        } else {
-            return UIImage(named: name)
-        }
-    }
-    
     // MARK: - Init
-    
     init(
-        //        homeUseCase: HomeUseCase,
         getUserDataUseCase: GetUserUseCase,
         actions: HomeViewModelActions? = nil,
         mainQueue: DispatchQueueType = DispatchQueue.main
     ) {
-        //        self.homeUseCase = homeUseCase
         self.getUserDataUseCase = getUserDataUseCase
         self.actions = actions
         self.mainQueue = mainQueue
@@ -89,19 +64,9 @@ final class DefaultHomeViewModel: HomeViewModel {
         NSLocalizedString("No internet connection", comment: "") :
         NSLocalizedString("Failed loading movies", comment: "")
     }
-    
-    private func createNavigationController(for viewController: UIViewController,
-                                            title: String,
-                                            image: UIImage?) -> UINavigationController {
-        let navigationController = UINavigationController(rootViewController: viewController)
-        navigationController.tabBarItem.title = title
-        navigationController.tabBarItem.image = image
-        return navigationController
-    }
 }
 
 // MARK: - INPUT. View event methods
-
 extension DefaultHomeViewModel {
     
     func viewDidLoad() {
