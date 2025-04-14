@@ -10,7 +10,7 @@ import SocketIO
 
 protocol SocketService {
     func connect(from vc: String)
-    func dissconnect()
+    func disconnect()
     func socketStatus() -> SocketIOStatus
     func send(message: String)
     func subscribe(to event: @escaping (Result<String, Error>) -> Void)
@@ -28,7 +28,7 @@ final class DefaultSocketService: SocketService {
     private var appConfiguration: AppConfiguration
     private let getUserTokenUsecase: DefaultGetCurrentUserTokenUseCase
     
-    private init() {
+    init() {
         let keychainRepository = DefaultKeychainRepository()
         self.appConfiguration = AppConfiguration()
         self.getUserTokenUsecase = DefaultGetCurrentUserTokenUseCase(keychainRepository: keychainRepository)
@@ -43,7 +43,7 @@ final class DefaultSocketService: SocketService {
         socket.connect(withPayload: ["token": key])
     }
         
-    func dissconnect() {
+    func disconnect() {
         printed("dissconnect")
         socket.disconnect()
     }

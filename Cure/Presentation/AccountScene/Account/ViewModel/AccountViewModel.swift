@@ -56,7 +56,7 @@ final class DefaultAccountViewModel: AccountViewModel {
             guard let self = self else { return }
             self.isLoading.value = false
             switch result {
-            case .success(let user):
+            case .success(_):
                 self.actions.logoutDidSucceed()
             case .failure(let error):
                 self.error.value = self.mapErrorToMessage(error as! AuthenticationError)

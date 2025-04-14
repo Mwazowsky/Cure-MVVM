@@ -88,7 +88,7 @@ final class DefaultLoginViewModel: LoginViewModel {
                 fetchUserDetailsUseCase.execute() { [weak self] result in
                     guard let self = self else { return }
                     
-                    if case .success(let userDetails) = result {
+                    if case .success(_) = result {
                         self.actions.loginDidSucceed(user)
                     }
                     

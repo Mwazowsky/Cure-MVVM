@@ -27,12 +27,12 @@ extension DefaultUserRepository: IUserRepository {
         let endpoint = APIEndpoints.getLoginUserProfile()
         
         dataTransferService.request(with: endpoint) { [weak self] (result: Result<UserDetailsDTO, DataTransferError>) in
-            guard let self = self else { return }
+            guard self != nil else { return }
             print("Fetch User Result: ", result)
             
             switch result {
             case .success(let response):
-                    completion(.success(response))
+                completion(.success(response))
             case .failure(let error):
                 completion(.failure(error))
             }
@@ -42,9 +42,11 @@ extension DefaultUserRepository: IUserRepository {
 
 extension DefaultUserRepository {
     private func mapToDomain(response: UserDetailsResponse) -> UserDetailsDTO {
-        return UserDetailsDTO(
-            
-        )
+        guard let responseData = response.data else {
+            fatalError("Received invalid user details response")
+        }
+        
+        return responseData
     }
     
     private func mapError(_ error: DataTransferError) -> AuthenticationError {

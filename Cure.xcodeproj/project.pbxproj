@@ -146,6 +146,11 @@
 		649027022D55AD68005B5C7A /* MoviesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649027012D55AD68005B5C7A /* MoviesListView.swift */; };
 		649027032D55AD68005B5C7A /* MoviesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649027012D55AD68005B5C7A /* MoviesListView.swift */; };
 		649027042D55AD68005B5C7A /* MoviesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649027012D55AD68005B5C7A /* MoviesListView.swift */; };
+		64A61F0B2DACC19B007D97D4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A61F0A2DACC18F007D97D4 /* SceneDelegate.swift */; };
+		64A61F0F2DACEA5D007D97D4 /* ChatContactResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A61F0E2DACEA4B007D97D4 /* ChatContactResponseDTO+Mapping.swift */; };
+		64A61F112DACEBC8007D97D4 /* OptionallyDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A61F102DACEBC2007D97D4 /* OptionallyDecodable.swift */; };
+		64A61F132DACF3FF007D97D4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 64A61F122DACF3FF007D97D4 /* GoogleService-Info.plist */; };
+		64A61F152DACFC56007D97D4 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 64A61F142DACFC56007D97D4 /* PrivacyInfo.xcprivacy */; };
 		64A811C02D9CF40E0044BB95 /* IDeviceInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A811BF2D9CF4060044BB95 /* IDeviceInfoRepository.swift */; };
 		64A811C12D9CF40E0044BB95 /* IDeviceInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A811BF2D9CF4060044BB95 /* IDeviceInfoRepository.swift */; };
 		64A811C32D9CF4DF0044BB95 /* DefaultDeviceInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A811C22D9CF4D40044BB95 /* DefaultDeviceInfoRepository.swift */; };
@@ -345,6 +350,11 @@
 		646CB7262D9107710009E8F2 /* Cure.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cure.entitlements; sourceTree = "<group>"; };
 		646CB9892D91402C0009E8F2 /* SaveUserTokenUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveUserTokenUseCase.swift; sourceTree = "<group>"; };
 		649027012D55AD68005B5C7A /* MoviesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListView.swift; sourceTree = "<group>"; };
+		64A61F0A2DACC18F007D97D4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		64A61F0E2DACEA4B007D97D4 /* ChatContactResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatContactResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
+		64A61F102DACEBC2007D97D4 /* OptionallyDecodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionallyDecodable.swift; sourceTree = "<group>"; };
+		64A61F122DACF3FF007D97D4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		64A61F142DACFC56007D97D4 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		64A811BF2D9CF4060044BB95 /* IDeviceInfoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDeviceInfoRepository.swift; sourceTree = "<group>"; };
 		64A811C22D9CF4D40044BB95 /* DefaultDeviceInfoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDeviceInfoRepository.swift; sourceTree = "<group>"; };
 		64A811C42D9CF5BE0044BB95 /* DeviceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfo.swift; sourceTree = "<group>"; };
@@ -497,6 +507,7 @@
 		1F6B52142363002C002FCDE9 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				64A61F102DACEBC2007D97D4 /* OptionallyDecodable.swift */,
 				1F6B521223630016002FCDE9 /* RepositoryTask.swift */,
 			);
 			path = Utils;
@@ -525,6 +536,7 @@
 		1F8D092D2301C2F20061FB6F /* DataMapping */ = {
 			isa = PBXGroup;
 			children = (
+				64A61F0C2DACEA37007D97D4 /* Chatting */,
 				64B7402F2D8A73B300168646 /* Users */,
 				64B740292D8A70C400168646 /* Auth */,
 				64B740282D8A70B900168646 /* Movies */,
@@ -679,6 +691,8 @@
 				646CB7192D91032C0009E8F2 /* Fonts */,
 				1FF082B5239438DC00876A22 /* Localizable.strings */,
 				1FA53393201E1FDE00747E55 /* Assets.xcassets */,
+				64A61F122DACF3FF007D97D4 /* GoogleService-Info.plist */,
+				64A61F142DACFC56007D97D4 /* PrivacyInfo.xcprivacy */,
 				1FA53398201E1FDE00747E55 /* Info.plist */,
 				1FA53395201E1FDE00747E55 /* LaunchScreen.storyboard */,
 				64FB946F2D9533FC00A5325D /* Constants.swift */,
@@ -711,6 +725,7 @@
 			isa = PBXGroup;
 			children = (
 				1FA5338C201E1FDE00747E55 /* AppDelegate.swift */,
+				64A61F0A2DACC18F007D97D4 /* SceneDelegate.swift */,
 				FC2B715B2156FF93002BD59E /* AppAppearance.swift */,
 				1F1CD655222368CA00B0143C /* AppConfigurations.swift */,
 				1F16031C2426919300C173C6 /* AppFlowCoordinator.swift */,
@@ -1134,6 +1149,14 @@
 				645CD9FD2D9E84A2006E01F6 /* UserToken */,
 			);
 			path = KeychainUseCase;
+			sourceTree = "<group>";
+		};
+		64A61F0C2DACEA37007D97D4 /* Chatting */ = {
+			isa = PBXGroup;
+			children = (
+				64A61F0E2DACEA4B007D97D4 /* ChatContactResponseDTO+Mapping.swift */,
+			);
+			path = Chatting;
 			sourceTree = "<group>";
 		};
 		64B740282D8A70B900168646 /* Movies */ = {
@@ -1696,8 +1719,10 @@
 				646CB7232D91032C0009E8F2 /* Opensans-SemiBold.ttf in Resources */,
 				646CB7242D91032C0009E8F2 /* Opensans-BoldItalic.ttf in Resources */,
 				646CB7252D91032C0009E8F2 /* Opensans-MediumItalic.ttf in Resources */,
+				64A61F152DACFC56007D97D4 /* PrivacyInfo.xcprivacy in Resources */,
 				1FA53397201E1FDE00747E55 /* LaunchScreen.storyboard in Resources */,
 				1FE49D88230AA7C200D1D42E /* MovieDetailsViewController.storyboard in Resources */,
+				64A61F132DACF3FF007D97D4 /* GoogleService-Info.plist in Resources */,
 				1FA53394201E1FDE00747E55 /* Assets.xcassets in Resources */,
 				1FE49D86230AA7C200D1D42E /* MoviesQueriesTableViewController.storyboard in Resources */,
 			);
@@ -1959,6 +1984,7 @@
 				1F84DED023006BDA00139F73 /* FetchRecentMovieQueriesUseCase.swift in Sources */,
 				1FFF12A42439F2E700937EE4 /* MoviesResponseStorage.swift in Sources */,
 				1F2AB951242789B80010DEEE /* MoviesResponseDTO+Mapping.swift in Sources */,
+				64A61F112DACEBC8007D97D4 /* OptionallyDecodable.swift in Sources */,
 				1FFF1AD5243B966600937EE4 /* MoviesListItemViewModel.swift in Sources */,
 				645CDA082D9E934B006E01F6 /* DefaultUserRepository.swift in Sources */,
 				1FC2C9632301FEC0001AE47E /* MovieQueryUDS+Mapping.swift in Sources */,
@@ -2002,6 +2028,7 @@
 				1FC5B7D0242634EB0086FA8C /* UIImageView+ImageSizeAfterAspectFit.swift in Sources */,
 				1FE49D8C230AA7C200D1D42E /* MoviesListViewController.swift in Sources */,
 				64B740462D8A862300168646 /* AuthSceneDIContainer.swift in Sources */,
+				64A61F0F2DACEA5D007D97D4 /* ChatContactResponseDTO+Mapping.swift in Sources */,
 				1FC5B7D2242635CC0086FA8C /* CGSize+ScaledSize.swift in Sources */,
 				1FFFC832221B0041007D99D2 /* IMoviesQueriesRepository.swift in Sources */,
 				1FE49D8E230AA7C200D1D42E /* MoviesQueryListView.swift in Sources */,
@@ -2018,6 +2045,7 @@
 				64FB946B2D94FAD100A5325D /* ChatListVC.swift in Sources */,
 				1F160324242693DD00C173C6 /* MoviesSearchFlowCoordinator.swift in Sources */,
 				1F1CD656222368CA00B0143C /* AppConfigurations.swift in Sources */,
+				64A61F0B2DACC19B007D97D4 /* SceneDelegate.swift in Sources */,
 				64B7402B2D8A70D900168646 /* AuthRequestDTO+Mapping.swift in Sources */,
 				641914512D8C05CC00807FDC /* WindowManager.swift in Sources */,
 				1F474F2222356B1E0092DB4B /* Cancellable.swift in Sources */,

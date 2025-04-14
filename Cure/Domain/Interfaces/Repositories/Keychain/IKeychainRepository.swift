@@ -15,4 +15,12 @@ protocol IKeychainRepository {
     func saveUserDetailsData(_ userData: UserDetailsDTO) -> Bool
     func getUserDetailsData() -> UserDetailsDTO?
     func deleteUserDetailsData() -> Void
+    
+    func saveFCMTokenData(_ fcmToken: String) -> Bool
+    func getFCMTokenData() -> String?
+    func deleteFCMTokenData() -> Void
+    
+    func saveHandledContactData(_ value: [Int:[ChatContact]]) -> Bool
+    func getHandledContactData() -> [Int:[ChatContact]]?
+    func deleteHandledContactData() -> Void
 }

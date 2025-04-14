@@ -6,7 +6,14 @@ final class AppDIContainer {
     
     let windowManager: WindowManageable
     
-    init(windowManager: WindowManageable) {
+    let socketService: SocketService
+    let keychainService: DefaultKeychainRepository
+    
+    init(
+        windowManager: WindowManageable
+    ) {
+        self.socketService = DefaultSocketService()
+        self.keychainService = DefaultKeychainRepository()
         self.windowManager = windowManager
     }
     

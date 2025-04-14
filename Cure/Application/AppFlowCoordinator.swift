@@ -20,7 +20,8 @@ final class AppFlowCoordinator {
     var navigationController: UINavigationController
     private let appDIContainer: AppDIContainer
     private let windowManager: WindowManageable
-    private let getUserTokenDataUseCase: GetUserTokenUseCase
+    
+    let getUserTokenDataUseCase: GetUserTokenUseCase
     
     init(
         navigationController: UINavigationController,

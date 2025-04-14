@@ -33,12 +33,18 @@ final class DefaultLoginUseCase: LoginUseCase {
             return
         }
         
+        var serial = deviceInfoRepository.serial
+        
+        #if DEBUG
+        serial = "p1s4ngc0kl4t"
+        #endif
+        
         let metadata = LoginMetadataDTO(
             platform: deviceInfoRepository.platform,
             version: deviceInfoRepository.version,
             manufacturer: deviceInfoRepository.manufacturer,
             model: deviceInfoRepository.model,
-            serial: deviceInfoRepository.serial,
+            serial: serial,
             fcmToken: "nasdjkansdmadnsaidh99djkkwk"
         )
         
