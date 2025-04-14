@@ -13,3 +13,8 @@ enum AuthenticationError: Error {
     case serverError(String)
     case unknownError
 }
+
+struct LoginDM: Equatable {
+    let token: String
+}
+

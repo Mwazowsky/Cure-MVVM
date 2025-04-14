@@ -49,6 +49,16 @@ extension DefaultUserRepository {
         return responseData
     }
     
+    private func mapToDomain(response: UserDetailsDTO) -> UserDetailsDM {
+        return UserDetailsDM(
+            employeeID: response.employeeID,
+            companyID: response.companyID,
+            companyName: response.companyName,
+            name: response.name,
+            email: response.email
+        )
+    }
+    
     private func mapError(_ error: DataTransferError) -> AuthenticationError {
         switch error {
         case .networkFailure:

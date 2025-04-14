@@ -111,9 +111,9 @@ extension DefaultAuthRepository {
         )
     }
     
-    
-    private func mapToDomain(response: LoginResponseDTO) -> User {
-        return User(
+    /// CORRECT DTO > DM: This is how you convert the response from DTO to DM
+    private func mapToDomain(response: LoginResponseDTO) -> LoginDM {
+        return LoginDM(
             token: response.token
         )
     }

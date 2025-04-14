@@ -8,7 +8,6 @@
 import Foundation
 
 extension Notification.Name {
-    
     /// MARK: socket observer
     static let socketConnected = Notification.Name("SOCKET_CONNECTED")
     static let socketDisconnected = Notification.Name("SOCKET_DISCONNECTED")

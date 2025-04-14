@@ -8,7 +8,7 @@
 import Foundation
 
 protocol SaveUserDetailsUseCase {
-    func execute(userData: UserDetailsDTO) -> Bool
+    func execute(userData: UserDetailsDM) -> Bool
 }
 
 final class DefaultSaveCurrentUserDetailsUseCase: SaveUserDetailsUseCase {
@@ -18,7 +18,7 @@ final class DefaultSaveCurrentUserDetailsUseCase: SaveUserDetailsUseCase {
         self.keychainRepository = keychainRepository
     }
     
-    func execute(userData: UserDetailsDTO) -> Bool {
+    func execute(userData: UserDetailsDM) -> Bool {
         return keychainRepository.saveUserDetailsData(userData)
     }
 }

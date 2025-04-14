@@ -13,28 +13,22 @@ final class DefaultKeychainRepository {
 
 extension DefaultKeychainRepository: IKeychainRepository {
     // MARK: - User Details
-    func saveUserDetailsData(_ userData: UserDetailsDTO) -> Bool {
-        do {
-            _ = try JSONEncoder().encode(userData)
-            
-            let query: [String: Any] = [
-                kSecClass as String: kSecClassGenericPassword,
-                kSecAttrService as String: keychainService,
-                kSecAttrAccount as String: "currentUserDetailsData",
-                kSecValueData as String: userData
-            ]
-            
-            SecItemDelete(query as CFDictionary)
-            
-            let status = SecItemAdd(query as CFDictionary, nil)
-            
-            return status == errSecSuccess
-        } catch {
-            return false
-        }
+    func saveUserDetailsData(_ userData: UserDetailsDM) -> Bool {
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String: keychainService,
+            kSecAttrAccount as String: "currentUserDetailsData",
+            kSecValueData as String: userData
+        ]
+        
+        SecItemDelete(query as CFDictionary)
+        
+        let status = SecItemAdd(query as CFDictionary, nil)
+        
+        return status == errSecSuccess
     }
     
-    func getUserDetailsData() -> UserDetailsDTO? {
+    func getUserDetailsData() -> UserDetailsDM? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: keychainService,
@@ -47,13 +41,8 @@ extension DefaultKeychainRepository: IKeychainRepository {
         let status = SecItemCopyMatching(query as CFDictionary, &dataTypeRef)
         
         guard status == errSecSuccess else { return nil }
-        if status == errSecSuccess, let data = dataTypeRef as? Data {
-            do {
-                return try JSONDecoder().decode(UserDetailsDTO.self, from: data)
-            } catch {
-                print("Error decoding user data: \(error)")
-                return nil
-            }
+        if status == errSecSuccess, let data = dataTypeRef as? UserDetailsDM {
+            return data
         }
         return nil
     }
@@ -170,7 +159,7 @@ extension DefaultKeychainRepository: IKeychainRepository {
     }
     
     // MARK: - Handled Contact
-    func saveHandledContactData(_ value: [Int : [ChatContact]]) -> Bool {
+    func saveHandledContactData(_ value: [Int : [ChatContactDTO]]) -> Bool {
         do {
             let handledContactData = try JSONEncoder().encode(value)
             
@@ -195,7 +184,7 @@ extension DefaultKeychainRepository: IKeychainRepository {
         }
     }
     
-    func getHandledContactData() -> [Int:[ChatContact]]? {
+    func getHandledContactData() -> [Int:[ChatContactDTO]]? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: keychainService,
@@ -210,7 +199,7 @@ extension DefaultKeychainRepository: IKeychainRepository {
         guard status == errSecSuccess else { return nil }
         if status == errSecSuccess, let data = dataTypeRef as? Data {
             do {
-                return try JSONDecoder().decode([Int:[ChatContact]].self, from: data)
+                return try JSONDecoder().decode([Int:[ChatContactDTO]].self, from: data)
             } catch {
                 print("Error decoding user data: \(error)")
                 return nil

@@ -737,6 +737,7 @@
 		1FA533D8201EF2F100747E55 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				64A61F162DAD03B9007D97D4 /* MessagingUseCase */,
 				645CD9FF2D9E84E7006E01F6 /* UserUseCase */,
 				64FB94322D93A5EF00A5325D /* HomeUseCase */,
 				646CB72A2D9114D60009E8F2 /* AuthUseCases */,
@@ -1157,6 +1158,13 @@
 				64A61F0E2DACEA4B007D97D4 /* ChatContactResponseDTO+Mapping.swift */,
 			);
 			path = Chatting;
+			sourceTree = "<group>";
+		};
+		64A61F162DAD03B9007D97D4 /* MessagingUseCase */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MessagingUseCase;
 			sourceTree = "<group>";
 		};
 		64B740282D8A70B900168646 /* Movies */ = {

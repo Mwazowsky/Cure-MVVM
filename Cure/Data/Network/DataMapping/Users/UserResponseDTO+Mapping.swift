@@ -10,6 +10,38 @@ import Foundation
 // MARK: - Data Transfer Object
 
 struct UserDetailsDTO: Codable {
+    private enum CodingKeys: String, CodingKey {
+        case employeeID = "employeeID"
+        case companyID = "companyID"
+        case companyName = "companyName"
+        case name = "name"
+        case email = "email"
+        case dob = "dob"
+        case gender = "gender"
+        case address = "address"
+        case phoneNumber = "phoneNumber"
+        case nationality = "nationality"
+        case photoURL = "photoUrl"
+        case isOnline = "isOnline"
+        case lastOnline = "lastOnline"
+        case sundayStart = "sundayStart"
+        case sundayEnd = "sundayEnd"
+        case mondayStart = "mondayStart"
+        case mondayEnd = "mondayEnd"
+        case tuesdayStart = "tuesdayStart"
+        case tuesdayEnd = "tuesdayEnd"
+        case wednesdayStart = "wednesdayStart"
+        case wednesdayEnd = "wednesdayEnd"
+        case thursdayStart = "thursdayStart"
+        case thursdayEnd = "thursdayEnd"
+        case fridayStart = "fridayStart"
+        case fridayEnd = "fridayEnd"
+        case saturdayStart = "saturdayStart"
+        case saturdayEnd = "saturdayEnd"
+        case avgResponseTime = "avgResponseTime"
+        case weeklyScore = "weeklyScore"
+    }
+    
     let employeeID, companyID: Int
     let companyName, name, email: String
     let dob, gender, address: String?
@@ -25,13 +57,6 @@ struct UserDetailsDTO: Codable {
     let saturdayEnd: String?
     let avgResponseTime: Int
     let weeklyScore: Double
-    
-    enum CodingKeys: String, CodingKey {
-        case employeeID, companyID, companyName, name, email, dob, gender, address, phoneNumber, nationality
-        case photoURL = "photoUrl"
-        case isOnline, lastOnline, sundayStart, sundayEnd, mondayStart, mondayEnd, tuesdayStart, tuesdayEnd, wednesdayStart, wednesdayEnd, thursdayStart, thursdayEnd, fridayStart, fridayEnd, saturdayStart, saturdayEnd
-        case avgResponseTime, weeklyScore
-    }
     
     func getMinuteResponseTime() -> Double {
         let milis = Double(self.avgResponseTime)
