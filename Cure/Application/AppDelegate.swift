@@ -81,8 +81,7 @@ extension AppDelegate: MessagingDelegate, UNUserNotificationCenterDelegate {
     
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         guard let fcmToken = fcmToken else { return }
-        let isFCMSaved = keychainService.saveFCMTokenData(fcmToken)
-        print(isFCMSaved)
+        _ = keychainService.saveFCMTokenData(fcmToken)
     }
     
     /// Mark: Messaging UNUserNotificationCenterDelegate

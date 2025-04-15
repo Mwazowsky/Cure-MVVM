@@ -42,7 +42,7 @@ struct APIEndpoints {
         )
     }
     
-    static func getLoginUserProfile() -> Endpoint<UserDetailsDTO> {
+    static func getLoginUserProfile() -> Endpoint<UserDetailsResponse> {
         
         let headerParameters = [
             "accept": "*/*",

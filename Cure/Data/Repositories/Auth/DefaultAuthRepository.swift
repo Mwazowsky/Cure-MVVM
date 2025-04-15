@@ -31,22 +31,29 @@ extension DefaultAuthRepository: IAuthRepository {
             metadata: request.metadata
         )
         let endpoint = APIEndpoints.login(with: requestDTO)
-        dataTransferService.request(with: endpoint) { [weak self] (result: Result<LoginResponse, DataTransferError>) in
-            guard let self = self else { return }
-            print("Login Result: ", result)
-            
-            switch result {
-            case .success(let response):
-                if response.success == false || response.status >= 400 {
-                    let errorMessage = response.message
-                    let errorDetail = response.error?.detail ?? ""
-                    let authError = AuthenticationError.serverError(errorMessage + ": " + errorDetail)
-                    completion(.failure(authError))
-                } else {
-                    completion(.success(response))
+        backgroundQueue.asyncExecute {
+            self.dataTransferService.request(with: endpoint) { [weak self] (result: Result<LoginResponse, DataTransferError>) in
+                guard let self = self else { return }
+                
+                switch result {
+                case .success(let response):
+                    if response.success == false || response.status >= 400 {
+                        let errorMessage = response.message
+                        let errorDetail = response.error?.detail ?? ""
+                        let authError = AuthenticationError.serverError(errorMessage + ": " + errorDetail)
+                        DispatchQueue.main.async {
+                            completion(.failure(authError))
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            completion(.success(response))
+                        }
+                    }
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        completion(.failure(self.mapError(error)))
+                    }
                 }
-            case .failure(let error):
-                completion(.failure(self.mapError(error)))
             }
         }
     }
@@ -59,14 +66,20 @@ extension DefaultAuthRepository: IAuthRepository {
         
         let endpoint = APIEndpoints.register(with: requestDTO)
         
-        dataTransferService.request(with: endpoint) { [weak self] (result: Result<RegisterResponseDTO, DataTransferError>) in
-            guard let self = self else { return }
-            
-            switch result {
-            case .success(let response):
-                completion(.success(response))
-            case .failure(let error):
-                completion(.failure(self.mapError(error)))
+        backgroundQueue.asyncExecute {
+            self.dataTransferService.request(with: endpoint) { [weak self] (result: Result<RegisterResponseDTO, DataTransferError>) in
+                guard let self = self else { return }
+                
+                switch result {
+                case .success(let response):
+                    DispatchQueue.main.async {
+                        completion(.success(response))
+                    }
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        completion(.failure(self.mapError(error)))
+                    }
+                }
             }
         }
     }
@@ -78,14 +91,20 @@ extension DefaultAuthRepository: IAuthRepository {
     func logout(completion: @escaping (Result<Bool, any Error>) -> Void) {
         let endpoint = APIEndpoints.logout()
         
-        dataTransferService.request(with: endpoint) { [weak self] (result:  Result<LoginResponse, DataTransferError>) in
-            guard let self = self else { return }
-            
-            switch result {
-            case .success(let response):
-                completion(.success(response.status == 200))
-            case .failure(let error):
-                completion(.failure(self.mapError(error)))
+        backgroundQueue.asyncExecute {
+            self.dataTransferService.request(with: endpoint) { [weak self] (result:  Result<LoginResponse, DataTransferError>) in
+                guard let self = self else { return }
+                
+                switch result {
+                case .success(let response):
+                    DispatchQueue.main.async {
+                        completion(.success(response.status == 200))
+                    }
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        completion(.failure(self.mapError(error)))
+                    }
+                }
             }
         }
     }

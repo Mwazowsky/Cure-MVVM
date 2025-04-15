@@ -22,19 +22,35 @@ final class DefaultUserRepository {
 
 extension DefaultUserRepository: IUserRepository {
     func fetchLoginUserDetails(
-        completion: @escaping (Result<UserDetailsDTO, Error>) -> Void
+        completion: @escaping (Result<UserDetailsDM, Error>) -> Void
     ) {
         let endpoint = APIEndpoints.getLoginUserProfile()
-        
-        dataTransferService.request(with: endpoint) { [weak self] (result: Result<UserDetailsDTO, DataTransferError>) in
-            guard self != nil else { return }
-            print("Fetch User Result: ", result)
-            
-            switch result {
-            case .success(let response):
-                completion(.success(response))
-            case .failure(let error):
-                completion(.failure(error))
+        backgroundQueue.asyncExecute {
+            self.dataTransferService.request(with: endpoint) { [weak self] (result: Result<UserDetailsResponse, DataTransferError>) in
+                guard self != nil else { return }
+                switch result {
+                case .success(let response):
+                    guard let userDTO = self?.mapToDomain(response: response) else {
+                        DispatchQueue.main.async {
+                            completion(.failure(AuthenticationError.unknownError))
+                        }
+                        return
+                    }
+                    
+                    if let userDomainModel = self?.mapToDomain(response: userDTO) {
+                        DispatchQueue.main.async {
+                            completion(.success(userDomainModel))
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            completion(.failure(AuthenticationError.unknownError))
+                        }
+                    }
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        completion(.failure(error))
+                    }
+                }
             }
         }
     }

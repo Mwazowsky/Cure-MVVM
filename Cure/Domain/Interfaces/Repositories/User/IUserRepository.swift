@@ -7,6 +7,6 @@
 
 protocol IUserRepository {
     func fetchLoginUserDetails(
-        completion: @escaping (Result<UserDetailsDTO, Error>) -> Void
+        completion: @escaping (Result<UserDetailsDM, Error>) -> Void
     )
 }

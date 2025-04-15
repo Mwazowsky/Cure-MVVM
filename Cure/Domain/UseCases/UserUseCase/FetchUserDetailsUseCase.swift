@@ -6,7 +6,7 @@
 //
 
 protocol FetchUserDetailsUseCase {
-    func execute(completion: @escaping (Result<UserDetailsDTO, Error>) -> Void)
+    func execute(completion: @escaping (Result<UserDetailsDM, Error>) -> Void)
 }
 
 final class DefaultFetchUserDetailsUseCase: FetchUserDetailsUseCase {
@@ -18,7 +18,7 @@ final class DefaultFetchUserDetailsUseCase: FetchUserDetailsUseCase {
         self.userRepository = userRepository
     }
     
-    func execute(completion: @escaping (Result<UserDetailsDTO, Error>) -> Void) {
+    func execute(completion: @escaping (Result<UserDetailsDM, Error>) -> Void) {
         return userRepository.fetchLoginUserDetails(completion: completion)
     }
 }

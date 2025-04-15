@@ -134,7 +134,6 @@ final class HomeFlowCoordinator: NSObject, HomeFlowCoordinatorProtocol {
     }
     
     func finish() {
-        print("Entered HomeFlowCoordinator > Finish")
         parentCoordinator?.childDidFinish(self)
     }
     

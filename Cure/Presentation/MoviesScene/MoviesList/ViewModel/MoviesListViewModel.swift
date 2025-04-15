@@ -160,8 +160,6 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
 extension DefaultMoviesListViewModel {
 
     func viewDidLoad() {
-        print("Get Saved User Data from ViewDidLoad: ", getUserTokenDataUseCase.execute() as Any)
-        
         if let token = getUserTokenDataUseCase.execute()?.token {
             TokenManager.shared.configure(token: token)
         }
