@@ -10,7 +10,7 @@ import Foundation
 struct LoginViewModelActions {
     let showRegister: () -> Void
     let showForgotPassword: () -> Void
-    let loginDidSucceed: (LoginResponse) -> Void
+    let loginDidSucceed: (Result<UserDetailsDM, any Error>) -> Void
 }
 
 protocol LoginViewModelInput {
@@ -78,28 +78,23 @@ final class DefaultLoginViewModel: LoginViewModel {
             self.isLoading.value = false
             switch result {
             case .success(let user):
-                var isUserSaved: Bool = false
                 
-                if let userData = user.data {
-                    TokenManager.shared.configure(token: userData.token)
-                    isUserSaved = self.saveUserTokenDataUseCase.execute(userData: userData)
+                if let userTokenData = user.data {
+                    TokenManager.shared.configure(token: userTokenData.token)
+                    _ = self.saveUserTokenDataUseCase.execute(userData: userTokenData)
                 }
                 
                 fetchUserDetailsUseCase.execute() { [weak self] result in
                     guard let self = self else { return }
                     
                     if case .success(_) = result {
-                        self.actions.loginDidSucceed(user)
-                    }
-                    
-                    
-                    if isUserSaved {
-                        self.actions.loginDidSucceed(user)
+                        print("User Details DM: ", result)
+                        self.actions.loginDidSucceed(result)
                     } else {
                         self.error.value = "Error: Fail to save user data."
                     }
                 }
-                 
+                
             case .failure(let error):
                 self.error.value = self.mapErrorToMessage(error)
             }
