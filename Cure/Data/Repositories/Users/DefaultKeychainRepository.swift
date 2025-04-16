@@ -14,11 +14,16 @@ final class DefaultKeychainRepository {
 extension DefaultKeychainRepository: IKeychainRepository {
     // MARK: - User Details
     func saveUserDetailsData(_ userData: UserDetailsDM) -> Bool {
+        guard let encodedData = try? JSONEncoder().encode(userData) else {
+            print("Failed to encode user data")
+            return false
+        }
+        
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: keychainService,
             kSecAttrAccount as String: "currentUserDetailsData",
-            kSecValueData as String: userData
+            kSecValueData as String: encodedData
         ]
         
         SecItemDelete(query as CFDictionary)
@@ -27,6 +32,7 @@ extension DefaultKeychainRepository: IKeychainRepository {
         
         return status == errSecSuccess
     }
+    
     
     func getUserDetailsData() -> UserDetailsDM? {
         let query: [String: Any] = [
@@ -41,10 +47,18 @@ extension DefaultKeychainRepository: IKeychainRepository {
         let status = SecItemCopyMatching(query as CFDictionary, &dataTypeRef)
         
         guard status == errSecSuccess else { return nil }
-        if status == errSecSuccess, let data = dataTypeRef as? UserDetailsDM {
-            return data
+        
+        guard let keychainData = dataTypeRef as? Data else {
+            print("Retrieved data is not of type Data")
+            return nil
         }
-        return nil
+        do {
+            let userDetailsData: UserDetailsDM = try JSONDecoder().decode(UserDetailsDM.self, from: keychainData)
+            return userDetailsData
+        } catch {
+            print("Decoding error: \(error)")
+            return nil
+        }
     }
     
     func deleteUserDetailsData() {
@@ -58,7 +72,7 @@ extension DefaultKeychainRepository: IKeychainRepository {
     }
     
     // MARK: - User JWT Token
-    func saveUserTokenData(_ userData: LoginResponseDTO) -> Bool {
+    func saveLoginTokenData(_ userData: LoginResponseDTO) -> Bool {
         do {
             let userData = try JSONEncoder().encode(userData)
             
@@ -79,7 +93,7 @@ extension DefaultKeychainRepository: IKeychainRepository {
         }
     }
     
-    func getUserTokenData() -> LoginResponseDTO? {
+    func getLoginTokenData() -> LoginResponseDTO? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: keychainService,
@@ -103,7 +117,7 @@ extension DefaultKeychainRepository: IKeychainRepository {
         return nil
     }
     
-    func deleteUserTokenData() -> Void {
+    func deleteLoginTokenData() -> Void {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: keychainService,

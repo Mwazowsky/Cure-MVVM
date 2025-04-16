@@ -25,14 +25,14 @@ public class MoviesListViewController: UIViewController, StoryboardInstantiable,
     private var searchController = UISearchController(searchResultsController: nil)
     
     public class func create(with viewModel: MoviesListViewModel,
-                      moviesListViewControllersFactory: MoviesListViewControllersFactory) -> MoviesListViewController {
+                             moviesListViewControllersFactory: MoviesListViewControllersFactory) -> MoviesListViewController {
         let view = instantiateViewController((Bundle(for: MoviesListViewController.self)))
         view.viewModel = viewModel
         view.viewModel.router = DefaultMoviesListViewRouter(view: view,
                                                             moviesListViewControllersFactory: moviesListViewControllersFactory)
         return view
     }
-
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -72,12 +72,12 @@ public class MoviesListViewController: UIViewController, StoryboardInstantiable,
     
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == String(describing: MoviesListTableViewController.self),
-            let destinationVC = segue.destination as? MoviesListTableViewController {
+           let destinationVC = segue.destination as? MoviesListTableViewController {
             moviesTableViewController = destinationVC
             moviesTableViewController?.viewModel = viewModel
         }
     }
-
+    
     func showError(_ error: String) {
         guard !error.isEmpty else { return }
         showAlert(title: NSLocalizedString("Error", comment: ""), message: error)
@@ -134,7 +134,7 @@ extension MoviesListViewController: UISearchControllerDelegate {
     public func willDismissSearchController(_ searchController: UISearchController) {
         updateQueriesSuggestionsVisibility()
     }
-
+    
     public func didDismissSearchController(_ searchController: UISearchController) {
         updateQueriesSuggestionsVisibility()
     }

@@ -48,9 +48,7 @@ class AccountVC: UIViewController {
         logoutButton.addTarget(self, action: #selector(didTapLogoutButton(_:)), for: .touchUpInside)
     }
     
-    deinit {
-        print("LoginViewController deinit")
-    }
+    deinit {}
 
     @objc private func didTapLogoutButton(_ sender: Any) {
         didSendEventClosure?(.account)

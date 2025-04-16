@@ -9,9 +9,9 @@ import Foundation
 
 /// REFACTOR DTO to DM: Dont use DTO model in this, since its shouldnt directly work upon the data from the api
 protocol IKeychainRepository {
-    func saveUserTokenData(_ userData: LoginResponseDTO) -> Bool
-    func getUserTokenData() -> LoginResponseDTO?
-    func deleteUserTokenData() -> Void
+    func saveLoginTokenData(_ token: LoginResponseDTO) -> Bool
+    func getLoginTokenData() -> LoginResponseDTO?
+    func deleteLoginTokenData() -> Void
     
     /// CORRECT DTO to Domain Model(DM): This is the correct implementation
     /// DM only contains handpicked value of DTOs, and is seperate model for more seperation and decoupling

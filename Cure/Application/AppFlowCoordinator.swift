@@ -87,7 +87,7 @@ final class AppFlowCoordinator {
 
 
 extension AppFlowCoordinator: AuthFlowCoordinatorDelegate {
-    func authFlowDidFinish(with user: LoginResponse) {
+    func authFlowDidFinish(with user: UserDetailsDM) {
         showHomeFlow()
     }
     

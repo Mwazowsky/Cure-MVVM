@@ -26,7 +26,7 @@ final class DefaultLogoutUseCase: LogoutUseCase {
             switch result {
             case .success(let isSuccess):
                 if isSuccess {
-                    self.keychainRepository.deleteUserTokenData()
+                    self.keychainRepository.deleteLoginTokenData()
                 }
                 completion(.success(isSuccess))
             case .failure(let error):

@@ -10,7 +10,7 @@ import Foundation
 struct LoginViewModelActions {
     let showRegister: () -> Void
     let showForgotPassword: () -> Void
-    let loginDidSucceed: (Result<UserDetailsDM, any Error>) -> Void
+    let loginDidSucceed: (UserDetailsDM) -> Void
 }
 
 protocol LoginViewModelInput {
@@ -43,19 +43,22 @@ final class DefaultLoginViewModel: LoginViewModel {
     // MARK: - Private
     private let loginUseCase: LoginUseCase
     private let fetchUserDetailsUseCase: FetchUserDetailsUseCase
-    private let saveUserTokenDataUseCase: SaveUserUseCase
+    private let saveUserTokenDataUseCase: SaveLoginTokenUseCase
+    private let saveUserDetailsDataUseCase: SaveUserDetailsUseCase
     private let actions: LoginViewModelActions
     
     // MARK: - Init
     init(
         loginUseCase: LoginUseCase,
         fetchUserDetailsUseCase: FetchUserDetailsUseCase,
-        saveUserTokenDataUseCase: SaveUserUseCase,
+        saveLoginTokenDataUseCase: SaveLoginTokenUseCase,
+        saveUserDetailsDataUseCase: SaveUserDetailsUseCase,
         actions: LoginViewModelActions
     ) {
         self.loginUseCase = loginUseCase
         self.fetchUserDetailsUseCase = fetchUserDetailsUseCase
-        self.saveUserTokenDataUseCase = saveUserTokenDataUseCase
+        self.saveUserTokenDataUseCase = saveLoginTokenDataUseCase
+        self.saveUserDetailsDataUseCase = saveUserDetailsDataUseCase
         self.actions = actions
     }
     
@@ -81,17 +84,19 @@ final class DefaultLoginViewModel: LoginViewModel {
                 
                 if let userTokenData = user.data {
                     TokenManager.shared.configure(token: userTokenData.token)
-                    _ = self.saveUserTokenDataUseCase.execute(userData: userTokenData)
+                    _ = self.saveUserTokenDataUseCase.execute(token: userTokenData)
                 }
                 
                 fetchUserDetailsUseCase.execute() { [weak self] result in
                     guard let self = self else { return }
                     
-                    if case .success(_) = result {
-                        print("User Details DM: ", result)
-                        self.actions.loginDidSucceed(result)
-                    } else {
-                        self.error.value = "Error: Fail to save user data."
+                    switch result {
+                    case .success(let userData):
+                        let isSuccessSaveUserData = self.saveUserDetailsDataUseCase.execute(userData: userData)
+                        print("Success Save User Data: ", isSuccessSaveUserData)
+                        self.actions.loginDidSucceed(userData)
+                    case .failure(let error):
+                        self.error.value = error.localizedDescription
                     }
                 }
                 

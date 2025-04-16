@@ -20,6 +20,6 @@ class DefaultDeleteUserUseCase: DeleteUserUseCase {
     }
     
     func execute() -> Void {
-        keychainRepository.deleteUserTokenData()
+        keychainRepository.deleteLoginTokenData()
     }
 }

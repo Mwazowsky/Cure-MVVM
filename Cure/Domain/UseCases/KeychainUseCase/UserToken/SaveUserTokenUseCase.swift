@@ -7,18 +7,18 @@
 
 import Foundation
 
-protocol SaveUserUseCase {
-    func execute(userData: LoginResponseDTO) -> Bool
+protocol SaveLoginTokenUseCase {
+    func execute(token: LoginResponseDTO) -> Bool
 }
 
-class DefaultSaveUserUseCase: SaveUserUseCase {
+class DefaultSaveLoginTokenUseCase: SaveLoginTokenUseCase {
     private let keychainRepository: IKeychainRepository
     
     init(keychainRepository: IKeychainRepository) {
         self.keychainRepository = keychainRepository
     }
     
-    func execute(userData: LoginResponseDTO) -> Bool {
-        return keychainRepository.saveUserTokenData(userData)
+    func execute(token: LoginResponseDTO) -> Bool {
+        return keychainRepository.saveLoginTokenData(token)
     }
 }

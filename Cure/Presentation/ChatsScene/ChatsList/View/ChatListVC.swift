@@ -40,9 +40,7 @@ class ChatListVC: UIViewController {
         loginButton.addTarget(self, action: #selector(didTapLoginButton(_:)), for: .touchUpInside)
     }
     
-    deinit {
-        print("LoginViewController deinit")
-    }
+    deinit {}
 
     @objc private func didTapLoginButton(_ sender: Any) {
         didSendEventClosure?(.chats)

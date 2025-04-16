@@ -19,6 +19,6 @@ final class DefaultGetCurrentUserTokenUseCase: GetUserTokenUseCase {
     }
     
     func execute() -> LoginResponseDTO? {
-        return keychainRepository.getUserTokenData()
+        return keychainRepository.getLoginTokenData()
     }
 }

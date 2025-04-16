@@ -61,12 +61,16 @@ final class AuthSceneDIContainer {
     }
     
     /// User Data Save
-    func makeSaveCurrentUserUseCase() -> SaveUserUseCase {
-        return DefaultSaveUserUseCase(keychainRepository: makeKeychainRepository())
+    func makeSaveCurrentLoginTokenUseCase() -> SaveLoginTokenUseCase {
+        return DefaultSaveLoginTokenUseCase(keychainRepository: makeKeychainRepository())
     }
 
     func makeFetchUserDetailsUseCase() -> FetchUserDetailsUseCase {
         return DefaultFetchUserDetailsUseCase(userRepository: makeUserRepository())
+    }
+    
+    func makeSaveCurrentUserDetailsUseCase() -> SaveUserDetailsUseCase {
+        return DefaultSaveCurrentUserDetailsUseCase(keychainRepository: makeKeychainRepository())
     }
     
     // MARK: - View Models
@@ -74,7 +78,8 @@ final class AuthSceneDIContainer {
         return DefaultLoginViewModel(
             loginUseCase: makeLoginUseCase(),
             fetchUserDetailsUseCase: makeFetchUserDetailsUseCase(),
-            saveUserTokenDataUseCase: makeSaveCurrentUserUseCase(),
+            saveLoginTokenDataUseCase: makeSaveCurrentLoginTokenUseCase(),
+            saveUserDetailsDataUseCase: makeSaveCurrentUserDetailsUseCase(),
             actions: actions
         )
     }

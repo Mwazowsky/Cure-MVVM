@@ -115,7 +115,7 @@ final class HomeFlowCoordinator: NSObject, HomeFlowCoordinatorProtocol {
     }
     
     deinit {
-        print("HomeFLowCoordinator deinit'd")
+        
     }
     
     func start() {

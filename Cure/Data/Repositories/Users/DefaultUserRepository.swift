@@ -69,6 +69,9 @@ extension DefaultUserRepository {
         return UserDetailsDM(
             employeeID: response.employeeID,
             companyID: response.companyID,
+            dob: response.dob,
+            gender: response.gender,
+            address: response.address,
             companyName: response.companyName,
             name: response.name,
             email: response.email
