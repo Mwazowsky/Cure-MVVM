@@ -44,7 +44,6 @@ final class DefaultLoginViewModel: LoginViewModel {
     private let loginUseCase: LoginUseCase
     private let fetchUserDetailsUseCase: FetchUserDetailsUseCase
     private let saveUserTokenDataUseCase: SaveLoginTokenUseCase
-    private let saveUserDetailsDataUseCase: SaveUserDetailsUseCase
     private let actions: LoginViewModelActions
     
     // MARK: - Init
@@ -52,13 +51,11 @@ final class DefaultLoginViewModel: LoginViewModel {
         loginUseCase: LoginUseCase,
         fetchUserDetailsUseCase: FetchUserDetailsUseCase,
         saveLoginTokenDataUseCase: SaveLoginTokenUseCase,
-        saveUserDetailsDataUseCase: SaveUserDetailsUseCase,
         actions: LoginViewModelActions
     ) {
         self.loginUseCase = loginUseCase
         self.fetchUserDetailsUseCase = fetchUserDetailsUseCase
         self.saveUserTokenDataUseCase = saveLoginTokenDataUseCase
-        self.saveUserDetailsDataUseCase = saveUserDetailsDataUseCase
         self.actions = actions
     }
     
@@ -92,8 +89,6 @@ final class DefaultLoginViewModel: LoginViewModel {
                     
                     switch result {
                     case .success(let userData):
-                        let isSuccessSaveUserData = self.saveUserDetailsDataUseCase.execute(userData: userData)
-                        print("Success Save User Data: ", isSuccessSaveUserData)
                         self.actions.loginDidSucceed(userData)
                     case .failure(let error):
                         self.error.value = error.localizedDescription

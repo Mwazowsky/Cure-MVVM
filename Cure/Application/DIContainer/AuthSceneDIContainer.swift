@@ -16,9 +16,7 @@ final class AuthSceneDIContainer {
     
     private let dependencies: Dependencies
     
-    // Replace: Replace with a proper keychain storage to store user login response data
-    lazy var moviesQueriesStorage: MoviesQueriesStorage  = CoreDataMoviesQueriesStorage(maxStorageLimit: 10)
-    lazy var moviesResponseCache : MoviesResponseStorage = CoreDataMoviesResponseStorage()
+    lazy var userResponseCache : UserDetailsResponseStorage = CoreDataUserDetailsResponseStorage()
     
     
     init(dependencies: Dependencies) {
@@ -42,7 +40,8 @@ final class AuthSceneDIContainer {
     
     private func makeUserRepository() -> IUserRepository {
         return DefaultUserRepository(
-            dataTransferService: dependencies.newApiDataTransferervice
+            dataTransferService: dependencies.newApiDataTransferervice,
+            cache: userResponseCache
         )
     }
     
@@ -69,17 +68,12 @@ final class AuthSceneDIContainer {
         return DefaultFetchUserDetailsUseCase(userRepository: makeUserRepository())
     }
     
-    func makeSaveCurrentUserDetailsUseCase() -> SaveUserDetailsUseCase {
-        return DefaultSaveCurrentUserDetailsUseCase(keychainRepository: makeKeychainRepository())
-    }
-    
     // MARK: - View Models
     func makeLoginViewModel(actions: LoginViewModelActions) -> LoginViewModel {
         return DefaultLoginViewModel(
             loginUseCase: makeLoginUseCase(),
             fetchUserDetailsUseCase: makeFetchUserDetailsUseCase(),
             saveLoginTokenDataUseCase: makeSaveCurrentLoginTokenUseCase(),
-            saveUserDetailsDataUseCase: makeSaveCurrentUserDetailsUseCase(),
             actions: actions
         )
     }

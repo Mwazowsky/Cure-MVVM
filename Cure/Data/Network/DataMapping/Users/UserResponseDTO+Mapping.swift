@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 // MARK: - Data Transfer Object
 
@@ -80,5 +81,117 @@ struct UserDetailsResponse: Decodable {
     struct ErrorDetail: Decodable {
         let name: String
         let detail: String
+    }
+}
+
+extension UserDetailsResponse.ErrorDetail {
+    func toEntity(in context: NSManagedObjectContext) -> ErrorEntity {
+        let entity = ErrorEntity(context: context)
+        entity.name = name
+        entity.detail = detail
+        return entity
+    }
+}
+
+extension UserDetailsResponse {
+    func toEntity(in context: NSManagedObjectContext) -> UserBaseResponseEntity {
+            let entity = UserBaseResponseEntity(context: context)
+            
+            entity.status = Int16(status)
+            entity.message = message
+            entity.errors = errors as NSObject
+            entity.success = success
+            
+            if let error = error {
+                entity.error = error.toEntity(in: context)
+            }
+            
+            if let data = data {
+                entity.data = data.toEntitiy(in: context)
+            }
+            
+            return entity
+        }
+    
+    func toDomain() -> UserDetailsResponse {
+        return .init(
+            status: Int(status),
+            message: message,
+            errors: errors,
+            error: error,
+            success: success,
+            data: data
+        )
+    }
+}
+
+extension UserDetailsDTO {
+    func toEntitiy(in context: NSManagedObjectContext) -> UserDetailsResponseEntity {
+        let entity: UserDetailsResponseEntity = .init(context: context)
+        entity.employeeID = Int64(employeeID)
+        entity.companyId = Int64(companyID)
+        entity.companyName = companyName
+        entity.name = name
+        entity.email = email
+        entity.dob = dob
+        entity.gender = gender
+        entity.address = address
+        entity.phoneNumber = phoneNumber
+        entity.nationality = nationality
+        entity.photoURL = photoURL
+        entity.isOnline = isOnline
+        entity.lastOnline = lastOnline
+        entity.sundayStart = sundayStart
+        entity.sundayEnd = sundayEnd
+        entity.mondayStart = mondayStart
+        entity.mondayEnd = mondayEnd
+        entity.tuesdayStart = tuesdayStart
+        entity.tuesdayEnd = tuesdayEnd
+        entity.wednesdayStart = wednesdayStart
+        entity.wednesdayEnd = wednesdayEnd
+        entity.thursdayStart = thursdayStart
+        entity.thursdayEnd = thursdayEnd
+        entity.fridayStart = fridayStart
+        entity.fridayEnd = fridayEnd
+        entity.saturdayStart = saturdayStart
+        entity.saturdayEnd = saturdayEnd
+        entity.avgResponseTime = Int64(avgResponseTime)
+        entity.weeklyScore = weeklyScore
+        
+        return entity
+    }
+    
+    func toDomain() -> UserDetailsDTO {
+        return .init(
+            employeeID: Int(employeeID),
+            companyID: Int(companyID),
+            companyName: companyName,
+            name: name,
+            email: email,
+            dob: dob,
+            gender: gender,
+            address: address,
+            phoneNumber: phoneNumber,
+            nationality: nationality,
+            photoURL: photoURL,
+            isOnline: isOnline,
+            lastOnline: lastOnline,
+            sundayStart: sundayStart,
+            sundayEnd: sundayEnd,
+            mondayStart: mondayStart,
+            mondayEnd: mondayEnd,
+            tuesdayStart: tuesdayStart,
+            tuesdayEnd: tuesdayEnd,
+            wednesdayStart: wednesdayStart,
+            wednesdayEnd: wednesdayEnd,
+            thursdayStart: thursdayStart,
+            thursdayEnd: thursdayEnd,
+            fridayStart: fridayStart,
+            fridayEnd: fridayEnd,
+            saturdayStart: saturdayStart,
+            saturdayEnd: saturdayEnd,
+            avgResponseTime: Int(avgResponseTime),
+            weeklyScore: weeklyScore
+        )
     }
 }

@@ -12,65 +12,6 @@ final class DefaultKeychainRepository {
 }
 
 extension DefaultKeychainRepository: IKeychainRepository {
-    // MARK: - User Details
-    func saveUserDetailsData(_ userData: UserDetailsDM) -> Bool {
-        guard let encodedData = try? JSONEncoder().encode(userData) else {
-            print("Failed to encode user data")
-            return false
-        }
-        
-        let query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: keychainService,
-            kSecAttrAccount as String: "currentUserDetailsData",
-            kSecValueData as String: encodedData
-        ]
-        
-        SecItemDelete(query as CFDictionary)
-        
-        let status = SecItemAdd(query as CFDictionary, nil)
-        
-        return status == errSecSuccess
-    }
-    
-    
-    func getUserDetailsData() -> UserDetailsDM? {
-        let query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: keychainService,
-            kSecAttrAccount as String: "currentUserDetailsData",
-            kSecReturnData as String: true,
-            kSecMatchLimit as String: kSecMatchLimitOne
-        ]
-        
-        var dataTypeRef: AnyObject?
-        let status = SecItemCopyMatching(query as CFDictionary, &dataTypeRef)
-        
-        guard status == errSecSuccess else { return nil }
-        
-        guard let keychainData = dataTypeRef as? Data else {
-            print("Retrieved data is not of type Data")
-            return nil
-        }
-        do {
-            let userDetailsData: UserDetailsDM = try JSONDecoder().decode(UserDetailsDM.self, from: keychainData)
-            return userDetailsData
-        } catch {
-            print("Decoding error: \(error)")
-            return nil
-        }
-    }
-    
-    func deleteUserDetailsData() {
-        let query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: keychainService,
-            kSecAttrAccount as String: "currentUserDetailsData"
-        ]
-        
-        let _ = SecItemDelete(query as CFDictionary)
-    }
-    
     // MARK: - User JWT Token
     func saveLoginTokenData(_ userData: LoginResponseDTO) -> Bool {
         do {
