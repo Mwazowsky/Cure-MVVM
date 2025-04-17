@@ -43,24 +43,24 @@ extension CoreDataUserDetailsResponseStorage: UserDetailsResponseStorage {
                 let fetchRequest = UserBaseResponseEntity.fetchRequest()
                 let requestEntity = try context.fetch(fetchRequest).first
 
-                if let dto = requestEntity?.toDTO() {
-                    completion(.success(requestEntity))
+                if (requestEntity?.toDTO()) != nil {
+                    completion(.success(requestEntity?.toDTO()))
                 } else {
-                    completion(.failure(CoreDataStorageError.readError(NSError(domain: "NoData", code: 404))))
+                    completion(.failure(DataTransferError.parsing(AuthenticationError.unknownError)))
                 }
             } catch {
-                completion(.failure(CoreDataStorageError.readError(error)))
+                completion(.failure(DataTransferError.parsing(AuthenticationError.unknownError)))
             }
         }
 
     }
     
-    func save(response: UserDetailsResponse) {
+    func save(response: UserDetailsDTO) {
         coreDataStorage.performBackgroundTask { context in
             do {
-                self.deleteCurrentUser(withId: String(response.data?.employeeID ?? 0), in: context)
+                self.deleteCurrentUser(withId: String(response.employeeID), in: context)
                 
-                _ = response.toEntity(in: context)
+                _ = response.toEntitiy(in: context)
                 
                 try context.save()
             } catch {

@@ -8,11 +8,11 @@
 
 import Foundation
 
-protocol DeleteUserUseCase {
+protocol DeleteUserTokenUseCase {
     func execute() -> Void
 }
 
-class DefaultDeleteUserUseCase: DeleteUserUseCase {
+class DefaultDeleteUserUseCase: DeleteUserTokenUseCase {
     private let keychainRepository: IKeychainRepository
     
     init(keychainRepository: IKeychainRepository) {

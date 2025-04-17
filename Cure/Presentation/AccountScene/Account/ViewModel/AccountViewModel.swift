@@ -32,20 +32,37 @@ final class DefaultAccountViewModel: AccountViewModel {
     
     // MARK: - Private
     private let logoutUseCase: LogoutUseCase
+    private let fetchUserDetailsUseCase: FetchUserDetailsUseCase
     private let actions: AccountViewModelActions
     
     // MARK: - Init
     init(
+        fetchUserDetailsUseCase: FetchUserDetailsUseCase,
         logoutUseCase: LogoutUseCase,
         actions: AccountViewModelActions
     ) {
+        self.fetchUserDetailsUseCase = fetchUserDetailsUseCase
         self.logoutUseCase = logoutUseCase
         self.actions = actions
     }
     
     // MARK: - Input
     func viewDidLoad() {
-        
+        fetchUserDetailsUseCase.execute(
+            cached: { cachedUser in
+                print("Using cached user: \(cachedUser)")
+            },
+            completion: { [weak self] result in
+//                guard let self = self else { return }
+                switch result {
+                case .success(let userDetails):
+                    print("User Details: ", userDetails)
+//                    self.actions.loginDidSucceed(userDetails)
+                case .failure(let error):
+                    print("Error fetching user details: \(error)")
+                }
+            }
+        )
     }
     
     func didTapLogoutButton() {

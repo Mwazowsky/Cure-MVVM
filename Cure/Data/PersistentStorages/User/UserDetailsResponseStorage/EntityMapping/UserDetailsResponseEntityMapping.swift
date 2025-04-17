@@ -44,12 +44,21 @@ extension UserDetailsResponseEntity {
     }
 }
 
+extension ErrorEntity {
+    func toDTO() -> UserDetailsResponse.ErrorDetail {
+        return UserDetailsResponse.ErrorDetail(
+            name: name ?? "",
+            detail: detail ?? ""
+        )
+    }
+}
+
 extension UserBaseResponseEntity {
     func toDTO() -> UserDetailsResponse {
         return UserDetailsResponse(
             status: Int(status),
             message: message ?? "",
-            errors: errors as? [String] ?? [],
+            errors: errors?.components(separatedBy: ", ") ?? [],
             error: error?.toDTO(),
             success: success,
             data: data?.toDTO()

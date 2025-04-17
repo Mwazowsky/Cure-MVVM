@@ -3,6 +3,7 @@
     <entity name="ErrorEntity" representedClassName="ErrorEntity" syncable="YES" codeGenerationType="class">
         <attribute name="detail" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="baseResponseEntity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserBaseResponseEntity" inverseName="error" inverseEntity="UserBaseResponseEntity"/>
     </entity>
     <entity name="MovieQueryEntity" representedClassName="MovieQueryEntity" syncable="YES" codeGenerationType="class">
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -29,14 +30,13 @@
         <relationship name="request" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="MoviesRequestEntity" inverseName="response" inverseEntity="MoviesRequestEntity"/>
     </entity>
     <entity name="UserBaseResponseEntity" representedClassName="UserBaseResponseEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="data" optional="YES" attributeType="Transformable"/>
-        <attribute name="error" optional="YES" attributeType="Transformable"/>
-        <attribute name="errors" optional="YES" attributeType="Transformable"/>
+        <attribute name="errors" optional="YES" attributeType="String"/>
         <attribute name="message" optional="YES" attributeType="String"/>
         <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="success" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <relationship name="data" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserDetailsResponseEntity" inverseName="dataDetail" inverseEntity="UserDetailsResponseEntity"/>
+        <relationship name="error" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ErrorEntity" inverseName="baseResponseEntity" inverseEntity="ErrorEntity"/>
     </entity>
-    <entity name="UserDetailsRequestEntity" representedClassName="UserDetailsRequestEntity" syncable="YES" codeGenerationType="class"/>
     <entity name="UserDetailsResponseEntity" representedClassName="UserDetailsResponseEntity" syncable="YES" codeGenerationType="class">
         <attribute name="address" optional="YES" attributeType="String"/>
         <attribute name="avgResponseTime" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -67,5 +67,6 @@
         <attribute name="wednesdayEnd" optional="YES" attributeType="String"/>
         <attribute name="wednesdayStart" optional="YES" attributeType="String"/>
         <attribute name="weeklyScore" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="dataDetail" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserBaseResponseEntity" inverseName="data" inverseEntity="UserBaseResponseEntity"/>
     </entity>
 </model>

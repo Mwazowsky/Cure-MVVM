@@ -84,16 +84,20 @@ final class DefaultLoginViewModel: LoginViewModel {
                     _ = self.saveUserTokenDataUseCase.execute(token: userTokenData)
                 }
                 
-                fetchUserDetailsUseCase.execute() { [weak self] result in
-                    guard let self = self else { return }
-                    
-                    switch result {
-                    case .success(let userData):
-                        self.actions.loginDidSucceed(userData)
-                    case .failure(let error):
-                        self.error.value = error.localizedDescription
+                fetchUserDetailsUseCase.execute(
+                    cached: { cachedUser in
+                        print("Using cached user: \(cachedUser)")
+                    },
+                    completion: { [weak self] result in
+                        guard let self = self else { return }
+                        switch result {
+                        case .success(let userDetails):
+                            self.actions.loginDidSucceed(userDetails)
+                        case .failure(let error):
+                            print("Error fetching user details: \(error)")
+                        }
                     }
-                }
+                )
                 
             case .failure(let error):
                 self.error.value = self.mapErrorToMessage(error)

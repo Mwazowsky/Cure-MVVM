@@ -24,7 +24,13 @@ class ChatListVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            view.backgroundColor = .systemBackground
+        } else {
+//            let darkModeEnabled = KeychainWrapper.standard.string(forKey: "darkMode") == "true"
+//            view.backgroundColor = darkModeEnabled ? UIColor.black : UIColor.white
+        }
+
         
         view.addSubview(loginButton)
 

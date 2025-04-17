@@ -99,7 +99,7 @@ extension UserDetailsResponse {
             
             entity.status = Int16(status)
             entity.message = message
-            entity.errors = errors as NSObject
+            entity.errors = (errors as [String]).joined(separator: ", ")
             entity.success = success
             
             if let error = error {

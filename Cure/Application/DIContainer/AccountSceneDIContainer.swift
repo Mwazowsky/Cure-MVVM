@@ -17,9 +17,7 @@ final class AccountSceneDIContainer {
     private let dependencies: Dependencies
     
     // Replace: Replace with a proper keychain storage to store user login response data
-    lazy var moviesQueriesStorage: MoviesQueriesStorage  = CoreDataMoviesQueriesStorage(maxStorageLimit: 10)
-    lazy var moviesResponseCache : MoviesResponseStorage = CoreDataMoviesResponseStorage()
-    
+    lazy var userResponseCache : UserDetailsResponseStorage = CoreDataUserDetailsResponseStorage()
     
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
@@ -32,23 +30,40 @@ final class AccountSceneDIContainer {
         )
     }
     
-    private func makeUserRepository() -> IKeychainRepository {
+    private func makeKeychainRepository() -> IKeychainRepository {
         return DefaultKeychainRepository()
+    }
+    
+    private func makeUserRepository() -> IUserRepository {
+        return DefaultUserRepository(
+            dataTransferService: dependencies.newApiDataTransferervice,
+            cache: userResponseCache
+        )
     }
     
     // MARK: - Use Cases
     func makeLogoutUseCase() -> LogoutUseCase {
-        return DefaultLogoutUseCase(authRepository: makeAuthRepository(), keychainRepository: makeUserRepository())
+        return DefaultLogoutUseCase(authRepository: makeAuthRepository(), keychainRepository: makeKeychainRepository())
     }
     
-    /// User Data Save
-    func makeDeleteCurrentUserUseCase() -> DeleteUserUseCase {
-        return DefaultDeleteUserUseCase(keychainRepository: makeUserRepository())
+    /// User Token Delete
+    func makeDeleteCurrentUserUseCase() -> DeleteUserTokenUseCase {
+        return DefaultDeleteUserUseCase(keychainRepository: makeKeychainRepository())
     }
+    
+    func makeFetchUserDetailsUseCase() -> FetchUserDetailsUseCase {
+        return DefaultFetchUserDetailsUseCase(userRepository: makeUserRepository())
+    }
+    
+    // Get User Details
+//    func makeGetLoginUserDetailUseCase() ->  {
+//        
+//    }
     
     // MARK: - View Models
     func makeAccountViewModel(actions: AccountViewModelActions) -> AccountViewModel {
         return DefaultAccountViewModel(
+            fetchUserDetailsUseCase: makeFetchUserDetailsUseCase(),
             logoutUseCase: makeLogoutUseCase(),
             actions: actions
         )

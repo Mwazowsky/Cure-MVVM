@@ -5,11 +5,11 @@
 //  Created by MacBook Air MII  on 18/03/25.
 //
 
-protocol FetchUserDetailsUseCase {
+protocol LoadUserDetailsUseCase {
     func execute(cached: @escaping (UserDetailsDTO) -> Void, completion: @escaping (Result<UserDetailsDM, Error>) -> Void)
 }
 
-final class DefaultFetchUserDetailsUseCase: FetchUserDetailsUseCase {
+final class DefaultLoadUserDetailsUseCase: LoadUserDetailsUseCase {
     private let userRepository: IUserRepository
     
     init(

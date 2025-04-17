@@ -10,5 +10,5 @@ import CoreData
 
 protocol UserDetailsResponseStorage {
     func getResponse(completion: @escaping (Result<UserDetailsResponse?, DataTransferError>) -> Void)
-    func save(response: UserDetailsResponse)
+    func save(response: UserDetailsDTO)
 }

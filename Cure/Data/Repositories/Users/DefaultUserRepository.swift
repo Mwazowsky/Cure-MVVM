@@ -30,7 +30,7 @@ extension DefaultUserRepository: IUserRepository {
     ) {
         let task = RepositoryTask()
 
-        cache.getResponse { [weak self, backgroundQueue] (result: Result<UserDetailsResponse?, any Error>) in
+        cache.getResponse { [weak self, backgroundQueue] (result: Result<UserDetailsResponse?, DataTransferError>) in
             if case let .success(response?) = result {
                 guard let userDTO = self?.mapToDomain(response: response) else {
                     DispatchQueue.main.async {
@@ -55,7 +55,7 @@ extension DefaultUserRepository: IUserRepository {
                 case .success(let response):
                     let userDTO = self.mapToDomain(response: response)
 
-                    self.cache.save(response: response)
+                    self.cache.save(response: userDTO)
 
                     let domainModel = self.mapToDomain(response: userDTO)
 
@@ -71,42 +71,6 @@ extension DefaultUserRepository: IUserRepository {
             }
         }
     }
-
-    
-//    func fetchLoginUserDetails(
-//        cached: @escaping (UserDetailsDTO) -> Void,
-//        completion: @escaping (Result<UserDetailsDM, Error>) -> Void
-//    ) {
-//        let endpoint = APIEndpoints.getLoginUserProfile()
-//        backgroundQueue.asyncExecute {
-//            self.dataTransferService.request(with: endpoint) { [weak self] (result: Result<UserDetailsResponse, DataTransferError>) in
-//                guard self != nil else { return }
-//                switch result {
-//                case .success(let response):
-//                    guard let userDTO = self?.mapToDomain(response: response) else {
-//                        DispatchQueue.main.async {
-//                            completion(.failure(AuthenticationError.unknownError))
-//                        }
-//                        return
-//                    }
-//                    
-//                    if let userDomainModel = self?.mapToDomain(response: userDTO) {
-//                        DispatchQueue.main.async {
-//                            completion(.success(userDomainModel))
-//                        }
-//                    } else {
-//                        DispatchQueue.main.async {
-//                            completion(.failure(AuthenticationError.unknownError))
-//                        }
-//                    }
-//                case .failure(let error):
-//                    DispatchQueue.main.async {
-//                        completion(.failure(error))
-//                    }
-//                }
-//            }
-//        }
-//    }
 }
 
 extension DefaultUserRepository {
