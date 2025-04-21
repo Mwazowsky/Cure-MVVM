@@ -9,6 +9,6 @@ import Foundation
 import CoreData
 
 protocol UserDetailsResponseStorage {
-    func getResponse(completion: @escaping (Result<UserDetailsResponse?, DataTransferError>) -> Void)
+    func getResponse(completion: @escaping (Result<UserDetailsDTO?, DataTransferError>) -> Void)
     func save(response: UserDetailsDTO)
 }

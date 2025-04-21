@@ -25,44 +25,49 @@ final class DefaultUserRepository {
 
 extension DefaultUserRepository: IUserRepository {
     func fetchLoginUserDetails(
-        cached: @escaping (UserDetailsDTO) -> Void,
+        cached: @escaping (UserDetailsDM) -> Void,
         completion: @escaping (Result<UserDetailsDM, Error>) -> Void
     ) {
         let task = RepositoryTask()
-
-        cache.getResponse { [weak self, backgroundQueue] (result: Result<UserDetailsResponse?, DataTransferError>) in
-            if case let .success(response?) = result {
-                guard let userDTO = self?.mapToDomain(response: response) else {
+        
+        cache.getResponse { [weak self, backgroundQueue] (result: Result<UserDetailsDTO?, DataTransferError>) in
+            switch result {
+            case .success(let response?):
+                guard let cacheUserDTO = self?.mapToDomain(response: response) else {
                     DispatchQueue.main.async {
                         completion(.failure(AuthenticationError.unknownError))
                     }
                     return
                 }
-                cached(userDTO)
+                cached(cacheUserDTO)
+            case .success(nil):
+                print("🟡 Cache is empty (success but nil)")
+            case .failure(let error):
+                print("❌ Failed to get from cache: \(error)")
             }
-
+            
             guard !task.isCancelled else { return }
-
+            
             let endpoint: Endpoint<UserDetailsResponse> = APIEndpoints.getLoginUserProfile()
-
+            
             task.networkTask = self?.dataTransferService.request(
                 with: endpoint,
                 on: backgroundQueue
             ) { [weak self] result in
                 guard let self = self else { return }
-
+                
                 switch result {
                 case .success(let response):
-                    let userDTO = self.mapToDomain(response: response)
-
-                    self.cache.save(response: userDTO)
-
-                    let domainModel = self.mapToDomain(response: userDTO)
-
+                    let netUserDTO = self.mapToDomain(response: response)
+                    
+                    self.cache.save(response: netUserDTO)
+                    
+                    let domainModel = self.mapToDomain(response: netUserDTO)
+                    
                     DispatchQueue.main.async {
                         completion(.success(domainModel))
                     }
-
+                    
                 case .failure(let error):
                     DispatchQueue.main.async {
                         completion(.failure(error))

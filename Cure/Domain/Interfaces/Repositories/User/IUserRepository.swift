@@ -7,7 +7,7 @@
 
 protocol IUserRepository {
     func fetchLoginUserDetails(
-        cached: @escaping (UserDetailsDTO) -> Void,
+        cached: @escaping (UserDetailsDM) -> Void,
         completion: @escaping (Result<UserDetailsDM, Error>) -> Void
     )
 }

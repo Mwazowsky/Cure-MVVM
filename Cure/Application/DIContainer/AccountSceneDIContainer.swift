@@ -51,8 +51,8 @@ final class AccountSceneDIContainer {
         return DefaultDeleteUserUseCase(keychainRepository: makeKeychainRepository())
     }
     
-    func makeFetchUserDetailsUseCase() -> FetchUserDetailsUseCase {
-        return DefaultFetchUserDetailsUseCase(userRepository: makeUserRepository())
+    func makeLoadUserDetailsUseCase() -> LoadUserDetailsUseCase {
+        return DefaultLoadUserDetailsUseCase(userRepository: makeUserRepository())
     }
     
     // Get User Details
@@ -63,7 +63,7 @@ final class AccountSceneDIContainer {
     // MARK: - View Models
     func makeAccountViewModel(actions: AccountViewModelActions) -> AccountViewModel {
         return DefaultAccountViewModel(
-            fetchUserDetailsUseCase: makeFetchUserDetailsUseCase(),
+            loadUserDetailsUseCase: makeLoadUserDetailsUseCase(),
             logoutUseCase: makeLogoutUseCase(),
             actions: actions
         )
