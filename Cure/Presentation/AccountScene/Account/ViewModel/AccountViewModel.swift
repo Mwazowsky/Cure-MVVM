@@ -21,6 +21,7 @@ protocol AccountViewModelInput {
 protocol AccountViewModelOutput {
     var isLoading: Observable<Bool> { get }
     var error: Observable<String?> { get }
+    var userDetailsData: Observable<UserDetailsDM?> { get }
 }
 
 typealias AccountViewModel = AccountViewModelInput & AccountViewModelOutput
@@ -29,6 +30,7 @@ final class DefaultAccountViewModel: AccountViewModel {
     // MARK: - Output
     let isLoading: Observable<Bool> = Observable(false)
     let error: Observable<String?> = Observable(nil)
+    let userDetailsData: Observable<UserDetailsDM?> = Observable(nil)
     
     // MARK: - Private
     private let logoutUseCase: LogoutUseCase
@@ -50,13 +52,15 @@ final class DefaultAccountViewModel: AccountViewModel {
     func viewDidLoad() {
         loadUserDetailsUseCase.execute(
             cached: { cachedUser in
-
+                print("Using cached user: \(cachedUser)")
             },
             completion: { [weak self] result in
                 guard let self = self else { return }
                 switch result {
                 case .success(let userDetails):
-                    self.actions.loginDidSucceed(userDetails)
+                    print("User Details: ", userDetails)
+//                    self.actions.onUserDetailsFetched(userDetails)
+                    userDetailsData.value = userDetails
                 case .failure(let error):
                     print("Error fetching user details: \(error)")
                 }

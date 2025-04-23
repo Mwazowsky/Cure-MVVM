@@ -11,6 +11,10 @@ class AccountVC: UIViewController {
 
     var didSendEventClosure: ((AccountVC.Event) -> Void)?
     
+    private let nameLabel = UILabel()
+    private let emailLabel = UILabel()
+    private let phoneLabel = UILabel()
+    
     private var viewModel: AccountViewModel!
 
     private let logoutButton: UIButton = {
@@ -26,6 +30,7 @@ class AccountVC: UIViewController {
     static func create(with viewModel: AccountViewModel) -> AccountVC {
         let vc = AccountVC()
         vc.viewModel = viewModel
+        
         return vc
     }
     
@@ -37,12 +42,33 @@ class AccountVC: UIViewController {
         } else {
             // Fallback on earlier versions
         }
-        
+
+        setupUI()
+        bind(to: viewModel)
+        viewModel.viewDidLoad()
+    }
+    
+    private func setupUI() {
+        view.addSubview(nameLabel)
+        view.addSubview(emailLabel)
+        view.addSubview(phoneLabel)
         view.addSubview(logoutButton)
 
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        emailLabel.translatesAutoresizingMaskIntoConstraints = false
+        phoneLabel.translatesAutoresizingMaskIntoConstraints = false
         logoutButton.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
+            nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            nameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
+
+            emailLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            emailLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 12),
+            
+            phoneLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            phoneLabel.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 12),
+
             logoutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             logoutButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             logoutButton.widthAnchor.constraint(equalToConstant: 200),
@@ -50,8 +76,6 @@ class AccountVC: UIViewController {
         ])
         
         logoutButton.addTarget(self, action: #selector(didTapLogoutButton(_:)), for: .touchUpInside)
-        
-        viewModel.viewDidLoad()
     }
     
     deinit {}
@@ -59,6 +83,20 @@ class AccountVC: UIViewController {
     @objc private func didTapLogoutButton(_ sender: Any) {
         didSendEventClosure?(.account)
         viewModel.didTapLogoutButton()
+    }
+    
+    private func bind(to viewModel: AccountViewModel) {
+        viewModel.userDetailsData.observe(on: self) { [weak self] userData in
+            if let userData = userData {
+                self?.displayUserDetails(userData)
+            }
+        }
+    }
+    
+    private func displayUserDetails(_ details: UserDetailsDM) {
+        nameLabel.text = "Name: \(details.name)"
+        emailLabel.text = "Email: \(details.email)"
+        phoneLabel.text = "Phone: \(String(describing: details.phoneNumber))"
     }
 }
 

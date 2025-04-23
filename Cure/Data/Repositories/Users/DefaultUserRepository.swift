@@ -96,7 +96,8 @@ extension DefaultUserRepository {
             address: response.address,
             companyName: response.companyName,
             name: response.name,
-            email: response.email
+            email: response.email,
+            phoneNumber: response.phoneNumber
         )
     }
     
