@@ -58,8 +58,6 @@ final class DefaultAccountViewModel: AccountViewModel {
                 guard let self = self else { return }
                 switch result {
                 case .success(let userDetails):
-                    print("User Details: ", userDetails)
-//                    self.actions.onUserDetailsFetched(userDetails)
                     userDetailsData.value = userDetails
                 case .failure(let error):
                     print("Error fetching user details: \(error)")
