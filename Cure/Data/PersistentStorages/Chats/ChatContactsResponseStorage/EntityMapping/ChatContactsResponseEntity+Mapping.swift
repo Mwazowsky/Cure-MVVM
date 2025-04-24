@@ -17,8 +17,8 @@ extension ChatContactResponseEntity {
     }
 }
 
-// Essentially contact data wrapped inside of baseResponse
-/// Base response should contain be cotai pagination information of the chatContact data list
+// Essentially contact data wrapped inside of coredata baseResponse
+/// Coredata Base response should contain be cotai pagination information of the chatContact data list
 extension ChatContactsResponseEntity {
     func toDTO() ->  {
         return .init(

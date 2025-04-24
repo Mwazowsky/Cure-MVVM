@@ -8,6 +8,22 @@
 import Foundation
 import CoreData
 
+// Absolutely wrong, coredata shouldnt save unnecesarryly heavy data,
+/// especiallly datas that unrelated to the UI to display
+/// Replace with coreData base response
+extension UserBaseResponseEntity {
+    func toDTO() -> UserDetailsResponse {
+        return UserDetailsResponse(
+            status: Int(status),
+            message: message ?? "",
+            errors: errors?.components(separatedBy: ", ") ?? [],
+            error: error?.toDTO(),
+            success: success,
+            data: data?.toDTO()
+        )
+    }
+}
+
 extension UserDetailsResponseEntity {
     func toDTO() -> UserDetailsDTO {
         return .init(
@@ -49,19 +65,6 @@ extension ErrorEntity {
         return UserDetailsResponse.ErrorDetail(
             name: name ?? "",
             detail: detail ?? ""
-        )
-    }
-}
-
-extension UserBaseResponseEntity {
-    func toDTO() -> UserDetailsResponse {
-        return UserDetailsResponse(
-            status: Int(status),
-            message: message ?? "",
-            errors: errors?.components(separatedBy: ", ") ?? [],
-            error: error?.toDTO(),
-            success: success,
-            data: data?.toDTO()
         )
     }
 }
