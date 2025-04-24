@@ -8,16 +8,19 @@
 import Foundation
 import CoreData
 
-extension ChatContactsResponseEntity {
-    func toDTO() -> {
+// Individual Contact Data
+extension ChatContactResponseEntity {
+    func toDTO() -> ChatContactResponseDTO {
         return .init(
             
         )
     }
 }
 
-extension ChatContactEtity {
-    func toDTO() -> {
+// Essentially contact data wrapped inside of baseResponse
+/// Base response should contain be cotai pagination information of the chatContact data list
+extension ChatContactsResponseEntity {
+    func toDTO() ->  {
         return .init(
             
         )
