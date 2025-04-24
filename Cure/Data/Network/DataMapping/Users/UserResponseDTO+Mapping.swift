@@ -70,6 +70,8 @@ struct UserDetailsDTO: Codable {
     }
 }
 
+/// Absolutely wrong, or at least not ideal.
+/// Future Refactor to use the generic baseResponse
 struct UserDetailsResponse: Decodable {
     let status: Int
     let message: String
