@@ -4,6 +4,9 @@
 //
 //  Created by MacBook Air MII  on 24/4/25.
 //
+
+import Foundation
+
 struct BaseSuccessResponse<T: Codable>: Codable {
     let success: Bool
     let data: T

@@ -8,6 +8,7 @@
 import Foundation
 
 struct ChatContactsRequestDTO: Encodable {
-    let query: String
+    let filter: String
     let page: Int
+    let size: Int
 }

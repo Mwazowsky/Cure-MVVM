@@ -30,6 +30,15 @@ enum ChannelType {
     case none
 }
 
+struct ChatContactsPageDTO: Codable {
+    let filter: String
+    let timeStamp: Date
+    let page: Int
+    let size: Int
+    let chatContacts: [ChatContactResponseDTO]
+}
+
+
 struct ChatContactResponseDTO: Codable {
     let contactPairingID: Int
     let contactID: Int
@@ -95,7 +104,7 @@ struct ChatContactResponseDTO: Codable {
 }
 
 // MARK: - LastMessage
-struct LastMessage: Codable {
+struct LastMessage: Equatable, Codable {
     let messageLogID: Int
     let waMessageID, messageMetaID: String?
     let timestamp, content, status: String
@@ -108,7 +117,7 @@ struct ChatNotifStatus: Codable {
     let timestamp: String
 }
 
-struct ChatContactWhatsapp: Codable {
+struct ChatContactWhatsapp: Equatable, Codable {
     var companyHuntingPhoneId: String
     var companyHuntingWabaId: String
     var contactNumber: String
@@ -116,7 +125,7 @@ struct ChatContactWhatsapp: Codable {
     
 }
 
-struct ChatContactInstagram: Codable {
+struct ChatContactInstagram: Equatable, Codable {
     var companyHuntingInstagramId: String
     var companyHuntingUsername: String
     var companyHuntingInstagramSenderId: String?
@@ -153,3 +162,40 @@ extension ChatContactResponseDTO {
     }
 }
 
+
+extension ChatContactsPageDTO {
+    func toDomain() -> ChatContactsPage {
+        return ChatContactsPage(
+            page: page,
+            size: size,
+            chatContacts: chatContacts.map { $0.toDomain() }
+        )
+    }
+}
+
+extension ChatContactResponseDTO {
+    func toDomain() -> ChatContact {
+        return .init(
+            contactPairingID: contactPairingID,
+            contactID: contactID,
+            contactName: contactName,
+            isActive: isActive,
+            contactNumber: contactNumber,
+            photoURL: photoURL,
+            companyHuntingNumberID: companyHuntingNumberID,
+            companyHuntingNumberName: companyHuntingNumberName,
+            companyHuntingNumberPhone: companyHuntingNumberPhone,
+            companyID: companyID,
+            companyName: companyName,
+            totalUnread: totalUnread,
+            lastRoomStatus: lastRoomStatus,
+            lastMessage: lastMessage,
+            isBlocked: isBlocked,
+            isNew: isNew,
+            lastFreeformStatus: lastFreeformStatus,
+            channelID: channelID,
+            channelName: channelName,
+            instagram: instagram,
+            whatsapp: whatsapp)
+    }
+}

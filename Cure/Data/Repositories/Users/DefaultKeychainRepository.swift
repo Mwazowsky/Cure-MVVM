@@ -114,7 +114,7 @@ extension DefaultKeychainRepository: IKeychainRepository {
     }
     
     // MARK: - Handled Contact
-    func saveHandledContactData(_ value: [Int : [ChatContactDTO]]) -> Bool {
+    func saveHandledContactData(_ value: [Int : [ChatContactResponseDTO]]) -> Bool {
         do {
             let handledContactData = try JSONEncoder().encode(value)
             
@@ -139,7 +139,7 @@ extension DefaultKeychainRepository: IKeychainRepository {
         }
     }
     
-    func getHandledContactData() -> [Int:[ChatContactDTO]]? {
+    func getHandledContactData() -> [Int:[ChatContactResponseDTO]]? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: keychainService,
@@ -154,7 +154,7 @@ extension DefaultKeychainRepository: IKeychainRepository {
         guard status == errSecSuccess else { return nil }
         if status == errSecSuccess, let data = dataTypeRef as? Data {
             do {
-                return try JSONDecoder().decode([Int:[ChatContactDTO]].self, from: data)
+                return try JSONDecoder().decode([Int:[ChatContactResponseDTO]].self, from: data)
             } catch {
                 print("Error decoding user data: \(error)")
                 return nil

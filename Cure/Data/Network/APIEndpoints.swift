@@ -91,7 +91,7 @@ struct APIEndpoints {
     
     // MARK: - Chat Endpoints
     /// Chat Contacts
-    static func chatContacts(with chatContactsRequestDTO: ChatContactsRequestDTO) -> Endpoint<BaseResponse<[ChatContactResponseDTO]>> {
+    static func getChatContacts(with chatContactsRequestDTO: ChatContactsRequestDTO) -> Endpoint<BaseResponse<[ChatContactResponseDTO]>> {
         let headerParameters = [
             "accept": "*/*",
             "Content-Type": "application/json",

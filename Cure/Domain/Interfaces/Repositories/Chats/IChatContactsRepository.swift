@@ -10,7 +10,10 @@ import Foundation
 protocol IChatContactsRepository {
     @discardableResult
     func fetchChatContactsList(
-        cached: @escaping (ChatContactsPage) -> Void,
+        query: ChatContactQuery,
+        page: Int,
+        size: Int,
+        cached: @escaping (ChatContactsPageDTO) -> Void,
         completion: @escaping (Result<ChatContactsPage, Error>) -> Void
     ) -> Cancellable?
 }

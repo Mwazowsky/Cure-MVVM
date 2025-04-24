@@ -1,46 +1,76 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23507" systemVersion="24E263" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23605" systemVersion="24E263" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ChatContactQueryEntity" representedClassName="ChatContactQueryEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="query" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="ChatContactResponseEntity" representedClassName="ChatContactResponseEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="address" optional="YES" attributeType="String"/>
-        <attribute name="avgResponseTime" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="companyId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="channelID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="channelName" optional="YES" attributeType="String"/>
+        <attribute name="companyHuntingNumberID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="companyHuntingNumberName" optional="YES" attributeType="String"/>
+        <attribute name="companyHuntingNumberPhone" optional="YES" attributeType="String"/>
+        <attribute name="companyID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="companyName" optional="YES" attributeType="String"/>
-        <attribute name="dob" optional="YES" attributeType="String"/>
-        <attribute name="email" optional="YES" attributeType="String"/>
-        <attribute name="employeeID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="fridayEnd" optional="YES" attributeType="String"/>
-        <attribute name="fridayStart" optional="YES" attributeType="String"/>
-        <attribute name="gender" optional="YES" attributeType="String"/>
-        <attribute name="isOnline" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="lastOnline" optional="YES" attributeType="String"/>
-        <attribute name="mondayEnd" optional="YES" attributeType="String"/>
-        <attribute name="mondayStart" optional="YES" attributeType="String"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="nationality" optional="YES" attributeType="String"/>
-        <attribute name="phoneNumber" optional="YES" attributeType="String"/>
+        <attribute name="contactID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="contactName" optional="YES" attributeType="String"/>
+        <attribute name="contactNumber" optional="YES" attributeType="String"/>
+        <attribute name="contactPairingID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="isActive" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isBlocked" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isNew" optional="YES" attributeType="Boolean" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="lastRoomStatus" optional="YES" attributeType="String"/>
         <attribute name="photoURL" optional="YES" attributeType="String"/>
-        <attribute name="saturdayEnd" optional="YES" attributeType="String"/>
-        <attribute name="saturdayStart" optional="YES" attributeType="String"/>
-        <attribute name="sundayEnd" optional="YES" attributeType="String"/>
-        <attribute name="sundayStart" optional="YES" attributeType="String"/>
-        <attribute name="thursdayEnd" optional="YES" attributeType="String"/>
-        <attribute name="thursdayStart" optional="YES" attributeType="String"/>
-        <attribute name="tuesdayEnd" optional="YES" attributeType="String"/>
-        <attribute name="tuesdayStart" optional="YES" attributeType="String"/>
-        <attribute name="wednesdayEnd" optional="YES" attributeType="String"/>
-        <attribute name="wednesdayStart" optional="YES" attributeType="String"/>
-        <attribute name="weeklyScore" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="dataDetail" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserBaseResponseEntity" inverseName="data" inverseEntity="UserBaseResponseEntity"/>
+        <attribute name="totalUnread" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="chatContactsResponse" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChatContactsResponseEntity" inverseName="chatContacts" inverseEntity="ChatContactsResponseEntity"/>
+        <relationship name="instagram" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="I_ContactInstagramEntity" inverseName="chatContact" inverseEntity="I_ContactInstagramEntity"/>
+        <relationship name="lastMessage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="I_LastMessageEntity" inverseName="chatContact" inverseEntity="I_LastMessageEntity"/>
+        <relationship name="whatsapp" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="I_ContactWhatsappEntity" inverseName="chatContact" inverseEntity="I_ContactWhatsappEntity"/>
+    </entity>
+    <entity name="ChatContactsRequestEntity" representedClassName="ChatContactsRequestEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="filter" optional="YES" attributeType="String"/>
+        <attribute name="page" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="size" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="response" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChatContactsResponseEntity" inverseName="request" inverseEntity="ChatContactsResponseEntity"/>
     </entity>
     <entity name="ChatContactsResponseEntity" representedClassName="ChatContactsResponseEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="page" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="size" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="totalPages" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="filter" optional="YES" attributeType="String"/>
+        <attribute name="page" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="size" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="timeStamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="chatContacts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ChatContactResponseEntity" inverseName="chatContactsResponse" inverseEntity="ChatContactResponseEntity"/>
+        <relationship name="request" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChatContactsRequestEntity" inverseName="response" inverseEntity="ChatContactsRequestEntity"/>
     </entity>
     <entity name="ErrorEntity" representedClassName="ErrorEntity" syncable="YES" codeGenerationType="class">
         <attribute name="detail" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="baseResponseEntity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserBaseResponseEntity" inverseName="error" inverseEntity="UserBaseResponseEntity"/>
+    </entity>
+    <entity name="I_ContactInstagramEntity" representedClassName="I_ContactInstagramEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="companyHuntingInstagramId" optional="YES" attributeType="String"/>
+        <attribute name="companyHuntingInstagramSenderId" optional="YES" attributeType="String"/>
+        <attribute name="companyHuntingUsername" optional="YES" attributeType="String"/>
+        <attribute name="contactInstagramId" optional="YES" attributeType="String"/>
+        <attribute name="contactUsername" optional="YES" attributeType="String"/>
+        <relationship name="chatContact" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChatContactResponseEntity" inverseName="instagram" inverseEntity="ChatContactResponseEntity"/>
+    </entity>
+    <entity name="I_ContactWhatsappEntity" representedClassName="I_ContactWhatsappEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="companyHuntingNumber" optional="YES" attributeType="String"/>
+        <attribute name="companyHuntingPhoneId" optional="YES" attributeType="String"/>
+        <attribute name="companyHuntingWabaId" optional="YES" attributeType="String"/>
+        <attribute name="contactNumber" optional="YES" attributeType="String"/>
+        <relationship name="chatContact" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChatContactResponseEntity" inverseName="whatsapp" inverseEntity="ChatContactResponseEntity"/>
+    </entity>
+    <entity name="I_LastMessageEntity" representedClassName="I_LastMessageEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="content" optional="YES" attributeType="String"/>
+        <attribute name="messageLogID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="messageMetaID" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
+        <attribute name="timestamp" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <attribute name="waMessageID" optional="YES" attributeType="String"/>
+        <relationship name="chatContact" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChatContactResponseEntity" inverseName="lastMessage" inverseEntity="ChatContactResponseEntity"/>
     </entity>
     <entity name="MovieQueryEntity" representedClassName="MovieQueryEntity" syncable="YES" codeGenerationType="class">
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -71,7 +101,7 @@
         <attribute name="message" optional="YES" attributeType="String"/>
         <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="success" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <relationship name="data" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserDetailsResponseEntity" inverseName="dataDetail" inverseEntity="UserDetailsResponseEntity"/>
+        <relationship name="data" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserDetailsResponseEntity"/>
         <relationship name="error" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ErrorEntity" inverseName="baseResponseEntity" inverseEntity="ErrorEntity"/>
     </entity>
     <entity name="UserDetailsResponseEntity" representedClassName="UserDetailsResponseEntity" syncable="YES" codeGenerationType="class">
