@@ -7,8 +7,8 @@
 
 import UIKit
 import LanguageManager_iOS
-import GoogleMaps
-import GooglePlaces
+//import GoogleMaps
+//import GooglePlaces
 import AVFAudio
 import Firebase
 import FirebaseMessaging
@@ -92,10 +92,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 @available(iOS 13.0, *)
 extension SceneDelegate: MessagingDelegate, UNUserNotificationCenterDelegate {
-    func setupGoogleMaps() {
-        GMSServices.provideAPIKey("AIzaSyCUbt0Kjb08PkDsUnDzAOCDegGJLZsexsg")
-        GMSPlacesClient.provideAPIKey("AIzaSyCUbt0Kjb08PkDsUnDzAOCDegGJLZsexsg")
-    }
+//    func setupGoogleMaps() {
+//        GMSServices.provideAPIKey("AIzaSyCUbt0Kjb08PkDsUnDzAOCDegGJLZsexsg")
+//        GMSPlacesClient.provideAPIKey("AIzaSyCUbt0Kjb08PkDsUnDzAOCDegGJLZsexsg")
+//    }
     
     /// Mark: Messaging Delegate
     

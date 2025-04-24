@@ -1,8 +1,10 @@
 platform :ios, '12.0'
 
+install! 'cocoapods', :generate_multiple_pod_projects => true
+
 target 'Cure' do
   use_frameworks!
-  
+
   # Local Pods
   pod 'Domain', :path => 'Modules/Domain', :testspecs => ['Tests']
   pod 'Presentation', :path => 'Modules/Presentation', :testspecs => ['Tests']
@@ -16,31 +18,35 @@ target 'Cure' do
   pod 'LanguageManager-iOS'
   pod 'Socket.IO-Client-Swift', '~> 16.1.0'
   pod 'Kingfisher'
-  pod 'GoogleMaps', '~> 6.2.1'
-  pod 'GooglePlaces'
+#  pod 'GoogleMaps', '~> 6.2.1'
+#  pod 'GooglePlaces'
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
-  
-  target 'CureUITests' do
-    
-  end
 
+  target 'CureUITests' do
+    # Test pods if any
+  end
 end
 
+# 🛠️ Post-install: Fix iOS version + workaround build system quirks
 post_install do |installer|
   installer.generated_projects.each do |project|
-      project.targets.each do |target|
-          target.build_configurations.each do |config|
-              config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0'
-          end
+    project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0'
+        config.build_settings['CLANG_ENABLE_MODULES'] = 'YES'
       end
+    end
   end
+
+  # Optional: workaround for some toolchain-related issues (like Xcode 15+)
   installer.aggregate_targets.each do |target|
     target.xcconfigs.each do |variant, xcconfig|
       xcconfig_path = target.client_root + target.xcconfig_relative_path(variant)
       IO.write(xcconfig_path, IO.read(xcconfig_path).gsub("DT_TOOLCHAIN_DIR", "TOOLCHAIN_DIR"))
     end
   end
+
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
       if config.base_configuration_reference.is_a? Xcodeproj::Project::Object::PBXFileReference

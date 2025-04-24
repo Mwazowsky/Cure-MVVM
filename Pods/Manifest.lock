@@ -79,12 +79,6 @@ PODS:
     - GoogleUtilities/Environment (~> 7.7)
     - nanopb (< 2.30911.0, >= 2.30908.0)
     - PromisesObjC (< 3.0, >= 1.2)
-  - GoogleMaps (6.2.1):
-    - GoogleMaps/Maps (= 6.2.1)
-  - GoogleMaps/Base (6.2.1)
-  - GoogleMaps/Maps (6.2.1):
-    - GoogleMaps/Base
-  - GooglePlaces (6.2.1)
   - GoogleUtilities/AppDelegateSwizzler (7.13.3):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -144,8 +138,6 @@ DEPENDENCIES:
   - Domain/Tests (from `Modules/Domain`)
   - Firebase/Core
   - Firebase/Messaging
-  - GoogleMaps (~> 6.2.1)
-  - GooglePlaces
   - Kingfisher
   - LanguageManager-iOS
   - Networking (from `Modules/Networking`)
@@ -166,8 +158,6 @@ SPEC REPOS:
     - FirebaseMessaging
     - GoogleAppMeasurement
     - GoogleDataTransport
-    - GoogleMaps
-    - GooglePlaces
     - GoogleUtilities
     - Kingfisher
     - LanguageManager-iOS
@@ -202,8 +192,6 @@ SPEC CHECKSUMS:
   FirebaseMessaging: 7b5d8033e183ab59eb5b852a53201559e976d366
   GoogleAppMeasurement: f9de05ee17401e3355f68e8fc8b5064d429f5918
   GoogleDataTransport: 6c09b596d841063d76d4288cc2d2f42cc36e1e2a
-  GoogleMaps: 20d7b12be49a14287f797e88e0e31bc4156aaeb4
-  GooglePlaces: 94974aa119573d5acc2a35a699948dac838abd73
   GoogleUtilities: ea963c370a38a8069cc5f7ba4ca849a60b6d7d15
   Kingfisher: 53a10ea35051a436b5fb626ca2dd8f3144d755e9
   LanguageManager-iOS: 2dba6f51c0477c0fa16ee4c446794cc8778a98be
@@ -215,6 +203,6 @@ SPEC CHECKSUMS:
   Starscream: 19b5533ddb925208db698f0ac508a100b884a1b9
   Wormholy: ab1c8c2f02f58587a0941deb0088555ffbf039a1
 
-PODFILE CHECKSUM: 5dfa1d7dc4263d947027c5beb767ac3e4de09157
+PODFILE CHECKSUM: f657d852a048e811cc645d2fd55e9b6dd88bf159
 
 COCOAPODS: 1.16.2
