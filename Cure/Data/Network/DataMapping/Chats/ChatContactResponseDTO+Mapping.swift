@@ -30,12 +30,12 @@ enum ChannelType {
     case none
 }
 
-struct ChatContactDTO: Codable {
+struct ChatContactResponseDTO: Codable {
     let contactPairingID: Int
     let contactID: Int
     let contactName: String?
     let isActive: Bool
-    let contactNumber: String? // -
+    let contactNumber: String?
     let photoURL: String?
     let companyHuntingNumberID: Int
     let companyHuntingNumberName: String
@@ -48,7 +48,6 @@ struct ChatContactDTO: Codable {
     let isBlocked: Bool
     let isNew: Bool
     
-    // update instagram struct
     let channelID: Int?
     let channelName: String?
     let instagram: ChatContactInstagram?
@@ -126,9 +125,9 @@ struct ChatContactInstagram: Codable {
     
 }
 
-extension ChatContactDTO {
-    func with(totalUnread: Int) -> ChatContactDTO {
-        return ChatContactDTO(
+extension ChatContactResponseDTO {
+    func with(totalUnread: Int) -> ChatContactResponseDTO {
+        return ChatContactResponseDTO(
             contactPairingID: self.contactPairingID,
             contactID: self.contactID,
             contactName: self.contactName,

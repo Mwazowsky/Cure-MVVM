@@ -18,7 +18,7 @@ protocol IKeychainRepository {
     func deleteFCMTokenData() -> Void
     
     // TODO: This should be stored in presistent core data storage
-    func saveHandledContactData(_ value: [Int:[ChatContactDTO]]) -> Bool
-    func getHandledContactData() -> [Int:[ChatContactDTO]]?
+    func saveHandledContactData(_ value: [Int:[ChatContactResponseDTO]]) -> Bool
+    func getHandledContactData() -> [Int:[ChatContactResponseDTO]]?
     func deleteHandledContactData() -> Void
 }

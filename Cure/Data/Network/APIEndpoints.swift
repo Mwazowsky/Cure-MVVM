@@ -3,6 +3,8 @@ import Foundation
 
 /// Note: This could potentially be a humongous file, if there is a bunch of endpoints
 struct APIEndpoints {
+    // MARK: - Template Endpoints
+    /// 3rd Wheel in case Im lost
     static func getMovies(with moviesRequestDTO: MoviesRequestDTO) -> Endpoint<MoviesResponseDTO> {
         return Endpoint(
             path: "3/search/movie",
@@ -25,7 +27,8 @@ struct APIEndpoints {
         )
     }
     
-    
+    // MARK: - Auth Endpoints
+    /// Login
     static func login(with loginRequestDTO: LoginRequestDTO) -> Endpoint<LoginResponse> {
         
         let headerParameters = [
@@ -42,6 +45,7 @@ struct APIEndpoints {
         )
     }
     
+    /// Get User Profile
     static func getLoginUserProfile() -> Endpoint<UserDetailsResponse> {
         
         let headerParameters = [
@@ -58,6 +62,7 @@ struct APIEndpoints {
         )
     }
     
+    /// Logout
     static func logout() -> Endpoint<LoginResponse> {
         
         let headerParameters = [
@@ -74,7 +79,7 @@ struct APIEndpoints {
         )
     }
     
-    
+    /// Register
     static func register(with registerRequestDto: RegisterRequestDTO) -> Endpoint<RegisterResponseDTO> {
 
         return Endpoint(
@@ -83,4 +88,25 @@ struct APIEndpoints {
             queryParametersEncodable: registerRequestDto
         )
     }
+    
+    // MARK: - Chat Endpoints
+    /// Chat Contacts
+    static func chatContacts(with chatContactsRequestDTO: ChatContactsRequestDTO) -> Endpoint<BaseResponse<[ChatContactResponseDTO]>> {
+        let headerParameters = [
+            "accept": "*/*",
+            "Content-Type": "application/json",
+            "Authorization": "Bearer \(TokenManager.shared.getToken())",
+            "x-api-key": apiKey
+        ]
+        
+        return Endpoint(
+            path: "",
+            method: .get,
+            headerParameters: headerParameters,
+            queryParametersEncodable: chatContactsRequestDTO
+        )
+    }
+    
+    /// ...Additionally add function to fetch user profile image if needed
+        
 }
