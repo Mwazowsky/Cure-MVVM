@@ -54,26 +54,13 @@ final class HomeSceneDIContainer {
             actions: actions
         )
     }
-    
-//    func makeAccountViewModel(actions: AccountViewModelActions) -> AccountViewModel {
-//        return DefaultAccountViewModel(
-//            logoutUseCase: makeLogoutUserUseCase(),
-//            actions: actions
-//        )
-//    }
-    
+
     // MARK: - View Controllers
     func makeHomeViewController(actions: HomeViewModelActions) -> HomeViewController {
         return HomeViewController.create(
             with: makeHomeViewModel(actions: actions)
         )
     }
-    
-//    func makeAccountViewController(actions: AccountViewModelActions) -> AccountVC {
-//        return AccountVC.create(
-//            with: makeAccountViewModel(actions: actions)
-//        )
-//    }
     
     // MARK: - Flow Coordinator
     func makeHomeFlowCoordinator(
