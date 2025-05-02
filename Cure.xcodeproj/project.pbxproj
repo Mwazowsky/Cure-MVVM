@@ -109,6 +109,15 @@
 		641162C52DAF85A100142060 /* UserDetailsResponseEntityMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641162C42DAF85A100142060 /* UserDetailsResponseEntityMapping.swift */; };
 		641914502D8C05CC00807FDC /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6419144F2D8C05CC00807FDC /* WindowManager.swift */; };
 		641914512D8C05CC00807FDC /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6419144F2D8C05CC00807FDC /* WindowManager.swift */; };
+		641DF2E12DC4A59500EDAC97 /* DefaultChatContactsQueriesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641DF2E02DC4A59500EDAC97 /* DefaultChatContactsQueriesRepository.swift */; };
+		641DF2E42DC4A67100EDAC97 /* ChatContactsQueriesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641DF2E32DC4A66400EDAC97 /* ChatContactsQueriesStorage.swift */; };
+		641DF2ED2DC4A69700EDAC97 /* CoreDataChatContactsQueriesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641DF2E52DC4A69700EDAC97 /* CoreDataChatContactsQueriesStorage.swift */; };
+		641DF2EE2DC4A69700EDAC97 /* ChatContactQueryUDS+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641DF2EA2DC4A69700EDAC97 /* ChatContactQueryUDS+Mapping.swift */; };
+		641DF2EF2DC4A69700EDAC97 /* UserDefaultsChatContactsQueriesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641DF2E92DC4A69700EDAC97 /* UserDefaultsChatContactsQueriesStorage.swift */; };
+		641DF2F02DC4A69700EDAC97 /* ChatContactQueryEntity+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641DF2E62DC4A69700EDAC97 /* ChatContactQueryEntity+Mapping.swift */; };
+		641DF2F82DC4B5DF00EDAC97 /* ChatContactsListFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641DF2F72DC4B5CB00EDAC97 /* ChatContactsListFlowCoordinator.swift */; };
+		641DF2FE2DC4BD1100EDAC97 /* ChatListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641DF2FD2DC4BD0700EDAC97 /* ChatListViewModel.swift */; };
+		641DF3002DC4BE6000EDAC97 /* ChatContactsListItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641DF2FF2DC4BE5200EDAC97 /* ChatContactsListItemViewModel.swift */; };
 		642A928C2D894E2500E34BDA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642A928B2D894E1C00E34BDA /* User.swift */; };
 		642A928D2D894E2500E34BDA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642A928B2D894E1C00E34BDA /* User.swift */; };
 		642A92902D894E9F00E34BDA /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642A928F2D894E9900E34BDA /* Authentication.swift */; };
@@ -343,6 +352,15 @@
 		5ECB44A97EE37A0D4194E04B /* Pods-Cure.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cure.debug.xcconfig"; path = "Target Support Files/Pods-Cure/Pods-Cure.debug.xcconfig"; sourceTree = "<group>"; };
 		641162C42DAF85A100142060 /* UserDetailsResponseEntityMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsResponseEntityMapping.swift; sourceTree = "<group>"; };
 		6419144F2D8C05CC00807FDC /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
+		641DF2E02DC4A59500EDAC97 /* DefaultChatContactsQueriesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChatContactsQueriesRepository.swift; sourceTree = "<group>"; };
+		641DF2E32DC4A66400EDAC97 /* ChatContactsQueriesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatContactsQueriesStorage.swift; sourceTree = "<group>"; };
+		641DF2E52DC4A69700EDAC97 /* CoreDataChatContactsQueriesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataChatContactsQueriesStorage.swift; sourceTree = "<group>"; };
+		641DF2E62DC4A69700EDAC97 /* ChatContactQueryEntity+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatContactQueryEntity+Mapping.swift"; sourceTree = "<group>"; };
+		641DF2E92DC4A69700EDAC97 /* UserDefaultsChatContactsQueriesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsChatContactsQueriesStorage.swift; sourceTree = "<group>"; };
+		641DF2EA2DC4A69700EDAC97 /* ChatContactQueryUDS+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatContactQueryUDS+Mapping.swift"; sourceTree = "<group>"; };
+		641DF2F72DC4B5CB00EDAC97 /* ChatContactsListFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatContactsListFlowCoordinator.swift; sourceTree = "<group>"; };
+		641DF2FD2DC4BD0700EDAC97 /* ChatListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewModel.swift; sourceTree = "<group>"; };
+		641DF2FF2DC4BE5200EDAC97 /* ChatContactsListItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatContactsListItemViewModel.swift; sourceTree = "<group>"; };
 		642A928B2D894E1C00E34BDA /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		642A928F2D894E9900E34BDA /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		642A92922D894F2700E34BDA /* IAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAuthRepository.swift; sourceTree = "<group>"; };
@@ -1131,6 +1149,59 @@
 			path = UIWindow;
 			sourceTree = "<group>";
 		};
+		641DF2E22DC4A5FD00EDAC97 /* ChatContactsQueriesStorage */ = {
+			isa = PBXGroup;
+			children = (
+				641DF2E32DC4A66400EDAC97 /* ChatContactsQueriesStorage.swift */,
+				641DF2E82DC4A69700EDAC97 /* CoreDataStorage */,
+				641DF2EC2DC4A69700EDAC97 /* UserDefaultsStorage */,
+			);
+			path = ChatContactsQueriesStorage;
+			sourceTree = "<group>";
+		};
+		641DF2E72DC4A69700EDAC97 /* EntityMapping */ = {
+			isa = PBXGroup;
+			children = (
+				641DF2E62DC4A69700EDAC97 /* ChatContactQueryEntity+Mapping.swift */,
+			);
+			path = EntityMapping;
+			sourceTree = "<group>";
+		};
+		641DF2E82DC4A69700EDAC97 /* CoreDataStorage */ = {
+			isa = PBXGroup;
+			children = (
+				641DF2E52DC4A69700EDAC97 /* CoreDataChatContactsQueriesStorage.swift */,
+				641DF2E72DC4A69700EDAC97 /* EntityMapping */,
+			);
+			path = CoreDataStorage;
+			sourceTree = "<group>";
+		};
+		641DF2EB2DC4A69700EDAC97 /* DataMapping */ = {
+			isa = PBXGroup;
+			children = (
+				641DF2EA2DC4A69700EDAC97 /* ChatContactQueryUDS+Mapping.swift */,
+			);
+			path = DataMapping;
+			sourceTree = "<group>";
+		};
+		641DF2EC2DC4A69700EDAC97 /* UserDefaultsStorage */ = {
+			isa = PBXGroup;
+			children = (
+				641DF2E92DC4A69700EDAC97 /* UserDefaultsChatContactsQueriesStorage.swift */,
+				641DF2EB2DC4A69700EDAC97 /* DataMapping */,
+			);
+			path = UserDefaultsStorage;
+			sourceTree = "<group>";
+		};
+		641DF2FC2DC4BCC900EDAC97 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				641DF2FD2DC4BD0700EDAC97 /* ChatListViewModel.swift */,
+				641DF2FF2DC4BE5200EDAC97 /* ChatContactsListItemViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		642A928A2D894DF200E34BDA /* User */ = {
 			isa = PBXGroup;
 			children = (
@@ -1161,6 +1232,7 @@
 			isa = PBXGroup;
 			children = (
 				643A96FF2DB9F27F001AAED1 /* DefaultChatsRepository.swift */,
+				641DF2E02DC4A59500EDAC97 /* DefaultChatContactsQueriesRepository.swift */,
 			);
 			path = Chats;
 			sourceTree = "<group>";
@@ -1168,6 +1240,7 @@
 		643A97012DB9F42D001AAED1 /* Chats */ = {
 			isa = PBXGroup;
 			children = (
+				641DF2E22DC4A5FD00EDAC97 /* ChatContactsQueriesStorage */,
 				643A97022DB9F453001AAED1 /* ChatContactsResponseStorage */,
 			);
 			path = Chats;
@@ -1624,6 +1697,7 @@
 		64FB94662D94FAD100A5325D /* Flows */ = {
 			isa = PBXGroup;
 			children = (
+				641DF2F72DC4B5CB00EDAC97 /* ChatContactsListFlowCoordinator.swift */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -1639,6 +1713,7 @@
 		64FB94692D94FAD100A5325D /* ChatsList */ = {
 			isa = PBXGroup;
 			children = (
+				641DF2FC2DC4BCC900EDAC97 /* ViewModel */,
 				64FB94682D94FAD100A5325D /* View */,
 			);
 			path = ChatsList;
@@ -2064,6 +2139,7 @@
 				64DFE21C2DB8F6C100A64AEA /* FetchChatUC.swift in Sources */,
 				64A61F112DACEBC8007D97D4 /* OptionallyDecodable.swift in Sources */,
 				1FFF1AD5243B966600937EE4 /* MoviesListItemViewModel.swift in Sources */,
+				641DF2FE2DC4BD1100EDAC97 /* ChatListViewModel.swift in Sources */,
 				645CDA082D9E934B006E01F6 /* DefaultUserRepository.swift in Sources */,
 				1FC2C9632301FEC0001AE47E /* MovieQueryUDS+Mapping.swift in Sources */,
 				64FB946D2D952FAB00A5325D /* SocketService.swift in Sources */,
@@ -2086,6 +2162,7 @@
 				64FB942E2D93A42500A5325D /* HomeQueriesItemCell.swift in Sources */,
 				64FB942F2D93A42500A5325D /* HomeQueryListViewModel.swift in Sources */,
 				64FB94302D93A42500A5325D /* HomeQueriesTableViewController.swift in Sources */,
+				641DF2E12DC4A59500EDAC97 /* DefaultChatContactsQueriesRepository.swift in Sources */,
 				644944CC2D89625E006B11C1 /* ResetPasswordUseCase.swift in Sources */,
 				64FB94732D9538C200A5325D /* Notification+Extension.swift in Sources */,
 				1FA533D7201EF2B500747E55 /* AppDIContainer.swift in Sources */,
@@ -2101,6 +2178,10 @@
 				645CD9F82D9E3578006E01F6 /* TokenManager.swift in Sources */,
 				1FFFC831221B0041007D99D2 /* DefaultMoviesQueriesRepository.swift in Sources */,
 				64FB943A2D93A66400A5325D /* IHomeQueriesRepository.swift in Sources */,
+				641DF2ED2DC4A69700EDAC97 /* CoreDataChatContactsQueriesStorage.swift in Sources */,
+				641DF2EE2DC4A69700EDAC97 /* ChatContactQueryUDS+Mapping.swift in Sources */,
+				641DF2EF2DC4A69700EDAC97 /* UserDefaultsChatContactsQueriesStorage.swift in Sources */,
+				641DF2F02DC4A69700EDAC97 /* ChatContactQueryEntity+Mapping.swift in Sources */,
 				1FD03807239098650016D05F /* CoreDataStorage.xcdatamodeld in Sources */,
 				642A92962D89526300E34BDA /* LoginUseCase.swift in Sources */,
 				1FE49D87230AA7C200D1D42E /* MovieDetailsViewController.swift in Sources */,
@@ -2137,10 +2218,13 @@
 				1F474F2222356B1E0092DB4B /* Cancellable.swift in Sources */,
 				6C0F72E229CF0F5B0005020A /* DispatchQueueType.swift in Sources */,
 				1FFFC833221B0041007D99D2 /* DefaultPosterImagesRepository.swift in Sources */,
+				641DF3002DC4BE6000EDAC97 /* ChatContactsListItemViewModel.swift in Sources */,
 				644944C92D89555C006B11C1 /* RegisterUseCase.swift in Sources */,
 				FC740818216555C500FE52A5 /* UserDefaultsMoviesQueriesStorage.swift in Sources */,
+				641DF2F82DC4B5DF00EDAC97 /* ChatContactsListFlowCoordinator.swift in Sources */,
 				64B740252D8A64C600168646 /* GetUserTokenUseCase.swift in Sources */,
 				64B7403F2D8A801E00168646 /* LoginViewModel.swift in Sources */,
+				641DF2E42DC4A67100EDAC97 /* ChatContactsQueriesStorage.swift in Sources */,
 				1FCE68A1222C873A00CC3074 /* MoviesSceneDIContainer.swift in Sources */,
 				64BAAFB92D927A7900B70EFF /* UseCase.swift in Sources */,
 				1F2AB95324278CC20010DEEE /* MoviesRequestDTO+Mapping.swift in Sources */,

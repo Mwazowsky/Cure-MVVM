@@ -15,7 +15,7 @@ final class DefaultChatsRepository {
     init(
         newDataTransferService: DataTransferService,
         cache: ChatContactsResponseStorage,
-        backgroundQueue: DataTransferDispatchQueue
+        backgroundQueue: DataTransferDispatchQueue = DispatchQueue.global(qos: .userInitiated)
     ) {
         self.newDataTransferService = newDataTransferService
         self.cache = cache
@@ -69,6 +69,7 @@ extension DefaultChatsRepository: IChatContactsRepository {
             }
 
         }
+        
         return task
     }
 }

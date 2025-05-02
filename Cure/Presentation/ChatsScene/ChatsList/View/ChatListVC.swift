@@ -7,9 +7,9 @@
 
 import UIKit
 
-class ChatListVC: UIViewController {
+class ChatContactsListVC: UIViewController {
 
-    var didSendEventClosure: ((ChatListVC.Event) -> Void)?
+    var didSendEventClosure: ((ChatContactsListVC.Event) -> Void)?
 
     private let loginButton: UIButton = {
         let button = UIButton()
@@ -53,7 +53,7 @@ class ChatListVC: UIViewController {
     }
 }
 
-extension ChatListVC {
+extension ChatContactsListVC {
     enum Event {
         case chats
     }

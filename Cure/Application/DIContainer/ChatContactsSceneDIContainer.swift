@@ -12,8 +12,13 @@ final class ChatContactsDIContainer: MoviesSearchFlowCoordinatorDependencies {
     private let dependencies: Dependencies
 
     // MARK: - Persistent Storage
+    /// Movies
     lazy var moviesQueriesStorage: MoviesQueriesStorage  = CoreDataMoviesQueriesStorage(maxStorageLimit: 10)
     lazy var moviesResponseCache : MoviesResponseStorage = CoreDataMoviesResponseStorage()
+    
+    /// ChatContacts
+    lazy var chatContactsQueriesStorage: ChatContactsQueriesStorage  = CoreDataChatContactsQueriesStorage(maxStorageLimit: 10)
+    lazy var chatContactsResponseCache : ChatContactsResponseStorage = CoreDataChatContactsResponseStorage()
 
     init(dependencies: Dependencies) {
         self.dependencies = dependencies        
@@ -24,6 +29,13 @@ final class ChatContactsDIContainer: MoviesSearchFlowCoordinatorDependencies {
         DefaultSearchMoviesUseCase(
             moviesRepository: makeMoviesRepository(),
             moviesQueriesRepository: makeMoviesQueriesRepository()
+        )
+    }
+    
+    func makeFetchContactsUseCase() -> FetchChatContactsUseCase {
+        DefaultFetchChatContactsUseCase(
+            chatContactsRepository: makeChatContactsRepository(),
+            chatsContactsQueriesRepository: makeChatContactsQueriesRepository()
         )
     }
     
@@ -50,10 +62,23 @@ final class ChatContactsDIContainer: MoviesSearchFlowCoordinatorDependencies {
         )
     }
     
+    func makeChatContactsRepository() -> IChatContactsRepository {
+        DefaultChatsRepository(
+            newDataTransferService: dependencies.newApiDataTransferervice,
+            cache: chatContactsResponseCache
+        )
+    }
+    
     
     func makeMoviesQueriesRepository() -> IMoviesQueriesRepository {
         DefaultMoviesQueriesRepository(
             moviesQueriesPersistentStorage: moviesQueriesStorage
+        )
+    }
+    
+    func makeChatContactsQueriesRepository() -> IChatContactsQueriesRepository {
+        DefaultChatContactsQueriesRepository(
+            chatContactsQueriesPersistentStorage: chatContactsQueriesStorage
         )
     }
     
@@ -77,10 +102,10 @@ final class ChatContactsDIContainer: MoviesSearchFlowCoordinatorDependencies {
         )
     }
     
-    // Initial or home view, change this to tab bar view or something else depending on your need
     func makeMoviesListViewModel(actions: MoviesListViewModelActions) -> MoviesListViewModel {
         DefaultMoviesListViewModel(
             searchMoviesUseCase: makeSearchMoviesUseCase(),
+            fetchChatContactsUseCase: makeFetchContactsUseCase(),
             getUserTokenDataUseCase: makeGetCurrentUserTokenUseCase(),
             actions: actions
         )

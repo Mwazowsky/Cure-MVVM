@@ -11,7 +11,9 @@ protocol Coordinator: AnyObject {
 
 // MARK: - CoordinatorType
 enum CoordinatorType {
-    case app, login, tab
+    case app
+    case login
+    case tab
 }
 
 final class AppFlowCoordinator {

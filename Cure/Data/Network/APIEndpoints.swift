@@ -100,7 +100,7 @@ struct APIEndpoints {
         ]
         
         return Endpoint(
-            path: "",
+            path: "api/contact/",
             method: .get,
             headerParameters: headerParameters,
             queryParametersEncodable: chatContactsRequestDTO

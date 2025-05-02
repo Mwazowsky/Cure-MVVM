@@ -38,7 +38,7 @@ final class DefaultFetchChatContactsUseCase: FetchChatContactsUseCase {
             cached: cached,
             completion: { result in
                 if case .success = result {
-                    print("Result Chat Contact Fetching", result)
+                    print("Result Chat Contact Fetching", result) // DebugPoint 2 - Result Parsed to Swift Data 
                 }
                 
             }

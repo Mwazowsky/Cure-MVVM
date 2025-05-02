@@ -22,17 +22,21 @@ final class MoviesSearchFlowCoordinator: Coordinator {
     private weak var moviesListVC: MoviesListViewController?
     private weak var moviesQueriesSuggestionsVC: UIViewController?
 
-    init(navigationController: UINavigationController,
-         dependencies: MoviesSearchFlowCoordinatorDependencies) {
+    init(
+        navigationController: UINavigationController,
+        dependencies: MoviesSearchFlowCoordinatorDependencies
+    ) {
         self.navigationController = navigationController
         self.dependencies = dependencies
     }
     
     func start() {
         // Note: here we keep strong reference with actions, this way this flow do not need to be strong referenced
-        let actions = MoviesListViewModelActions(showMovieDetails: showMovieDetails,
-                                                 showMovieQueriesSuggestions: showMovieQueriesSuggestions,
-                                                 closeMovieQueriesSuggestions: closeMovieQueriesSuggestions)
+        let actions = MoviesListViewModelActions(
+            showMovieDetails: showMovieDetails,
+            showMovieQueriesSuggestions: showMovieQueriesSuggestions,
+            closeMovieQueriesSuggestions: closeMovieQueriesSuggestions
+        )
         let vc = dependencies.makeMoviesListViewController(actions: actions)
         navigationController?.pushViewController(vc, animated: false)
         moviesListVC = vc

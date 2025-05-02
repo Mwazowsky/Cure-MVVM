@@ -40,6 +40,7 @@ typealias MoviesListViewModel = MoviesListViewModelInput & MoviesListViewModelOu
 final class DefaultMoviesListViewModel: MoviesListViewModel {
     
     private let searchMoviesUseCase: SearchMoviesUseCase
+    private let getUserTokenDataUseCase: GetUserTokenUseCase
     private let actions: MoviesListViewModelActions?
     
     var currentPage: Int = 0
@@ -64,7 +65,6 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
     let searchBarPlaceholder = NSLocalizedString("Search Movies", comment: "")
     
     // MARK: - Init
-    
     init(
         searchMoviesUseCase: SearchMoviesUseCase,
         getUserTokenDataUseCase: GetUserTokenUseCase,
@@ -89,8 +89,6 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
         
         items.value = pages.movies.map(MoviesListItemViewModel.init)
     }
-    
-    private let getUserTokenDataUseCase: GetUserTokenUseCase
     
     private func resetPages() {
         currentPage = 0
@@ -134,26 +132,6 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
         resetPages()
         load(movieQuery: movieQuery, loading: .fullScreen)
     }
-    
-    //    private func setupNotificationSocket() {
-    //        NotificationCenter.default.addObserver(self, selector: #selector(handlerNewMessage(notification:)), name: .socketNewMessage, object: nil)
-    //        NotificationCenter.default.addObserver(self, selector: #selector(handlerNewContactPaired(notification:)), name: .socketContactPaired, object: nil)
-    //    }
-    //    
-    //    @objc
-    //    func handlerNewMessage(notification: Notification) {
-    //        self.getNewChat(huntingNumber: currentHuntingNumber?.companyHuntingNumberID)
-    //    }
-    //    
-    //    @objc
-    //    func handlerNewContactPaired(notification: Notification) {
-    //        self.isCanPagination = true
-    //        self.currentPage = 1
-    //        self.getListChatContact(huntingNumber: currentHuntingNumber?.companyHuntingNumberID) { contactName in
-    //            //            let toast = Toast.text("\(contactName) Baru Dipasangkan ke Anda")
-    //            //            toast.show()
-    //        }
-    //    }
 }
 
 // MARK: - INPUT. View event methods

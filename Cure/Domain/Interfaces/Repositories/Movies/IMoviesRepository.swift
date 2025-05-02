@@ -9,3 +9,4 @@ protocol IMoviesRepository {
         completion: @escaping (Result<MoviesPage, Error>) -> Void
     ) -> Cancellable?
 }
+
