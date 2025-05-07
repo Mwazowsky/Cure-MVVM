@@ -104,7 +104,6 @@ final class MoviesSceneDIContainer: MoviesSearchFlowCoordinatorDependencies {
     func makeMoviesListViewModel(actions: MoviesListViewModelActions) -> MoviesListViewModel {
         DefaultMoviesListViewModel(
             searchMoviesUseCase: makeSearchMoviesUseCase(),
-            fetchChatContactsUseCase: makeFetchContactsUseCase(),
             getUserTokenDataUseCase: makeGetCurrentUserTokenUseCase(),
             actions: actions
         )

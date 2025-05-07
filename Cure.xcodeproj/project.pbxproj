@@ -583,11 +583,11 @@
 		1F84DECD2300673A00139F73 /* DIContainer */ = {
 			isa = PBXGroup;
 			children = (
+				1FA533D6201EF2B500747E55 /* AppDIContainer.swift */,
 				1FCE68A0222C873A00CC3074 /* MoviesSceneDIContainer.swift */,
 				64B3B9962DBB3F8200F91946 /* ChatContactsSceneDIContainer.swift */,
 				64B740452D8A862300168646 /* AuthSceneDIContainer.swift */,
 				64FB947A2D963AE200A5325D /* AccountSceneDIContainer.swift */,
-				1FA533D6201EF2B500747E55 /* AppDIContainer.swift */,
 				64BAAFBA2D927FEF00B70EFF /* HomeSceneDIContainer.swift */,
 			);
 			path = DIContainer;

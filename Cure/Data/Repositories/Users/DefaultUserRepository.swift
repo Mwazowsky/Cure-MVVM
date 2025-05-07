@@ -57,7 +57,18 @@ extension DefaultUserRepository: IUserRepository {
                 guard let self = self else { return }
                 
                 switch result {
+                    
                 case .success(let response):
+                    guard response.success, response.status == 200 else {
+                        let error = NSError(domain: "YourApp.Network", code: response.status, userInfo: [
+                            NSLocalizedDescriptionKey: response.message
+                        ])
+                        DispatchQueue.main.async {
+                            completion(.failure(error))
+                        }
+                        return
+                    }
+                    
                     let netUserDTO = self.mapToDomain(response: response)
                     
                     self.cache.save(response: netUserDTO)

@@ -65,14 +65,15 @@ final class ChatContactsListFlowCoordinator: Coordinator {
     }
     
     private func showChatContactQueriesSuggestions(didSelect: @escaping (ChatContactQuery) -> Void) {
-        guard let chatContactsListViewController = chatContactsListVC, chatContactsQueriesSuggestionsVC == nil,
-              let container = chatContactsListViewController.suggestionsListContainer else { return }
+        guard let chatContactsListViewController = chatContactsListVC, chatContactsQueriesSuggestionsVC == nil else { return }
+        
+        let container = chatContactsListViewController.suggestionsListContainer
         
         let vc = dependencies.makeChatContactsQueriesSuggestionsListViewController(didSelect: didSelect)
         
         chatContactsListViewController.add(child: vc, container: container)
         chatContactsQueriesSuggestionsVC = vc
-        container.hidden = false
+        container.isHidden = false
     }
     
     private func closeChatContactQueriesSuggestions() {

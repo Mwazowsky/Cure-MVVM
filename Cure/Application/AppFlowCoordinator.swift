@@ -41,7 +41,6 @@ final class AppFlowCoordinator {
     }
     
     private func showAuthFlow() {
-        print("Show Auth")
         let authSceneDIContainer = appDIContainer.makeAuthSceneDIContainer()
         let authFlow = authSceneDIContainer.makeAuthFlowCoordinator(
             navigationController: navigationController,

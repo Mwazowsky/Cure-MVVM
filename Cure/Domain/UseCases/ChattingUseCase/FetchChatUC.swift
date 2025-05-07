@@ -37,8 +37,11 @@ final class DefaultFetchChatContactsUseCase: FetchChatContactsUseCase {
             size: requestValue.size,
             cached: cached,
             completion: { result in
-                if case .success = result {
-                    print("Result Chat Contact Fetching", result) // DebugPoint 2 - Result Parsed to Swift Data 
+                switch result {
+                case .success(let page):
+                    completion(.success(page))
+                case .failure(let error):
+                    completion(.failure(error))
                 }
                 
             }

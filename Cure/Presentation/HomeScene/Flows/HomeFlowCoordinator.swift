@@ -163,6 +163,18 @@ final class HomeFlowCoordinator: NSObject, HomeFlowCoordinatorProtocol {
         childCoordinators.append(moviesFlowCoordinator)
     }
     
+    private func showChatContactsFlow(navigationController: UINavigationController) {
+        let chatContactsSceneDIContainer = appDIContainer.makeChatContactsSceneDIContainer()
+        let chatContactsFlowDIContainer = chatContactsSceneDIContainer.makeChatContactsListFlowCoordinator(
+            navigationController: navigationController
+        )
+        
+        chatContactsFlowDIContainer.parentCoordinator = self
+        chatContactsFlowDIContainer.start()
+        
+        childCoordinators.append(chatContactsFlowDIContainer)
+    }
+    
     private func showAccountFlow(navigationController: UINavigationController) {
         let accountSceneDIContainer = appDIContainer.makeAccountSceneDIContainer()
         let accountFlowCoordinator = accountSceneDIContainer.makeAccountFlowCoordinator(
@@ -203,7 +215,7 @@ final class HomeFlowCoordinator: NSObject, HomeFlowCoordinatorProtocol {
             
             navController.viewControllers = [dashboardVC]
         case .chats:
-            showMovieFlow(navigationController: navController)
+            showChatContactsFlow(navigationController: navController)
         case .account:
             showAccountFlow(navigationController: navController)
         }

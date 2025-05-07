@@ -110,8 +110,7 @@ final class DefaultChatContactsViewModel: ChatContactsViewModel {
 
         query.value = chatContactQuery.query
         print("Did run execute fetch chat contact")
-        
-        // Fetch Chat Contact List
+
         chatContactsLoadTask = fetchChatContactsUseCase.execute(
             requestValue: .init(query: chatContactQuery, page: nextPage, size: 10),
             cached: { page in
@@ -126,8 +125,6 @@ final class DefaultChatContactsViewModel: ChatContactsViewModel {
                 self?.mainQueue.async {
                     switch result {
                     case .success(let page):
-                        /// No Error: Execute completion return
-                        /// the entire page that contain its metadata
                         print("Page Chat Contact: ", page)
                         self?.appendPage(page)
                     case .failure(let error):

@@ -1,7 +1,7 @@
 import UIKit
 import SwiftUI
 
-final class ChatContactsDIContainer: MoviesSearchFlowCoordinatorDependencies {
+final class ChatContactsDIContainer: ChatContactsListFlowCoordinatorDependencies {
     
     struct Dependencies {
         let apiDataTransferService: DataTransferService
@@ -12,10 +12,6 @@ final class ChatContactsDIContainer: MoviesSearchFlowCoordinatorDependencies {
     private let dependencies: Dependencies
 
     // MARK: - Persistent Storage
-    /// Movies
-    lazy var moviesQueriesStorage: MoviesQueriesStorage  = CoreDataMoviesQueriesStorage(maxStorageLimit: 10)
-    lazy var moviesResponseCache : MoviesResponseStorage = CoreDataMoviesResponseStorage()
-    
     /// ChatContacts
     lazy var chatContactsQueriesStorage: ChatContactsQueriesStorage  = CoreDataChatContactsQueriesStorage(maxStorageLimit: 10)
     lazy var chatContactsResponseCache : ChatContactsResponseStorage = CoreDataChatContactsResponseStorage()
@@ -25,12 +21,12 @@ final class ChatContactsDIContainer: MoviesSearchFlowCoordinatorDependencies {
     }
     
     // MARK: - Use Cases
-    func makeSearchMoviesUseCase() -> SearchMoviesUseCase {
-        DefaultSearchMoviesUseCase(
-            moviesRepository: makeMoviesRepository(),
-            moviesQueriesRepository: makeMoviesQueriesRepository()
-        )
-    }
+//    func makeSearchMoviesUseCase() -> SearchMoviesUseCase {
+//        DefaultSearchMoviesUseCase(
+//            moviesRepository: makeMoviesRepository(),
+//            moviesQueriesRepository: makeMoviesQueriesRepository()
+//        )
+//    }
     
     func makeFetchContactsUseCase() -> FetchChatContactsUseCase {
         DefaultFetchChatContactsUseCase(
@@ -39,29 +35,22 @@ final class ChatContactsDIContainer: MoviesSearchFlowCoordinatorDependencies {
         )
     }
     
-    func makeFetchRecentMovieQueriesUseCase(
-        requestValue: FetchRecentMovieQueriesUseCase.RequestValue,
-        completion: @escaping (FetchRecentMovieQueriesUseCase.ResultValue) -> Void
-    ) -> UseCase {
-        FetchRecentMovieQueriesUseCase(
-            requestValue: requestValue,
-            completion: completion,
-            moviesQueriesRepository: makeMoviesQueriesRepository()
-        )
-    }
+//    func makeFetchRecentMovieQueriesUseCase(
+//        requestValue: FetchRecentMovieQueriesUseCase.RequestValue,
+//        completion: @escaping (FetchRecentMovieQueriesUseCase.ResultValue) -> Void
+//    ) -> UseCase {
+//        FetchRecentMovieQueriesUseCase(
+//            requestValue: requestValue,
+//            completion: completion,
+//            moviesQueriesRepository: makeMoviesQueriesRepository()
+//        )
+//    }
     
     func makeGetCurrentUserTokenUseCase() -> GetUserTokenUseCase {
         return DefaultGetCurrentUserTokenUseCase(keychainRepository: makeKeychainRepository())
     }
     
     // MARK: - Repositories
-    func makeMoviesRepository() -> IMoviesRepository {
-        DefaultMoviesRepository(
-            dataTransferService: dependencies.apiDataTransferService,
-            cache: moviesResponseCache
-        )
-    }
-    
     func makeChatContactsRepository() -> IChatContactsRepository {
         DefaultChatsRepository(
             newDataTransferService: dependencies.newApiDataTransferervice,
@@ -70,22 +59,9 @@ final class ChatContactsDIContainer: MoviesSearchFlowCoordinatorDependencies {
     }
     
     
-    func makeMoviesQueriesRepository() -> IMoviesQueriesRepository {
-        DefaultMoviesQueriesRepository(
-            moviesQueriesPersistentStorage: moviesQueriesStorage
-        )
-    }
-    
     func makeChatContactsQueriesRepository() -> IChatContactsQueriesRepository {
         DefaultChatContactsQueriesRepository(
             chatContactsQueriesPersistentStorage: chatContactsQueriesStorage
-        )
-    }
-    
-    
-    func makePosterImagesRepository() -> IPosterImagesRepository {
-        DefaultPosterImagesRepository(
-            dataTransferService: dependencies.imageDataTransferService
         )
     }
     
@@ -95,16 +71,14 @@ final class ChatContactsDIContainer: MoviesSearchFlowCoordinatorDependencies {
 
     
     // MARK: - Movies List
-    func makeMoviesListViewController(actions: MoviesListViewModelActions) -> MoviesListViewController {
-        MoviesListViewController.create(
-            with: makeMoviesListViewModel(actions: actions),
-            posterImagesRepository: makePosterImagesRepository()
+    func makeChatContactsListViewController(actions: ChatContactsListViewModelActions) -> ChatContactsListVC {
+        ChatContactsListVC.create(
+            with: makeChatContactsListViewModel(actions: actions)
         )
     }
     
-    func makeMoviesListViewModel(actions: MoviesListViewModelActions) -> MoviesListViewModel {
-        DefaultMoviesListViewModel(
-            searchMoviesUseCase: makeSearchMoviesUseCase(),
+    func makeChatContactsListViewModel(actions: ChatContactsListViewModelActions) -> ChatContactsViewModel {
+        DefaultChatContactsViewModel(
             fetchChatContactsUseCase: makeFetchContactsUseCase(),
             getUserTokenDataUseCase: makeGetCurrentUserTokenUseCase(),
             actions: actions
@@ -113,60 +87,78 @@ final class ChatContactsDIContainer: MoviesSearchFlowCoordinatorDependencies {
     
     
     // MARK: - Movie Details
-    func makeMoviesDetailsViewController(movie: Movie) -> UIViewController {
-        MovieDetailsViewController.create(
-            with: makeMoviesDetailsViewModel(movie: movie)
-        )
-    }
-    
-    
-    func makeMoviesDetailsViewModel(movie: Movie) -> MovieDetailsViewModel {
-        DefaultMovieDetailsViewModel(
-            movie: movie,
-            posterImagesRepository: makePosterImagesRepository()
-        )
-    }
+//    func makeMoviesDetailsViewController(movie: Movie) -> UIViewController {
+//        MovieDetailsViewController.create(
+//            with: makeMoviesDetailsViewModel(movie: movie)
+//        )
+//    }
+//    
+//    
+//    func makeMoviesDetailsViewModel(movie: Movie) -> MovieDetailsViewModel {
+//        DefaultMovieDetailsViewModel(
+//            movie: movie,
+//            posterImagesRepository: makePosterImagesRepository()
+//        )
+//    }
     
     
     // MARK: - Movies Queries Suggestions List
-    func makeMoviesQueriesSuggestionsListViewController(didSelect: @escaping MoviesQueryListViewModelDidSelectAction) -> UIViewController {
-        if #available(iOS 13.0, *) { // SwiftUI
-            let view = MoviesQueryListView(
-                viewModelWrapper: makeMoviesQueryListViewModelWrapper(didSelect: didSelect)
-            )
-            return UIHostingController(rootView: view)
-        } else { // UIKit
-            return MoviesQueriesTableViewController.create(
-                with: makeMoviesQueryListViewModel(didSelect: didSelect)
-            )
-        }
-    }
-    
-    
-    func makeMoviesQueryListViewModel(didSelect: @escaping MoviesQueryListViewModelDidSelectAction) -> MoviesQueryListViewModel {
-        DefaultMoviesQueryListViewModel(
-            numberOfQueriesToShow: 10,
-            fetchRecentMovieQueriesUseCaseFactory: makeFetchRecentMovieQueriesUseCase,
-            didSelect: didSelect
-        )
-    }
+//    func makeMoviesQueriesSuggestionsListViewController(didSelect: @escaping MoviesQueryListViewModelDidSelectAction) -> UIViewController {
+//        if #available(iOS 13.0, *) { // SwiftUI
+//            let view = MoviesQueryListView(
+//                viewModelWrapper: makeMoviesQueryListViewModelWrapper(didSelect: didSelect)
+//            )
+//            return UIHostingController(rootView: view)
+//        } else { // UIKit
+//            return MoviesQueriesTableViewController.create(
+//                with: makeMoviesQueryListViewModel(didSelect: didSelect)
+//            )
+//        }
+//    }
+//    
+//    
+//    func makeMoviesQueryListViewModel(didSelect: @escaping MoviesQueryListViewModelDidSelectAction) -> MoviesQueryListViewModel {
+//        DefaultMoviesQueryListViewModel(
+//            numberOfQueriesToShow: 10,
+//            fetchRecentMovieQueriesUseCaseFactory: makeFetchRecentMovieQueriesUseCase,
+//            didSelect: didSelect
+//        )
+//    }
 
     
-    @available(iOS 13.0, *)
-    func makeMoviesQueryListViewModelWrapper(
-        didSelect: @escaping MoviesQueryListViewModelDidSelectAction
-    ) -> MoviesQueryListViewModelWrapper {
-        MoviesQueryListViewModelWrapper(
-            viewModel: makeMoviesQueryListViewModel(didSelect: didSelect)
-        )
+//    @available(iOS 13.0, *)
+//    func makeMoviesQueryListViewModelWrapper(
+//        didSelect: @escaping MoviesQueryListViewModelDidSelectAction
+//    ) -> MoviesQueryListViewModelWrapper {
+//        MoviesQueryListViewModelWrapper(
+//            viewModel: makeMoviesQueryListViewModel(didSelect: didSelect)
+//        )
+//    }
+    
+    func makeChatContactsDetailsViewController(chatContact: ChatContact) -> UIViewController {
+        print("Implement later: ", chatContact)
+        
+        return UIViewController()
+    }
+    
+    func makeChattingViewController(chatContact: ChatContact) -> UIViewController {
+        print("Implement later: ", chatContact)
+        
+        return UIViewController()
+    }
+    
+    func makeChatContactsQueriesSuggestionsListViewController(didSelect: @escaping ChatContactsQueryListViewModelDidSelectAction) -> UIViewController {
+        print("Implement later: ", didSelect)
+        
+        return UIViewController()
     }
 
     
     // MARK: - Flow Coordinators
-    func makeMoviesSearchFlowCoordinator(
+    func makeChatContactsListFlowCoordinator(
         navigationController: UINavigationController
-    ) -> MoviesSearchFlowCoordinator {
-        MoviesSearchFlowCoordinator(
+    ) -> ChatContactsListFlowCoordinator {
+        ChatContactsListFlowCoordinator(
             navigationController: navigationController,
             dependencies: self
         )

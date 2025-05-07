@@ -7,9 +7,33 @@
 
 import UIKit
 
-class ChatContactsListVC: UIViewController {
+class ChatContactsListVC: UIViewController, Alertable {
 
     var didSendEventClosure: ((ChatContactsListVC.Event) -> Void)?
+    
+    private var viewModel: ChatContactsViewModel!
+    
+    static func create(
+        with viewModel: ChatContactsViewModel
+    ) -> ChatContactsListVC {
+        let view = ChatContactsListVC()
+        
+        view.viewModel = viewModel
+        
+        return view
+    }
+    
+    private(set) var suggestionsListContainer: UIView = {
+        let view = UIView()
+        
+        if #available(iOS 13.0, *) {
+            view.backgroundColor = .systemBackground
+        } else {
+            view.backgroundColor = .lightGray
+        }
+        
+        return view
+    }()
 
     private let loginButton: UIButton = {
         let button = UIButton()
@@ -44,6 +68,8 @@ class ChatContactsListVC: UIViewController {
         ])
         
         loginButton.addTarget(self, action: #selector(didTapLoginButton(_:)), for: .touchUpInside)
+        
+        viewModel.viewDidLoad()
     }
     
     deinit {}

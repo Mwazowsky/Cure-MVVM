@@ -87,4 +87,14 @@ final class AppDIContainer {
         )
         return MoviesSceneDIContainer(dependencies: dependencies)
     }
+    
+    func makeChatContactsSceneDIContainer() -> ChatContactsDIContainer {
+        let dependencies = ChatContactsDIContainer.Dependencies(
+            apiDataTransferService: apiDataTransferService,
+            newApiDataTransferervice: newApiDataTransferService,
+            imageDataTransferService: imageDataTransferService
+        )
+        
+        return ChatContactsDIContainer(dependencies: dependencies)
+    }
 }
