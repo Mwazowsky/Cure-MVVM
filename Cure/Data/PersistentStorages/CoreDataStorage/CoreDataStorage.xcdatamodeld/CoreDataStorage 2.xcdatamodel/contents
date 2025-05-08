@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23605" systemVersion="24E263" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23507" systemVersion="24E263" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="ChatContactQueryEntity" representedClassName="ChatContactQueryEntity" syncable="YES" codeGenerationType="class">
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="query" optional="YES" attributeType="String"/>
@@ -101,7 +101,7 @@
         <attribute name="message" optional="YES" attributeType="String"/>
         <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="success" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <relationship name="data" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserDetailsResponseEntity"/>
+        <relationship name="data" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserDetailsResponseEntity" inverseName="dataDetail" inverseEntity="UserDetailsResponseEntity"/>
         <relationship name="error" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ErrorEntity" inverseName="baseResponseEntity" inverseEntity="ErrorEntity"/>
     </entity>
     <entity name="UserDetailsResponseEntity" representedClassName="UserDetailsResponseEntity" syncable="YES" codeGenerationType="class">

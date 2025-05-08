@@ -248,6 +248,8 @@
 		64FE0AF12DCC96E90044A69C /* NavBarCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE0AF02DCC96E90044A69C /* NavBarCURE.swift */; };
 		64FE0AF62DCC97940044A69C /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE0AF52DCC977B0044A69C /* LoginPage.swift */; };
 		64FE0AFA2DCC9A7E0044A69C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE0AF92DCC9A740044A69C /* LoginView.swift */; };
+		64FE0AFC2DCCAC650044A69C /* SecondaryTxtCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE0AFB2DCCAC650044A69C /* SecondaryTxtCURE.swift */; };
+		64FE0AFE2DCCAE3B0044A69C /* FocusedLayoutCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE0AFD2DCCAE3B0044A69C /* FocusedLayoutCURE.swift */; };
 		6C0F72E229CF0F5B0005020A /* DispatchQueueType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0F72E129CF0F5A0005020A /* DispatchQueueType.swift */; };
 		6C0F72E329CF115F0005020A /* DispatchQueueType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0F72E129CF0F5A0005020A /* DispatchQueueType.swift */; };
 		6C0F72E629CF12930005020A /* DispatchQueueTypeMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0F72E429CF12180005020A /* DispatchQueueTypeMock.swift */; };
@@ -472,6 +474,8 @@
 		64FE0AF02DCC96E90044A69C /* NavBarCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarCURE.swift; sourceTree = "<group>"; };
 		64FE0AF52DCC977B0044A69C /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
 		64FE0AF92DCC9A740044A69C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		64FE0AFB2DCCAC650044A69C /* SecondaryTxtCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryTxtCURE.swift; sourceTree = "<group>"; };
+		64FE0AFD2DCCAE3B0044A69C /* FocusedLayoutCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusedLayoutCURE.swift; sourceTree = "<group>"; };
 		6C0F72E129CF0F5A0005020A /* DispatchQueueType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueType.swift; sourceTree = "<group>"; };
 		6C0F72E429CF12180005020A /* DispatchQueueTypeMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueTypeMock.swift; sourceTree = "<group>"; };
 		74DDE3D4EDDD8B0C05831797 /* Pods-Cure.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cure.release.xcconfig"; path = "Target Support Files/Pods-Cure/Pods-Cure.release.xcconfig"; sourceTree = "<group>"; };
@@ -1807,6 +1811,7 @@
 			isa = PBXGroup;
 			children = (
 				64FE0AB72DCC8B000044A69C /* PrimaryTxtCURE.swift */,
+				64FE0AFB2DCCAC650044A69C /* SecondaryTxtCURE.swift */,
 			);
 			path = Texts;
 			sourceTree = "<group>";
@@ -1939,6 +1944,7 @@
 			isa = PBXGroup;
 			children = (
 				64FE0AED2DCC96540044A69C /* MainLayoutCURE.swift */,
+				64FE0AFD2DCCAE3B0044A69C /* FocusedLayoutCURE.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -2358,6 +2364,7 @@
 				64A811C12D9CF40E0044BB95 /* IDeviceInfoRepository.swift in Sources */,
 				64A811C32D9CF4DF0044BB95 /* DefaultDeviceInfoRepository.swift in Sources */,
 				64B740312D8A777C00168646 /* UserResponseDTO+Mapping.swift in Sources */,
+				64FE0AFC2DCCAC650044A69C /* SecondaryTxtCURE.swift in Sources */,
 				642A92942D894F2C00E34BDA /* IAuthRepository.swift in Sources */,
 				1FA533E2201EF5F700747E55 /* APIEndpoints.swift in Sources */,
 				1F77930F222C0DF2004E034C /* StoryboardInstantiable.swift in Sources */,
@@ -2452,6 +2459,7 @@
 				1F5CE1CD242C303700A9CDE3 /* CoreDataStorage.swift in Sources */,
 				64B740382D8A7F1400168646 /* IKeychainRepository.swift in Sources */,
 				64BAAFBB2D927FEF00B70EFF /* HomeSceneDIContainer.swift in Sources */,
+				64FE0AFE2DCCAE3B0044A69C /* FocusedLayoutCURE.swift in Sources */,
 				1FE49D85230AA7C200D1D42E /* MoviesQueriesTableViewController.swift in Sources */,
 				643A97002DB9F28A001AAED1 /* DefaultChatsRepository.swift in Sources */,
 				645CDA022D9E8502006E01F6 /* FetchUserDetailsUseCase.swift in Sources */,

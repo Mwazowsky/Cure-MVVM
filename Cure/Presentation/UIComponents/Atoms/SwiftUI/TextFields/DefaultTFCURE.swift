@@ -11,14 +11,12 @@ import SwiftUI
 struct DefaultTFCURE: View {
     @Binding var query: String
     var placeholder: String
-//    var onChange: (String) -> Void = { _ in }
 
     var body: some View {
         let binding = Binding<String>(
             get: { query },
             set: {
                 query = $0
-//                onChange($0)
             }
         )
 

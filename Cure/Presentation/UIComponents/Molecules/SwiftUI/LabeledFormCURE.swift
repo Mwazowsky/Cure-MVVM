@@ -11,15 +11,13 @@ import SwiftUI
 struct LabeledFormCURE: View {
     @State private var inputText: String = ""
     var label: String
-//    var onChange: (String) -> Void
     
     var body: some View {
         HStack {
-            PrimaryTxtCURE(text: label)
+            SecondaryTxtCURE(text: label)
             DefaultTFCURE(
                 query: $inputText,
                 placeholder: "Enter \(label)"
-//                onChange: onChange
             )
         }
         .padding()
