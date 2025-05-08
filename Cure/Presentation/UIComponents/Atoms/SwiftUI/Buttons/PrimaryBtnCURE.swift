@@ -1,0 +1,29 @@
+//
+//  PrimaryBtnCURE.swift
+//  Cure
+//
+//  Created by MacBook Air MII  on 8/5/25.
+//
+
+/// Atoms are the basic building blocks of a UI, such as buttons, texts, and icons.
+
+import SwiftUI
+
+
+@available(iOS 13.0.0, *)
+struct PrimaryBtnCURE: View {
+    var title: String
+    
+    var body: some View {
+        Button(action: {
+            // Button action
+        }) {
+            Text(title)
+                .font(DesignTokens.Typography.bodyFont)
+                .foregroundColor(.white)
+                .padding()
+                .background(DesignTokens.Colors.primary)
+                .cornerRadius(8)
+        }
+    }
+}

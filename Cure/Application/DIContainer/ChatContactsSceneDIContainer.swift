@@ -70,7 +70,7 @@ final class ChatContactsDIContainer: ChatContactsListFlowCoordinatorDependencies
     }
 
     
-    // MARK: - Movies List
+    // MARK: - Chat Contacts List
     func makeChatContactsListViewController(actions: ChatContactsListViewModelActions) -> ChatContactsListVC {
         ChatContactsListVC.create(
             with: makeChatContactsListViewModel(actions: actions)

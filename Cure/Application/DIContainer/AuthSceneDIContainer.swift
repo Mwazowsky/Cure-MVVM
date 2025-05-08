@@ -93,10 +93,17 @@ final class AuthSceneDIContainer {
 //    }
     
     // MARK: - View Controllers
-    func makeLoginViewController(actions: LoginViewModelActions) -> LoginViewController {
-        return LoginViewController.create(
-            with: makeLoginViewModel(actions: actions)
-        )
+    func makeLoginViewController(actions: LoginViewModelActions) -> UIViewController {
+        if #available(iOS 13.0, *) { // SwiftUI
+            let view = LoginView(
+                viewModelWrapper: makeLoginViewModelWrapper(actions: actions)
+            )
+            return UIHostingController(rootView: view)
+        } else { // UIKit
+            return LoginViewController.create(
+                with: makeLoginViewModel(actions: actions)
+            )
+        }
     }
     
 //    func makeRegisterViewController(actions: RegisterViewModelActions) -> RegisterViewController {
@@ -110,6 +117,15 @@ final class AuthSceneDIContainer {
 //            with: makeResetPasswordViewModel(actions: actions)
 //        )
 //    }
+    
+    @available(iOS 13.0, *)
+    func makeLoginViewModelWrapper(
+        actions: LoginViewModelActions
+    ) -> LoginViewModelWrapper {
+        LoginViewModelWrapper(
+            viewModel: makeLoginViewModel(actions: actions)
+        )
+    }
     
     // MARK: - Flow Coordinator
     func makeAuthFlowCoordinator(

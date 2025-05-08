@@ -235,6 +235,19 @@
 		64FB94792D95486B00A5325D /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB94772D95486B00A5325D /* AccountViewModel.swift */; };
 		64FB947B2D963AE200A5325D /* AccountSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB947A2D963AE200A5325D /* AccountSceneDIContainer.swift */; };
 		64FB947D2D963DEA00A5325D /* AccountFlowCoordinatorDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB947C2D963DEA00A5325D /* AccountFlowCoordinatorDependencies.swift */; };
+		64FE0AB22DCC87170044A69C /* DesignTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE0AB12DCC87120044A69C /* DesignTokens.swift */; };
+		64FE0AB52DCC8A2C0044A69C /* PrimaryBtnCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE0AB42DCC8A0A0044A69C /* PrimaryBtnCURE.swift */; };
+		64FE0AB82DCC8B0C0044A69C /* PrimaryTxtCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE0AB72DCC8B000044A69C /* PrimaryTxtCURE.swift */; };
+		64FE0ABA2DCC8BEA0044A69C /* IconCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE0AB92DCC8BE00044A69C /* IconCURE.swift */; };
+		64FE0AD82DCC8D580044A69C /* DefaultTFCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE0AD72DCC8D390044A69C /* DefaultTFCURE.swift */; };
+		64FE0ADB2DCC8E040044A69C /* SearchFormCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE0ADA2DCC8DF80044A69C /* SearchFormCURE.swift */; };
+		64FE0ADD2DCC8EA00044A69C /* SearchBtnCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE0ADC2DCC8E970044A69C /* SearchBtnCURE.swift */; };
+		64FE0AE42DCC90450044A69C /* LoginFormCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE0AE32DCC903A0044A69C /* LoginFormCURE.swift */; };
+		64FE0AE82DCC91760044A69C /* LabeledFormCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE0AE72DCC91760044A69C /* LabeledFormCURE.swift */; };
+		64FE0AEE2DCC965D0044A69C /* MainLayoutCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE0AED2DCC96540044A69C /* MainLayoutCURE.swift */; };
+		64FE0AF12DCC96E90044A69C /* NavBarCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE0AF02DCC96E90044A69C /* NavBarCURE.swift */; };
+		64FE0AF62DCC97940044A69C /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE0AF52DCC977B0044A69C /* LoginPage.swift */; };
+		64FE0AFA2DCC9A7E0044A69C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE0AF92DCC9A740044A69C /* LoginView.swift */; };
 		6C0F72E229CF0F5B0005020A /* DispatchQueueType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0F72E129CF0F5A0005020A /* DispatchQueueType.swift */; };
 		6C0F72E329CF115F0005020A /* DispatchQueueType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0F72E129CF0F5A0005020A /* DispatchQueueType.swift */; };
 		6C0F72E629CF12930005020A /* DispatchQueueTypeMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0F72E429CF12180005020A /* DispatchQueueTypeMock.swift */; };
@@ -446,6 +459,19 @@
 		64FB94772D95486B00A5325D /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
 		64FB947A2D963AE200A5325D /* AccountSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSceneDIContainer.swift; sourceTree = "<group>"; };
 		64FB947C2D963DEA00A5325D /* AccountFlowCoordinatorDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountFlowCoordinatorDependencies.swift; sourceTree = "<group>"; };
+		64FE0AB12DCC87120044A69C /* DesignTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignTokens.swift; sourceTree = "<group>"; };
+		64FE0AB42DCC8A0A0044A69C /* PrimaryBtnCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryBtnCURE.swift; sourceTree = "<group>"; };
+		64FE0AB72DCC8B000044A69C /* PrimaryTxtCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryTxtCURE.swift; sourceTree = "<group>"; };
+		64FE0AB92DCC8BE00044A69C /* IconCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconCURE.swift; sourceTree = "<group>"; };
+		64FE0AD72DCC8D390044A69C /* DefaultTFCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTFCURE.swift; sourceTree = "<group>"; };
+		64FE0ADA2DCC8DF80044A69C /* SearchFormCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFormCURE.swift; sourceTree = "<group>"; };
+		64FE0ADC2DCC8E970044A69C /* SearchBtnCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBtnCURE.swift; sourceTree = "<group>"; };
+		64FE0AE32DCC903A0044A69C /* LoginFormCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormCURE.swift; sourceTree = "<group>"; };
+		64FE0AE72DCC91760044A69C /* LabeledFormCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledFormCURE.swift; sourceTree = "<group>"; };
+		64FE0AED2DCC96540044A69C /* MainLayoutCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLayoutCURE.swift; sourceTree = "<group>"; };
+		64FE0AF02DCC96E90044A69C /* NavBarCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarCURE.swift; sourceTree = "<group>"; };
+		64FE0AF52DCC977B0044A69C /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
+		64FE0AF92DCC9A740044A69C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		6C0F72E129CF0F5A0005020A /* DispatchQueueType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueType.swift; sourceTree = "<group>"; };
 		6C0F72E429CF12180005020A /* DispatchQueueTypeMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueTypeMock.swift; sourceTree = "<group>"; };
 		74DDE3D4EDDD8B0C05831797 /* Pods-Cure.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cure.release.xcconfig"; path = "Target Support Files/Pods-Cure/Pods-Cure.release.xcconfig"; sourceTree = "<group>"; };
@@ -873,6 +899,7 @@
 		1FE49D63230AA7C200D1D42E /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				64FE0AB02DCC86C00044A69C /* UIComponents */,
 				64FB945A2D94F43B00A5325D /* DashboardScene */,
 				64FB946A2D94FAD100A5325D /* ChatsScene */,
 				64FB94642D94F4FB00A5325D /* AccountScene */,
@@ -1429,8 +1456,8 @@
 		64B7403C2D8A800000168646 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				64B740402D8A852000168646 /* View */,
 				64B7403D2D8A800C00168646 /* ViewModel */,
+				64B740402D8A852000168646 /* View */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1446,7 +1473,8 @@
 		64B740402D8A852000168646 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				64B740412D8A853100168646 /* LoginVC.swift */,
+				64FE0AF72DCC9A2E0044A69C /* UIKit */,
+				64FE0AF82DCC9A320044A69C /* SwiftUI */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1742,6 +1770,217 @@
 				64FB94772D95486B00A5325D /* AccountViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		64FE0AB02DCC86C00044A69C /* UIComponents */ = {
+			isa = PBXGroup;
+			children = (
+				64FE0AB12DCC87120044A69C /* DesignTokens.swift */,
+				64FE0AB32DCC89F30044A69C /* Atoms */,
+				64FE0AC82DCC8CC20044A69C /* Molecules */,
+				64FE0ADE2DCC8F6F0044A69C /* Organisms */,
+				64FE0AE92DCC95A30044A69C /* Templates */,
+				64FE0AF22DCC97590044A69C /* Pages */,
+			);
+			path = UIComponents;
+			sourceTree = "<group>";
+		};
+		64FE0AB32DCC89F30044A69C /* Atoms */ = {
+			isa = PBXGroup;
+			children = (
+				64FE0ABE2DCC8C940044A69C /* UIKit */,
+				64FE0ABD2DCC8C840044A69C /* SwiftUI */,
+			);
+			path = Atoms;
+			sourceTree = "<group>";
+		};
+		64FE0AB62DCC8AEC0044A69C /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				64FE0ADC2DCC8E970044A69C /* SearchBtnCURE.swift */,
+				64FE0AB42DCC8A0A0044A69C /* PrimaryBtnCURE.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		64FE0ABB2DCC8C520044A69C /* Texts */ = {
+			isa = PBXGroup;
+			children = (
+				64FE0AB72DCC8B000044A69C /* PrimaryTxtCURE.swift */,
+			);
+			path = Texts;
+			sourceTree = "<group>";
+		};
+		64FE0ABC2DCC8C5D0044A69C /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				64FE0AB92DCC8BE00044A69C /* IconCURE.swift */,
+			);
+			path = Icons;
+			sourceTree = "<group>";
+		};
+		64FE0ABD2DCC8C840044A69C /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				64FE0AD92DCC8DB50044A69C /* TextFields */,
+				64FE0ABC2DCC8C5D0044A69C /* Icons */,
+				64FE0ABB2DCC8C520044A69C /* Texts */,
+				64FE0AB62DCC8AEC0044A69C /* Buttons */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		64FE0ABE2DCC8C940044A69C /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				64FE0AC02DCC8C9D0044A69C /* Icons */,
+				64FE0AC22DCC8C9D0044A69C /* Texts */,
+				64FE0AC42DCC8C9D0044A69C /* Buttons */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		64FE0AC02DCC8C9D0044A69C /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Icons;
+			sourceTree = "<group>";
+		};
+		64FE0AC22DCC8C9D0044A69C /* Texts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Texts;
+			sourceTree = "<group>";
+		};
+		64FE0AC42DCC8C9D0044A69C /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		64FE0AC82DCC8CC20044A69C /* Molecules */ = {
+			isa = PBXGroup;
+			children = (
+				64FE0ACC2DCC8D010044A69C /* UIKit */,
+				64FE0AD32DCC8D010044A69C /* SwiftUI */,
+			);
+			path = Molecules;
+			sourceTree = "<group>";
+		};
+		64FE0ACC2DCC8D010044A69C /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		64FE0AD32DCC8D010044A69C /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				64FE0ADA2DCC8DF80044A69C /* SearchFormCURE.swift */,
+				64FE0AE72DCC91760044A69C /* LabeledFormCURE.swift */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		64FE0AD92DCC8DB50044A69C /* TextFields */ = {
+			isa = PBXGroup;
+			children = (
+				64FE0AD72DCC8D390044A69C /* DefaultTFCURE.swift */,
+			);
+			path = TextFields;
+			sourceTree = "<group>";
+		};
+		64FE0ADE2DCC8F6F0044A69C /* Organisms */ = {
+			isa = PBXGroup;
+			children = (
+				64FE0AE02DCC900B0044A69C /* UIKit */,
+				64FE0ADF2DCC90030044A69C /* SwiftUI */,
+			);
+			path = Organisms;
+			sourceTree = "<group>";
+		};
+		64FE0ADF2DCC90030044A69C /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				64FE0AE32DCC903A0044A69C /* LoginFormCURE.swift */,
+				64FE0AF02DCC96E90044A69C /* NavBarCURE.swift */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		64FE0AE02DCC900B0044A69C /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		64FE0AE92DCC95A30044A69C /* Templates */ = {
+			isa = PBXGroup;
+			children = (
+				64FE0AEA2DCC95EE0044A69C /* UIKit */,
+				64FE0AEB2DCC95F20044A69C /* SwiftUI */,
+			);
+			path = Templates;
+			sourceTree = "<group>";
+		};
+		64FE0AEA2DCC95EE0044A69C /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		64FE0AEB2DCC95F20044A69C /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				64FE0AED2DCC96540044A69C /* MainLayoutCURE.swift */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		64FE0AF22DCC97590044A69C /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				64FE0AF32DCC97680044A69C /* UIKit */,
+				64FE0AF42DCC976F0044A69C /* SwiftUI */,
+			);
+			path = Pages;
+			sourceTree = "<group>";
+		};
+		64FE0AF32DCC97680044A69C /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		64FE0AF42DCC976F0044A69C /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				64FE0AF52DCC977B0044A69C /* LoginPage.swift */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		64FE0AF72DCC9A2E0044A69C /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				64B740412D8A853100168646 /* LoginVC.swift */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		64FE0AF82DCC9A320044A69C /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				64FE0AF92DCC9A740044A69C /* LoginView.swift */,
+			);
+			path = SwiftUI;
 			sourceTree = "<group>";
 		};
 		6C0F72E729CF14CD0005020A /* Stubs */ = {
@@ -2128,12 +2367,14 @@
 				64FB94652D94F4FB00A5325D /* AccountVC.swift in Sources */,
 				1FF53EB423688893008D6CCC /* DataTransferError+ConnectionError.swift in Sources */,
 				64BAAFEC2D92804200B70EFF /* HomeFlowCoordinator.swift in Sources */,
+				64FE0AE42DCC90450044A69C /* LoginFormCURE.swift in Sources */,
 				64B7402D2D8A71BB00168646 /* AuthResponseDTO+Mapping.swift in Sources */,
 				64FB94752D95464D00A5325D /* DeleteUserTokenUseCase.swift in Sources */,
 				1F53E2B623125896008D6A05 /* UIViewController+AddChild.swift in Sources */,
 				64B740362D8A7EF500168646 /* DefaultKeychainRepository.swift in Sources */,
 				64B740422D8A853100168646 /* LoginVC.swift in Sources */,
 				1F84DED023006BDA00139F73 /* FetchRecentMovieQueriesUseCase.swift in Sources */,
+				64FE0AF62DCC97940044A69C /* LoginPage.swift in Sources */,
 				1FFF12A42439F2E700937EE4 /* MoviesResponseStorage.swift in Sources */,
 				1F2AB951242789B80010DEEE /* MoviesResponseDTO+Mapping.swift in Sources */,
 				64DFE21C2DB8F6C100A64AEA /* FetchChatUC.swift in Sources */,
@@ -2154,18 +2395,21 @@
 				64BAAFED2D92804200B70EFF /* HomeView.swift in Sources */,
 				1F0CEFCF23436B67004141FA /* ConnectionError.swift in Sources */,
 				1F05A6CC2220A2CB001E2801 /* SearchMoviesUseCase.swift in Sources */,
+				64FE0AF12DCC96E90044A69C /* NavBarCURE.swift in Sources */,
 				64FB942C2D93A42500A5325D /* HomeQueryListView.swift in Sources */,
 				64FB942D2D93A42500A5325D /* HomeQueryListItemViewModel.swift in Sources */,
 				6458D0C72DAF8CA900A4E4CA /* CoreDataUserDetailsResponseStorage.swift in Sources */,
 				64FB945F2D94F47B00A5325D /* DashboardVC.swift in Sources */,
 				645CDA062D9E86E1006E01F6 /* IUserRepository.swift in Sources */,
 				64FB942E2D93A42500A5325D /* HomeQueriesItemCell.swift in Sources */,
+				64FE0ADD2DCC8EA00044A69C /* SearchBtnCURE.swift in Sources */,
 				64FB942F2D93A42500A5325D /* HomeQueryListViewModel.swift in Sources */,
 				64FB94302D93A42500A5325D /* HomeQueriesTableViewController.swift in Sources */,
 				641DF2E12DC4A59500EDAC97 /* DefaultChatContactsQueriesRepository.swift in Sources */,
 				644944CC2D89625E006B11C1 /* ResetPasswordUseCase.swift in Sources */,
 				64FB94732D9538C200A5325D /* Notification+Extension.swift in Sources */,
 				1FA533D7201EF2B500747E55 /* AppDIContainer.swift in Sources */,
+				64FE0ABA2DCC8BEA0044A69C /* IconCURE.swift in Sources */,
 				642A928C2D894E2500E34BDA /* User.swift in Sources */,
 				64B3B9972DBB3F8200F91946 /* ChatContactsSceneDIContainer.swift in Sources */,
 				1F6B521323630016002FCDE9 /* RepositoryTask.swift in Sources */,
@@ -2179,8 +2423,10 @@
 				1FFFC831221B0041007D99D2 /* DefaultMoviesQueriesRepository.swift in Sources */,
 				64FB943A2D93A66400A5325D /* IHomeQueriesRepository.swift in Sources */,
 				641DF2ED2DC4A69700EDAC97 /* CoreDataChatContactsQueriesStorage.swift in Sources */,
+				64FE0AB82DCC8B0C0044A69C /* PrimaryTxtCURE.swift in Sources */,
 				641DF2EE2DC4A69700EDAC97 /* ChatContactQueryUDS+Mapping.swift in Sources */,
 				641DF2EF2DC4A69700EDAC97 /* UserDefaultsChatContactsQueriesStorage.swift in Sources */,
+				64FE0AD82DCC8D580044A69C /* DefaultTFCURE.swift in Sources */,
 				641DF2F02DC4A69700EDAC97 /* ChatContactQueryEntity+Mapping.swift in Sources */,
 				1FD03807239098650016D05F /* CoreDataStorage.xcdatamodeld in Sources */,
 				642A92962D89526300E34BDA /* LoginUseCase.swift in Sources */,
@@ -2192,6 +2438,7 @@
 				64B740462D8A862300168646 /* AuthSceneDIContainer.swift in Sources */,
 				64A61F0F2DACEA5D007D97D4 /* ChatContactResponseDTO+Mapping.swift in Sources */,
 				643A97072DB9FB0A001AAED1 /* ChatContactsRequestDTO+Mapping.swift in Sources */,
+				64FE0AE82DCC91760044A69C /* LabeledFormCURE.swift in Sources */,
 				1FC5B7D2242635CC0086FA8C /* CGSize+ScaledSize.swift in Sources */,
 				1FFFC832221B0041007D99D2 /* IMoviesQueriesRepository.swift in Sources */,
 				1FE49D8E230AA7C200D1D42E /* MoviesQueryListView.swift in Sources */,
@@ -2199,6 +2446,7 @@
 				1FE49D92230AA7C200D1D42E /* MoviesListViewModel.swift in Sources */,
 				64FB94402D93A80D00A5325D /* IHomeRepository.swift in Sources */,
 				641162C52DAF85A100142060 /* UserDetailsResponseEntityMapping.swift in Sources */,
+				64FE0AB52DCC8A2C0044A69C /* PrimaryBtnCURE.swift in Sources */,
 				1FB0903A2437651700DBE132 /* UIViewController+AddBehaviors.swift in Sources */,
 				64FB94792D95486B00A5325D /* AccountViewModel.swift in Sources */,
 				1F5CE1CD242C303700A9CDE3 /* CoreDataStorage.swift in Sources */,
@@ -2222,9 +2470,11 @@
 				644944C92D89555C006B11C1 /* RegisterUseCase.swift in Sources */,
 				FC740818216555C500FE52A5 /* UserDefaultsMoviesQueriesStorage.swift in Sources */,
 				641DF2F82DC4B5DF00EDAC97 /* ChatContactsListFlowCoordinator.swift in Sources */,
+				64FE0AEE2DCC965D0044A69C /* MainLayoutCURE.swift in Sources */,
 				64B740252D8A64C600168646 /* GetUserTokenUseCase.swift in Sources */,
 				64B7403F2D8A801E00168646 /* LoginViewModel.swift in Sources */,
 				641DF2E42DC4A67100EDAC97 /* ChatContactsQueriesStorage.swift in Sources */,
+				64FE0AFA2DCC9A7E0044A69C /* LoginView.swift in Sources */,
 				1FCE68A1222C873A00CC3074 /* MoviesSceneDIContainer.swift in Sources */,
 				64BAAFB92D927A7900B70EFF /* UseCase.swift in Sources */,
 				1F2AB95324278CC20010DEEE /* MoviesRequestDTO+Mapping.swift in Sources */,
@@ -2234,12 +2484,14 @@
 				1FE49D8F230AA7C200D1D42E /* MoviesQueryListViewModel.swift in Sources */,
 				64FB947B2D963AE200A5325D /* AccountSceneDIContainer.swift in Sources */,
 				64584BA52DBA3114007183B9 /* BaseResponse+Mapping.swift in Sources */,
+				64FE0ADB2DCC8E040044A69C /* SearchFormCURE.swift in Sources */,
 				1FB0903D243766C200DBE132 /* BackButtonEmptyTitleNavigationBarBehavior.swift in Sources */,
 				1F1FC48C22E3693100BCBA8D /* NetworkConfig.swift in Sources */,
 				643A96F22DB9DF9C001AAED1 /* ChatContact.swift in Sources */,
 				1FFFC834221B0041007D99D2 /* IPosterImagesRepository.swift in Sources */,
 				64FB94702D9533FC00A5325D /* Constants.swift in Sources */,
 				643A97052DB9F4C1001AAED1 /* ChatContactsResponseEntity+Mapping.swift in Sources */,
+				64FE0AB22DCC87170044A69C /* DesignTokens.swift in Sources */,
 				1FA5338D201E1FDE00747E55 /* AppDelegate.swift in Sources */,
 				1FA533B2201EE2A500747E55 /* Movie.swift in Sources */,
 			);

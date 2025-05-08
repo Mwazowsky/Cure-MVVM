@@ -8,7 +8,7 @@
 import UIKit
 
 protocol AuthFlowCoordinatorDependencies {
-    func makeLoginViewController(actions: LoginViewModelActions) -> LoginViewController
+    func makeLoginViewController(actions: LoginViewModelActions) -> UIViewController
 }
 
 protocol AuthFlowCoordinatorDelegate: AnyObject {
@@ -26,7 +26,7 @@ final class AuthFlowCoordinator: Coordinator {
     
     weak var parentCoordinator: AppFlowCoordinator?
     
-    private weak var loginVC: LoginViewController?
+    private weak var loginVC: UIViewController?
     
     init(
         navigationController: UINavigationController,

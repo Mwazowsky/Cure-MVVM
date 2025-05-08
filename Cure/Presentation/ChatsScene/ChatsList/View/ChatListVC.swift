@@ -35,9 +35,9 @@ class ChatContactsListVC: UIViewController, Alertable {
         return view
     }()
 
-    private let loginButton: UIButton = {
+    private let broadcastBtn: UIButton = {
         let button = UIButton()
-        button.setTitle("Login", for: .normal)
+        button.setTitle("", for: .normal)
         button.backgroundColor = .systemBlue
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 8.0
@@ -56,25 +56,25 @@ class ChatContactsListVC: UIViewController, Alertable {
         }
 
         
-        view.addSubview(loginButton)
+        view.addSubview(broadcastBtn)
 
-        loginButton.translatesAutoresizingMaskIntoConstraints = false
+        broadcastBtn.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loginButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            loginButton.widthAnchor.constraint(equalToConstant: 200),
-            loginButton.heightAnchor.constraint(equalToConstant: 50)
+            broadcastBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            broadcastBtn.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            broadcastBtn.widthAnchor.constraint(equalToConstant: 200),
+            broadcastBtn.heightAnchor.constraint(equalToConstant: 50)
         ])
         
-        loginButton.addTarget(self, action: #selector(didTapLoginButton(_:)), for: .touchUpInside)
+        broadcastBtn.addTarget(self, action: #selector(didTapBroadcastButton(_:)), for: .touchUpInside)
         
         viewModel.viewDidLoad()
     }
     
     deinit {}
 
-    @objc private func didTapLoginButton(_ sender: Any) {
+    @objc private func didTapBroadcastButton(_ sender: Any) {
         didSendEventClosure?(.chats)
     }
 }

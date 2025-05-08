@@ -8,7 +8,7 @@
 import Foundation
 
 struct ChatContactsListViewModelActions {
-    /// Note: if you would need to edit movie inside Details screen and update this Movies List screen with updated movie then you would need this closure:
+    /// Note: if you would need to edit chatContact inside Chat Contact Details screen and update this ChatContact List screen with updated contact then you would need this closure:
     /// showMovieDetails: (Movie, @escaping (_ updated: Movie) -> Void) -> Void
     let showChattingPage: (ChatContact) -> Void
     let showChatContactDetails: (ChatContact) -> Void
