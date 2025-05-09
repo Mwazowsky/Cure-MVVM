@@ -63,7 +63,7 @@ final class AuthSceneDIContainer {
     func makeSaveCurrentLoginTokenUseCase() -> SaveLoginTokenUseCase {
         return DefaultSaveLoginTokenUseCase(keychainRepository: makeKeychainRepository())
     }
-
+    
     func makeFetchUserDetailsUseCase() -> FetchUserDetailsUseCase {
         return DefaultFetchUserDetailsUseCase(userRepository: makeUserRepository())
     }
@@ -78,46 +78,47 @@ final class AuthSceneDIContainer {
         )
     }
     
-//    func makeRegisterViewModel(actions: RegisterViewModelActions) -> RegisterViewModel {
-//        return DefaultRegisterViewModel(
-//            registerUseCase: makeRegisterUseCase(),
-//            actions: actions
-//        )
-//    }
-//    
-//    func makeResetPasswordViewModel(actions: ResetPasswordViewModelActions) -> ResetPasswordViewModel {
-//        return DefaultResetPasswordViewModel(
-//            resetPasswordUseCase: makeResetPasswordUseCase(),
-//            actions: actions
-//        )
-//    }
+    //    func makeRegisterViewModel(actions: RegisterViewModelActions) -> RegisterViewModel {
+    //        return DefaultRegisterViewModel(
+    //            registerUseCase: makeRegisterUseCase(),
+    //            actions: actions
+    //        )
+    //    }
+    //
+    //    func makeResetPasswordViewModel(actions: ResetPasswordViewModelActions) -> ResetPasswordViewModel {
+    //        return DefaultResetPasswordViewModel(
+    //            resetPasswordUseCase: makeResetPasswordUseCase(),
+    //            actions: actions
+    //        )
+    //    }
     
     // MARK: - View Controllers
     func makeLoginViewController(actions: LoginViewModelActions) -> UIViewController {
-//        if #available(iOS 13.0, *) { // SwiftUI
-//            let view = LoginView(
-//                viewModelWrapper: makeLoginViewModelWrapper(actions: actions)
-//            )
-//            return UIHostingController(rootView: view)
-//        } else { // UIKit
+        if #available(iOS 13.0, *) { // SwiftUI
+            let view = LoginView(
+                viewModelWrapper: makeLoginViewModelWrapper(actions: actions)
+            )
+            return UIHostingController(rootView: view)
+        } else { // UIKit
             return LoginViewController.create(
                 with: makeLoginViewModel(actions: actions)
             )
-//        }
+        }
     }
     
-//    func makeRegisterViewController(actions: RegisterViewModelActions) -> RegisterViewController {
-//        return RegisterViewController.create(
-//            with: makeRegisterViewModel(actions: actions)
-//        )
-//    }
-//    
-//    func makeResetPasswordViewController(actions: ResetPasswordViewModelActions) -> ResetPasswordViewController {
-//        return ResetPasswordViewController.create(
-//            with: makeResetPasswordViewModel(actions: actions)
-//        )
-//    }
+    //    func makeRegisterViewController(actions: RegisterViewModelActions) -> RegisterViewController {
+    //        return RegisterViewController.create(
+    //            with: makeRegisterViewModel(actions: actions)
+    //        )
+    //    }
+    //
+    //    func makeResetPasswordViewController(actions: ResetPasswordViewModelActions) -> ResetPasswordViewController {
+    //        return ResetPasswordViewController.create(
+    //            with: makeResetPasswordViewModel(actions: actions)
+    //        )
+    //    }
     
+    // MARK: - ViewModelWrapper (For SwiftUI)
     @available(iOS 13.0, *)
     func makeLoginViewModelWrapper(
         actions: LoginViewModelActions

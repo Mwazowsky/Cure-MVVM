@@ -15,10 +15,10 @@ struct LabeledFormCURE: View {
     var body: some View {
         HStack {
             SecondaryTxtCURE(text: label)
-            DefaultTFCURE(
-                query: $inputText,
-                placeholder: "Enter \(label)"
-            )
+//            DefaultTFCURE(
+//                query: $inputText,
+//                placeholder: "Enter \(label)"
+//            )
         }
         .padding()
     }

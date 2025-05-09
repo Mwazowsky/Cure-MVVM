@@ -13,26 +13,20 @@ struct LoginFormCURE: View {
     
     var body: some View {
         VStack(spacing: 16) {
-            // Change this into an atoms or molecule whatever suits the architectural pattern
-            TextField("Email", text: binding(viewModelWrapper.viewModel?.email ?? Observable("")) {
-                viewModelWrapper.viewModel?.updateEmail($0)
-            })
-            .textContentType(.emailAddress)
-            .keyboardType(.emailAddress)
-            .autocapitalization(.none)
-            .disableAutocorrection(true)
-            .padding()
-            .background(Color(.secondarySystemBackground))
-            .cornerRadius(8)
             
-            // Change this into an atoms or molecule whatever suits the architectural pattern
-            SecureField("Password", text: binding(viewModelWrapper.viewModel?.password ?? Observable("")) {
-                viewModelWrapper.viewModel?.updatePassword($0)
-            })
-            .textContentType(.password)
-            .padding()
-            .background(Color(.secondarySystemBackground))
-            .cornerRadius(8)
+            DefaultTFCURE(
+                isSecureTF: false,
+                placeholder: "Email",
+                text: binding(viewModelWrapper.viewModel?.email ?? Observable("")) { viewModelWrapper.viewModel?.updateEmail($0) },
+                onTextChange: { viewModelWrapper.viewModel?.updateEmail($0) }
+            )
+            
+            DefaultTFCURE(
+                isSecureTF: true,
+                placeholder: "Password",
+                text: binding(viewModelWrapper.viewModel?.password ?? Observable("")) { viewModelWrapper.viewModel?.updatePassword($0) },
+                onTextChange: { viewModelWrapper.viewModel?.updatePassword($0) }
+            )
             
             PrimaryBtnCURE(title: "Login") {
                 viewModelWrapper.viewModel?.didTapLoginButton()
