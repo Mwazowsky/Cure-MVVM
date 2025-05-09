@@ -167,6 +167,8 @@
 		646CB7252D91032C0009E8F2 /* Opensans-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 646CB7152D91032C0009E8F2 /* Opensans-MediumItalic.ttf */; };
 		646CB98A2D91402C0009E8F2 /* SaveUserTokenUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646CB9892D91402C0009E8F2 /* SaveUserTokenUseCase.swift */; };
 		646CB98B2D91402C0009E8F2 /* SaveUserTokenUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646CB9892D91402C0009E8F2 /* SaveUserTokenUseCase.swift */; };
+		647B5B102DCDD7440097AE34 /* PrimaryBtnCUREUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647B5B0F2DCDD7330097AE34 /* PrimaryBtnCUREUIKit.swift */; };
+		647B5B132DCDDEF40097AE34 /* DefaultTFCUREUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647B5B122DCDDEDE0097AE34 /* DefaultTFCUREUIKit.swift */; };
 		64A61F0B2DACC19B007D97D4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A61F0A2DACC18F007D97D4 /* SceneDelegate.swift */; };
 		64A61F0F2DACEA5D007D97D4 /* ChatContactResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A61F0E2DACEA4B007D97D4 /* ChatContactResponseDTO+Mapping.swift */; };
 		64A61F112DACEBC8007D97D4 /* OptionallyDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A61F102DACEBC2007D97D4 /* OptionallyDecodable.swift */; };
@@ -411,6 +413,8 @@
 		646CB7182D91032C0009E8F2 /* Opensans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Opensans-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		646CB7262D9107710009E8F2 /* Cure.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cure.entitlements; sourceTree = "<group>"; };
 		646CB9892D91402C0009E8F2 /* SaveUserTokenUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveUserTokenUseCase.swift; sourceTree = "<group>"; };
+		647B5B0F2DCDD7330097AE34 /* PrimaryBtnCUREUIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryBtnCUREUIKit.swift; sourceTree = "<group>"; };
+		647B5B122DCDDEDE0097AE34 /* DefaultTFCUREUIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTFCUREUIKit.swift; sourceTree = "<group>"; };
 		64A61F0A2DACC18F007D97D4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		64A61F0E2DACEA4B007D97D4 /* ChatContactResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatContactResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
 		64A61F102DACEBC2007D97D4 /* OptionallyDecodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionallyDecodable.swift; sourceTree = "<group>"; };
@@ -1369,6 +1373,14 @@
 			path = KeychainUseCase;
 			sourceTree = "<group>";
 		};
+		647B5B112DCDDED50097AE34 /* TextFields */ = {
+			isa = PBXGroup;
+			children = (
+				647B5B122DCDDEDE0097AE34 /* DefaultTFCUREUIKit.swift */,
+			);
+			path = TextFields;
+			sourceTree = "<group>";
+		};
 		64A61F0C2DACEA37007D97D4 /* Chats */ = {
 			isa = PBXGroup;
 			children = (
@@ -1838,6 +1850,7 @@
 		64FE0ABE2DCC8C940044A69C /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				647B5B112DCDDED50097AE34 /* TextFields */,
 				64FE0AC02DCC8C9D0044A69C /* Icons */,
 				64FE0AC22DCC8C9D0044A69C /* Texts */,
 				64FE0AC42DCC8C9D0044A69C /* Buttons */,
@@ -1862,6 +1875,7 @@
 		64FE0AC42DCC8C9D0044A69C /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				647B5B0F2DCDD7330097AE34 /* PrimaryBtnCUREUIKit.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -2349,6 +2363,7 @@
 				1F53E2B823125F71008D6A05 /* MoviesQueryListItemViewModel.swift in Sources */,
 				1FCBB8CE25237D4C007F23DC /* UIViewController+ActivityIndicator.swift in Sources */,
 				FC2B715C2156FF93002BD59E /* AppAppearance.swift in Sources */,
+				647B5B132DCDDEF40097AE34 /* DefaultTFCUREUIKit.swift in Sources */,
 				64FB941E2D93A36B00A5325D /* HomeQuery.swift in Sources */,
 				1FFF12AA243A022300937EE4 /* MoviesResponseEntity+Mapping.swift in Sources */,
 				1F1FC48922E3693100BCBA8D /* NetworkService.swift in Sources */,
@@ -2472,6 +2487,7 @@
 				64B7402B2D8A70D900168646 /* AuthRequestDTO+Mapping.swift in Sources */,
 				641914512D8C05CC00807FDC /* WindowManager.swift in Sources */,
 				1F474F2222356B1E0092DB4B /* Cancellable.swift in Sources */,
+				647B5B102DCDD7440097AE34 /* PrimaryBtnCUREUIKit.swift in Sources */,
 				6C0F72E229CF0F5B0005020A /* DispatchQueueType.swift in Sources */,
 				1FFFC833221B0041007D99D2 /* DefaultPosterImagesRepository.swift in Sources */,
 				641DF3002DC4BE6000EDAC97 /* ChatContactsListItemViewModel.swift in Sources */,

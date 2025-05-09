@@ -14,10 +14,10 @@ import SwiftUI
 struct PrimaryBtnCURE: View {
     var title: String
     
+    let action: () -> Void
+    
     var body: some View {
-        Button(action: {
-            // Button action
-        }) {
+        Button(action: action) {
             Text(title)
                 .font(DesignTokens.Typography.bodyFont)
                 .foregroundColor(.white)

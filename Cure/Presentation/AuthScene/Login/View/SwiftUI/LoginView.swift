@@ -13,12 +13,10 @@ extension DefaultLoginViewModel: Identifiable { }
 @available(iOS 13.0, *)
 struct LoginView: View {
     @ObservedObject var viewModelWrapper: LoginViewModelWrapper
-    
+
     var body: some View {
-        NavigationView {
-            LoginPage()
-                .navigationBarHidden(true)
-        }
+        LoginPage(viewModelWrapper: viewModelWrapper)
+        .navigationBarHidden(true)
     }
 }
 
@@ -37,7 +35,7 @@ struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView(viewModelWrapper: previewViewModelWrapper)
     }
-
+    
     static var previewViewModelWrapper: LoginViewModelWrapper = {
         var viewModel = LoginViewModelWrapper(viewModel: nil)
         return viewModel
