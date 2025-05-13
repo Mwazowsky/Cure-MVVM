@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 // Presentation/Auth/Login/View/LoginViewController.swift
-final class LoginViewController: UIViewController {
+final class LoginVC: UIViewController {
     private var viewModel: LoginViewModel!
     
     // UI Components
@@ -34,26 +34,9 @@ final class LoginViewController: UIViewController {
         return label
     }()
     
-    private lazy var emailTextField: UITextField = {
-        let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.placeholder = "email"
-        textField.keyboardType = .emailAddress
-        textField.autocapitalizationType = .none
-        textField.borderStyle = .roundedRect
-        textField.addTarget(self, action: #selector(emailTextChanged), for: .editingChanged)
-        return textField
-    }()
+    let emailTF: DefaultTFCUREUIKit = DefaultTFCUREUIKit(title: "Email", isSecure: false)
     
-    private lazy var passwordTextField: UITextField = {
-        let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.placeholder = "Password"
-        textField.isSecureTextEntry = true
-        textField.borderStyle = .roundedRect
-        textField.addTarget(self, action: #selector(passwordTextChanged), for: .editingChanged)
-        return textField
-    }()
+    let passwordTF: DefaultTFCUREUIKit = DefaultTFCUREUIKit(title: "Password", isSecure: true)
     
     private lazy var loginButton: UIButton = {
         let button = UIButton(type: .system)
@@ -105,8 +88,8 @@ final class LoginViewController: UIViewController {
     }()
     
     // MARK: - Lifecycle
-    static func create(with viewModel: LoginViewModel) -> LoginViewController {
-        let vc = LoginViewController()
+    static func create(with viewModel: LoginViewModel) -> LoginVC {
+        let vc = LoginVC()
         vc.viewModel = viewModel
         return vc
     }
@@ -148,13 +131,22 @@ final class LoginViewController: UIViewController {
         scrollView.addSubview(contentView)
         
         contentView.addSubview(titleLabel)
-        contentView.addSubview(emailTextField)
-        contentView.addSubview(passwordTextField)
+        
+        // Setup TextFields
+        contentView.addSubview(emailTF)
+        contentView.addSubview(passwordTF)
+        
+        // Setup Buttons
         contentView.addSubview(loginButton)
         contentView.addSubview(registerButton)
         contentView.addSubview(forgotPasswordButton)
+        
         contentView.addSubview(errorLabel)
         view.addSubview(activityIndicator)
+        
+        // Configure View Components
+        emailTF.delegate = self
+        passwordTF.delegate = self
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -172,17 +164,17 @@ final class LoginViewController: UIViewController {
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
-            emailTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40),
-            emailTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            emailTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            emailTextField.heightAnchor.constraint(equalToConstant: 50),
+            emailTF.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40),
+            emailTF.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            emailTF.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            emailTF.heightAnchor.constraint(equalToConstant: 50),
             
-            passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 20),
-            passwordTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            passwordTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            passwordTextField.heightAnchor.constraint(equalToConstant: 50),
+            passwordTF.topAnchor.constraint(equalTo: emailTF.bottomAnchor, constant: 20),
+            passwordTF.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            passwordTF.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            passwordTF.heightAnchor.constraint(equalToConstant: 50),
             
-            errorLabel.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 10),
+            errorLabel.topAnchor.constraint(equalTo: passwordTF.bottomAnchor, constant: 10),
             errorLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             errorLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
@@ -201,6 +193,9 @@ final class LoginViewController: UIViewController {
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
+        
+        emailTF.addTarget(self, action: #selector(emailTextChanged), for: .editingChanged)
+        passwordTF.addTarget(self, action: #selector(passwordTextChanged), for: .editingChanged)
     }
     
     private func setupBindings() {
@@ -230,17 +225,18 @@ final class LoginViewController: UIViewController {
     
     private func updateLoginButtonState() {
         let isEnabled = viewModel.isLoginButtonEnabled.value && !viewModel.isLoading.value
+        print("Login is Enaled: ", isEnabled)
         loginButton.isEnabled = isEnabled
         loginButton.alpha = isEnabled ? 1.0 : 0.7
     }
     
     // MARK: - Actions
     @objc private func emailTextChanged() {
-        viewModel.updateEmail(emailTextField.text ?? "")
+        viewModel.updateEmail(emailTF.text ?? "")
     }
     
     @objc private func passwordTextChanged() {
-        viewModel.updatePassword(passwordTextField.text ?? "")
+        viewModel.updatePassword(passwordTF.text ?? "")
     }
     
     @objc private func loginButtonTapped() {
@@ -273,7 +269,7 @@ final class LoginViewController: UIViewController {
         var rect = self.view.frame
         rect.size.height -= keyboardSize.height
         
-        if let activeField = [emailTextField, passwordTextField].first(where: { $0.isFirstResponder }) {
+        if let activeField = [emailTF, passwordTF].first(where: { $0.isFirstResponder }) {
             let activeRect = activeField.convert(activeField.bounds, to: scrollView)
             if !rect.contains(activeRect.origin) {
                 scrollView.scrollRectToVisible(activeRect, animated: true)
@@ -284,5 +280,33 @@ final class LoginViewController: UIViewController {
     @objc private func keyboardWillHide(notification: NSNotification) {
         scrollView.contentInset = .zero
         scrollView.scrollIndicatorInsets = .zero
+    }
+    
+    @objc private func pushChatContactListVC() {
+        guard let userEmail = emailTF.text, !userEmail.isEmpty else {
+            print("No email provided")
+            return
+        }
+        
+        guard let userPassword = passwordTF.text, !userPassword.isEmpty else {
+            print("No password provided")
+            return
+        }
+        
+        if userEmail.isValidEmail {
+            print("Valid email format")
+        } else if userPassword.isValidPassword {
+            print("Valid password format")
+        } else {
+            print("Invalid email/password format")
+        }
+    }
+}
+
+
+extension LoginVC: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        pushChatContactListVC()
+        return true
     }
 }

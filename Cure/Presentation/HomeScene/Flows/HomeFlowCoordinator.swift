@@ -146,7 +146,7 @@ final class HomeFlowCoordinator: NSObject, HomeFlowCoordinatorProtocol {
         
         tabBarController.tabBar.isTranslucent = true
         
-        tabBarController.tabBar.tintColor = .primaryRed
+        tabBarController.tabBar.tintColor = DesignTokens.LegacyColors.primary
         
         navigationController?.viewControllers = [tabBarController]
     }

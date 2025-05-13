@@ -12,7 +12,6 @@ final class HomeSceneDIContainer {
     struct Dependencies {
         let newApiDataTransferervice: DataTransferService
     }
-    
     private let windowManager: WindowManageable
     
     private let dependencies: Dependencies
@@ -36,6 +35,9 @@ final class HomeSceneDIContainer {
             dataTransferService: dependencies.newApiDataTransferervice
         )
     }
+    
+    // Make webSocket repository
+    /// Figure out what is the best way of interacting with websocket event in clean architecture MVVM
     
     // MARK: - Use Cases
     /// User Data Get

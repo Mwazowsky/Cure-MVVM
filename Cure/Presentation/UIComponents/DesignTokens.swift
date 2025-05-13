@@ -11,14 +11,18 @@ import SwiftUICore
 struct DesignTokens {
     @available(iOS 13.0, *)
     struct Colors {
-        static let primary = Color(.black)
+        static let primary = Color("PrimaryRed")
         static let secondary = Color("SecondaryColor")
         static let background = Color("BackgroundColor")
     }
     
     struct LegacyColors {
         static let primary = UIColor.primaryRed
-        static let secondary = UIColor.white
+        static let dark = UIColor.black
+        
+        static let textFieldForeground = UIColor.textfieldFG
+        static let textFieldBackground = UIColor.textfieldBG
+        
         static let lightBackground = UIColor.white
         static let darkBackground = UIColor.black
     }
