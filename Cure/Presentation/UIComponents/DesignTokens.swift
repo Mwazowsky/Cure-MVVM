@@ -14,14 +14,18 @@ struct DesignTokens {
         static let primary = Color("PrimaryRed")
         static let secondary = Color("SecondaryColor")
         static let background = Color("BackgroundColor")
+        
+        static let textClickable = Color(.systemBlue)
     }
     
     struct LegacyColors {
         static let primary = UIColor.primaryRed
         static let dark = UIColor.black
         
-        static let textFieldForeground = UIColor.textfieldFG
-        static let textFieldBackground = UIColor.textfieldBG
+        static let textForeground = UIColor.textfieldFG
+        static let textBackground = UIColor.textfieldBG
+        
+        static let textClickable = UIColor.systemBlue
         
         static let lightBackground = UIColor.white
         static let darkBackground = UIColor.black

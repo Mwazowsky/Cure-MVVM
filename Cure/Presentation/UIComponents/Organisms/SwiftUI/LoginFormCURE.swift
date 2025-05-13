@@ -32,12 +32,12 @@ struct LoginFormCURE: View {
                 viewModelWrapper.viewModel?.didTapLoginButton()
             }
             
-            Button("Register") {
+            TextBtnCURE(title: "Register") {
                 viewModelWrapper.viewModel?.didTapRegisterButton()
             }
             
-            Button("Forgot Password?") {
-                viewModelWrapper.viewModel?.didTapForgotPasswordButton()
+            TextBtnCURE(title: "Forgot Password?") {
+                viewModelWrapper.viewModel?.didTapRegisterButton()
             }
         }
         .padding()

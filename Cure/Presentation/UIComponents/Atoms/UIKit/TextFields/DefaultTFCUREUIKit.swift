@@ -33,14 +33,14 @@ class DefaultTFCUREUIKit: UITextField {
         
         adjustsFontSizeToFitWidth = true
         
-        textColor = DesignTokens.LegacyColors.textFieldForeground
-        tintColor = DesignTokens.LegacyColors.textFieldForeground
+        textColor = DesignTokens.LegacyColors.textForeground
+        tintColor = DesignTokens.LegacyColors.textForeground
         leftView = paddingView
         leftViewMode = .always
         font = DesignTokens.LegacyTypography.bodyFont
         minimumFontSize = 12
         
-        backgroundColor = DesignTokens.LegacyColors.textFieldBackground
+        backgroundColor = DesignTokens.LegacyColors.textBackground
         autocorrectionType = .no
         
         textContentType = .password

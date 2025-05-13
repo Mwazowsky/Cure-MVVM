@@ -171,6 +171,11 @@
 		646CB98B2D91402C0009E8F2 /* SaveUserTokenUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646CB9892D91402C0009E8F2 /* SaveUserTokenUseCase.swift */; };
 		647B5B102DCDD7440097AE34 /* PrimaryBtnCUREUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647B5B0F2DCDD7330097AE34 /* PrimaryBtnCUREUIKit.swift */; };
 		647B5B132DCDDEF40097AE34 /* DefaultTFCUREUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647B5B122DCDDEDE0097AE34 /* DefaultTFCUREUIKit.swift */; };
+		648D8CA82DD3002600F59F33 /* TextBtnCUREUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648D8CA72DD3002500F59F33 /* TextBtnCUREUIKit.swift */; };
+		648D8CAA2DD3065400F59F33 /* ValidationTxtCUREUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648D8CA92DD3065400F59F33 /* ValidationTxtCUREUIKit.swift */; };
+		648D8CAC2DD3068500F59F33 /* TitleTxtCUREUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648D8CAB2DD3068500F59F33 /* TitleTxtCUREUIKit.swift */; };
+		648D8CAE2DD316C600F59F33 /* TextBtnCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648D8CAD2DD316C500F59F33 /* TextBtnCURE.swift */; };
+		648D8CB22DD31FC300F59F33 /* LoginFormCUREUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648D8CB12DD31FB800F59F33 /* LoginFormCUREUIKit.swift */; };
 		64A61F0B2DACC19B007D97D4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A61F0A2DACC18F007D97D4 /* SceneDelegate.swift */; };
 		64A61F0F2DACEA5D007D97D4 /* ChatContactResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A61F0E2DACEA4B007D97D4 /* ChatContactResponseDTO+Mapping.swift */; };
 		64A61F112DACEBC8007D97D4 /* OptionallyDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A61F102DACEBC2007D97D4 /* OptionallyDecodable.swift */; };
@@ -419,6 +424,11 @@
 		646CB9892D91402C0009E8F2 /* SaveUserTokenUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveUserTokenUseCase.swift; sourceTree = "<group>"; };
 		647B5B0F2DCDD7330097AE34 /* PrimaryBtnCUREUIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryBtnCUREUIKit.swift; sourceTree = "<group>"; };
 		647B5B122DCDDEDE0097AE34 /* DefaultTFCUREUIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTFCUREUIKit.swift; sourceTree = "<group>"; };
+		648D8CA72DD3002500F59F33 /* TextBtnCUREUIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBtnCUREUIKit.swift; sourceTree = "<group>"; };
+		648D8CA92DD3065400F59F33 /* ValidationTxtCUREUIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationTxtCUREUIKit.swift; sourceTree = "<group>"; };
+		648D8CAB2DD3068500F59F33 /* TitleTxtCUREUIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTxtCUREUIKit.swift; sourceTree = "<group>"; };
+		648D8CAD2DD316C500F59F33 /* TextBtnCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBtnCURE.swift; sourceTree = "<group>"; };
+		648D8CB12DD31FB800F59F33 /* LoginFormCUREUIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormCUREUIKit.swift; sourceTree = "<group>"; };
 		64A61F0A2DACC18F007D97D4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		64A61F0E2DACEA4B007D97D4 /* ChatContactResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatContactResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
 		64A61F102DACEBC2007D97D4 /* OptionallyDecodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionallyDecodable.swift; sourceTree = "<group>"; };
@@ -1829,6 +1839,7 @@
 			children = (
 				64FE0ADC2DCC8E970044A69C /* SearchBtnCURE.swift */,
 				64FE0AB42DCC8A0A0044A69C /* PrimaryBtnCURE.swift */,
+				648D8CAD2DD316C500F59F33 /* TextBtnCURE.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -1882,6 +1893,8 @@
 		64FE0AC22DCC8C9D0044A69C /* Texts */ = {
 			isa = PBXGroup;
 			children = (
+				648D8CA92DD3065400F59F33 /* ValidationTxtCUREUIKit.swift */,
+				648D8CAB2DD3068500F59F33 /* TitleTxtCUREUIKit.swift */,
 			);
 			path = Texts;
 			sourceTree = "<group>";
@@ -1890,6 +1903,7 @@
 			isa = PBXGroup;
 			children = (
 				647B5B0F2DCDD7330097AE34 /* PrimaryBtnCUREUIKit.swift */,
+				648D8CA72DD3002500F59F33 /* TextBtnCUREUIKit.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -1948,6 +1962,7 @@
 		64FE0AE02DCC900B0044A69C /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				648D8CB12DD31FB800F59F33 /* LoginFormCUREUIKit.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -1955,17 +1970,9 @@
 		64FE0AE92DCC95A30044A69C /* Templates */ = {
 			isa = PBXGroup;
 			children = (
-				64FE0AEA2DCC95EE0044A69C /* UIKit */,
 				64FE0AEB2DCC95F20044A69C /* SwiftUI */,
 			);
 			path = Templates;
-			sourceTree = "<group>";
-		};
-		64FE0AEA2DCC95EE0044A69C /* UIKit */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = UIKit;
 			sourceTree = "<group>";
 		};
 		64FE0AEB2DCC95F20044A69C /* SwiftUI */ = {
@@ -1980,17 +1987,9 @@
 		64FE0AF22DCC97590044A69C /* Pages */ = {
 			isa = PBXGroup;
 			children = (
-				64FE0AF32DCC97680044A69C /* UIKit */,
 				64FE0AF42DCC976F0044A69C /* SwiftUI */,
 			);
 			path = Pages;
-			sourceTree = "<group>";
-		};
-		64FE0AF32DCC97680044A69C /* UIKit */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = UIKit;
 			sourceTree = "<group>";
 		};
 		64FE0AF42DCC976F0044A69C /* SwiftUI */ = {
@@ -2455,6 +2454,7 @@
 				64BAAFEA2D92804200B70EFF /* HomeViewModel.swift in Sources */,
 				1FE49D8A230AA7C200D1D42E /* MoviesListItemCell.swift in Sources */,
 				1F1FC48B22E3693100BCBA8D /* Endpoint.swift in Sources */,
+				648D8CAC2DD3068500F59F33 /* TitleTxtCUREUIKit.swift in Sources */,
 				64BAAFE82D92804200B70EFF /* HomeViewController.swift in Sources */,
 				645CD9F82D9E3578006E01F6 /* TokenManager.swift in Sources */,
 				1FFFC831221B0041007D99D2 /* DefaultMoviesQueriesRepository.swift in Sources */,
@@ -2468,12 +2468,15 @@
 				1FD03807239098650016D05F /* CoreDataStorage.xcdatamodeld in Sources */,
 				642A92962D89526300E34BDA /* LoginUseCase.swift in Sources */,
 				1FE49D87230AA7C200D1D42E /* MovieDetailsViewController.swift in Sources */,
+				648D8CAA2DD3065400F59F33 /* ValidationTxtCUREUIKit.swift in Sources */,
 				643A96F62DB9E20F001AAED1 /* IChatContactsRepository.swift in Sources */,
 				1FC5B7D0242634EB0086FA8C /* UIImageView+ImageSizeAfterAspectFit.swift in Sources */,
 				643A96FD2DB9E341001AAED1 /* IChatContactsQueriesRepository.swift in Sources */,
 				1FE49D8C230AA7C200D1D42E /* MoviesListViewController.swift in Sources */,
 				64B740462D8A862300168646 /* AuthSceneDIContainer.swift in Sources */,
 				64A61F0F2DACEA5D007D97D4 /* ChatContactResponseDTO+Mapping.swift in Sources */,
+				648D8CAE2DD316C600F59F33 /* TextBtnCURE.swift in Sources */,
+				648D8CA82DD3002600F59F33 /* TextBtnCUREUIKit.swift in Sources */,
 				643A97072DB9FB0A001AAED1 /* ChatContactsRequestDTO+Mapping.swift in Sources */,
 				64FE0AE82DCC91760044A69C /* LabeledFormCURE.swift in Sources */,
 				1FC5B7D2242635CC0086FA8C /* CGSize+ScaledSize.swift in Sources */,
@@ -2528,6 +2531,7 @@
 				1FB0903D243766C200DBE132 /* BackButtonEmptyTitleNavigationBarBehavior.swift in Sources */,
 				1F1FC48C22E3693100BCBA8D /* NetworkConfig.swift in Sources */,
 				643A96F22DB9DF9C001AAED1 /* ChatContact.swift in Sources */,
+				648D8CB22DD31FC300F59F33 /* LoginFormCUREUIKit.swift in Sources */,
 				1FFFC834221B0041007D99D2 /* IPosterImagesRepository.swift in Sources */,
 				64FB94702D9533FC00A5325D /* Constants.swift in Sources */,
 				643A97052DB9F4C1001AAED1 /* ChatContactsResponseEntity+Mapping.swift in Sources */,

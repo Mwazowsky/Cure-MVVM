@@ -8,84 +8,11 @@
 import Foundation
 import UIKit
 
-// Presentation/Auth/Login/View/LoginViewController.swift
 final class LoginVC: UIViewController {
     private var viewModel: LoginViewModel!
     
     // UI Components
-    private lazy var scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        return scrollView
-    }()
-    
-    private lazy var contentView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Welcome Back"
-        label.font = UIFont.systemFont(ofSize: 28, weight: .bold)
-        label.textAlignment = .center
-        return label
-    }()
-    
-    let emailTF: DefaultTFCUREUIKit = DefaultTFCUREUIKit(title: "Email", isSecure: false)
-    
-    let passwordTF: DefaultTFCUREUIKit = DefaultTFCUREUIKit(title: "Password", isSecure: true)
-    
-    private lazy var loginButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Login", for: .normal)
-        button.backgroundColor = .systemBlue
-        button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 8
-        button.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
-        return button
-    }()
-    
-    private lazy var registerButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Don't have an account? Register", for: .normal)
-        button.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
-        return button
-    }()
-    
-    private lazy var forgotPasswordButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Forgot Password?", for: .normal)
-        button.addTarget(self, action: #selector(forgotPasswordButtonTapped), for: .touchUpInside)
-        return button
-    }()
-    
-    private lazy var activityIndicator: UIActivityIndicatorView = {
-        let indicator: UIActivityIndicatorView
-        if #available(iOS 13.0, *) {
-            indicator = UIActivityIndicatorView(style: .large)
-        } else {
-            indicator = UIActivityIndicatorView(style: .gray)
-        }
-        indicator.translatesAutoresizingMaskIntoConstraints = false
-        indicator.hidesWhenStopped = true
-        return indicator
-    }()
-    
-    private lazy var errorLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .systemRed
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.isHidden = true
-        return label
-    }()
+    private lazy var loginPage: LoginFormCUREUIKit = LoginFormCUREUIKit(viewModel: viewModel)
     
     // MARK: - Lifecycle
     static func create(with viewModel: LoginViewModel) -> LoginVC {
@@ -96,17 +23,8 @@ final class LoginVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupViews()
-        setupBindings()
-        viewModel.viewDidLoad()
-        
-        // Hide keyboard when tapping outside
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(tapGesture)
-        
-        // Add keyboard notifications
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -127,186 +45,15 @@ final class LoginVC: UIViewController {
             view.backgroundColor = .white
         }
         
-        view.addSubview(scrollView)
-        scrollView.addSubview(contentView)
+        view.addSubview(loginPage)
         
-        contentView.addSubview(titleLabel)
-        
-        // Setup TextFields
-        contentView.addSubview(emailTF)
-        contentView.addSubview(passwordTF)
-        
-        // Setup Buttons
-        contentView.addSubview(loginButton)
-        contentView.addSubview(registerButton)
-        contentView.addSubview(forgotPasswordButton)
-        
-        contentView.addSubview(errorLabel)
-        view.addSubview(activityIndicator)
-        
-        // Configure View Components
-        emailTF.delegate = self
-        passwordTF.delegate = self
+        loginPage.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 40),
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            
-            emailTF.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40),
-            emailTF.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            emailTF.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            emailTF.heightAnchor.constraint(equalToConstant: 50),
-            
-            passwordTF.topAnchor.constraint(equalTo: emailTF.bottomAnchor, constant: 20),
-            passwordTF.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            passwordTF.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            passwordTF.heightAnchor.constraint(equalToConstant: 50),
-            
-            errorLabel.topAnchor.constraint(equalTo: passwordTF.bottomAnchor, constant: 10),
-            errorLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            errorLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            
-            loginButton.topAnchor.constraint(equalTo: errorLabel.bottomAnchor, constant: 20),
-            loginButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            loginButton.heightAnchor.constraint(equalToConstant: 50),
-            
-            forgotPasswordButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 10),
-            forgotPasswordButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            
-            registerButton.topAnchor.constraint(equalTo: forgotPasswordButton.bottomAnchor, constant: 20),
-            registerButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            registerButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -40),
-            
-            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            loginPage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loginPage.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            loginPage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            loginPage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
         ])
-        
-        emailTF.addTarget(self, action: #selector(emailTextChanged), for: .editingChanged)
-        passwordTF.addTarget(self, action: #selector(passwordTextChanged), for: .editingChanged)
-    }
-    
-    private func setupBindings() {
-        viewModel.isLoading.observe(on: self) { [weak self] isLoading in
-            if isLoading {
-                self?.activityIndicator.startAnimating()
-                self?.loginButton.isEnabled = false
-            } else {
-                self?.activityIndicator.stopAnimating()
-                self?.updateLoginButtonState()
-            }
-        }
-        
-        viewModel.error.observe(on: self) { [weak self] errorMessage in
-            if let errorMessage = errorMessage, !errorMessage.isEmpty {
-                self?.errorLabel.text = errorMessage
-                self?.errorLabel.isHidden = false
-            } else {
-                self?.errorLabel.isHidden = true
-            }
-        }
-        
-        viewModel.isLoginButtonEnabled.observe(on: self) { [weak self] isEnabled in
-            self?.updateLoginButtonState()
-        }
-    }
-    
-    private func updateLoginButtonState() {
-        let isEnabled = viewModel.isLoginButtonEnabled.value && !viewModel.isLoading.value
-        print("Login is Enaled: ", isEnabled)
-        loginButton.isEnabled = isEnabled
-        loginButton.alpha = isEnabled ? 1.0 : 0.7
-    }
-    
-    // MARK: - Actions
-    @objc private func emailTextChanged() {
-        viewModel.updateEmail(emailTF.text ?? "")
-    }
-    
-    @objc private func passwordTextChanged() {
-        viewModel.updatePassword(passwordTF.text ?? "")
-    }
-    
-    @objc private func loginButtonTapped() {
-        print("login button tapped: 1")
-        viewModel.didTapLoginButton()
-    }
-    
-    @objc private func registerButtonTapped() {
-        viewModel.didTapRegisterButton()
-    }
-    
-    @objc private func forgotPasswordButtonTapped() {
-        viewModel.didTapForgotPasswordButton()
-    }
-    
-    @objc private func dismissKeyboard() {
-        view.endEditing(true)
-    }
-    
-    @objc private func keyboardWillShow(notification: NSNotification) {
-        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
-            return
-        }
-        
-        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
-        scrollView.contentInset = contentInsets
-        scrollView.scrollIndicatorInsets = contentInsets
-        
-        // Scroll to active text field
-        var rect = self.view.frame
-        rect.size.height -= keyboardSize.height
-        
-        if let activeField = [emailTF, passwordTF].first(where: { $0.isFirstResponder }) {
-            let activeRect = activeField.convert(activeField.bounds, to: scrollView)
-            if !rect.contains(activeRect.origin) {
-                scrollView.scrollRectToVisible(activeRect, animated: true)
-            }
-        }
-    }
-    
-    @objc private func keyboardWillHide(notification: NSNotification) {
-        scrollView.contentInset = .zero
-        scrollView.scrollIndicatorInsets = .zero
-    }
-    
-    @objc private func pushChatContactListVC() {
-        guard let userEmail = emailTF.text, !userEmail.isEmpty else {
-            print("No email provided")
-            return
-        }
-        
-        guard let userPassword = passwordTF.text, !userPassword.isEmpty else {
-            print("No password provided")
-            return
-        }
-        
-        if userEmail.isValidEmail {
-            print("Valid email format")
-        } else if userPassword.isValidPassword {
-            print("Valid password format")
-        } else {
-            print("Invalid email/password format")
-        }
-    }
-}
-
-
-extension LoginVC: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        pushChatContactListVC()
-        return true
     }
 }
