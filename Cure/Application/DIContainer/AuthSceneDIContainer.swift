@@ -94,16 +94,16 @@ final class AuthSceneDIContainer {
     
     // MARK: - View Controllers
     func makeLoginViewController(actions: LoginViewModelActions) -> UIViewController {
-//        if #available(iOS 13.0, *) { // SwiftUI
-//            let view = LoginView(
-//                viewModelWrapper: makeLoginViewModelWrapper(actions: actions)
-//            )
-//            return UIHostingController(rootView: view)
-//        } else { // UIKit
+        if #available(iOS 13.0, *) { // SwiftUI
+            let view = LoginView(
+                viewModelWrapper: makeLoginViewModelWrapper(actions: actions)
+            )
+            return UIHostingController(rootView: view)
+        } else { // UIKit
             return LoginVC.create(
                 with: makeLoginViewModel(actions: actions)
             )
-//        }
+        }
     }
     
     //    func makeRegisterViewController(actions: RegisterViewModelActions) -> RegisterViewController {

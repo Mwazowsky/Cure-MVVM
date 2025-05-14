@@ -12,7 +12,7 @@ typealias ChatContactsQueryListViewModelDidSelectAction = (ChatContactQuery) -> 
 protocol ChatContactsListFlowCoordinatorDependencies {
     func makeChatContactsListViewController(
         actions: ChatContactsListViewModelActions
-    ) -> ChatContactsListVC
+    ) -> UIViewController
     func makeChatContactsDetailsViewController(chatContact: ChatContact) -> UIViewController
     func makeChattingViewController(chatContact: ChatContact) -> UIViewController
     func makeChatContactsQueriesSuggestionsListViewController(
@@ -30,7 +30,7 @@ final class ChatContactsListFlowCoordinator: Coordinator {
     private let dependencies: ChatContactsListFlowCoordinatorDependencies
     
     weak var parentCoordinator: HomeFlowCoordinator?
-    private weak var chatContactsListVC: ChatContactsListVC?
+    private weak var chatContactsListVC: UIViewController?
     private weak var chatContactsQueriesSuggestionsVC: UIViewController?
     
     init(
@@ -65,20 +65,20 @@ final class ChatContactsListFlowCoordinator: Coordinator {
     }
     
     private func showChatContactQueriesSuggestions(didSelect: @escaping (ChatContactQuery) -> Void) {
-        guard let chatContactsListViewController = chatContactsListVC, chatContactsQueriesSuggestionsVC == nil else { return }
+        guard let _ = chatContactsListVC, chatContactsQueriesSuggestionsVC == nil else { return }
         
-        let container = chatContactsListViewController.suggestionsListContainer
+//        let container = chatContactsListViewController.suggestionsListContainer
         
         let vc = dependencies.makeChatContactsQueriesSuggestionsListViewController(didSelect: didSelect)
         
-        chatContactsListViewController.add(child: vc, container: container)
+//        chatContactsListViewController.add(child: vc, container: container)
         chatContactsQueriesSuggestionsVC = vc
-        container.isHidden = false
+//        container.isHidden = false
     }
     
     private func closeChatContactQueriesSuggestions() {
         chatContactsQueriesSuggestionsVC?.remove()
         chatContactsQueriesSuggestionsVC = nil
-        chatContactsListVC?.suggestionsListContainer.isHidden = true
+//        chatContactsListVC?.suggestionsListContainer.isHidden = true
     }
 }

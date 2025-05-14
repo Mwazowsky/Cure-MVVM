@@ -9,7 +9,6 @@
 
 import SwiftUI
 
-
 @available(iOS 13.0.0, *)
 struct PrimaryBtnCURE: View {
     var title: String
@@ -22,7 +21,7 @@ struct PrimaryBtnCURE: View {
                 .font(DesignTokens.Typography.bodyFont)
                 .foregroundColor(.white)
                 .padding()
-                .background(DesignTokens.Colors.primary)
+                .background(DesignTokens.Colors.primaryCURE)
                 .cornerRadius(8)
         }
     }

@@ -71,10 +71,18 @@ final class ChatContactsDIContainer: ChatContactsListFlowCoordinatorDependencies
 
     
     // MARK: - Chat Contacts List
-    func makeChatContactsListViewController(actions: ChatContactsListViewModelActions) -> ChatContactsListVC {
-        ChatContactsListVC.create(
-            with: makeChatContactsListViewModel(actions: actions)
-        )
+    func makeChatContactsListViewController(actions: ChatContactsListViewModelActions) -> UIViewController {
+        if #available(iOS 13.0, *) { // SwiftUI
+            let view = ChatContactsView(
+                viewModelWrapper: makeChatContactsViewModelWrapper(actions: actions)
+            )
+            
+            return UIHostingController(rootView: view)
+        } else { // UIKit
+            return ChatContactsListVC.create(
+                with: makeChatContactsListViewModel(actions: actions)
+            )
+        }
     }
     
     func makeChatContactsListViewModel(actions: ChatContactsListViewModelActions) -> ChatContactsViewModel {
@@ -84,56 +92,6 @@ final class ChatContactsDIContainer: ChatContactsListFlowCoordinatorDependencies
             actions: actions
         )
     }
-    
-    
-    // MARK: - Movie Details
-//    func makeMoviesDetailsViewController(movie: Movie) -> UIViewController {
-//        MovieDetailsViewController.create(
-//            with: makeMoviesDetailsViewModel(movie: movie)
-//        )
-//    }
-//    
-//    
-//    func makeMoviesDetailsViewModel(movie: Movie) -> MovieDetailsViewModel {
-//        DefaultMovieDetailsViewModel(
-//            movie: movie,
-//            posterImagesRepository: makePosterImagesRepository()
-//        )
-//    }
-    
-    
-    // MARK: - Movies Queries Suggestions List
-//    func makeMoviesQueriesSuggestionsListViewController(didSelect: @escaping MoviesQueryListViewModelDidSelectAction) -> UIViewController {
-//        if #available(iOS 13.0, *) { // SwiftUI
-//            let view = MoviesQueryListView(
-//                viewModelWrapper: makeMoviesQueryListViewModelWrapper(didSelect: didSelect)
-//            )
-//            return UIHostingController(rootView: view)
-//        } else { // UIKit
-//            return MoviesQueriesTableViewController.create(
-//                with: makeMoviesQueryListViewModel(didSelect: didSelect)
-//            )
-//        }
-//    }
-//    
-//    
-//    func makeMoviesQueryListViewModel(didSelect: @escaping MoviesQueryListViewModelDidSelectAction) -> MoviesQueryListViewModel {
-//        DefaultMoviesQueryListViewModel(
-//            numberOfQueriesToShow: 10,
-//            fetchRecentMovieQueriesUseCaseFactory: makeFetchRecentMovieQueriesUseCase,
-//            didSelect: didSelect
-//        )
-//    }
-
-    
-//    @available(iOS 13.0, *)
-//    func makeMoviesQueryListViewModelWrapper(
-//        didSelect: @escaping MoviesQueryListViewModelDidSelectAction
-//    ) -> MoviesQueryListViewModelWrapper {
-//        MoviesQueryListViewModelWrapper(
-//            viewModel: makeMoviesQueryListViewModel(didSelect: didSelect)
-//        )
-//    }
     
     func makeChatContactsDetailsViewController(chatContact: ChatContact) -> UIViewController {
         print("Implement later: ", chatContact)
@@ -153,6 +111,16 @@ final class ChatContactsDIContainer: ChatContactsListFlowCoordinatorDependencies
         return UIViewController()
     }
 
+    
+    // MARK: - ViewModelWrapper (For SwiftUI)
+    @available(iOS 13.0, *)
+    func makeChatContactsViewModelWrapper(
+        actions: ChatContactsListViewModelActions
+    ) -> ChatContactsViewModelWrapper {
+        ChatContactsViewModelWrapper(
+            viewModel: makeChatContactsListViewModel(actions: actions)
+        )
+    }
     
     // MARK: - Flow Coordinators
     func makeChatContactsListFlowCoordinator(

@@ -11,15 +11,16 @@ import SwiftUICore
 struct DesignTokens {
     @available(iOS 13.0, *)
     struct Colors {
-        static let primary = Color("PrimaryRed")
-        static let secondary = Color("SecondaryColor")
-        static let background = Color("BackgroundColor")
+        static let primaryCURE = Color("PrimaryCURE")
+        static let secondaryCURE = Color("SecondaryCURE")
+        
+        static let background = Color("SecondaryCURE")
         
         static let textClickable = Color(.systemBlue)
     }
     
     struct LegacyColors {
-        static let primary = UIColor.primaryRed
+        static let primary = UIColor.primaryCURE
         static let dark = UIColor.black
         
         static let textForeground = UIColor.textfieldFG
@@ -35,6 +36,7 @@ struct DesignTokens {
     struct Typography {
         static let titleFont = Font.system(size: 24, weight: .bold)
         static let bodyFont = Font.system(size: 16, weight: .regular)
+        static let subscriptFont = Font.system(size: 10, weight: .regular)
     }
     
     struct LegacyTypography {

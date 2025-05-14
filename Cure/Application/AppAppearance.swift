@@ -1,7 +1,7 @@
 import UIKit
 
 final class AppAppearance {
-    
+    // Setup Navigation Bar Appearance here
     static func setupAppearance() {
         if #available(iOS 15, *) {
             let appearance = UINavigationBarAppearance()

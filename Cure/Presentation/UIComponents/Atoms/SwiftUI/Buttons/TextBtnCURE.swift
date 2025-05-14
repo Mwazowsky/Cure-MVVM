@@ -22,7 +22,7 @@ struct TextBtnCURE: View {
             Text(title)
                 .font(DesignTokens.Typography.bodyFont)
                 .foregroundColor(DesignTokens.Colors.textClickable)
-                .padding()
+                .padding(.vertical, 4)
         }
     }
 }

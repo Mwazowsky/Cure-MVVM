@@ -5,7 +5,7 @@
 //  Created by MacBook Air MII  on 8/5/25.
 //
 
-import SwiftUICore
+import SwiftUI
 
 
 @available(iOS 13.0.0, *)
@@ -16,11 +16,11 @@ struct SecondaryTxtCURE: View {
         if #available(iOS 17.0, *) {
             Text(text)
                 .font(DesignTokens.Typography.bodyFont)
-                .foregroundStyle(Color(DesignTokens.Colors.primary))
+                .foregroundStyle(Color(DesignTokens.Colors.primaryCURE))
         } else {
             Text(text)
                 .font(DesignTokens.Typography.titleFont)
-                .foregroundColor(DesignTokens.Colors.primary)
+                .foregroundColor(DesignTokens.Colors.primaryCURE)
         }
     }
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 @available(iOS 13.0.0, *)
-struct LoginFormCURE: View {
+struct SignupFormCURE: View {
     @ObservedObject var viewModelWrapper: LoginViewModelWrapper
     
     var body: some View {
@@ -64,7 +64,7 @@ struct LoginFormCURE: View {
 
 #if DEBUG
 @available(iOS 13.0, *)
-struct LoginForm_Previews: PreviewProvider {
+struct SignupForm_Previews: PreviewProvider {
     static var previews: some View {
         LoginView(viewModelWrapper: previewViewModelWrapper)
     }

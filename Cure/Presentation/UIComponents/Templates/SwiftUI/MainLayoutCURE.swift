@@ -15,8 +15,6 @@ struct MainLayoutCURE<Content: View>: View {
         VStack {
             NavBarCURE()
             content()
-                .padding(DesignTokens.Spacing.medium)
-            Spacer()
         }
         .background(DesignTokens.Colors.background)
         .edgesIgnoringSafeArea(.all)

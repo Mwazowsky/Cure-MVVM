@@ -15,7 +15,6 @@ struct SearchFormCURE: View {
     var body: some View {
         HStack {
             PrimaryTxtCURE(text: "Search")
-//            DefaultTFCURE(query: $searchQuery, placeholder: "Enter text...")
             SearchBtnCURE {
                 onSearch(searchQuery)
             }
