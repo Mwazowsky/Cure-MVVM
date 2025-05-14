@@ -32,18 +32,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         socketService = appDIContainer.socketService
         keychainService = appDIContainer.keychainService
         
+        // MARK: - App Dependencies Injection
+        /// Inject the required dependencies of the app
+        ///  - navigationController:
+        ///  - appDIContainer:
         appFlowCoordinator = AppFlowCoordinator(
             navigationController: navigationController,
             appDIContainer: appDIContainer
         )
         
+        // MARK: - External Tools Global Setup
+        /// External tools and library setup and configure at app start
         LanguageManager.shared.defaultLanguage = .id
         registerForPushNotifications()
         
+        // MARK: - Window Initialization
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
 //        self.setupGoogleMaps()
         
+        // MARK: - Start App
+        /// Start app by calling appFlowCoordinator start method
         appFlowCoordinator?.start()
         
         return true
@@ -77,15 +86,13 @@ extension AppDelegate: MessagingDelegate, UNUserNotificationCenterDelegate {
 //        GMSPlacesClient.provideAPIKey("AIzaSyCUbt0Kjb08PkDsUnDzAOCDegGJLZsexsg")
 //    }
     
-    /// Mark: Messaging Delegate
-    
+    // MARK: - Messaging Delegate
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         guard let fcmToken = fcmToken else { return }
         _ = keychainService.saveFCMTokenData(fcmToken)
     }
     
-    /// Mark: Messaging UNUserNotificationCenterDelegate
-    
+    // MARK: - Messaging UNUserNotificationCenterDelegate
     func registerForPushNotifications() {
         FirebaseApp.configure()
         Messaging.messaging().delegate = self

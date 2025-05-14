@@ -20,6 +20,7 @@ final class AppFlowCoordinator {
     var childCoordinators: [Coordinator]  = [Coordinator]()
     
     var navigationController: UINavigationController
+    
     private let appDIContainer: AppDIContainer
     private let windowManager: WindowManageable
     
@@ -38,6 +39,16 @@ final class AppFlowCoordinator {
     func start() {
         let userTokenData = getUserTokenDataUseCase.execute()
         handlingNavigation(token: userTokenData?.token)
+    }
+    
+    private func handlingNavigation(token: String?) {
+        if let token = token,
+           !token.isEmpty,
+           token.trimmingCharacters(in: .whitespacesAndNewlines).count > 0 {
+            showHomeFlow()
+        } else {
+            showAuthFlow()
+        }
     }
     
     private func showAuthFlow() {
@@ -72,17 +83,6 @@ final class AppFlowCoordinator {
         homeFlow.parentCoordinator = self
         
         homeFlow.start()
-    }
-    
-    
-    func handlingNavigation(token: String?) {
-        if let token = token,
-           !token.isEmpty,
-           token.trimmingCharacters(in: .whitespacesAndNewlines).count > 0 {
-            showHomeFlow()
-        } else {
-            showAuthFlow()
-        }
     }
 }
 

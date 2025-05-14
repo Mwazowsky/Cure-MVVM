@@ -21,30 +21,12 @@ final class ChatContactsDIContainer: ChatContactsListFlowCoordinatorDependencies
     }
     
     // MARK: - Use Cases
-//    func makeSearchMoviesUseCase() -> SearchMoviesUseCase {
-//        DefaultSearchMoviesUseCase(
-//            moviesRepository: makeMoviesRepository(),
-//            moviesQueriesRepository: makeMoviesQueriesRepository()
-//        )
-//    }
-    
     func makeFetchContactsUseCase() -> FetchChatContactsUseCase {
         DefaultFetchChatContactsUseCase(
             chatContactsRepository: makeChatContactsRepository(),
             chatsContactsQueriesRepository: makeChatContactsQueriesRepository()
         )
     }
-    
-//    func makeFetchRecentMovieQueriesUseCase(
-//        requestValue: FetchRecentMovieQueriesUseCase.RequestValue,
-//        completion: @escaping (FetchRecentMovieQueriesUseCase.ResultValue) -> Void
-//    ) -> UseCase {
-//        FetchRecentMovieQueriesUseCase(
-//            requestValue: requestValue,
-//            completion: completion,
-//            moviesQueriesRepository: makeMoviesQueriesRepository()
-//        )
-//    }
     
     func makeGetCurrentUserTokenUseCase() -> GetUserTokenUseCase {
         return DefaultGetCurrentUserTokenUseCase(keychainRepository: makeKeychainRepository())

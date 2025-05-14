@@ -23,7 +23,7 @@ final class AppDIContainer {
     
     // MARK: - Network
     /// This is data service based on the base url, if there are many different base urls, add more of this
-    /// in here I have 3 base urls
+    /// in here I have 3 base urls for old, new(cure related), and image
     lazy var apiDataTransferService: DataTransferService = {
         let config = ApiDataNetworkConfig(
             baseURL: URL(string: appConfiguration.apiBaseURL)!,
@@ -55,6 +55,7 @@ final class AppDIContainer {
     }()
     
     // MARK: - DIContainers of scenes
+    /// This will initialize all scenes DI Container. Add new entries as your app grows
     func makeAuthSceneDIContainer() -> AuthSceneDIContainer {
         let dependencies = AuthSceneDIContainer.Dependencies(
             newApiDataTransferervice: newApiDataTransferService
