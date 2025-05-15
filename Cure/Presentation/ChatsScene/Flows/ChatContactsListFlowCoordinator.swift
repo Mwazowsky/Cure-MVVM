@@ -26,7 +26,7 @@ final class ChatContactsListFlowCoordinator: Coordinator {
     
     var childCoordinators: [Coordinator] = [Coordinator]()
     
-//    weak var parentCoordinator: HomeFlowCoordinator?
+    weak var parentCoordinator: HomeFlowCoordinator?
     
     weak var navigationController: UINavigationController?
     private let dependencies: ChatContactsListFlowCoordinatorDependencies

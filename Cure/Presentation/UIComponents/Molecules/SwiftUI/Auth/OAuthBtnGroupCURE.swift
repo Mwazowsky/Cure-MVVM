@@ -12,10 +12,10 @@ struct OAuthBtnGroupCURE: View {
     var body: some View {
         HStack(spacing: 10) {
             OAuthLoginButton(title: "Google", imageName: "magnifyingglass.circle.fill") {
-                print("Google Login Pressed!!!")
+
             }
             OAuthLoginButton(title: "Apple", imageName: "magnifyingglass.circle.fill") {
-                print("Apple Login Pressed!!!")
+
             }
         }
     }

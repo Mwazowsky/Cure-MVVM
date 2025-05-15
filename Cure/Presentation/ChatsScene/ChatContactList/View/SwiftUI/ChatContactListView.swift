@@ -26,9 +26,11 @@ struct ChatContactsView: View {
 @available(iOS 13.0, *)
 final class ChatContactsViewModelWrapper: ObservableObject {
     var viewModel: ChatContactsViewModel?
+    @Published var items: [ChatContactsListItemViewModel] = []
     
     init(viewModel: ChatContactsViewModel?) {
         self.viewModel = viewModel
+        viewModel?.items.observe(on: self) { [weak self] values in self?.items = values }
     }
 }
 

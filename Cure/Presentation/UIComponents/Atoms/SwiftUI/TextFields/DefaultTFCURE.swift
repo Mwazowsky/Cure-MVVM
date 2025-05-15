@@ -25,8 +25,9 @@ struct DefaultTFCURE: View {
                 .autocapitalization(.none)
                 .disableAutocorrection(true)
                 .padding()
-                .background(Color(.secondarySystemBackground))
-                .cornerRadius(8)
+                .background(DesignTokens.Colors.textBackground)
+                .cornerRadius(25)
+                .shadow(radius: 0.25)
                 .onReceive(Just(text)) { newValue in
                     debounceHelper.input.send(newValue)
                 }
@@ -40,8 +41,9 @@ struct DefaultTFCURE: View {
                 .autocapitalization(.none)
                 .disableAutocorrection(true)
                 .padding()
-                .background(Color(.secondarySystemBackground))
-                .cornerRadius(8)
+                .background(DesignTokens.Colors.textBackground)
+                .cornerRadius(25)
+                .shadow(radius: 0.25)
                 .onReceive(Just(text)) { newValue in
                     debounceHelper.input.send(newValue)
                 }

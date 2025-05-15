@@ -147,6 +147,9 @@
 		644944C92D89555C006B11C1 /* RegisterUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644944C72D89555C006B11C1 /* RegisterUseCase.swift */; };
 		644944CB2D89625E006B11C1 /* ResetPasswordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644944CA2D89625E006B11C1 /* ResetPasswordUseCase.swift */; };
 		644944CC2D89625E006B11C1 /* ResetPasswordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644944CA2D89625E006B11C1 /* ResetPasswordUseCase.swift */; };
+		644A27472DD5C24E00185DE5 /* AsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644A27462DD5C24900185DE5 /* AsyncImage.swift */; };
+		644A27482DD5C24E00185DE5 /* AsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644A27462DD5C24900185DE5 /* AsyncImage.swift */; };
+		644A27492DD5C24E00185DE5 /* AsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644A27462DD5C24900185DE5 /* AsyncImage.swift */; };
 		64515E1F2DD2E6B2002E6F0F /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64515E1E2DD2E6AA002E6F0F /* String+Extension.swift */; };
 		64515E222DD2ECF8002E6F0F /* Regex.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64515E212DD2ECF4002E6F0F /* Regex.swift.swift */; };
 		64584BA52DBA3114007183B9 /* BaseResponse+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64584BA42DBA3109007183B9 /* BaseResponse+Mapping.swift */; };
@@ -266,7 +269,6 @@
 		64FE0ADD2DCC8EA00044A69C /* SearchBtnCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE0ADC2DCC8E970044A69C /* SearchBtnCURE.swift */; };
 		64FE0AE42DCC90450044A69C /* LoginFormCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE0AE32DCC903A0044A69C /* LoginFormCURE.swift */; };
 		64FE0AEE2DCC965D0044A69C /* MainLayoutCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE0AED2DCC96540044A69C /* MainLayoutCURE.swift */; };
-		64FE0AF12DCC96E90044A69C /* NavBarCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE0AF02DCC96E90044A69C /* NavBarCURE.swift */; };
 		64FE0AF62DCC97940044A69C /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE0AF52DCC977B0044A69C /* LoginPage.swift */; };
 		64FE0AFA2DCC9A7E0044A69C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE0AF92DCC9A740044A69C /* LoginView.swift */; };
 		64FE0AFC2DCCAC650044A69C /* SecondaryTxtCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE0AFB2DCCAC650044A69C /* SecondaryTxtCURE.swift */; };
@@ -415,6 +417,7 @@
 		64472A872DB0F50500AF7DFE /* LoadUserDetailsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadUserDetailsUseCase.swift; sourceTree = "<group>"; };
 		644944C72D89555C006B11C1 /* RegisterUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUseCase.swift; sourceTree = "<group>"; };
 		644944CA2D89625E006B11C1 /* ResetPasswordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordUseCase.swift; sourceTree = "<group>"; };
+		644A27462DD5C24900185DE5 /* AsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImage.swift; sourceTree = "<group>"; };
 		64515E1E2DD2E6AA002E6F0F /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		64515E212DD2ECF4002E6F0F /* Regex.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Regex.swift.swift; sourceTree = "<group>"; };
 		64584BA42DBA3109007183B9 /* BaseResponse+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseResponse+Mapping.swift"; sourceTree = "<group>"; };
@@ -513,7 +516,6 @@
 		64FE0ADC2DCC8E970044A69C /* SearchBtnCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBtnCURE.swift; sourceTree = "<group>"; };
 		64FE0AE32DCC903A0044A69C /* LoginFormCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormCURE.swift; sourceTree = "<group>"; };
 		64FE0AED2DCC96540044A69C /* MainLayoutCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLayoutCURE.swift; sourceTree = "<group>"; };
-		64FE0AF02DCC96E90044A69C /* NavBarCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarCURE.swift; sourceTree = "<group>"; };
 		64FE0AF52DCC977B0044A69C /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
 		64FE0AF92DCC9A740044A69C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		64FE0AFB2DCCAC650044A69C /* SecondaryTxtCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryTxtCURE.swift; sourceTree = "<group>"; };
@@ -921,6 +923,7 @@
 		1FC8B6E4230AF89A005DBF44 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				644A27462DD5C24900185DE5 /* AsyncImage.swift */,
 				1FD2696524261A24005236FB /* Extensions */,
 				1FEED0EE2023575C000F4EAA /* Protocols */,
 				1FEE31612218B17E00C160B9 /* Observable.swift */,
@@ -1296,7 +1299,6 @@
 		642A6E2D2DD44ED500B006F0 /* Navigations */ = {
 			isa = PBXGroup;
 			children = (
-				64FE0AF02DCC96E90044A69C /* NavBarCURE.swift */,
 			);
 			path = Navigations;
 			sourceTree = "<group>";
@@ -2459,6 +2461,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				644A27482DD5C24E00185DE5 /* AsyncImage.swift in Sources */,
 				64BAAFF92D92804200B70EFF /* HomeView.swift in Sources */,
 				1F02DE3522F8507500E40C3A /* MoviesSceneUITests.swift in Sources */,
 				1F57F8D423C656F600981E09 /* AccessibilityIdentifier.swift in Sources */,
@@ -2537,7 +2540,6 @@
 				1F0CEFCF23436B67004141FA /* ConnectionError.swift in Sources */,
 				642A6E312DD4542A00B006F0 /* OAuthBtnGroupCURE.swift in Sources */,
 				1F05A6CC2220A2CB001E2801 /* SearchMoviesUseCase.swift in Sources */,
-				64FE0AF12DCC96E90044A69C /* NavBarCURE.swift in Sources */,
 				649ED1072DD47F5B0062814F /* AvatarIVCURE.swift in Sources */,
 				64FB942C2D93A42500A5325D /* HomeQueryListView.swift in Sources */,
 				64FB942D2D93A42500A5325D /* HomeQueryListItemViewModel.swift in Sources */,
@@ -2623,6 +2625,7 @@
 				644944C92D89555C006B11C1 /* RegisterUseCase.swift in Sources */,
 				FC740818216555C500FE52A5 /* UserDefaultsMoviesQueriesStorage.swift in Sources */,
 				641DF2F82DC4B5DF00EDAC97 /* ChatContactsListFlowCoordinator.swift in Sources */,
+				644A27472DD5C24E00185DE5 /* AsyncImage.swift in Sources */,
 				64FE0AEE2DCC965D0044A69C /* MainLayoutCURE.swift in Sources */,
 				64B740252D8A64C600168646 /* GetUserTokenUseCase.swift in Sources */,
 				64B7403F2D8A801E00168646 /* LoginViewModel.swift in Sources */,
@@ -2673,6 +2676,7 @@
 				1F9035412307758D00DEA4BD /* PosterImagesRepositoryMock.swift in Sources */,
 				1F474F2E22356C7F0092DB4B /* IMoviesRepository.swift in Sources */,
 				64B740222D8A635A00168646 /* LogoutUseCase.swift in Sources */,
+				644A27492DD5C24E00185DE5 /* AsyncImage.swift in Sources */,
 				1F9034DC2307291800DEA4BD /* FetchRecentMovieQueriesUseCase.swift in Sources */,
 				1FE49D9B230AEC4F00D1D42E /* MoviesListViewModel.swift in Sources */,
 				64FB943B2D93A66400A5325D /* IHomeQueriesRepository.swift in Sources */,

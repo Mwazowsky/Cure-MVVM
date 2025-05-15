@@ -66,7 +66,6 @@ class LoginFormCUREUIKit: UIView {
     }
     
     private func setupView() {
-        print("Setup LoginFormCUREUIKit")
         if #available(iOS 13.0, *) {
             backgroundColor = .systemBackground
         } else {
@@ -159,7 +158,6 @@ class LoginFormCUREUIKit: UIView {
     
     private func updateLoginButtonState() {
         let isEnabled = viewModel.isLoginButtonEnabled.value && !viewModel.isLoading.value
-        print("Login is Enaled: ", isEnabled)
         loginBtn.isEnabled = isEnabled
         loginBtn.alpha = isEnabled ? 1.0 : 0.7
     }
@@ -174,7 +172,6 @@ class LoginFormCUREUIKit: UIView {
     }
     
     @objc private func loginButtonTapped() {
-        print("login button tapped: 1")
         viewModel.didTapLoginButton()
     }
     
@@ -218,19 +215,15 @@ class LoginFormCUREUIKit: UIView {
     
     @objc private func pushChatContactListVC() {
         guard let userEmail = emailTF.text, !userEmail.isEmpty else {
-            print("No email provided")
             return
         }
         
         guard let userPassword = passwordTF.text, !userPassword.isEmpty else {
-            print("No password provided")
             return
         }
         
         if userEmail.isValidEmail {
-            print("Valid email format")
         } else if userPassword.isValidPassword {
-            print("Valid password format")
         } else {
             print("Invalid email/password format")
         }

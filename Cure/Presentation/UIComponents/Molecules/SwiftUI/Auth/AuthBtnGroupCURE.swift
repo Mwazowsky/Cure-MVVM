@@ -14,12 +14,10 @@ struct AuthBtnGroupCURE: View {
         VStack(spacing: 10) {
             TextBtnCURE(title: "Register") {
 //                viewModelWrapper.viewModel?.didTapRegisterButton()
-                print("Register Tapped")
             }
             
             TextBtnCURE(title: "Forgot Password?") {
 //                viewModelWrapper.viewModel?.didTapRegisterButton()
-                print("Forget Password Tapped")
             }
         }
     }

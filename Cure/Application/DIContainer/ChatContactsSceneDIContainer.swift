@@ -76,20 +76,14 @@ final class ChatContactsDIContainer: ChatContactsListFlowCoordinatorDependencies
     }
     
     func makeChatContactsDetailsViewController(chatContact: ChatContact) -> UIViewController {
-        print("Implement later: ", chatContact)
-        
         return UIViewController()
     }
     
     func makeChattingViewController(chatContact: ChatContact) -> UIViewController {
-        print("Implement later: ", chatContact)
-        
         return UIViewController()
     }
     
     func makeChatContactsQueriesSuggestionsListViewController(didSelect: @escaping ChatContactsQueryListViewModelDidSelectAction) -> UIViewController {
-        print("Implement later: ", didSelect)
-        
         return UIViewController()
     }
 

@@ -38,11 +38,11 @@ enum TabBarItem {
     func pageeTitleValue() -> String {
         switch self {
         case .dashboard:
-            return "Dashboard"
+            return "Dashboard".localiz()
         case .chats:
-            return "Chats"
+            return "Chats".localiz()
         case .account:
-            return "Account"
+            return "Account".localiz()
         }
     }
     
@@ -60,20 +60,16 @@ enum TabBarItem {
     func pageIconName() -> String {
         switch self {
         case .dashboard:
-            return "square.and.arrow.down.fill"
+            return "IconTabDashboard"
         case .chats:
-            return "pencil.circle.fill"
+            return "IconTabAccount"
         case .account:
-            return "eraser.line.dashed.fill"
+            return "IconTabChat"
         }
     }
     
     func pageIconValue() -> UIImage? {
-        if #available(iOS 13.0, *) {
-            return UIImage(systemName: pageIconName())
-        } else {
             return UIImage(named: pageIconName())
-        }
     }
     
     func iconSelectedColor() -> UIColor {
@@ -139,15 +135,10 @@ final class HomeFlowCoordinator: NSObject, HomeFlowCoordinatorProtocol {
     
     private func prepareTabBarController(withTabBarControllers tabBarControllers: [UIViewController]) {
         tabBarController.delegate = self
-        
         tabBarController.setViewControllers(tabBarControllers, animated: true)
-        
         tabBarController.selectedIndex = TabBarItem.chats.pageOrderNumber()
-        
         tabBarController.tabBar.isTranslucent = true
-        
         tabBarController.tabBar.tintColor = DesignTokens.LegacyColors.primary
-        
         navigationController?.viewControllers = [tabBarController]
     }
     
@@ -248,7 +239,6 @@ extension HomeFlowCoordinator: UITabBarControllerDelegate {
 
 extension HomeFlowCoordinator: HomeFlowCoordinatorDelegate {
     func homeFlowDidFinish() {
-        print("Executing start")
         parentCoordinator?.start()
     }
     

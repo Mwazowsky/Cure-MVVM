@@ -65,7 +65,6 @@ final class AccountFlowCoordinator: Coordinator {
     }
     
     private func logoutDidSucceed() -> Void {
-        print("logoutDidSucceed, executing self.finish()")
         self.finish()
     }
 }

@@ -13,7 +13,7 @@ struct ChatContactsCVCURE: View {
     var body: some View {
         
         HStack(spacing: 4) {
-            AvatarIVCURE()
+//            AvatarIVCURE()
             
             VStack(spacing: 4){
                 NameTxtCURE(text: "Abdul Dudu")

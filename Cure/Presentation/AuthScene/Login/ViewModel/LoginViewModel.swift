@@ -86,7 +86,6 @@ final class DefaultLoginViewModel: LoginViewModel {
                 
                 fetchUserDetailsUseCase.execute(
                     cached: { cachedUser in
-                        print("Using cached user: \(cachedUser)")
                     },
                     completion: { [weak self] result in
                         guard let self = self else { return }

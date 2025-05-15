@@ -9,7 +9,9 @@
 
 import Foundation
 
-struct ChatContactsListItemViewModel: Equatable {
+struct ChatContactsListItemViewModel: Equatable, Identifiable {
+    var id: String
+    
     let contactName: String
     let lastMessage: String
     let dateTime: String
@@ -19,6 +21,7 @@ struct ChatContactsListItemViewModel: Equatable {
 extension ChatContactsListItemViewModel {
 
     init(chatContact: ChatContact) {
+        self.id = chatContact.id
         self.contactName = chatContact.contactName ?? ""
         self.profileImage = chatContact.photoURL
         self.lastMessage = chatContact.lastMessage?.content ?? ""

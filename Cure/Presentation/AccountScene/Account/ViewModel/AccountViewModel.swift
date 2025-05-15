@@ -52,7 +52,6 @@ final class DefaultAccountViewModel: AccountViewModel {
     func viewDidLoad() {
         loadUserDetailsUseCase.execute(
             cached: { cachedUser in
-                print("Using cached user: \(cachedUser)")
             },
             completion: { [weak self] result in
                 guard let self = self else { return }
