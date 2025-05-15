@@ -12,7 +12,7 @@ struct AuthFieldsGroupCURE: View {
     @ObservedObject var viewModelWrapper: LoginViewModelWrapper
     
     var body: some View {
-        VStack(spacing: 10) {
+        VStack(spacing: 14) {
             DefaultTFCURE(
                 isSecureTF: false,
                 placeholder: "Email",
@@ -20,12 +20,21 @@ struct AuthFieldsGroupCURE: View {
                 onTextChange: { viewModelWrapper.viewModel?.updateEmail($0) }
             )
             
-            DefaultTFCURE(
-                isSecureTF: true,
-                placeholder: "Password",
-                text: binding(viewModelWrapper.viewModel?.password ?? Observable("")) { viewModelWrapper.viewModel?.updatePassword($0) },
-                onTextChange: { viewModelWrapper.viewModel?.updatePassword($0) }
-            )
+            VStack(spacing: 7) {
+                DefaultTFCURE(
+                    isSecureTF: true,
+                    placeholder: "Password",
+                    text: binding(viewModelWrapper.viewModel?.password ?? Observable("")) { viewModelWrapper.viewModel?.updatePassword($0) },
+                    onTextChange: { viewModelWrapper.viewModel?.updatePassword($0) }
+                )
+                
+                HStack {
+                    Spacer()
+                    TextBtnCURE(title: "Forgot Password?") {
+                        // viewModelWrapper.viewModel?.didTapForgotPassword()
+                    }
+                }
+            }
         }
     }
     

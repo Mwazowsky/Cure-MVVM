@@ -20,9 +20,11 @@ struct PrimaryBtnCURE: View {
             Text(title)
                 .font(DesignTokens.Typography.bodyFont)
                 .foregroundColor(.white)
-                .padding()
+                .frame(minWidth: 120, minHeight: 40)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 4)
                 .background(DesignTokens.Colors.primaryCURE)
-                .cornerRadius(8)
+                .cornerRadius(25)
         }
     }
 }

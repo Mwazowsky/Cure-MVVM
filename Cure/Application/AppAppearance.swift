@@ -6,7 +6,15 @@ final class AppAppearance {
         if #available(iOS 15, *) {
             let appearance = UINavigationBarAppearance()
             appearance.configureWithOpaqueBackground()
-            appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+            
+            appearance.titleTextAttributes = [
+                .foregroundColor: DesignTokens.LegacyColors.lightBackground
+            ]
+            
+            appearance.largeTitleTextAttributes = [
+                .foregroundColor: DesignTokens.LegacyColors.lightBackground
+            ]
+            
             appearance.backgroundColor = DesignTokens.LegacyColors.primary
             appearance.shadowImage = UIImage()
             appearance.shadowColor = .clear

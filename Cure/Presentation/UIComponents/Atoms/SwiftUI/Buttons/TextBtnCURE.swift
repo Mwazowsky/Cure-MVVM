@@ -20,7 +20,7 @@ struct TextBtnCURE: View {
     var body: some View {
         Button(action: action) {
             Text(title)
-                .font(DesignTokens.Typography.bodyFont)
+                .font(DesignTokens.Typography.body2Font)
                 .foregroundColor(DesignTokens.Colors.textClickable)
                 .padding(.vertical, 4)
         }

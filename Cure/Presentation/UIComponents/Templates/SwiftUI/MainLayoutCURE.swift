@@ -15,7 +15,7 @@ struct MainLayoutCURE<Content: View>: View {
         NavigationView {
             //
             content()
-            //                .modifier(NavBarModifier())
+                .modifier(NavBarModifier())
         }
         .background(DesignTokens.Colors.background)
         .edgesIgnoringSafeArea(.all)

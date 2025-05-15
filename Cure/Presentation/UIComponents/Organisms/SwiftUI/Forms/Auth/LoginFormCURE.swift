@@ -14,6 +14,9 @@ struct LoginFormCURE: View {
     var body: some View {
         VStack(spacing: 16) {
             
+            PrimaryTxtCURE(text: "Welcome to CURE!")
+                .padding(.bottom, 25)
+            
             AuthFieldsGroupCURE(viewModelWrapper: viewModelWrapper)
             
             PrimaryBtnCURE(title: "Login") {

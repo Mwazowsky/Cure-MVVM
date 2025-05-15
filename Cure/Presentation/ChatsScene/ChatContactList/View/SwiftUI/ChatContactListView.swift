@@ -16,7 +16,7 @@ struct ChatContactsView: View {
 
     var body: some View {
         ChatContactsPageCURE(viewModelWrapper: viewModelWrapper)
-            .navigationBarHidden(false)
+            .navigationBarHidden(true)
             .onAppear {
                 viewModelWrapper.viewModel?.viewDidLoad()
             }
