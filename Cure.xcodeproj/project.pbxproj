@@ -118,6 +118,9 @@
 		641DF2F82DC4B5DF00EDAC97 /* ChatContactsListFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641DF2F72DC4B5CB00EDAC97 /* ChatContactsListFlowCoordinator.swift */; };
 		641DF2FE2DC4BD1100EDAC97 /* ChatListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641DF2FD2DC4BD0700EDAC97 /* ChatListViewModel.swift */; };
 		641DF3002DC4BE6000EDAC97 /* ChatContactsListItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641DF2FF2DC4BE5200EDAC97 /* ChatContactsListItemViewModel.swift */; };
+		642151142DD6E692007417E9 /* MainNavbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642151132DD6E687007417E9 /* MainNavbar.swift */; };
+		642151172DD6E9A8007417E9 /* ListLayoutCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642151162DD6E9A0007417E9 /* ListLayoutCURE.swift */; };
+		642151192DD710FB007417E9 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642151182DD710F1007417E9 /* Date.swift */; };
 		642A6E282DD44E4E00B006F0 /* SignupFormCUREUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642A6E272DD44E4E00B006F0 /* SignupFormCUREUIKit.swift */; };
 		642A6E2B2DD44E8D00B006F0 /* SignupFormCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642A6E2A2DD44E8D00B006F0 /* SignupFormCURE.swift */; };
 		642A6E2F2DD4513A00B006F0 /* IconBtnCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642A6E2E2DD4512F00B006F0 /* IconBtnCURE.swift */; };
@@ -151,7 +154,7 @@
 		644A27482DD5C24E00185DE5 /* AsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644A27462DD5C24900185DE5 /* AsyncImage.swift */; };
 		644A27492DD5C24E00185DE5 /* AsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644A27462DD5C24900185DE5 /* AsyncImage.swift */; };
 		64515E1F2DD2E6B2002E6F0F /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64515E1E2DD2E6AA002E6F0F /* String+Extension.swift */; };
-		64515E222DD2ECF8002E6F0F /* Regex.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64515E212DD2ECF4002E6F0F /* Regex.swift.swift */; };
+		64515E222DD2ECF8002E6F0F /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64515E212DD2ECF4002E6F0F /* Regex.swift */; };
 		64584BA52DBA3114007183B9 /* BaseResponse+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64584BA42DBA3109007183B9 /* BaseResponse+Mapping.swift */; };
 		6458D0C72DAF8CA900A4E4CA /* CoreDataUserDetailsResponseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6458D0C62DAF8C9900A4E4CA /* CoreDataUserDetailsResponseStorage.swift */; };
 		6458D0C92DAF91D800A4E4CA /* UserDetailsResponseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6458D0C82DAF91CF00A4E4CA /* UserDetailsResponseStorage.swift */; };
@@ -189,7 +192,7 @@
 		649ED1092DD480BA0062814F /* NameTxtCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649ED1082DD480AE0062814F /* NameTxtCURE.swift */; };
 		649ED10B2DD480FC0062814F /* LastMsgTxtCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649ED10A2DD480FC0062814F /* LastMsgTxtCURE.swift */; };
 		649ED10D2DD4812A0062814F /* TimeTxtCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649ED10C2DD4812A0062814F /* TimeTxtCURE.swift */; };
-		649ED1112DD484270062814F /* ChatContactsCVCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649ED1102DD4841A0062814F /* ChatContactsCVCURE.swift */; };
+		649ED1112DD484270062814F /* ChatContactsItemCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649ED1102DD4841A0062814F /* ChatContactsItemCURE.swift */; };
 		649ED1152DD487D00062814F /* ChatContactsPageCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649ED1142DD487AB0062814F /* ChatContactsPageCURE.swift */; };
 		649ED1192DD48AEC0062814F /* ChatContactListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649ED1182DD48AEC0062814F /* ChatContactListView.swift */; };
 		64A61F0B2DACC19B007D97D4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A61F0A2DACC18F007D97D4 /* SceneDelegate.swift */; };
@@ -399,6 +402,9 @@
 		641DF2F72DC4B5CB00EDAC97 /* ChatContactsListFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatContactsListFlowCoordinator.swift; sourceTree = "<group>"; };
 		641DF2FD2DC4BD0700EDAC97 /* ChatListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewModel.swift; sourceTree = "<group>"; };
 		641DF2FF2DC4BE5200EDAC97 /* ChatContactsListItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatContactsListItemViewModel.swift; sourceTree = "<group>"; };
+		642151132DD6E687007417E9 /* MainNavbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavbar.swift; sourceTree = "<group>"; };
+		642151162DD6E9A0007417E9 /* ListLayoutCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListLayoutCURE.swift; sourceTree = "<group>"; };
+		642151182DD710F1007417E9 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		642A6E272DD44E4E00B006F0 /* SignupFormCUREUIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupFormCUREUIKit.swift; sourceTree = "<group>"; };
 		642A6E2A2DD44E8D00B006F0 /* SignupFormCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupFormCURE.swift; sourceTree = "<group>"; };
 		642A6E2E2DD4512F00B006F0 /* IconBtnCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconBtnCURE.swift; sourceTree = "<group>"; };
@@ -419,7 +425,7 @@
 		644944CA2D89625E006B11C1 /* ResetPasswordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordUseCase.swift; sourceTree = "<group>"; };
 		644A27462DD5C24900185DE5 /* AsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImage.swift; sourceTree = "<group>"; };
 		64515E1E2DD2E6AA002E6F0F /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
-		64515E212DD2ECF4002E6F0F /* Regex.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Regex.swift.swift; sourceTree = "<group>"; };
+		64515E212DD2ECF4002E6F0F /* Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
 		64584BA42DBA3109007183B9 /* BaseResponse+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseResponse+Mapping.swift"; sourceTree = "<group>"; };
 		6458D0C62DAF8C9900A4E4CA /* CoreDataUserDetailsResponseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataUserDetailsResponseStorage.swift; sourceTree = "<group>"; };
 		6458D0C82DAF91CF00A4E4CA /* UserDetailsResponseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsResponseStorage.swift; sourceTree = "<group>"; };
@@ -454,7 +460,7 @@
 		649ED1082DD480AE0062814F /* NameTxtCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameTxtCURE.swift; sourceTree = "<group>"; };
 		649ED10A2DD480FC0062814F /* LastMsgTxtCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastMsgTxtCURE.swift; sourceTree = "<group>"; };
 		649ED10C2DD4812A0062814F /* TimeTxtCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTxtCURE.swift; sourceTree = "<group>"; };
-		649ED1102DD4841A0062814F /* ChatContactsCVCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatContactsCVCURE.swift; sourceTree = "<group>"; };
+		649ED1102DD4841A0062814F /* ChatContactsItemCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatContactsItemCURE.swift; sourceTree = "<group>"; };
 		649ED1142DD487AB0062814F /* ChatContactsPageCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatContactsPageCURE.swift; sourceTree = "<group>"; };
 		649ED1182DD48AEC0062814F /* ChatContactListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatContactListView.swift; sourceTree = "<group>"; };
 		64A61F0A2DACC18F007D97D4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -1279,6 +1285,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		642151152DD6E980007417E9 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				642151162DD6E9A0007417E9 /* ListLayoutCURE.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
 		642A6E292DD44E7E00B006F0 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
@@ -1299,6 +1313,7 @@
 		642A6E2D2DD44ED500B006F0 /* Navigations */ = {
 			isa = PBXGroup;
 			children = (
+				642151132DD6E687007417E9 /* MainNavbar.swift */,
 			);
 			path = Navigations;
 			sourceTree = "<group>";
@@ -1368,7 +1383,8 @@
 		64515E202DD2ECDA002E6F0F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				64515E212DD2ECF4002E6F0F /* Regex.swift.swift */,
+				64515E212DD2ECF4002E6F0F /* Regex.swift */,
+				642151182DD710F1007417E9 /* Date.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -2053,7 +2069,7 @@
 		64FE0ADF2DCC90030044A69C /* SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
-				649ED1102DD4841A0062814F /* ChatContactsCVCURE.swift */,
+				649ED1102DD4841A0062814F /* ChatContactsItemCURE.swift */,
 				642A6E2D2DD44ED500B006F0 /* Navigations */,
 				642A6E2C2DD44EC700B006F0 /* Forms */,
 			);
@@ -2079,6 +2095,7 @@
 		64FE0AEB2DCC95F20044A69C /* SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				642151152DD6E980007417E9 /* List */,
 				64FE0AED2DCC96540044A69C /* MainLayoutCURE.swift */,
 				64FE0AFD2DCCAE3B0044A69C /* FocusedLayoutCURE.swift */,
 			);
@@ -2505,8 +2522,9 @@
 				D35163602DBA899200EE63E5 /* CoreDataChatContactsResponseStorage.swift in Sources */,
 				64B740442D8A860C00168646 /* AuthFlowCoordinator.swift in Sources */,
 				1FE49D84230AA7C200D1D42E /* MoviesQueriesItemCell.swift in Sources */,
-				64515E222DD2ECF8002E6F0F /* Regex.swift.swift in Sources */,
+				64515E222DD2ECF8002E6F0F /* Regex.swift in Sources */,
 				64FB94652D94F4FB00A5325D /* AccountVC.swift in Sources */,
+				642151172DD6E9A8007417E9 /* ListLayoutCURE.swift in Sources */,
 				642A6E2F2DD4513A00B006F0 /* IconBtnCURE.swift in Sources */,
 				1FF53EB423688893008D6CCC /* DataTransferError+ConnectionError.swift in Sources */,
 				64BAAFEC2D92804200B70EFF /* HomeFlowCoordinator.swift in Sources */,
@@ -2548,6 +2566,7 @@
 				645CDA062D9E86E1006E01F6 /* IUserRepository.swift in Sources */,
 				64FB942E2D93A42500A5325D /* HomeQueriesItemCell.swift in Sources */,
 				64FE0ADD2DCC8EA00044A69C /* SearchBtnCURE.swift in Sources */,
+				642151142DD6E692007417E9 /* MainNavbar.swift in Sources */,
 				64FB942F2D93A42500A5325D /* HomeQueryListViewModel.swift in Sources */,
 				64FB94302D93A42500A5325D /* HomeQueriesTableViewController.swift in Sources */,
 				641DF2E12DC4A59500EDAC97 /* DefaultChatContactsQueriesRepository.swift in Sources */,
@@ -2585,6 +2604,7 @@
 				643A96FD2DB9E341001AAED1 /* IChatContactsQueriesRepository.swift in Sources */,
 				1FE49D8C230AA7C200D1D42E /* MoviesListViewController.swift in Sources */,
 				64B740462D8A862300168646 /* AuthSceneDIContainer.swift in Sources */,
+				642151192DD710FB007417E9 /* Date.swift in Sources */,
 				64A61F0F2DACEA5D007D97D4 /* ChatContactResponseDTO+Mapping.swift in Sources */,
 				648D8CAE2DD316C600F59F33 /* TextBtnCURE.swift in Sources */,
 				648D8CA82DD3002600F59F33 /* TextBtnCUREUIKit.swift in Sources */,
@@ -2633,7 +2653,7 @@
 				64FE0AFA2DCC9A7E0044A69C /* LoginView.swift in Sources */,
 				1FCE68A1222C873A00CC3074 /* MoviesSceneDIContainer.swift in Sources */,
 				64BAAFB92D927A7900B70EFF /* UseCase.swift in Sources */,
-				649ED1112DD484270062814F /* ChatContactsCVCURE.swift in Sources */,
+				649ED1112DD484270062814F /* ChatContactsItemCURE.swift in Sources */,
 				1F2AB95324278CC20010DEEE /* MoviesRequestDTO+Mapping.swift in Sources */,
 				64A811C62D9CF5DD0044BB95 /* DeviceInfo.swift in Sources */,
 				649ED1022DD478B80062814F /* AuthFieldsGroupCURE.swift in Sources */,

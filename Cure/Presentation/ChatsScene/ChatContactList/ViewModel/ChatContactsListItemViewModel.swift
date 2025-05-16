@@ -14,25 +14,59 @@ struct ChatContactsListItemViewModel: Equatable, Identifiable {
     
     let contactName: String
     let lastMessage: String
-    let dateTime: String
+    let dayOrTime: String
     let profileImage: String?
+    
+    let channelIdUrl: String
+    let company: String
+    
+    static let formatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+        return formatter
+    }()
 }
 
 extension ChatContactsListItemViewModel {
-
     init(chatContact: ChatContact) {
         self.id = chatContact.id
         self.contactName = chatContact.contactName ?? ""
         self.profileImage = chatContact.photoURL
         self.lastMessage = chatContact.lastMessage?.content ?? ""
-        if let chatDateTime = chatContact.lastMessage?.timestamp {
-            // DebugPoint 4 - Find out what best way in term of architectural design
-            /// to parse a date time in this app
-            /// Raw \(chatDateTime) timestamp string
-            self.dateTime = "\(NSLocalizedString("Last Chat", comment: "")): \(chatDateTime))"
-        } else {
-            self.dateTime = NSLocalizedString("-", comment: "")
+        
+        var timeString: String = ""
+        var channelIdImageUrl: String = ""
+        
+        if let timeStampString = chatContact.lastMessage?.timestamp,
+            let date = ChatContactsListItemViewModel.formatter.date(from: timeStampString) {
+            
+            let isSameDay = date.isToday
+            let isSameWeek = date.isThisWeek
+            
+            if isSameDay() {
+                timeString  = date.stringHour24()
+            } else if isSameWeek() {
+                timeString = date.stringDay()
+            } else {
+                timeString = date.stringDateDMY()
+            }
         }
+        
+        self.dayOrTime = timeString
+        
+        if let channelId = chatContact.channelID {
+            if channelId == 1 {
+                channelIdImageUrl  = "whatsapp"
+            } else if channelId == 2 {
+                channelIdImageUrl = "instagram"
+            } else {
+                channelIdImageUrl  = "whatsapp"
+            }
+        }
+        
+        self.channelIdUrl = channelIdImageUrl
+        self.company = chatContact.companyName
     }
 }
 

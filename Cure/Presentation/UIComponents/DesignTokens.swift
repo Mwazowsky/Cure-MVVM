@@ -14,6 +14,8 @@ struct DesignTokens {
         static let primaryCURE = Color("PrimaryCURE")
         static let secondaryCURE = Color("SecondaryCURE")
         
+        static let companyChip = Color("CompanyChip")
+        
         static let textForeground = Color("TextfieldFG")
         static let textBackground = Color("TextfieldBG")
         

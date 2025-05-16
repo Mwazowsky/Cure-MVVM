@@ -1,5 +1,5 @@
 //
-//  MainLayoutCURE.swift
+//  FocusedLayoutCURE.swift
 //  Cure
 //
 //  Created by MacBook Air MII  on 8/5/25.
