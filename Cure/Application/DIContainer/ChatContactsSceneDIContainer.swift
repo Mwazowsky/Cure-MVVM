@@ -17,7 +17,7 @@ final class ChatContactsDIContainer: ChatContactsListFlowCoordinatorDependencies
     lazy var chatContactsResponseCache : ChatContactsResponseStorage = CoreDataChatContactsResponseStorage()
 
     init(dependencies: Dependencies) {
-        self.dependencies = dependencies        
+        self.dependencies = dependencies       
     }
     
     // MARK: - Use Cases
@@ -34,7 +34,7 @@ final class ChatContactsDIContainer: ChatContactsListFlowCoordinatorDependencies
     
     // MARK: - Repositories
     func makeChatContactsRepository() -> IChatContactsRepository {
-        DefaultChatsRepository(
+        DefaultChatContactsRepository(
             newDataTransferService: dependencies.newApiDataTransferervice,
             cache: chatContactsResponseCache
         )
@@ -53,7 +53,7 @@ final class ChatContactsDIContainer: ChatContactsListFlowCoordinatorDependencies
 
     
     // MARK: - Chat Contacts List
-    func makeChatContactsListViewController(actions: ChatContactsListViewModelActions) -> UIViewController {
+    func makeChatContactsListViewController(actions: ChatContactsViewModelActions) -> UIViewController {
         if #available(iOS 13.0, *) { // SwiftUI
             let view = ChatContactsView(
                 viewModelWrapper: makeChatContactsViewModelWrapper(actions: actions)
@@ -67,7 +67,7 @@ final class ChatContactsDIContainer: ChatContactsListFlowCoordinatorDependencies
         }
     }
     
-    func makeChatContactsListViewModel(actions: ChatContactsListViewModelActions) -> ChatContactsViewModel {
+    func makeChatContactsListViewModel(actions: ChatContactsViewModelActions) -> ChatContactsViewModel {
         DefaultChatContactsViewModel(
             fetchChatContactsUseCase: makeFetchContactsUseCase(),
             getUserTokenDataUseCase: makeGetCurrentUserTokenUseCase(),
@@ -75,11 +75,11 @@ final class ChatContactsDIContainer: ChatContactsListFlowCoordinatorDependencies
         )
     }
     
-    func makeChatContactsDetailsViewController(chatContact: ChatContact) -> UIViewController {
+    func makeChattingViewController(chatContact: ChatContact) -> UIViewController {
         return UIViewController()
     }
     
-    func makeChattingViewController(chatContact: ChatContact) -> UIViewController {
+    func makeChatContactsDetailsViewController(chatContact: ChatContact) -> UIViewController {
         return UIViewController()
     }
     
@@ -91,7 +91,7 @@ final class ChatContactsDIContainer: ChatContactsListFlowCoordinatorDependencies
     // MARK: - ViewModelWrapper (For SwiftUI)
     @available(iOS 13.0, *)
     func makeChatContactsViewModelWrapper(
-        actions: ChatContactsListViewModelActions
+        actions: ChatContactsViewModelActions
     ) -> ChatContactsViewModelWrapper {
         ChatContactsViewModelWrapper(
             viewModel: makeChatContactsListViewModel(actions: actions)

@@ -10,7 +10,6 @@ final class DefaultChatContactsQueriesRepository {
 }
 
 extension DefaultChatContactsQueriesRepository: IChatContactsQueriesRepository {
-    
     func fetchRecentsQueries(
         maxCount: Int,
         completion: @escaping (Result<[ChatContactQuery], Error>) -> Void

@@ -42,6 +42,25 @@
         <relationship name="chatContacts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ChatContactResponseEntity" inverseName="chatContactsResponse" inverseEntity="ChatContactResponseEntity"/>
         <relationship name="request" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChatContactsRequestEntity" inverseName="response" inverseEntity="ChatContactsRequestEntity"/>
     </entity>
+    <entity name="ChattingQueryEntity" representedClassName="ChattingQueryEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="query" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="ChattingsRequestEntity" representedClassName="ChattingsRequestEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="filter" optional="YES" attributeType="String"/>
+        <attribute name="page" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="size" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="response" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChattingsResponseEntity"/>
+    </entity>
+    <entity name="ChattingsResponseEntity" representedClassName="ChattingsResponseEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="filter" optional="YES" attributeType="String"/>
+        <attribute name="page" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="size" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="timeStamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="chatContacts" optional="YES" toMany="YES" deletionRule="Nullify"/>
+        <relationship name="request" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChattingsRequestEntity"/>
+    </entity>
     <entity name="ErrorEntity" representedClassName="ErrorEntity" syncable="YES" codeGenerationType="class">
         <attribute name="detail" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>

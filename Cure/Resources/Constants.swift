@@ -11,6 +11,9 @@ import Alamofire
 let appStoreID = "6642695368"
 let apiKey = "mediainovasi"
 
+var global_nama_akun_login = "iosdev944@gmail.com"
+var globalSerialNumber = "p1s4ngc0kl4t"
+
 struct Constants {
     static private let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
     static private let appBundle = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "Unknown"

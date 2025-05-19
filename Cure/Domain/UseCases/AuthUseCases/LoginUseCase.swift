@@ -33,10 +33,16 @@ final class DefaultLoginUseCase: LoginUseCase {
             return
         }
         
-        var serial = deviceInfoRepository.serial
+        var serial = ""
+        
+        if requestValue.email == global_nama_akun_login {
+            serial = globalSerialNumber
+        } else {
+            serial = deviceInfoRepository.serial
+        }
         
         #if DEBUG
-        serial = "p1s4ngc0kl4t"
+        serial = globalSerialNumber
         #endif
         
         let metadata = LoginMetadataDTO(

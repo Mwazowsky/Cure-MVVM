@@ -9,6 +9,15 @@
 
 import Foundation
 
+enum DeliveryStatus: String, CaseIterable {
+    //    "sent" | "delivered" | "failed" | "read" | "deleted"
+    case sent
+    case delivered
+    case read
+    case failed
+    case deleted
+}
+
 struct ChatContactsListItemViewModel: Equatable, Identifiable {
     var id: String
     
@@ -19,6 +28,8 @@ struct ChatContactsListItemViewModel: Equatable, Identifiable {
     
     let channelIdUrl: String
     let company: String
+    
+    let status: DeliveryStatus
     
     static let formatter = {
         let formatter = DateFormatter()
@@ -67,6 +78,21 @@ extension ChatContactsListItemViewModel {
         
         self.channelIdUrl = channelIdImageUrl
         self.company = chatContact.companyName
+        
+        let statusString: String = chatContact.lastMessage?.status ?? ""
+        
+        switch statusString {
+        case "sent":
+            self.status = .sent
+        case "delivered":
+            self.status = .delivered
+        case "read":
+            self.status = .read
+        case "deleted":
+            self.status = .deleted
+        default:
+            self.status = .failed
+        }
     }
 }
 

@@ -49,9 +49,10 @@ struct ChatContactsItemView: View {
                     .foregroundColor(.gray)
                 
                 // Change with read indicator
-                //                Text(viewModel.id)
-                //                    .font(.subheadline)
-                //                    .foregroundColor(.gray)
+                Text(viewModel.status.rawValue)
+                    .font(.caption)
+                    .foregroundColor(.gray)
+                    .frame(alignment: .bottom)
             }
         }
         .frame(maxWidth: .infinity)

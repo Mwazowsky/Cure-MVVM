@@ -7,21 +7,21 @@
 
 import Foundation
 
-struct ChatContactsListViewModelActions {
+struct ChatContactsViewModelActions {
     /// Note: if you would need to edit chatContact inside Chat Contact Details screen and update this ChatContact List screen with updated contact then you would need this closure:
     /// showMovieDetails: (Movie, @escaping (_ updated: Movie) -> Void) -> Void
     let showChattingPage: (ChatContact) -> Void
-    let showChatContactDetails: (ChatContact) -> Void
+//    let showChatContactDetails: (ChatContact) -> Void
     let showChatContactsQueriesSuggestions: (@escaping (_ didSelect: ChatContactQuery) -> Void) -> Void
     let closeChatContactsQueriesSuggestions: () -> Void
 }
 
-enum ChatContactsListViewModelLoading {
+enum ChatContactsViewModelLoading {
     case fullScreen
     case nextPage
 }
 
-protocol ChatContactsListViewModelInput {
+protocol ChatContactsViewModelInput {
     func viewDidLoad()
     func didLoadNextPage()
     func didSearch(query: String)
@@ -31,9 +31,9 @@ protocol ChatContactsListViewModelInput {
     func didSelectItem(at index: Int)
 }
 
-protocol ChatContactsListViewModelOutput {
+protocol ChatContactsViewModelOutput {
     var items: Observable<[ChatContactsListItemViewModel]> { get } /// Also we can calculate view model items on demand:  https://github.com/kudoleh/iOS-Clean-Architecture-MVVM/pull/10/files
-    var loading: Observable<ChatContactsListViewModelLoading?> { get }
+    var loading: Observable<ChatContactsViewModelLoading?> { get }
     var query: Observable<String> { get }
     var error: Observable<String> { get }
     var isEmpty: Bool { get }
@@ -43,13 +43,13 @@ protocol ChatContactsListViewModelOutput {
     var searchBarPlaceholder: String { get }
 }
 
-typealias ChatContactsViewModel = ChatContactsListViewModelInput & ChatContactsListViewModelOutput
+typealias ChatContactsViewModel = ChatContactsViewModelInput & ChatContactsViewModelOutput
 
 final class DefaultChatContactsViewModel: ChatContactsViewModel {
     
     private let fetchChatContactsUseCase: FetchChatContactsUseCase
     private let getUserTokenDataUseCase: GetUserTokenUseCase
-    private let actions: ChatContactsListViewModelActions?
+    private let actions: ChatContactsViewModelActions?
     
     var currentPage: Int = 0
     var totalPageCount: Int = 1
@@ -62,7 +62,7 @@ final class DefaultChatContactsViewModel: ChatContactsViewModel {
     
     // MARK: - OUTPUT
     let items: Observable<[ChatContactsListItemViewModel]> = Observable([])
-    let loading: Observable<ChatContactsListViewModelLoading?> = Observable(.none)
+    let loading: Observable<ChatContactsViewModelLoading?> = Observable(.none)
     let query: Observable<String> = Observable("")
     let error: Observable<String> = Observable("")
     var isEmpty: Bool { return items.value.isEmpty }
@@ -75,7 +75,7 @@ final class DefaultChatContactsViewModel: ChatContactsViewModel {
     init(
         fetchChatContactsUseCase: FetchChatContactsUseCase,
         getUserTokenDataUseCase: GetUserTokenUseCase,
-        actions: ChatContactsListViewModelActions? = nil,
+        actions: ChatContactsViewModelActions? = nil,
         mainQueue: DispatchQueueType = DispatchQueue.main
     ) {
         self.fetchChatContactsUseCase = fetchChatContactsUseCase
@@ -105,7 +105,7 @@ final class DefaultChatContactsViewModel: ChatContactsViewModel {
         items.value.removeAll()
     }
     
-    private func load(chatContactQuery: ChatContactQuery, loading: ChatContactsListViewModelLoading) {
+    private func load(chatContactQuery: ChatContactQuery, loading: ChatContactsViewModelLoading) {
         self.loading.value = loading
 
         query.value = chatContactQuery.query
@@ -211,6 +211,6 @@ extension DefaultChatContactsViewModel {
     func didSelectItem(at index: Int) {
         let allContacts = pages.flatMap { $0.chatContacts }
         let selectedContact = allContacts[index]
-        actions?.showChatContactDetails(selectedContact)
+        actions?.showChattingPage(selectedContact)
     }
 }

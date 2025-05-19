@@ -11,19 +11,19 @@ typealias ChatContactsQueryListViewModelDidSelectAction = (ChatContactQuery) -> 
 
 protocol ChatContactsListFlowCoordinatorDependencies {
     func makeChatContactsListViewController(
-        actions: ChatContactsListViewModelActions
+        actions: ChatContactsViewModelActions
     ) -> UIViewController
-    func makeChatContactsDetailsViewController(chatContact: ChatContact) -> UIViewController
+//    func makeChatContactsDetailsViewController(chatContact: ChatContact) -> UIViewController
     func makeChattingViewController(chatContact: ChatContact) -> UIViewController
     func makeChatContactsQueriesSuggestionsListViewController(
         didSelect: @escaping ChatContactsQueryListViewModelDidSelectAction
     ) -> UIViewController
 }
 
-
 final class ChatContactsListFlowCoordinator: Coordinator {
-    var type: CoordinatorType { .app }
+    private let appDIContainer: AppDIContainer
     
+    var type: CoordinatorType { .app }
     var childCoordinators: [Coordinator] = [Coordinator]()
     
     weak var parentCoordinator: HomeFlowCoordinator?
@@ -43,9 +43,8 @@ final class ChatContactsListFlowCoordinator: Coordinator {
     }
     
     func start() {
-        let actions = ChatContactsListViewModelActions(
+        let actions = ChatContactsViewModelActions(
             showChattingPage: showChattingView,
-            showChatContactDetails: showChatContactDetails,
             showChatContactsQueriesSuggestions: showChatContactQueriesSuggestions,
             closeChatContactsQueriesSuggestions: closeChatContactQueriesSuggestions
         )
@@ -54,14 +53,23 @@ final class ChatContactsListFlowCoordinator: Coordinator {
         chatContactsListVC = vc
     }
     
-    // DebugPoint 3 - Missplaced Flow, Might need to move it in chattingflow
-    private func showChattingView(chatContact: ChatContact) {
-        let vc = dependencies.makeChattingViewController(chatContact: chatContact)
-        navigationController?.pushViewController(vc, animated: true)
+    // MARK: - This is flow
+    private func showChattingFlow(navigationController: UINavigationController) {
+        let chattingSceneDIContainer = appDIContainer.makeChattingSceneDIContainer()
+        let chattingFlowDIContainer = chattingSceneDIContainer.makeChattingFlowCoordinator(
+            navigationController: navigationController
+        )
+        
+        chattingFlowDIContainer.parentCoordinator = self
+        chattingFlowDIContainer.start()
+        
+        childCoordinators.append(chattingFlowDIContainer)
     }
     
-    private func showChatContactDetails(chatContact: ChatContact) {
-        let vc = dependencies.makeChatContactsDetailsViewController(chatContact: chatContact)
+    // MARK: - This is view
+    /// DebugPoint 3 - Missplaced Flow, Might need to move it in chattingflow
+    private func showChattingView(chatContact: ChatContact) {
+        let vc = dependencies.makeChattingViewController(chatContact: chatContact)
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -81,5 +89,16 @@ final class ChatContactsListFlowCoordinator: Coordinator {
         chatContactsQueriesSuggestionsVC?.remove()
         chatContactsQueriesSuggestionsVC = nil
 //        chatContactsListVC?.suggestionsListContainer.isHidden = true
+    }
+}
+
+extension ChatContactsListFlowCoordinator {
+    func childDidFinish(_ child: Coordinator?) {
+        for (index, coordinator) in childCoordinators.enumerated() {
+            if coordinator === child {
+                childCoordinators.remove(at: index)
+                break
+            }
+        }
     }
 }

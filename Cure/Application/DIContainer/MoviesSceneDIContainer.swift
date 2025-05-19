@@ -62,7 +62,7 @@ final class MoviesSceneDIContainer: MoviesSearchFlowCoordinatorDependencies {
     }
     
     func makeChatContactsRepository() -> IChatContactsRepository {
-        DefaultChatsRepository(
+        DefaultChatContactsRepository(
             newDataTransferService: dependencies.newApiDataTransferervice,
             cache: chatContactsResponseCache
         )

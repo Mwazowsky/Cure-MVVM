@@ -1,20 +1,20 @@
 //
-//  DefaultChatsRepository.swift
+//  DefaultChattingRepository.swift
 //  Cure
 //
-//  Created by MacBook Air MII  on 24/4/25.
+//  Created by MacBook Air MII  on 19/5/25.
 //
 
 import Foundation
 
-final class DefaultChatsRepository {
+final class DefaultChattingRepository {
     private let newDataTransferService: DataTransferService
-    private let cache: ChatContactsResponseStorage
+    private let cache: ChattingResponseStorage
     private let backgroundQueue: DataTransferDispatchQueue
     
     init(
         newDataTransferService: DataTransferService,
-        cache: ChatContactsResponseStorage,
+        cache: ChattingResponseStorage,
         backgroundQueue: DataTransferDispatchQueue = DispatchQueue.global(qos: .userInitiated)
     ) {
         self.newDataTransferService = newDataTransferService
@@ -23,15 +23,16 @@ final class DefaultChatsRepository {
     }
 }
 
-extension DefaultChatsRepository: IChatContactsRepository {
-    func fetchChatContactsList(
-        query: ChatContactQuery,
+extension DefaultChattingRepository: IChattingRepository {
+    func fetchMessages(
+        query: ChattingQuery,
         page: Int,
         size: Int,
-        cached: @escaping (ChatContactsPageDTO) -> Void,
-        completion: @escaping (Result<ChatContactsPage, Error>) -> Void
+        cached: @escaping (ChatMessagesPage) -> Void,
+        completion: @escaping (Result<ChatMessagesPage, Error>) -> Void
     ) -> Cancellable? {
-        let requestDto = ChatContactsRequestDTO(filter: query.query, page: page, size: size)
+        let requestDto = ChattingRequestDTO(filter: query.query, page: page, size: size)
+        
         let task = RepositoryTask()
         
         cache.getResponse(for: requestDto) { result in
@@ -44,30 +45,29 @@ extension DefaultChatsRepository: IChatContactsRepository {
             
             guard !task.isCancelled else { return }
             
-            let endpoint = APIEndpoints.getChatContacts(with: requestDto)
+            let endpoint = APIEndpoints.getMessages(with: requestDto)
             
             task.networkTask = self.newDataTransferService.request(
                 with: endpoint,
                 on: self.backgroundQueue
-            ) { [weak self] (result: Result<BaseResponse<[ChatContactResponseDTO]>, DataTransferError>) in
+            ) { [weak self] (result: Result<BaseResponse<[MessageResponseDTO]>, DataTransferError>) in
                 switch result {
                 case .success(let baseResponse):
-                    let responseDTO = ChatContactsPageDTO(
+                    let responseDTO = MessagesPageDTO(
                         filter: requestDto.filter,
                         timeStamp: Date(),
                         page: requestDto.page,
                         size: requestDto.size,
-                        chatContacts: baseResponse.data ?? []
+                        chatMessages: baseResponse.data ?? []
                     )
                     
                     self?.cache.save(responseDto: responseDTO, for: requestDto)
                     completion(.success(responseDTO.toDomain()))
-
+                    
                 case .failure(let error):
                     completion(.failure(error))
                 }
             }
-
         }
         
         return task

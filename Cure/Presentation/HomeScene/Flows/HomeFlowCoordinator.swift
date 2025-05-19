@@ -115,7 +115,6 @@ final class HomeFlowCoordinator: NSObject, HomeFlowCoordinatorProtocol {
     }
     
     func start() {
-        // Globally set the navbar hiden or visible
         navigationController?.navigationBar.isHidden = true
         navigationController?.setNavigationBarHidden(true, animated: false)
         
@@ -131,56 +130,6 @@ final class HomeFlowCoordinator: NSObject, HomeFlowCoordinatorProtocol {
     
     func finish() {
         parentCoordinator?.childDidFinish(self)
-    }
-    
-    private func prepareTabBarController(withTabBarControllers tabBarControllers: [UIViewController]) {
-        tabBarController.delegate = self
-        tabBarController.setViewControllers(tabBarControllers, animated: true)
-        tabBarController.selectedIndex = TabBarItem.chats.pageOrderNumber()
-        tabBarController.tabBar.isTranslucent = true
-        tabBarController.tabBar.tintColor = DesignTokens.LegacyColors.primary
-        navigationController?.viewControllers = [tabBarController]
-    }
-    
-    private func showMovieFlow(navigationController: UINavigationController) {
-        let moviesSceneDIContainer = appDIContainer.makeMoviesSceneDIContainer()
-        let moviesFlowCoordinator = moviesSceneDIContainer.makeMoviesSearchFlowCoordinator(
-            navigationController: navigationController
-        )
-        
-        moviesFlowCoordinator.parentCoordinator = self
-        moviesFlowCoordinator.start()
-        
-        childCoordinators.append(moviesFlowCoordinator)
-    }
-    
-    private func showChatContactsFlow(navigationController: UINavigationController) {
-        let chatContactsSceneDIContainer = appDIContainer.makeChatContactsSceneDIContainer()
-        let chatContactsFlowDIContainer = chatContactsSceneDIContainer.makeChatContactsListFlowCoordinator(
-            navigationController: navigationController
-        )
-        
-        chatContactsFlowDIContainer.parentCoordinator = self
-        chatContactsFlowDIContainer.start()
-        
-        childCoordinators.append(chatContactsFlowDIContainer)
-    }
-    
-    private func showAccountFlow(navigationController: UINavigationController) {
-        let accountSceneDIContainer = appDIContainer.makeAccountSceneDIContainer()
-        let accountFlowCoordinator = accountSceneDIContainer.makeAccountFlowCoordinator(
-            navigationController: navigationController
-        )
-        
-        accountFlowCoordinator.parentCoordinator = self
-        accountFlowCoordinator.start()
-        
-        childCoordinators.append(accountFlowCoordinator)
-    }
-    
-    private func showForgotPassword() {
-        //        let vc = dependencies.makeMoviesDetailsViewController(movie: movie)
-        //        navigationController?.pushViewController(vc, animated: true)
     }
     
     private func getTabBarController(_ item: TabBarItem) -> UINavigationController {
@@ -212,6 +161,44 @@ final class HomeFlowCoordinator: NSObject, HomeFlowCoordinatorProtocol {
         }
         
         return navController
+    }
+    
+    private func prepareTabBarController(withTabBarControllers tabBarControllers: [UIViewController]) {
+        tabBarController.delegate = self
+        tabBarController.setViewControllers(tabBarControllers, animated: true)
+        tabBarController.selectedIndex = TabBarItem.chats.pageOrderNumber()
+        tabBarController.tabBar.isTranslucent = true
+        tabBarController.tabBar.tintColor = DesignTokens.LegacyColors.primary
+        navigationController?.viewControllers = [tabBarController]
+    }
+    
+    private func showChatContactsFlow(navigationController: UINavigationController) {
+        let chatContactsSceneDIContainer = appDIContainer.makeChatContactsSceneDIContainer()
+        let chatContactsFlowDIContainer = chatContactsSceneDIContainer.makeChatContactsListFlowCoordinator(
+            navigationController: navigationController
+        )
+        
+        chatContactsFlowDIContainer.parentCoordinator = self
+        chatContactsFlowDIContainer.start()
+        
+        childCoordinators.append(chatContactsFlowDIContainer)
+    }
+    
+    private func showAccountFlow(navigationController: UINavigationController) {
+        let accountSceneDIContainer = appDIContainer.makeAccountSceneDIContainer()
+        let accountFlowCoordinator = accountSceneDIContainer.makeAccountFlowCoordinator(
+            navigationController: navigationController
+        )
+        
+        accountFlowCoordinator.parentCoordinator = self
+        accountFlowCoordinator.start()
+        
+        childCoordinators.append(accountFlowCoordinator)
+    }
+    
+    private func showForgotPassword() {
+        //        let vc = dependencies.makeMoviesDetailsViewController(movie: movie)
+        //        navigationController?.pushViewController(vc, animated: true)
     }
     
     func selectItem(_ item: TabBarItem) {
