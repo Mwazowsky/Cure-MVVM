@@ -28,10 +28,21 @@ extension DefaultChattingRepository: IChattingRepository {
         query: ChattingQuery,
         page: Int,
         size: Int,
-        cached: @escaping (ChatMessagesPage) -> Void,
+        totalPages: Int,
+        cached: @escaping (MessagesPageDTO) -> Void,
+        completion: @escaping (Result<MessagesPageDTO, any Error>) -> Void) -> (any Cancellable)? {
+        <#code#>
+    }
+    
+    func fetchMessages(
+        query: ChattingQuery,
+        page: Int,
+        size: Int,
+        totalPages: Int,
+        cached: @escaping (MessagesPageDTO) -> Void,
         completion: @escaping (Result<ChatMessagesPage, Error>) -> Void
     ) -> Cancellable? {
-        let requestDto = ChattingRequestDTO(filter: query.query, page: page, size: size)
+        let requestDto = ChattingRequestDTO(filter: query.query, page: page, size: size, totalPages: totalPages)
         
         let task = RepositoryTask()
         
@@ -45,7 +56,7 @@ extension DefaultChattingRepository: IChattingRepository {
             
             guard !task.isCancelled else { return }
             
-            let endpoint = APIEndpoints.getMessages(with: requestDto)
+            let endpoint = APIEndpoints.getChatMessages(with: requestDto)
             
             task.networkTask = self.newDataTransferService.request(
                 with: endpoint,
@@ -58,6 +69,7 @@ extension DefaultChattingRepository: IChattingRepository {
                         timeStamp: Date(),
                         page: requestDto.page,
                         size: requestDto.size,
+                        totalPages: requestDto.totalPages,
                         chatMessages: baseResponse.data ?? []
                     )
                     

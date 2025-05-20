@@ -21,7 +21,7 @@ extension DefaultChattingQueriesRepository: IChattingQueriesRepository {
         maxCount: Int,
         completion: @escaping (Result<[ChattingQuery], any Error>) -> Void
     ) {
-        return chattingQueriesPersistentStorage.fetchRecentsQueries(
+        return chattingQueriesPersistentStorage.fetchRecentQueries(
             maxCount: maxCount,
             completion: completion
         )

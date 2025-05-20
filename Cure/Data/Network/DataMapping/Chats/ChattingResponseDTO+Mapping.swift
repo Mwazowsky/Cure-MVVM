@@ -49,12 +49,9 @@ extension MessagesPageDTO {
 extension MessageResponseDTO {
     func toDomain() -> ChatMessage {
         return .init(
-            contactPairingID: contactPairingID,
-            contactID: contactID,
-            contactName: contactName,
-            isActive: isActive,
-            contactNumber: contactNumber,
-            photoURL: photoURL
+            reply: <#T##MessageReply?#>,
+            detail: <#T##MessageDetail#>,
+            base: <#T##BaseMessage#>
         )
     }
 }

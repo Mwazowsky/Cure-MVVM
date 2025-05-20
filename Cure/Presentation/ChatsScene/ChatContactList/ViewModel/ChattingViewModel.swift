@@ -117,7 +117,8 @@ final class DefaultChattingViewModel: ChattingViewModel {
             requestValue: .init(
                 query: chattingQuery,
                 page: nextPage,
-                size: 10),
+                size: 10,
+                totalPages: totalPageCount),
             cached: { page in
                 //                self?.mainQueue.async {
                 //                    /// Error: Execute Cached completion return dto of chat contact
@@ -129,7 +130,8 @@ final class DefaultChattingViewModel: ChattingViewModel {
                 self?.mainQueue.async {
                     switch result {
                     case .success(let page):
-                        self?.appendPage(page)
+                        let pageDM = page.toDomain()
+                        self?.appendPage(pageDM)
                     case .failure(let error):
                         self?.handle(error: error)
                     }

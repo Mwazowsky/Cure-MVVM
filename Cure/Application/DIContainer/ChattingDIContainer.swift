@@ -20,7 +20,7 @@ final class ChattingDIContainer: ChattingFlowCoordinatorDependencies {
     // MARK: - Persistent Storage
     /// Chatting
     lazy var chattingQueriesStorage: ChattingQueriesStorage  = CoreDataChattingsQueriesStorage(maxStorageLimit: 10)
-    lazy var chattingResponseCache : ChattingResponseStorage = CoreDataChatContactsResponseStorage()
+    lazy var chattingResponseCache : ChattingResponseStorage = CoreDataChattingResponseStorage()
 
     init(dependencies: Dependencies) {
         self.dependencies = dependencies

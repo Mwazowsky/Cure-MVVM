@@ -18,12 +18,12 @@ struct ChatMessage: Equatable, Identifiable, Codable {
         return "\(base.messageLogID)"
     }
     
-    let reply: Reply?
-    let detail: Detail
-    let base: Base
+    let reply: MessageReply?
+    let detail: MessageDetail
+    let base: BaseMessage
 }
 
-struct Base: Codable {
+struct BaseMessage: Codable {
     let companyHuntingNumberID: Int
     let content, status, timestamp: String
     let readAt: String?
@@ -47,7 +47,7 @@ struct Base: Codable {
 }
 
 // MARK: - Detail
-struct Detail: Codable {
+struct MessageDetail: Codable {
     let location, referral: String?
     let whatsappMessageLogID: Int
     let isForwarded: Bool
@@ -58,14 +58,14 @@ struct Detail: Codable {
 }
 
 // MARK: - Employee
-struct Employee: Codable {
+struct MessageEmployee: Codable {
     let id: Int
     let name: String
     let photourl: String?
 }
 
 // MARK: - Reply
-struct Reply: Codable {
+struct MessageReply: Codable {
     let content: String
     let messagelogid: Int
     let format: String

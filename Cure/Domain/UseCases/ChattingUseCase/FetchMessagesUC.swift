@@ -8,8 +8,8 @@
 protocol FetchMessagesUseCase {
     func execute(
         requestValue: FetchMessagesUseCaseRequestValue,
-        cached: @escaping (ChatMessagesPage) -> Void,
-        completion: @escaping (Result<ChatMessagesPage, Error>) -> Void
+        cached: @escaping (MessagesPageDTO) -> Void,
+        completion: @escaping (Result<MessagesPageDTO, Error>) -> Void
     ) -> Cancellable?
 }
 
@@ -27,13 +27,14 @@ final class DefaultFetchMessagesUseCase: FetchMessagesUseCase {
     
     func execute(
         requestValue: FetchMessagesUseCaseRequestValue,
-        cached: @escaping (ChatMessagesPage) -> Void,
-        completion: @escaping (Result<ChatMessagesPage, any Error>) -> Void
+        cached: @escaping (MessagesPageDTO) -> Void,
+        completion: @escaping (Result<MessagesPageDTO, any Error>) -> Void
     ) -> (any Cancellable)? {
         return fetchMessageRepository.fetchMessages(
             query: requestValue.query,
             page: requestValue.page,
             size: requestValue.size,
+            totalPages: requestValue.totalPages,
             cached: cached,
             completion: { result in
                 switch result {
@@ -54,4 +55,5 @@ struct FetchMessagesUseCaseRequestValue {
     let query: ChattingQuery
     let page: Int
     let size: Int
+    let totalPages: Int
 }

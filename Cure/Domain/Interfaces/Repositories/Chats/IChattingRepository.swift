@@ -11,7 +11,8 @@ protocol IChattingRepository {
         query: ChattingQuery,
         page: Int,
         size: Int,
-        cached: @escaping (ChatMessagesPage) -> Void,
-        completion: @escaping (Result<ChatMessagesPage, Error>) -> Void
+        totalPages: Int,
+        cached: @escaping (MessagesPageDTO) -> Void,
+        completion: @escaping (Result<MessagesPageDTO, Error>) -> Void
     ) -> Cancellable?
 }

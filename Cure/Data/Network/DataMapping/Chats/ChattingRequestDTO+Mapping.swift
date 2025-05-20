@@ -11,4 +11,5 @@ struct ChattingRequestDTO: Encodable {
     let filter: String
     let page: Int
     let size: Int
+    let totalPages: Int
 }

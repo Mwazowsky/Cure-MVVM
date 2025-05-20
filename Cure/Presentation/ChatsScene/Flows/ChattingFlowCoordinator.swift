@@ -63,7 +63,7 @@ final class ChattingFlowCoordinator: Coordinator {
     }
     
     func start() {
-        <#code#>
+        print("123")
     }
     
     func finish() {

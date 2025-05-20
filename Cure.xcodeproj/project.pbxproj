@@ -254,6 +254,9 @@
 		64BAAFF92D92804200B70EFF /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BAAFC72D92804200B70EFF /* HomeView.swift */; };
 		64DFE21B2DB8F6C100A64AEA /* FetchChatUC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DFE21A2DB8F6AA00A64AEA /* FetchChatUC.swift */; };
 		64DFE21C2DB8F6C100A64AEA /* FetchChatUC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DFE21A2DB8F6AA00A64AEA /* FetchChatUC.swift */; };
+		64EEF7292DDC1BFB00BDCC26 /* CoreDataChattingResponseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EEF7252DDC1BFB00BDCC26 /* CoreDataChattingResponseStorage.swift */; };
+		64EEF72A2DDC1BFB00BDCC26 /* ChattingResponseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EEF7242DDC1BFB00BDCC26 /* ChattingResponseStorage.swift */; };
+		64EEF72B2DDC1BFB00BDCC26 /* ChattingResponseEntity+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EEF7262DDC1BFB00BDCC26 /* ChattingResponseEntity+Mapping.swift */; };
 		64FB941E2D93A36B00A5325D /* HomeQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB941D2D93A36B00A5325D /* HomeQuery.swift */; };
 		64FB941F2D93A36B00A5325D /* HomeQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB941D2D93A36B00A5325D /* HomeQuery.swift */; };
 		64FB942C2D93A42500A5325D /* HomeQueryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB94282D93A42500A5325D /* HomeQueryListView.swift */; };
@@ -528,6 +531,9 @@
 		64BAAFC12D92804200B70EFF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		64BAAFC72D92804200B70EFF /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		64DFE21A2DB8F6AA00A64AEA /* FetchChatUC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchChatUC.swift; sourceTree = "<group>"; };
+		64EEF7242DDC1BFB00BDCC26 /* ChattingResponseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingResponseStorage.swift; sourceTree = "<group>"; };
+		64EEF7252DDC1BFB00BDCC26 /* CoreDataChattingResponseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataChattingResponseStorage.swift; sourceTree = "<group>"; };
+		64EEF7262DDC1BFB00BDCC26 /* ChattingResponseEntity+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChattingResponseEntity+Mapping.swift"; sourceTree = "<group>"; };
 		64FB941D2D93A36B00A5325D /* HomeQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeQuery.swift; sourceTree = "<group>"; };
 		64FB94202D93A42500A5325D /* HomeQueryListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeQueryListViewModel.swift; sourceTree = "<group>"; };
 		64FB94212D93A42500A5325D /* HomeQueryListItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeQueryListItemViewModel.swift; sourceTree = "<group>"; };
@@ -1403,6 +1409,7 @@
 				64706EB62DDB2C6F00D4B199 /* ChattingQueriesStorage */,
 				641DF2E22DC4A5FD00EDAC97 /* ChatContactsQueriesStorage */,
 				643A97022DB9F453001AAED1 /* ChatContactsResponseStorage */,
+				64EEF7282DDC1BFB00BDCC26 /* ChattingResponseStorage */,
 			);
 			path = Chats;
 			sourceTree = "<group>";
@@ -1772,6 +1779,24 @@
 				6451F4B02DDAE45000A18E95 /* ChattingQuery.swift */,
 			);
 			path = Chat;
+			sourceTree = "<group>";
+		};
+		64EEF7272DDC1BFB00BDCC26 /* EntityMapping */ = {
+			isa = PBXGroup;
+			children = (
+				64EEF7262DDC1BFB00BDCC26 /* ChattingResponseEntity+Mapping.swift */,
+			);
+			path = EntityMapping;
+			sourceTree = "<group>";
+		};
+		64EEF7282DDC1BFB00BDCC26 /* ChattingResponseStorage */ = {
+			isa = PBXGroup;
+			children = (
+				64EEF7242DDC1BFB00BDCC26 /* ChattingResponseStorage.swift */,
+				64EEF7252DDC1BFB00BDCC26 /* CoreDataChattingResponseStorage.swift */,
+				64EEF7272DDC1BFB00BDCC26 /* EntityMapping */,
+			);
+			path = ChattingResponseStorage;
 			sourceTree = "<group>";
 		};
 		64F9DEA42D894D7A008F3A35 /* Movie */ = {
@@ -2716,6 +2741,7 @@
 				642A6E282DD44E4E00B006F0 /* SignupFormCUREUIKit.swift in Sources */,
 				1FE49D92230AA7C200D1D42E /* MoviesListViewModel.swift in Sources */,
 				64FB94402D93A80D00A5325D /* IHomeRepository.swift in Sources */,
+				64EEF7292DDC1BFB00BDCC26 /* CoreDataChattingResponseStorage.swift in Sources */,
 				641162C52DAF85A100142060 /* UserDetailsResponseEntityMapping.swift in Sources */,
 				64FE0AB52DCC8A2C0044A69C /* PrimaryBtnCURE.swift in Sources */,
 				1FB0903A2437651700DBE132 /* UIViewController+AddBehaviors.swift in Sources */,
@@ -2744,6 +2770,8 @@
 				644944C92D89555C006B11C1 /* RegisterUseCase.swift in Sources */,
 				FC740818216555C500FE52A5 /* UserDefaultsMoviesQueriesStorage.swift in Sources */,
 				641DF2F82DC4B5DF00EDAC97 /* ChatContactsListFlowCoordinator.swift in Sources */,
+				64EEF72A2DDC1BFB00BDCC26 /* ChattingResponseStorage.swift in Sources */,
+				64EEF72B2DDC1BFB00BDCC26 /* ChattingResponseEntity+Mapping.swift in Sources */,
 				644A27472DD5C24E00185DE5 /* AsyncImage.swift in Sources */,
 				64FE0AEE2DCC965D0044A69C /* MainLayoutCURE.swift in Sources */,
 				64B740252D8A64C600168646 /* GetUserTokenUseCase.swift in Sources */,
