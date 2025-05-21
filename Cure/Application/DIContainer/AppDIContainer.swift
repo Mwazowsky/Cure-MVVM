@@ -105,6 +105,9 @@ final class AppDIContainer {
             imageDataTransferService: imageDataTransferService
         )
         
-        return ChattingDIContainer(dependencies: dependencies)
+        return ChattingDIContainer(
+            dependencies: dependencies,
+            windowManager: windowManager
+        )
     }
 }

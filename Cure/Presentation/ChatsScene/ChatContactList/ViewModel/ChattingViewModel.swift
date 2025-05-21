@@ -130,7 +130,7 @@ final class DefaultChattingViewModel: ChattingViewModel {
                 self?.mainQueue.async {
                     switch result {
                     case .success(let page):
-                        let pageDM = page.toDomain()
+                        let pageDM = page
                         self?.appendPage(pageDM)
                     case .failure(let error):
                         self?.handle(error: error)

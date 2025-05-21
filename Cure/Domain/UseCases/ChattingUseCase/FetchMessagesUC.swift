@@ -9,7 +9,7 @@ protocol FetchMessagesUseCase {
     func execute(
         requestValue: FetchMessagesUseCaseRequestValue,
         cached: @escaping (MessagesPageDTO) -> Void,
-        completion: @escaping (Result<MessagesPageDTO, Error>) -> Void
+        completion: @escaping (Result<ChatMessagesPage, Error>) -> Void
     ) -> Cancellable?
 }
 
@@ -28,7 +28,7 @@ final class DefaultFetchMessagesUseCase: FetchMessagesUseCase {
     func execute(
         requestValue: FetchMessagesUseCaseRequestValue,
         cached: @escaping (MessagesPageDTO) -> Void,
-        completion: @escaping (Result<MessagesPageDTO, any Error>) -> Void
+        completion: @escaping (Result<ChatMessagesPage, any Error>) -> Void
     ) -> (any Cancellable)? {
         return fetchMessageRepository.fetchMessages(
             query: requestValue.query,
@@ -39,7 +39,7 @@ final class DefaultFetchMessagesUseCase: FetchMessagesUseCase {
             completion: { result in
                 switch result {
                 case .success(let page):
-                    completion(.success(page))
+                    completion(.success(page.toDomain()))
                 case .failure(let error):
                     completion(.failure(error))
                 }

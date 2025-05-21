@@ -15,34 +15,55 @@ struct ChatMessage: Equatable, Identifiable, Codable {
     typealias Identifier = String
     
     var id: Identifier {
-        return "\(base.messageLogID)"
+        return "\(base?.messageLogID ?? 0)"
     }
     
     let reply: MessageReply?
-    let detail: MessageDetail
-    let base: BaseMessage
+    let detail: MessageDetail?
+    let base: BaseMessage?
 }
 
 struct BaseMessage: Codable {
-    let companyHuntingNumberID: Int
-    let content, status, timestamp: String
-    let readAt: String?
+    let messageLogID: Int
     let channelID: Int
-    let type, companyHuntingNumber: String
-    let messageLogID, roomID: Int
-    let deliveredAt: String?
-    let format: String
-    let errorLog: String?
-    let whatsapp: String?
-    let contactNumber: String
-    let media, instagram: String?
+    let waMessageID: String?
+    let companyHuntingNumberID: Int
     let contactID: Int
     let employeeID: Int?
+    let companyHuntingNumber: String
+    let contactNumber: String
+    let content: String
+    let type: String
+    let status: String
+    let format: String
+    let readLog: String?
+    let errorLog: String?
+    let roomID: Int
+    let timestamp: String
+    let deliveredAt: String?
+    let readAt: String?
+    let media: String?
     
     enum CodingKeys: String, CodingKey {
-        case companyHuntingNumberID, content, status, timestamp, readAt, channelID, type, companyHuntingNumber, messageLogID
+        case messageLogID
+        case channelID
+        case waMessageID
+        case companyHuntingNumberID
+        case contactID
+        case employeeID
+        case companyHuntingNumber
+        case contactNumber
+        case content
+        case type
+        case status
+        case format
+        case readLog
+        case errorLog
         case roomID = "roomId"
-        case deliveredAt, format, errorLog, whatsapp, contactNumber, media, instagram, contactID, employeeID
+        case timestamp
+        case deliveredAt
+        case readAt
+        case media
     }
 }
 
@@ -67,11 +88,13 @@ struct MessageEmployee: Codable {
 // MARK: - Reply
 struct MessageReply: Codable {
     let content: String
-    let messagelogid: Int
+    let messageLogID: Int
     let format: String
 }
 
 struct ChatMessagesPage: Codable {
+    let filter: String
+    let timeStamp: Date
     let page: Int
     let size: Int
     let totalPages: Int

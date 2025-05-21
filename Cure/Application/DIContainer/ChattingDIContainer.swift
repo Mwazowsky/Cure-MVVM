@@ -22,8 +22,9 @@ final class ChattingDIContainer: ChattingFlowCoordinatorDependencies {
     lazy var chattingQueriesStorage: ChattingQueriesStorage  = CoreDataChattingsQueriesStorage(maxStorageLimit: 10)
     lazy var chattingResponseCache : ChattingResponseStorage = CoreDataChattingResponseStorage()
 
-    init(dependencies: Dependencies) {
+    init(dependencies: Dependencies, windowManager: WindowManageable) {
         self.dependencies = dependencies
+        self.windowManager = windowManager
     }
     
     // MARK: - Use Cases

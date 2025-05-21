@@ -30,20 +30,9 @@ extension DefaultChattingRepository: IChattingRepository {
         size: Int,
         totalPages: Int,
         cached: @escaping (MessagesPageDTO) -> Void,
-        completion: @escaping (Result<MessagesPageDTO, any Error>) -> Void) -> (any Cancellable)? {
-        <#code#>
-    }
-    
-    func fetchMessages(
-        query: ChattingQuery,
-        page: Int,
-        size: Int,
-        totalPages: Int,
-        cached: @escaping (MessagesPageDTO) -> Void,
-        completion: @escaping (Result<ChatMessagesPage, Error>) -> Void
+        completion: @escaping (Result<MessagesPageDTO, any Error>) -> Void
     ) -> Cancellable? {
         let requestDto = ChattingRequestDTO(filter: query.query, page: page, size: size, totalPages: totalPages)
-        
         let task = RepositoryTask()
         
         cache.getResponse(for: requestDto) { result in
@@ -74,8 +63,8 @@ extension DefaultChattingRepository: IChattingRepository {
                     )
                     
                     self?.cache.save(responseDto: responseDTO, for: requestDto)
-                    completion(.success(responseDTO.toDomain()))
-                    
+                    completion(.success(responseDTO))
+
                 case .failure(let error):
                     completion(.failure(error))
                 }

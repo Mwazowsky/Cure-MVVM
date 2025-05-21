@@ -34,12 +34,17 @@ final class ChatContactsListFlowCoordinator: Coordinator {
     private weak var chatContactsListVC: UIViewController?
     private weak var chatContactsQueriesSuggestionsVC: UIViewController?
     
+    private let windowManager: WindowManageable
+    
     init(
         navigationController: UINavigationController? = nil,
+        appDIContainer: AppDIContainer,
         dependencies: ChatContactsListFlowCoordinatorDependencies
     ) {
         self.navigationController = navigationController
+        self.appDIContainer = appDIContainer
         self.dependencies = dependencies
+        self.windowManager = appDIContainer.windowManager
     }
     
     func start() {

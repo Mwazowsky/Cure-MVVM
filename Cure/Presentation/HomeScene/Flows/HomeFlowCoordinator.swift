@@ -62,9 +62,9 @@ enum TabBarItem {
         case .dashboard:
             return "IconTabDashboard"
         case .chats:
-            return "IconTabAccount"
-        case .account:
             return "IconTabChat"
+        case .account:
+            return "IconTabAccount"
         }
     }
     
@@ -175,7 +175,8 @@ final class HomeFlowCoordinator: NSObject, HomeFlowCoordinatorProtocol {
     private func showChatContactsFlow(navigationController: UINavigationController) {
         let chatContactsSceneDIContainer = appDIContainer.makeChatContactsSceneDIContainer()
         let chatContactsFlowDIContainer = chatContactsSceneDIContainer.makeChatContactsListFlowCoordinator(
-            navigationController: navigationController
+            navigationController: navigationController,
+            appDIContainer: appDIContainer
         )
         
         chatContactsFlowDIContainer.parentCoordinator = self

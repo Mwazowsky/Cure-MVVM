@@ -29,7 +29,7 @@ protocol ChattingFlowCoordinatorDelegate: AnyObject {
 final class ChattingFlowCoordinator: Coordinator {
     private let appDIContainer: AppDIContainer
     
-    var childCoordinators: [any Coordinator]
+    var childCoordinators: [Coordinator] = [Coordinator]()
     
     var navigationController: UINavigationController?
     
@@ -39,8 +39,6 @@ final class ChattingFlowCoordinator: Coordinator {
     private weak var delegate: ChattingFlowCoordinatorDelegate?
     
     weak var parentCoordinator: ChatContactsListFlowCoordinator?
-    //
-    //
     
     
     private let windowManager: WindowManageable

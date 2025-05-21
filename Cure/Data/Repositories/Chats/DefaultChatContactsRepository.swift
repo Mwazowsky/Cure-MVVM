@@ -67,7 +67,6 @@ extension DefaultChatContactsRepository: IChatContactsRepository {
                     completion(.failure(error))
                 }
             }
-
         }
         
         return task

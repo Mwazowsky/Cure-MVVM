@@ -47,9 +47,9 @@
         <attribute name="query" optional="YES" attributeType="String"/>
     </entity>
     <entity name="ChattingResponseEntity" representedClassName="ChattingResponseEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="channelID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="channelName" optional="YES" attributeType="String"/>
-        <relationship name="base" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="M_BaseMessageEntity" inverseName="chattingResponse" inverseEntity="M_BaseMessageEntity"/>
+        <relationship name="base" maxCount="1" deletionRule="Nullify" destinationEntity="M_BaseMessageEntity" inverseName="chattingResponse" inverseEntity="M_BaseMessageEntity"/>
+        <relationship name="detail" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="M_DetailMessageEntity" inverseName="chattingResponse" inverseEntity="M_DetailMessageEntity"/>
+        <relationship name="reply" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="M_ReplyMessageEntity" inverseName="chattingResponse" inverseEntity="M_ReplyMessageEntity"/>
     </entity>
     <entity name="ChattingsRequestEntity" representedClassName="ChattingsRequestEntity" syncable="YES" codeGenerationType="class">
         <attribute name="filter" optional="YES" attributeType="String"/>
@@ -99,9 +99,43 @@
         <relationship name="chatContact" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChatContactResponseEntity" inverseName="lastMessage" inverseEntity="ChatContactResponseEntity"/>
     </entity>
     <entity name="M_BaseMessageEntity" representedClassName="M_BaseMessageEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="channelID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="channelName" optional="YES" attributeType="String"/>
+        <attribute name="channelID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="companyHuntingNumber" optional="YES" attributeType="String"/>
+        <attribute name="companyHuntingNumberID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="contactID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="contactNumber" optional="YES" attributeType="String"/>
+        <attribute name="content" optional="YES" attributeType="String"/>
+        <attribute name="deliveredAt" optional="YES" attributeType="String"/>
+        <attribute name="employeeID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="errorLog" optional="YES" attributeType="String"/>
+        <attribute name="format" optional="YES" attributeType="String"/>
+        <attribute name="media" optional="YES" attributeType="String"/>
+        <attribute name="messageLogID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="readAt" optional="YES" attributeType="String"/>
+        <attribute name="readLog" optional="YES" attributeType="String"/>
+        <attribute name="roomID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
+        <attribute name="timestamp" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <attribute name="waMessageID" optional="YES" attributeType="String"/>
         <relationship name="chattingResponse" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChattingResponseEntity" inverseName="base" inverseEntity="ChattingResponseEntity"/>
+    </entity>
+    <entity name="M_DetailMessageEntity" representedClassName="M_DetailMessageEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="isForwarded" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="location" optional="YES" attributeType="String"/>
+        <attribute name="messageLogID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="referral" optional="YES" attributeType="String"/>
+        <attribute name="replyMessageID" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="template" optional="YES" attributeType="String"/>
+        <attribute name="waMessageID" attributeType="String"/>
+        <attribute name="whatsappMessageLogID" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="chattingResponse" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChattingResponseEntity" inverseName="detail" inverseEntity="ChattingResponseEntity"/>
+    </entity>
+    <entity name="M_ReplyMessageEntity" representedClassName="M_ReplyMessageEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="content" attributeType="String"/>
+        <attribute name="format" attributeType="String"/>
+        <attribute name="messageLogID" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="chattingResponse" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChattingResponseEntity" inverseName="reply" inverseEntity="ChattingResponseEntity"/>
     </entity>
     <entity name="MovieQueryEntity" representedClassName="MovieQueryEntity" syncable="YES" codeGenerationType="class">
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>

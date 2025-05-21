@@ -28,15 +28,15 @@ struct ChattingListItemViewModel: Equatable, Identifiable {
 extension ChattingListItemViewModel {
     init(message: ChatMessage) {
         id = message.id
-        messageContent = message.base.content
-        if let date = Self.formatter.date(from: message.base.timestamp) {
+        messageContent = message.base?.content ?? ""
+        if let date = Self.formatter.date(from: message.base?.timestamp ?? "") {
             messageTime = Self.formatter.string(from: date)
         } else {
             messageTime = ""
         }
 
         messageDayDate = String(messageTime.split(separator: "T").first ?? "")
-        status = DeliveryStatus(rawValue: message.base.status) ?? .sent
+        status = DeliveryStatus(rawValue: message.base?.status ?? "") ?? .sent
     }
 }
 

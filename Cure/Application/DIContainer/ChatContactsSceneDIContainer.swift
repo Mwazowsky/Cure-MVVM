@@ -100,10 +100,12 @@ final class ChatContactsDIContainer: ChatContactsListFlowCoordinatorDependencies
     
     // MARK: - Flow Coordinators
     func makeChatContactsListFlowCoordinator(
-        navigationController: UINavigationController
+        navigationController: UINavigationController,
+        appDIContainer: AppDIContainer
     ) -> ChatContactsListFlowCoordinator {
         ChatContactsListFlowCoordinator(
             navigationController: navigationController,
+            appDIContainer: appDIContainer,
             dependencies: self
         )
     }

@@ -11,13 +11,11 @@ import CoreData
 // Individual Message Data
 extension ChattingResponseEntity {
     func toDTO() -> MessageResponseDTO {
-        return .init(
-            contactPairingID: <#T##Int#>,
-            contactID: <#T##Int#>,
-            contactName: <#T##String?#>,
-            isActive: <#T##Bool#>,
-            contactNumber: <#T##String?#>,
-            photoURL: <#T##String?#>)
+        return MessageResponseDTO(
+            reply: self.reply?.toDTO(),          // Convert nested entity → DTO
+            detail: self.detail?.toDTO(),         // Convert nested entity → DTO
+            base: self.base?.toDTO()              // Convert nested entity → DTO
+        )
     }
 }
 
@@ -50,8 +48,7 @@ extension ChattingRequestDTO {
 extension MessageResponseDTO {
     func toEntity(in context: NSManagedObjectContext) -> ChattingResponseEntity {
         let entity: ChattingResponseEntity = .init(context: context)
-        entity.channelID = Int32(contactID)
-        entity.channelName = contactName
+        entity.base = base?.toEntity(in: context)
         
         return entity
     }
