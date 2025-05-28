@@ -44,16 +44,6 @@ class ChatContactsListVC: UIViewController, Alertable {
         
         return view
     }()
-
-    private let broadcastBtn: UIButton = {
-        let button = UIButton()
-        button.setTitle("", for: .normal)
-        button.backgroundColor = .systemBlue
-        button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 8.0
-        
-        return button
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,23 +61,16 @@ class ChatContactsListVC: UIViewController, Alertable {
         navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
         
-        view.addSubview(broadcastBtn)
-
-        broadcastBtn.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            broadcastBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            broadcastBtn.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            broadcastBtn.widthAnchor.constraint(equalToConstant: 200),
-            broadcastBtn.heightAnchor.constraint(equalToConstant: 50)
-        ])
-        
-        broadcastBtn.addTarget(self, action: #selector(didTapBroadcastButton(_:)), for: .touchUpInside)
-        
         viewModel.viewDidLoad()
     }
     
     deinit {}
+    
+    private func bind(to viewModel: ChatContactsViewModel) {
+        viewModel.items.observe(on: self) { [weak self] _ in self?.updateItems() }
+        viewModel.loading.observe(on: self) { [weak self] in self?.updateLoading($0) }
+        viewModel.error.observe(on: self) { [weak self] in self?.showError($0) }
+    }
 
     @objc private func didTapBroadcastButton(_ sender: Any) {
         didSendEventClosure?(.chats)
@@ -108,6 +91,30 @@ class ChatContactsListVC: UIViewController, Alertable {
         } else {
             viewModel.closeQueriesSuggestions()
         }
+    }
+    
+    private func updateItems() {
+        chatContactsTableViewController?.reload()
+    }
+    
+    private func updateLoading(_ loading: ChatContactsViewModelLoading?) {
+        emptyDataLabel.isHidden = true
+        chatContactsContainer.isHidden = true
+        suggestionsListContainer.isHidden = true
+        LoadingView.hide()
+        
+        switch loading {
+        case .fullScreen: LoadingView.show()
+        case .nextPage: chatContactsContainer.isHidden = false
+        case .none:
+            chatContactsContainer.isHidden = viewModel.isEmpty
+            emptyDataLabel.isHidden = !viewModel.isEmpty
+        }
+    }
+    
+    private func showError(_ error: String) {
+        guard !error.isEmpty else { return }
+        showAlert(title: viewModel.errorTitle, message: error)
     }
 }
 
