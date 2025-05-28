@@ -1,43 +1,77 @@
 //
-//  ChatContactResponseDTO+Mapping.swift
-//  Cure
+//  ChatContact.swift
+//  Domain
 //
-//  Created by MacBook Air MII  on 14/4/25.
+//  Created by MacBook Air MII  on 28/5/25.
 //
 
 import Foundation
 
-// Move this later
-enum RoomStatus: String, Codable {
-    case all = "all"
-    case ongoing = "ongoing"
-    case resolved = "resolved"
-    case unresolved = "unresolved"
-    case newexpired = "new"
+struct ChatContact: Equatable, Identifiable, Codable {
+    typealias Identifier = String
+    
+    // MARK: - ID
+    var id: Identifier {
+        return "\(contactID)"
+    }
+
+    // MARK: - Core Info
+    let contactPairingID: Int
+    let contactID: Int
+    let contactName: String?
+    let isActive: Bool
+    let contactNumber: String?
+    let photoURL: String?
+
+    // MARK: - Company Info
+    let companyHuntingNumberID: Int
+    let companyHuntingNumberName: String
+    let companyHuntingNumberPhone: String?
+    let companyID: Int
+    let companyName: String
+
+    // MARK: - Status Info
+    let totalUnread: Int
+    let lastRoomStatus: RoomStatus?
+    let lastMessage: LastMessage?
+    let isBlocked: Bool
+    let isNew: Bool
+    let lastFreeformStatus: Bool?
+
+    // MARK: - Channel Info
+    let channelID: Int?
+    let channelName: String?
+
+    // MARK: - Socials
+    let instagram: ChatContactInstagram?
+    let whatsapp: ChatContactWhatsapp?
 }
 
-// Move this later
-enum StatusChat: String, Codable {
-    case read
-    case delivered
-    case failed
-    case sent
+extension ChatContact {
+    init(from dto: ChatContactResponseDTO) {
+        self.contactPairingID = dto.contactPairingID
+        self.contactID = dto.contactID
+        self.contactName = dto.contactName
+        self.isActive = dto.isActive
+        self.contactNumber = dto.contactNumber
+        self.photoURL = dto.photoURL
+        self.companyHuntingNumberID = dto.companyHuntingNumberID
+        self.companyHuntingNumberName = dto.companyHuntingNumberName
+        self.companyHuntingNumberPhone = dto.companyHuntingNumberPhone
+        self.companyID = dto.companyID
+        self.companyName = dto.companyName
+        self.totalUnread = dto.totalUnread
+        self.lastRoomStatus = dto.lastRoomStatus
+        self.lastMessage = dto.lastMessage
+        self.isBlocked = dto.isBlocked
+        self.isNew = dto.isNew
+        self.channelID = dto.channelID
+        self.channelName = dto.channelName
+        self.instagram = dto.instagram
+        self.whatsapp = dto.whatsapp
+        self.lastFreeformStatus = dto.lastFreeformStatus
+    }
 }
-
-enum ChannelType {
-    case whatsapp
-    case instagram
-    case none
-}
-
-struct ChatContactsPageDTO: Codable {
-    let filter: String
-    let timeStamp: Date
-    let page: Int
-    let size: Int
-    let chatContacts: [ChatContactResponseDTO]
-}
-
 
 struct ChatContactResponseDTO: Codable {
     let contactPairingID: Int
@@ -62,7 +96,7 @@ struct ChatContactResponseDTO: Codable {
     let instagram: ChatContactInstagram?
     let whatsapp: ChatContactWhatsapp?
     
-    @OptionallyDecodable var lastFreeformStatus: Bool?
+    var lastFreeformStatus: Bool?
 
     enum CodingKeys: String, CodingKey {
         case contactPairingID, contactID, contactName, isActive, contactNumber
@@ -131,6 +165,35 @@ extension ChatContactResponseDTO {
     }
 }
 
+struct ChatContactsPage: Codable {
+    let page: Int
+    let size: Int
+    let chatContacts: [ChatContact]
+}
+
+
+// Move this later
+enum RoomStatus: String, Codable {
+    case all = "all"
+    case ongoing = "ongoing"
+    case resolved = "resolved"
+    case unresolved = "unresolved"
+    case newexpired = "new"
+}
+
+// Move this later
+enum StatusChat: String, Codable {
+    case read
+    case delivered
+    case failed
+    case sent
+}
+
+enum ChannelType {
+    case whatsapp
+    case instagram
+    case none
+}
 
 // MARK: - LastMessage
 struct LastMessage: Equatable, Codable {
@@ -161,41 +224,4 @@ struct ChatContactInstagram: Equatable, Codable {
     var contactInstagramId: String
     var contactUsername: String
     
-}
-
-extension ChatContactsPageDTO {
-    func toDomain() -> ChatContactsPage {
-        return ChatContactsPage(
-            page: page,
-            size: size,
-            chatContacts: chatContacts.map { $0.toDomain() }
-        )
-    }
-}
-
-extension ChatContactResponseDTO {
-    func toDomain() -> ChatContact {
-        return .init(
-            contactPairingID: contactPairingID,
-            contactID: contactID,
-            contactName: contactName,
-            isActive: isActive,
-            contactNumber: contactNumber,
-            photoURL: photoURL,
-            companyHuntingNumberID: companyHuntingNumberID,
-            companyHuntingNumberName: companyHuntingNumberName,
-            companyHuntingNumberPhone: companyHuntingNumberPhone,
-            companyID: companyID,
-            companyName: companyName,
-            totalUnread: totalUnread,
-            lastRoomStatus: lastRoomStatus,
-            lastMessage: lastMessage,
-            isBlocked: isBlocked,
-            isNew: isNew,
-            lastFreeformStatus: lastFreeformStatus,
-            channelID: channelID,
-            channelName: channelName,
-            instagram: instagram,
-            whatsapp: whatsapp)
-    }
 }

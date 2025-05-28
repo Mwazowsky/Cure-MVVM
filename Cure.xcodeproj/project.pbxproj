@@ -147,6 +147,7 @@
 		643A97002DB9F28A001AAED1 /* DefaultChatContactsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643A96FF2DB9F27F001AAED1 /* DefaultChatContactsRepository.swift */; };
 		643A97052DB9F4C1001AAED1 /* ChatContactsResponseEntity+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643A97042DB9F4A8001AAED1 /* ChatContactsResponseEntity+Mapping.swift */; };
 		643A97072DB9FB0A001AAED1 /* ChatContactsRequestDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643A97062DB9FAFC001AAED1 /* ChatContactsRequestDTO+Mapping.swift */; };
+		64427EFF2DE7010F00C02223 /* ChatContactsListItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64427EFE2DE7010200C02223 /* ChatContactsListItemCell.swift */; };
 		64472A882DB0F50500AF7DFE /* LoadUserDetailsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64472A872DB0F50500AF7DFE /* LoadUserDetailsUseCase.swift */; };
 		64472A892DB0F50500AF7DFE /* LoadUserDetailsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64472A872DB0F50500AF7DFE /* LoadUserDetailsUseCase.swift */; };
 		644944C82D89555C006B11C1 /* RegisterUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644944C72D89555C006B11C1 /* RegisterUseCase.swift */; };
@@ -210,6 +211,7 @@
 		648D8CAC2DD3068500F59F33 /* TitleTxtCUREUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648D8CAB2DD3068500F59F33 /* TitleTxtCUREUIKit.swift */; };
 		648D8CAE2DD316C600F59F33 /* TextBtnCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648D8CAD2DD316C500F59F33 /* TextBtnCURE.swift */; };
 		648D8CB22DD31FC300F59F33 /* LoginFormCUREUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648D8CB12DD31FB800F59F33 /* LoginFormCUREUIKit.swift */; };
+		649D6D942DE6F26200BC72D6 /* ChatContactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649D6D932DE6F26200BC72D6 /* ChatContactsTableViewController.swift */; };
 		649ED1002DD477440062814F /* AuthBtnGroupCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649ED0FF2DD477440062814F /* AuthBtnGroupCURE.swift */; };
 		649ED1022DD478B80062814F /* AuthFieldsGroupCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649ED1012DD4789A0062814F /* AuthFieldsGroupCURE.swift */; };
 		649ED1072DD47F5B0062814F /* AvatarIVCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649ED1062DD47F510062814F /* AvatarIVCURE.swift */; };
@@ -448,6 +450,7 @@
 		643A96FF2DB9F27F001AAED1 /* DefaultChatContactsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChatContactsRepository.swift; sourceTree = "<group>"; };
 		643A97042DB9F4A8001AAED1 /* ChatContactsResponseEntity+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatContactsResponseEntity+Mapping.swift"; sourceTree = "<group>"; };
 		643A97062DB9FAFC001AAED1 /* ChatContactsRequestDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatContactsRequestDTO+Mapping.swift"; sourceTree = "<group>"; };
+		64427EFE2DE7010200C02223 /* ChatContactsListItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatContactsListItemCell.swift; sourceTree = "<group>"; };
 		64472A872DB0F50500AF7DFE /* LoadUserDetailsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadUserDetailsUseCase.swift; sourceTree = "<group>"; };
 		644944C72D89555C006B11C1 /* RegisterUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUseCase.swift; sourceTree = "<group>"; };
 		644944CA2D89625E006B11C1 /* ResetPasswordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordUseCase.swift; sourceTree = "<group>"; };
@@ -498,6 +501,7 @@
 		648D8CAB2DD3068500F59F33 /* TitleTxtCUREUIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTxtCUREUIKit.swift; sourceTree = "<group>"; };
 		648D8CAD2DD316C500F59F33 /* TextBtnCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBtnCURE.swift; sourceTree = "<group>"; };
 		648D8CB12DD31FB800F59F33 /* LoginFormCUREUIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormCUREUIKit.swift; sourceTree = "<group>"; };
+		649D6D932DE6F26200BC72D6 /* ChatContactsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatContactsTableViewController.swift; sourceTree = "<group>"; };
 		649ED0FF2DD477440062814F /* AuthBtnGroupCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthBtnGroupCURE.swift; sourceTree = "<group>"; };
 		649ED1012DD4789A0062814F /* AuthFieldsGroupCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthFieldsGroupCURE.swift; sourceTree = "<group>"; };
 		649ED1062DD47F510062814F /* AvatarIVCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarIVCURE.swift; sourceTree = "<group>"; };
@@ -1437,6 +1441,14 @@
 			path = EntityMapping;
 			sourceTree = "<group>";
 		};
+		64427EFD2DE700F100C02223 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				64427EFE2DE7010200C02223 /* ChatContactsListItemCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		64515E202DD2ECDA002E6F0F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -1562,6 +1574,15 @@
 			path = TextFields;
 			sourceTree = "<group>";
 		};
+		649D6D922DE6F24C00BC72D6 /* ChatContactsTableView */ = {
+			isa = PBXGroup;
+			children = (
+				649D6D932DE6F26200BC72D6 /* ChatContactsTableViewController.swift */,
+				64427EFD2DE700F100C02223 /* Cells */,
+			);
+			path = ChatContactsTableView;
+			sourceTree = "<group>";
+		};
 		649ED1032DD47ECA0062814F /* Auth */ = {
 			isa = PBXGroup;
 			children = (
@@ -1594,6 +1615,7 @@
 			isa = PBXGroup;
 			children = (
 				64FB94672D94FAD100A5325D /* ChatListVC.swift */,
+				649D6D922DE6F24C00BC72D6 /* ChatContactsTableView */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -2666,6 +2688,7 @@
 				1FC2C9632301FEC0001AE47E /* MovieQueryUDS+Mapping.swift in Sources */,
 				64FB946D2D952FAB00A5325D /* SocketService.swift in Sources */,
 				1FE49D90230AA7C200D1D42E /* MovieDetailsViewModel.swift in Sources */,
+				649D6D942DE6F26200BC72D6 /* ChatContactsTableViewController.swift in Sources */,
 				1F794921247D869700552CC3 /* BlackStyleNavigationBarBehavior.swift in Sources */,
 				64FB947D2D963DEA00A5325D /* AccountFlowCoordinator.swift in Sources */,
 				1F1FC48A22E3693100BCBA8D /* DataTransferService.swift in Sources */,
@@ -2809,6 +2832,7 @@
 				64FE0AB22DCC87170044A69C /* DesignTokens.swift in Sources */,
 				1FA5338D201E1FDE00747E55 /* AppDelegate.swift in Sources */,
 				1FA533B2201EE2A500747E55 /* Movie.swift in Sources */,
+				64427EFF2DE7010F00C02223 /* ChatContactsListItemCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

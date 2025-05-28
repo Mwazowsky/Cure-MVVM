@@ -10,12 +10,12 @@ final class ChatContactsDIContainer: ChatContactsListFlowCoordinatorDependencies
     }
     
     private let dependencies: Dependencies
-
+    
     // MARK: - Persistent Storage
     /// ChatContacts
     lazy var chatContactsQueriesStorage: ChatContactsQueriesStorage  = CoreDataChatContactsQueriesStorage(maxStorageLimit: 10)
     lazy var chatContactsResponseCache : ChatContactsResponseStorage = CoreDataChatContactsResponseStorage()
-
+    
     init(dependencies: Dependencies) {
         self.dependencies = dependencies       
     }
@@ -50,21 +50,22 @@ final class ChatContactsDIContainer: ChatContactsListFlowCoordinatorDependencies
     private func makeKeychainRepository() -> IKeychainRepository {
         return DefaultKeychainRepository()
     }
-
+    
     
     // MARK: - Chat Contacts List
     func makeChatContactsListViewController(actions: ChatContactsViewModelActions) -> UIViewController {
-        if #available(iOS 13.0, *) { // SwiftUI
-            let view = ChatContactsView(
-                viewModelWrapper: makeChatContactsViewModelWrapper(actions: actions)
-            )
-            
-            return UIHostingController(rootView: view)
-        } else { // UIKit
-            return ChatContactsListVC.create(
-                with: makeChatContactsListViewModel(actions: actions)
-            )
-        }
+        //        if #available(iOS 13.0, *) {
+        //            // SwiftUI
+        //            let view = ChatContactsView(
+        //                viewModelWrapper: makeChatContactsViewModelWrapper(actions: actions)
+        //            )
+        //            return UIHostingController(rootView: view)
+        //        } else {
+        // UIKit
+        return ChatContactsListVC.create(
+            with: makeChatContactsListViewModel(actions: actions)
+        )
+        //        }
     }
     
     func makeChatContactsListViewModel(actions: ChatContactsViewModelActions) -> ChatContactsViewModel {
@@ -87,10 +88,12 @@ final class ChatContactsDIContainer: ChatContactsListFlowCoordinatorDependencies
         return UIViewController()
     }
     
-    func makeChatContactsQueriesSuggestionsListViewController(didSelect: @escaping ChatContactsQueryListViewModelDidSelectAction) -> UIViewController {
+    func makeChatContactsQueriesSuggestionsListViewController(
+        didSelect: @escaping ChatContactsQueryListViewModelDidSelectAction
+    ) -> UIViewController {
         return UIViewController()
     }
-
+    
     
     // MARK: - ViewModelWrapper (For SwiftUI)
     @available(iOS 13.0, *)

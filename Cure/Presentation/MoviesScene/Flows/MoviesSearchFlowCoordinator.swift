@@ -37,6 +37,7 @@ final class MoviesSearchFlowCoordinator: Coordinator {
             showMovieQueriesSuggestions: showMovieQueriesSuggestions,
             closeMovieQueriesSuggestions: closeMovieQueriesSuggestions
         )
+        
         let vc = dependencies.makeMoviesListViewController(actions: actions)
         navigationController?.pushViewController(vc, animated: false)
         moviesListVC = vc

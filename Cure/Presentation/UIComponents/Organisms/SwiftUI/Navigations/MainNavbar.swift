@@ -14,7 +14,6 @@ struct NavBarModifier: ViewModifier {
             return AnyView(
                 content
                     .navigationTitle("Chats")
-                    .navigationBarTitleDisplayMode(.automatic)
                     .toolbar {
                         ToolbarItem(placement: .topBarTrailing) {
                             Button(action: {
@@ -27,7 +26,7 @@ struct NavBarModifier: ViewModifier {
         } else {
             return AnyView(
                 content
-                    .navigationBarTitle("Chats", displayMode: .automatic)
+                    .navigationBarTitle("Chats")
             )
         }
     }
