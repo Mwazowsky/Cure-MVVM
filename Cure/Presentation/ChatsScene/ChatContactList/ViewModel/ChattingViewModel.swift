@@ -198,7 +198,7 @@ extension DefaultChattingViewModel {
     
     func didSelectItem(at index: Int) {
         let allMessages = pages.flatMap { $0.chatMessages }
-        let selectedMessage = allMessages[index]
+        let _ = allMessages[index]
 //        actions?.showChatContactDetails(selectedMessage)
     }
 }

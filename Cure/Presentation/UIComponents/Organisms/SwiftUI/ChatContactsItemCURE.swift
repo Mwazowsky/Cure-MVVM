@@ -11,50 +11,56 @@ import SwiftUI
 struct ChatContactsItemView: View {
     let viewModel: ChatContactsListItemViewModel
     
+    var onSelect: (() -> Void)?
+    
     var body: some View {
-        HStack(spacing: 8) {
-            AvatarIVCURE(imageUrl: URL(string: viewModel.profileImage ?? "https://picsum.photos/200")!)
-                .frame(width: 64, height: 64)
-                .clipShape(Circle())
-            
-            VStack(alignment: .leading, spacing: 4) {
-                Text(viewModel.contactName)
-                    .font(.headline)
+        Button(action: {
+            onSelect?()
+        }) {
+            HStack(spacing: 8) {
+                AvatarIVCURE(imageUrl: URL(string: viewModel.profileImage ?? "https://picsum.photos/200")!)
+                    .frame(width: 64, height: 64)
+                    .clipShape(Circle())
                 
-                Text(viewModel.company)
-                    .font(.caption)
-                    .foregroundColor(DesignTokens.Colors.textBackground)
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 4)
-                    .background(DesignTokens.Colors.companyChip)
-                    .cornerRadius(25)
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(viewModel.contactName)
+                        .font(.headline)
+                    
+                    Text(viewModel.company)
+                        .font(.caption)
+                        .foregroundColor(DesignTokens.Colors.textBackground)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(DesignTokens.Colors.companyChip)
+                        .cornerRadius(25)
+                    
+                    HStack {
+                        Text(String(viewModel.channelIdUrl))
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                        
+                        Text(viewModel.lastMessage)
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                    }
+                }
+                .layoutPriority(1)
                 
-                HStack {
-                    Text(String(viewModel.channelIdUrl))
-                        .font(.subheadline)
+                Spacer()
+                
+                VStack(alignment: .trailing, spacing: 4) {
+                    Text(viewModel.dayOrTime)
+                        .font(.caption)
                         .foregroundColor(.gray)
                     
-                    Text(viewModel.lastMessage)
-                        .font(.subheadline)
+                    // Change with read indicator
+                    Text(viewModel.status.rawValue)
+                        .font(.caption)
                         .foregroundColor(.gray)
+                        .frame(alignment: .bottom)
                 }
             }
-            .layoutPriority(1)
-            
-            Spacer()
-            
-            VStack(alignment: .trailing, spacing: 4) {
-                Text(viewModel.dayOrTime)
-                    .font(.caption)
-                    .foregroundColor(.gray)
-                
-                // Change with read indicator
-                Text(viewModel.status.rawValue)
-                    .font(.caption)
-                    .foregroundColor(.gray)
-                    .frame(alignment: .bottom)
-            }
+            .frame(maxWidth: .infinity)
         }
-        .frame(maxWidth: .infinity)
     }
 }

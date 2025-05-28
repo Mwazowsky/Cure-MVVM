@@ -173,7 +173,6 @@ extension DefaultMoviesListViewModel {
 }
 
 // MARK: - Private
-
 private extension Array where Element == MoviesPage {
     var movies: [Movie] { flatMap { $0.movies } }
 }

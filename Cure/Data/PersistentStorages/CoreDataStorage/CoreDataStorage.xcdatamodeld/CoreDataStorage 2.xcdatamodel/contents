@@ -48,6 +48,7 @@
     </entity>
     <entity name="ChattingResponseEntity" representedClassName="ChattingResponseEntity" syncable="YES" codeGenerationType="class">
         <relationship name="base" maxCount="1" deletionRule="Nullify" destinationEntity="M_BaseMessageEntity" inverseName="chattingResponse" inverseEntity="M_BaseMessageEntity"/>
+        <relationship name="chattingResponse" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChattingsResponseEntity" inverseName="messages" inverseEntity="ChattingsResponseEntity"/>
         <relationship name="detail" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="M_DetailMessageEntity" inverseName="chattingResponse" inverseEntity="M_DetailMessageEntity"/>
         <relationship name="reply" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="M_ReplyMessageEntity" inverseName="chattingResponse" inverseEntity="M_ReplyMessageEntity"/>
     </entity>
@@ -57,7 +58,7 @@
         <attribute name="size" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="totalPages" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="response" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChattingsResponseEntity"/>
+        <relationship name="response" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChattingsResponseEntity" inverseName="request" inverseEntity="ChattingsResponseEntity"/>
     </entity>
     <entity name="ChattingsResponseEntity" representedClassName="ChattingsResponseEntity" syncable="YES" codeGenerationType="class">
         <attribute name="filter" optional="YES" attributeType="String"/>
@@ -65,8 +66,8 @@
         <attribute name="size" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="timeStamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="totalPages" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ChattingResponseEntity"/>
-        <relationship name="request" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChattingsRequestEntity"/>
+        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ChattingResponseEntity" inverseName="chattingResponse" inverseEntity="ChattingResponseEntity"/>
+        <relationship name="request" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChattingsRequestEntity" inverseName="response" inverseEntity="ChattingsRequestEntity"/>
     </entity>
     <entity name="ErrorEntity" representedClassName="ErrorEntity" syncable="YES" codeGenerationType="class">
         <attribute name="detail" optional="YES" attributeType="String"/>

@@ -106,6 +106,9 @@
 		1FFFC835221B0041007D99D2 /* DefaultMoviesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFFC82F221B0041007D99D2 /* DefaultMoviesRepository.swift */; };
 		1FFFC836221B0041007D99D2 /* IMoviesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFFC830221B0041007D99D2 /* IMoviesRepository.swift */; };
 		4D29856673E676409D7B9383 /* Pods_Cure_CureUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DFAAFD712C8A828AF66016C /* Pods_Cure_CureUITests.framework */; };
+		640FB26C2DDEC8050058CFD1 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640FB26B2DDEC7F70058CFD1 /* TabBarItem.swift */; };
+		640FB26D2DDEC8050058CFD1 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640FB26B2DDEC7F70058CFD1 /* TabBarItem.swift */; };
+		640FB26E2DDEC8050058CFD1 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640FB26B2DDEC7F70058CFD1 /* TabBarItem.swift */; };
 		641162C52DAF85A100142060 /* UserDetailsResponseEntityMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641162C42DAF85A100142060 /* UserDetailsResponseEntityMapping.swift */; };
 		641914502D8C05CC00807FDC /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6419144F2D8C05CC00807FDC /* WindowManager.swift */; };
 		641914512D8C05CC00807FDC /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6419144F2D8C05CC00807FDC /* WindowManager.swift */; };
@@ -286,7 +289,7 @@
 		64FB94762D95464D00A5325D /* DeleteUserTokenUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB94742D95464D00A5325D /* DeleteUserTokenUseCase.swift */; };
 		64FB94792D95486B00A5325D /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB94772D95486B00A5325D /* AccountViewModel.swift */; };
 		64FB947B2D963AE200A5325D /* AccountSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB947A2D963AE200A5325D /* AccountSceneDIContainer.swift */; };
-		64FB947D2D963DEA00A5325D /* AccountFlowCoordinatorDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB947C2D963DEA00A5325D /* AccountFlowCoordinatorDependencies.swift */; };
+		64FB947D2D963DEA00A5325D /* AccountFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB947C2D963DEA00A5325D /* AccountFlowCoordinator.swift */; };
 		64FE0AB22DCC87170044A69C /* DesignTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE0AB12DCC87120044A69C /* DesignTokens.swift */; };
 		64FE0AB52DCC8A2C0044A69C /* PrimaryBtnCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE0AB42DCC8A0A0044A69C /* PrimaryBtnCURE.swift */; };
 		64FE0AB82DCC8B0C0044A69C /* PrimaryTxtCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE0AB72DCC8B000044A69C /* PrimaryTxtCURE.swift */; };
@@ -415,6 +418,7 @@
 		1FFFC83D221B02BA007D99D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ExampleMVVMTests/Info.plist; sourceTree = SOURCE_ROOT; };
 		2838F521AA498B9CB8374E9E /* Pods-Cure-CureUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cure-CureUITests.debug.xcconfig"; path = "Target Support Files/Pods-Cure-CureUITests/Pods-Cure-CureUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		5ECB44A97EE37A0D4194E04B /* Pods-Cure.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cure.debug.xcconfig"; path = "Target Support Files/Pods-Cure/Pods-Cure.debug.xcconfig"; sourceTree = "<group>"; };
+		640FB26B2DDEC7F70058CFD1 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
 		641162C42DAF85A100142060 /* UserDetailsResponseEntityMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsResponseEntityMapping.swift; sourceTree = "<group>"; };
 		6419144F2D8C05CC00807FDC /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
 		641DF2E02DC4A59500EDAC97 /* DefaultChatContactsQueriesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChatContactsQueriesRepository.swift; sourceTree = "<group>"; };
@@ -555,7 +559,7 @@
 		64FB94742D95464D00A5325D /* DeleteUserTokenUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUserTokenUseCase.swift; sourceTree = "<group>"; };
 		64FB94772D95486B00A5325D /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
 		64FB947A2D963AE200A5325D /* AccountSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSceneDIContainer.swift; sourceTree = "<group>"; };
-		64FB947C2D963DEA00A5325D /* AccountFlowCoordinatorDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountFlowCoordinatorDependencies.swift; sourceTree = "<group>"; };
+		64FB947C2D963DEA00A5325D /* AccountFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountFlowCoordinator.swift; sourceTree = "<group>"; };
 		64FE0AB12DCC87120044A69C /* DesignTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignTokens.swift; sourceTree = "<group>"; };
 		64FE0AB42DCC8A0A0044A69C /* PrimaryBtnCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryBtnCURE.swift; sourceTree = "<group>"; };
 		64FE0AB72DCC8B000044A69C /* PrimaryTxtCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryTxtCURE.swift; sourceTree = "<group>"; };
@@ -973,6 +977,7 @@
 		1FC8B6E4230AF89A005DBF44 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				640FB26B2DDEC7F70058CFD1 /* TabBarItem.swift */,
 				644A27462DD5C24900185DE5 /* AsyncImage.swift */,
 				1FD2696524261A24005236FB /* Extensions */,
 				1FEED0EE2023575C000F4EAA /* Protocols */,
@@ -1950,7 +1955,7 @@
 		64FB94602D94F4FB00A5325D /* Flows */ = {
 			isa = PBXGroup;
 			children = (
-				64FB947C2D963DEA00A5325D /* AccountFlowCoordinatorDependencies.swift */,
+				64FB947C2D963DEA00A5325D /* AccountFlowCoordinator.swift */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -2590,6 +2595,7 @@
 			files = (
 				644A27482DD5C24E00185DE5 /* AsyncImage.swift in Sources */,
 				64BAAFF92D92804200B70EFF /* HomeView.swift in Sources */,
+				640FB26D2DDEC8050058CFD1 /* TabBarItem.swift in Sources */,
 				1F02DE3522F8507500E40C3A /* MoviesSceneUITests.swift in Sources */,
 				1F57F8D423C656F600981E09 /* AccessibilityIdentifier.swift in Sources */,
 			);
@@ -2641,6 +2647,7 @@
 				1FF53EB423688893008D6CCC /* DataTransferError+ConnectionError.swift in Sources */,
 				64BAAFEC2D92804200B70EFF /* HomeFlowCoordinator.swift in Sources */,
 				64FE0AE42DCC90450044A69C /* LoginFormCURE.swift in Sources */,
+				640FB26C2DDEC8050058CFD1 /* TabBarItem.swift in Sources */,
 				64B7402D2D8A71BB00168646 /* AuthResponseDTO+Mapping.swift in Sources */,
 				64FB94752D95464D00A5325D /* DeleteUserTokenUseCase.swift in Sources */,
 				1F53E2B623125896008D6A05 /* UIViewController+AddChild.swift in Sources */,
@@ -2660,7 +2667,7 @@
 				64FB946D2D952FAB00A5325D /* SocketService.swift in Sources */,
 				1FE49D90230AA7C200D1D42E /* MovieDetailsViewModel.swift in Sources */,
 				1F794921247D869700552CC3 /* BlackStyleNavigationBarBehavior.swift in Sources */,
-				64FB947D2D963DEA00A5325D /* AccountFlowCoordinatorDependencies.swift in Sources */,
+				64FB947D2D963DEA00A5325D /* AccountFlowCoordinator.swift in Sources */,
 				1F1FC48A22E3693100BCBA8D /* DataTransferService.swift in Sources */,
 				1FEE31622218B17E00C160B9 /* Observable.swift in Sources */,
 				1FFFC836221B0041007D99D2 /* IMoviesRepository.swift in Sources */,
@@ -2839,6 +2846,7 @@
 				642A928D2D894E2500E34BDA /* User.swift in Sources */,
 				641914502D8C05CC00807FDC /* WindowManager.swift in Sources */,
 				1F9034C72306FF2D00DEA4BD /* Endpoint.swift in Sources */,
+				640FB26E2DDEC8050058CFD1 /* TabBarItem.swift in Sources */,
 				64706EAB2DDB10A800D4B199 /* ChatMessage.swift in Sources */,
 				642A92932D894F2C00E34BDA /* IAuthRepository.swift in Sources */,
 				1F9034CE230713FC00DEA4BD /* DataTransferServiceTests.swift in Sources */,

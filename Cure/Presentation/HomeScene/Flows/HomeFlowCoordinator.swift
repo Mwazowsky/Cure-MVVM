@@ -17,85 +17,25 @@ protocol HomeFlowCoordinatorProtocol: Coordinator {
     func currentItem() -> TabBarItem?
 }
 
-enum TabBarItem {
-    case dashboard
-    case chats
-    case account
+final class HomeFlowCoordinator: NSObject {
+    // MARK: - Dependencies
+    weak var navigationController   : UINavigationController?
+    private let appDIContainer      : AppDIContainer
+    private let dependencies        : HomeFlowCoordinatorDependencies
+    private weak var delegate       : HomeFlowCoordinatorDelegate?
+    private let windowManager       : WindowManageable
     
-    init?(index: Int) {
-        switch index {
-        case 0:
-            self = .dashboard
-        case 1:
-            self = .chats
-        case 2:
-            self = .account
-        default:
-            return nil
-        }
-    }
+    // MARK: - Coordinators
+    weak var parentCoordinator      : AppFlowCoordinator?
+    var childCoordinators           : [Coordinator] = [Coordinator]()
+    var type                        : CoordinatorType { .tab }
     
-    func pageeTitleValue() -> String {
-        switch self {
-        case .dashboard:
-            return "Dashboard".localiz()
-        case .chats:
-            return "Chats".localiz()
-        case .account:
-            return "Account".localiz()
-        }
-    }
+    // MARK: - Controllers
+    var tabBarController          : UITabBarController
+    private weak var homeVC       : HomeViewController?
+    private weak var homeSearchVC : UIViewController?
     
-    func pageOrderNumber() -> Int {
-        switch self {
-        case .dashboard:
-            return 0
-        case .chats:
-            return 1
-        case .account:
-            return 2
-        }
-    }
-    
-    func pageIconName() -> String {
-        switch self {
-        case .dashboard:
-            return "IconTabDashboard"
-        case .chats:
-            return "IconTabChat"
-        case .account:
-            return "IconTabAccount"
-        }
-    }
-    
-    func pageIconValue() -> UIImage? {
-            return UIImage(named: pageIconName())
-    }
-    
-    func iconSelectedColor() -> UIColor {
-        return .systemBlue
-    }
-}
-
-final class HomeFlowCoordinator: NSObject, HomeFlowCoordinatorProtocol {
-    private let appDIContainer: AppDIContainer
-    
-    var childCoordinators: [Coordinator] = [Coordinator]()
-    var type: CoordinatorType { .tab }
-    
-    weak var navigationController: UINavigationController?
-    
-    var tabBarController: UITabBarController
-    
-    private let dependencies: HomeFlowCoordinatorDependencies
-    private weak var delegate: HomeFlowCoordinatorDelegate?
-    
-    weak var parentCoordinator: AppFlowCoordinator?
-    private weak var homeVC: HomeViewController?
-    private weak var homeSearchSuggestionsVC: UIViewController?
-    
-    private let windowManager: WindowManageable
-    
+    // MARK: - Base
     init(
         navigationController: UINavigationController,
         appDIContainer: AppDIContainer,
@@ -116,7 +56,7 @@ final class HomeFlowCoordinator: NSObject, HomeFlowCoordinatorProtocol {
     
     func start() {
         navigationController?.navigationBar.isHidden = true
-        navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationController?.setNavigationBarHidden(true, animated: true)
         
         let pages: [TabBarItem] = [.dashboard, .chats, .account]
             .sorted(
@@ -132,6 +72,38 @@ final class HomeFlowCoordinator: NSObject, HomeFlowCoordinatorProtocol {
         parentCoordinator?.childDidFinish(self)
     }
     
+    // MARK: - Flow
+    private func showChatContactsFlow(navigationController: UINavigationController) {
+        let chatContactsSceneDIContainer = appDIContainer.makeChatContactsSceneDIContainer()
+        let chatContactsFlowDIContainer = chatContactsSceneDIContainer.makeChatContactsListFlowCoordinator(
+            navigationController: navigationController,
+            appDIContainer: appDIContainer
+        )
+        
+        chatContactsFlowDIContainer.parentCoordinator = self
+        chatContactsFlowDIContainer.start()
+        
+        childCoordinators.append(chatContactsFlowDIContainer)
+    }
+    
+    private func showAccountFlow(navigationController: UINavigationController) {
+        let accountSceneDIContainer = appDIContainer.makeAccountSceneDIContainer()
+        let accountFlowCoordinator = accountSceneDIContainer.makeAccountFlowCoordinator(
+            navigationController: navigationController
+        )
+        
+        accountFlowCoordinator.parentCoordinator = self
+        accountFlowCoordinator.start()
+        
+        childCoordinators.append(accountFlowCoordinator)
+    }
+    
+    private func showForgotPasswordFlow() {
+//                let vc = dependencies.makeMoviesDetailsViewController(movie: movie)
+//                navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    // MARK: - View
     private func getTabBarController(_ item: TabBarItem) -> UINavigationController {
         let navController = UINavigationController()
         
@@ -169,37 +141,23 @@ final class HomeFlowCoordinator: NSObject, HomeFlowCoordinatorProtocol {
         tabBarController.selectedIndex = TabBarItem.chats.pageOrderNumber()
         tabBarController.tabBar.isTranslucent = true
         tabBarController.tabBar.tintColor = DesignTokens.LegacyColors.primary
+        
+        if #available(iOS 15.0, *) {
+            let tabBarAppearance = UITabBarAppearance()
+            tabBarAppearance.configureWithDefaultBackground()
+            UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+        }
+        
         navigationController?.viewControllers = [tabBarController]
     }
-    
-    private func showChatContactsFlow(navigationController: UINavigationController) {
-        let chatContactsSceneDIContainer = appDIContainer.makeChatContactsSceneDIContainer()
-        let chatContactsFlowDIContainer = chatContactsSceneDIContainer.makeChatContactsListFlowCoordinator(
-            navigationController: navigationController,
-            appDIContainer: appDIContainer
-        )
-        
-        chatContactsFlowDIContainer.parentCoordinator = self
-        chatContactsFlowDIContainer.start()
-        
-        childCoordinators.append(chatContactsFlowDIContainer)
-    }
-    
-    private func showAccountFlow(navigationController: UINavigationController) {
-        let accountSceneDIContainer = appDIContainer.makeAccountSceneDIContainer()
-        let accountFlowCoordinator = accountSceneDIContainer.makeAccountFlowCoordinator(
-            navigationController: navigationController
-        )
-        
-        accountFlowCoordinator.parentCoordinator = self
-        accountFlowCoordinator.start()
-        
-        childCoordinators.append(accountFlowCoordinator)
-    }
-    
-    private func showForgotPassword() {
-        //        let vc = dependencies.makeMoviesDetailsViewController(movie: movie)
-        //        navigationController?.pushViewController(vc, animated: true)
+}
+
+
+// MARK: - UITabBarControllerDelegate and Protocol
+extension HomeFlowCoordinator: UITabBarControllerDelegate, HomeFlowCoordinatorProtocol {
+    func tabBarController(_ tabBarController: UITabBarController,
+                          didSelect viewController: UIViewController) {
+        UIView.setAnimationsEnabled(false)
     }
     
     func selectItem(_ item: TabBarItem) {
@@ -214,14 +172,6 @@ final class HomeFlowCoordinator: NSObject, HomeFlowCoordinatorProtocol {
     
     func currentItem() -> TabBarItem? {
         TabBarItem.init(index: tabBarController.selectedIndex)
-    }
-}
-
-// MARK: - UITabBarControllerDelegate
-extension HomeFlowCoordinator: UITabBarControllerDelegate {
-    func tabBarController(_ tabBarController: UITabBarController,
-                          didSelect viewController: UIViewController) {
-        UIView.setAnimationsEnabled(false)
     }
 }
 

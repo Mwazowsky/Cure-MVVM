@@ -12,8 +12,13 @@ struct ListChatContacts: View {
     @ObservedObject var viewModelWrapper: ChatContactsViewModelWrapper
     
     var body: some View {
-        List(viewModelWrapper.items) { item in
-            ChatContactsItemView(viewModel: item)
+        List(viewModelWrapper.items.indices, id: \.self) { index in
+            ChatContactsItemView(
+                viewModel: viewModelWrapper.items[index],
+                onSelect: {
+                    viewModelWrapper.viewModel?.didSelectItem(at: index)
+                }
+            )
         }
         .listStyle(PlainListStyle())
         .padding(.top, 4)

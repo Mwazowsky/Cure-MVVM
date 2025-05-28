@@ -76,7 +76,11 @@ final class ChatContactsDIContainer: ChatContactsListFlowCoordinatorDependencies
     }
     
     func makeChattingViewController(chatContact: ChatContact) -> UIViewController {
-        return UIViewController()
+        let vc = UIViewController()
+        vc.view.backgroundColor = DesignTokens.LegacyColors.textBackground
+        vc.hidesBottomBarWhenPushed = true
+        
+        return vc
     }
     
     func makeChatContactsDetailsViewController(chatContact: ChatContact) -> UIViewController {
