@@ -38,9 +38,7 @@ final class MoviesListTableViewController: UITableViewController {
 }
 
 // MARK: - UITableViewDataSource, UITableViewDelegate
-
 extension MoviesListTableViewController {
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.items.value.count
     }

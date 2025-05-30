@@ -45,6 +45,10 @@ class ChatContactsListVC: UIViewController, Alertable {
         return view
     }()
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -56,12 +60,41 @@ class ChatContactsListVC: UIViewController, Alertable {
         }
         
         setupSearchController()
+        bind(to: viewModel)
         
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
         
+        self.chatContactsTableViewController = ChatContactsTableViewController()
+        chatContactsTableViewController?.viewModel = viewModel
+        
         viewModel.viewDidLoad()
+        
+        view.addSubview(chatContactsContainer)
+        
+        NSLayoutConstraint.activate([
+            chatContactsContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            chatContactsContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            chatContactsContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            chatContactsContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+        ])
+        
+        guard let chatContactsTVController = chatContactsTableViewController else { return }
+        
+        addChild(chatContactsTVController)
+        chatContactsTVController.view.frame = chatContactsContainer.bounds
+        chatContactsContainer.addSubview(chatContactsTVController.view)
+        
+        NSLayoutConstraint.activate([
+            chatContactsTVController.view.topAnchor.constraint(equalTo: chatContactsContainer.topAnchor),
+            chatContactsTVController.view.bottomAnchor.constraint(equalTo: chatContactsContainer.bottomAnchor),
+            chatContactsTVController.view.leadingAnchor.constraint(equalTo: chatContactsContainer.leadingAnchor),
+            chatContactsTVController.view.trailingAnchor.constraint(equalTo: chatContactsContainer.trailingAnchor)
+        ])
+        
+        chatContactsTableViewController?.didMove(toParent: self)
+        self.chatContactsTableViewController = chatContactsTVController
     }
     
     deinit {}

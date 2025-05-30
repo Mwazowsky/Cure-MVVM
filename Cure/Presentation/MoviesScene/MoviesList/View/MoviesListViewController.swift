@@ -17,7 +17,6 @@ final class MoviesListViewController: UIViewController, StoryboardInstantiable, 
     private var searchController = UISearchController(searchResultsController: nil)
 
     // MARK: - Lifecycle
-
     static func create(
         with viewModel: MoviesListViewModel,
         posterImagesRepository: IPosterImagesRepository?

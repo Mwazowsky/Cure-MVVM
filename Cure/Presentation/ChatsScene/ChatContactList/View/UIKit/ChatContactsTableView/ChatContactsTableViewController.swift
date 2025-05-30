@@ -10,18 +10,22 @@ import UIKit
 
 final class ChatContactsTableViewController: UITableViewController {
 
-    var viewModel: ChatContactsViewModel!
+    var viewModel: ChatContactsViewModel! {
+        didSet {
+            self.reload()
+        }
+    }
 
     var nextPageLoadingSpinner: UIActivityIndicatorView?
 
     // MARK: - Lifecycle
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
     }
 
     func reload() {
+        print("inside reload function, reloading table")
         tableView.reloadData()
     }
 
@@ -37,22 +41,31 @@ final class ChatContactsTableViewController: UITableViewController {
     }
 
     // MARK: - Private
-
     private func setupViews() {
         tableView.estimatedRowHeight = ChatContactsListItemCell.height
         tableView.rowHeight = UITableView.automaticDimension
+        
+        let nib = UINib(nibName: "ChatContactsListItemCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "ChatContactsListItemCell")
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        tableView.translatesAutoresizingMaskIntoConstraints = false
     }
 }
 
 // MARK: - UITableViewDataSource, UITableViewDelegate
-
 extension ChatContactsTableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("Hkasdfia: ", viewModel.isEmpty)
         return viewModel.items.value.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("Dequeueed reusable cell \(ChatContactsListItemCell.self) with reuseIdentifier: \(ChatContactsListItemCell.reuseIdentifier)")
+        
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: ChatContactsListItemCell.reuseIdentifier,
             for: indexPath
@@ -71,6 +84,7 @@ extension ChatContactsTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        print("Hkasdfia: ", viewModel.isEmpty)
         return viewModel.isEmpty ? tableView.frame.height : super.tableView(tableView, heightForRowAt: indexPath)
     }
 
