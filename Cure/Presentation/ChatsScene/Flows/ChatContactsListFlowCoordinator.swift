@@ -93,7 +93,8 @@ final class ChatContactsListFlowCoordinator: Coordinator {
         let vc = dependencies.makeChattingViewController(chatContact: chatContact)
         navigationController?.pushViewController(vc, animated: true)
         navigationController?.isNavigationBarHidden = false
-        vc.navigationItem.largeTitleDisplayMode = .never
+        vc.navigationController?.navigationBar.prefersLargeTitles = true
+        vc.navigationController?.addLogoImage(imagePath: "profile-placeholder", navItem: vc.navigationItem)
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
