@@ -111,7 +111,7 @@ final class DefaultChatContactsViewModel: ChatContactsViewModel {
         query.value = chatContactQuery.query
 
         chatContactsLoadTask = fetchChatContactsUseCase.execute(
-            requestValue: .init(query: chatContactQuery, page: nextPage, size: 10),
+            requestValue: .init(query: chatContactQuery, page: nextPage, size: 30),
             cached: { page in
 //                self?.mainQueue.async {
 //                    /// Error: Execute Cached completion return dto of chat contact

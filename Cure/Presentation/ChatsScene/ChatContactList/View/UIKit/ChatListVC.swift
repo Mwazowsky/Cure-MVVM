@@ -8,12 +8,16 @@
 import UIKit
 
 class ChatContactsListVC: UIViewController, Alertable {
-
+    var filteredContacts: [ChatContactsListItemViewModel] = []
+    var isSearchBarEmpty: Bool {
+      return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
     var didSendEventClosure: ((ChatContactsListVC.Event) -> Void)?
     
-    private var viewModel: ChatContactsViewModel!
+    let searchController = UISearchController(searchResultsController: nil)
     
-    private var searchController = UISearchController(searchResultsController: nil)
+    private var viewModel: ChatContactsViewModel!
     
     static func create(
         with viewModel: ChatContactsViewModel
@@ -25,11 +29,10 @@ class ChatContactsListVC: UIViewController, Alertable {
         return view
     }
     
+    let parentView: UIView = UIView()
+    
     private var loadingView: UIActivityIndicatorView = UIActivityIndicatorView()
     private var emptyDataLabel: UILabel = UILabel()
-    private var searchBarContainer: UIView = UIView()
-    
-    private var chatContactsContainer: UIView = UIView()
     
     private var chatContactsTableViewController: ChatContactsTableViewController?
     
@@ -45,10 +48,6 @@ class ChatContactsListVC: UIViewController, Alertable {
         return view
     }()
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -59,42 +58,55 @@ class ChatContactsListVC: UIViewController, Alertable {
 //            view.backgroundColor = darkModeEnabled ? UIColor.black : UIColor.white
         }
         
-        setupSearchController()
+        title = "Chats"
+        
         bind(to: viewModel)
         
-        navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
-        definesPresentationContext = true
+        setupSearchController()
         
         self.chatContactsTableViewController = ChatContactsTableViewController()
         chatContactsTableViewController?.viewModel = viewModel
         
         viewModel.viewDidLoad()
         
-        view.addSubview(chatContactsContainer)
-        
-        NSLayoutConstraint.activate([
-            chatContactsContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            chatContactsContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            chatContactsContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            chatContactsContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor)
-        ])
-        
         guard let chatContactsTVController = chatContactsTableViewController else { return }
         
-        addChild(chatContactsTVController)
-        chatContactsTVController.view.frame = chatContactsContainer.bounds
-        chatContactsContainer.addSubview(chatContactsTVController.view)
+        parentView.backgroundColor = DesignTokens.LegacyColors.primary
+        parentView.translatesAutoresizingMaskIntoConstraints = false
         
+        view.addSubview(parentView)
+
         NSLayoutConstraint.activate([
-            chatContactsTVController.view.topAnchor.constraint(equalTo: chatContactsContainer.topAnchor),
-            chatContactsTVController.view.bottomAnchor.constraint(equalTo: chatContactsContainer.bottomAnchor),
-            chatContactsTVController.view.leadingAnchor.constraint(equalTo: chatContactsContainer.leadingAnchor),
-            chatContactsTVController.view.trailingAnchor.constraint(equalTo: chatContactsContainer.trailingAnchor)
+            parentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            parentView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            parentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            parentView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+        
+        parentView.addSubview(chatContactsTVController.view)
+
+        NSLayoutConstraint.activate([
+            chatContactsTVController.view.topAnchor.constraint(equalTo: parentView.safeAreaLayoutGuide.topAnchor),
+            chatContactsTVController.view.bottomAnchor.constraint(equalTo: parentView.safeAreaLayoutGuide.bottomAnchor),
+            chatContactsTVController.view.leadingAnchor.constraint(equalTo: parentView.leadingAnchor),
+            chatContactsTVController.view.trailingAnchor.constraint(equalTo: parentView.trailingAnchor)
         ])
         
         chatContactsTableViewController?.didMove(toParent: self)
         self.chatContactsTableViewController = chatContactsTVController
+    }
+    
+    func setupSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Contacts..."
+        
+        if let textField = searchController.searchBar.value(forKey: "searchField") as? UITextField {
+            textField.backgroundColor = DesignTokens.LegacyColors.textBackground
+        }
+
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
     
     deinit {}
@@ -112,19 +124,18 @@ class ChatContactsListVC: UIViewController, Alertable {
     private func updateViewsVisibility(model: ChatContactsViewModel) {
         loadingView.isHidden = true
         emptyDataLabel.isHidden = true
-        chatContactsContainer.isHidden = true
         suggestionsListContainer.isHidden = true
         
-        updateQueriesSuggestionsVisibility()
+//        updateQueriesSuggestionsVisibility()
     }
     
-    private func updateQueriesSuggestionsVisibility() {
-        if searchController.searchBar.isFirstResponder {
-            viewModel.showQueriesSuggestions()
-        } else {
-            viewModel.closeQueriesSuggestions()
-        }
-    }
+//    private func updateQueriesSuggestionsVisibility() {
+//        if searchController.searchBar.isFirstResponder {
+//            viewModel.showQueriesSuggestions()
+//        } else {
+//            viewModel.closeQueriesSuggestions()
+//        }
+//    }
     
     private func updateItems() {
         chatContactsTableViewController?.reload()
@@ -132,22 +143,28 @@ class ChatContactsListVC: UIViewController, Alertable {
     
     private func updateLoading(_ loading: ChatContactsViewModelLoading?) {
         emptyDataLabel.isHidden = true
-        chatContactsContainer.isHidden = true
         suggestionsListContainer.isHidden = true
-        LoadingView.hide()
-        
-        switch loading {
-        case .fullScreen: LoadingView.show()
-        case .nextPage: chatContactsContainer.isHidden = false
-        case .none:
-            chatContactsContainer.isHidden = viewModel.isEmpty
-            emptyDataLabel.isHidden = !viewModel.isEmpty
-        }
     }
     
     private func showError(_ error: String) {
         guard !error.isEmpty else { return }
         showAlert(title: viewModel.errorTitle, message: error)
+    }
+    
+    func filterContentForSearchText(_ searchText: String) {
+        filteredContacts = viewModel.items.value.filter { (contact: ChatContactsListItemViewModel) -> Bool in
+            return contact.contactName.lowercased().contains(searchText.lowercased())
+      }
+      
+        chatContactsTableViewController?.tableView.reloadData()
+    }
+}
+
+
+extension ChatContactsListVC: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        filterContentForSearchText(searchBar.text!)
     }
 }
 
@@ -155,7 +172,6 @@ class ChatContactsListVC: UIViewController, Alertable {
 extension ChatContactsListVC: UISearchBarDelegate {
     public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchText = searchBar.text, !searchText.isEmpty else { return }
-        searchController.isActive = false
         chatContactsTableViewController?.tableView.setContentOffset(CGPoint.zero, animated: false)
         viewModel.didSearch(query: searchText)
     }
@@ -167,40 +183,25 @@ extension ChatContactsListVC: UISearchBarDelegate {
 
 extension ChatContactsListVC: UISearchControllerDelegate {
     public func willPresentSearchController(_ searchController: UISearchController) {
-        updateQueriesSuggestionsVisibility()
+//        updateQueriesSuggestionsVisibility()
     }
     
     public func willDismissSearchController(_ searchController: UISearchController) {
-        updateQueriesSuggestionsVisibility()
+//        updateQueriesSuggestionsVisibility()
     }
     
     public func didDismissSearchController(_ searchController: UISearchController) {
-        updateQueriesSuggestionsVisibility()
+//        updateQueriesSuggestionsVisibility()
     }
 }
 
 
 // MARK: - Setup Search Controller
 
-extension ChatContactsListVC {
-    private func setupSearchController() {
-        searchController.delegate = self
-        searchController.searchBar.delegate = self
-        searchController.searchBar.placeholder = NSLocalizedString("Search Movies", comment: "")
-        if #available(iOS 9.1, *) {
-            searchController.obscuresBackgroundDuringPresentation = false
-        } else {
-            searchController.dimsBackgroundDuringPresentation = true
-        }
-        searchController.searchBar.translatesAutoresizingMaskIntoConstraints = true
-        searchController.searchBar.barStyle = .black
-        searchController.searchBar.frame = searchBarContainer.bounds
-        searchController.searchBar.autoresizingMask = [.flexibleWidth]
-        searchBarContainer.addSubview(searchController.searchBar)
-        definesPresentationContext = true
-        searchController.accessibilityLabel = NSLocalizedString("Search Movies", comment: "")
-    }
-}
+//extension ChatContactsListVC {
+//    private func setupSearchController() {
+//    }
+//}
 
 
 extension ChatContactsListVC {

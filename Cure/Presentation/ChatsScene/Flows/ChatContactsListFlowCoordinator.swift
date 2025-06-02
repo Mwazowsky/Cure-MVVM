@@ -66,6 +66,9 @@ final class ChatContactsListFlowCoordinator: Coordinator {
         let vc = dependencies.makeChatContactsListViewController(actions: actions)
         navigationController?.pushViewController(vc, animated: false)
         chatContactsListVC = vc
+        
+        navigationController?.navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     func finish() {
@@ -84,12 +87,14 @@ final class ChatContactsListFlowCoordinator: Coordinator {
 //        
 //        childCoordinators.append(chattingFlowDIContainer)
 //    }
-    
+
     // MARK: - View
     private func showChattingPage(chatContact: ChatContact) {
         let vc = dependencies.makeChattingViewController(chatContact: chatContact)
         navigationController?.pushViewController(vc, animated: true)
         navigationController?.isNavigationBarHidden = false
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     private func showChatContactQueriesSuggestions(didSelect: @escaping (ChatContactQuery) -> Void) {

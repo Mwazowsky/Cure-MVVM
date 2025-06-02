@@ -108,12 +108,13 @@ final class HomeFlowCoordinator: NSObject {
         let navController = UINavigationController()
         
         navController.setNavigationBarHidden(false, animated: true)
-        navController.navigationItem.largeTitleDisplayMode = .always
-        navController.navigationBar.prefersLargeTitles = true
         
-        UIView.animate(withDuration: 0.4) {
-            navController.navigationBar.prefersLargeTitles = false
-        }
+//        navController.navigationItem.largeTitleDisplayMode = .always
+//        navController.navigationBar.prefersLargeTitles = true
+//        
+//        UIView.animate(withDuration: 0.4) {
+//            navController.navigationBar.prefersLargeTitles = false
+//        }
         
         navController.tabBarItem = UITabBarItem.init(
             title: item.pageeTitleValue(),

@@ -117,7 +117,7 @@ final class DefaultChattingViewModel: ChattingViewModel {
             requestValue: .init(
                 query: chattingQuery,
                 page: nextPage,
-                size: 10,
+                size: 30,
                 totalPages: totalPageCount),
             cached: { page in
                 //                self?.mainQueue.async {
