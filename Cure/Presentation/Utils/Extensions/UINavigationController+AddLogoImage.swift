@@ -25,8 +25,6 @@ extension UINavigationController {
 
         let containerView = UIView(frame: CGRect(x: 0, y: 0, width: containerSize, height: containerSize))
         containerView.addSubview(imageView)
-        
-        containerView.backgroundColor = .black
 
         NSLayoutConstraint.activate([
             imageView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),

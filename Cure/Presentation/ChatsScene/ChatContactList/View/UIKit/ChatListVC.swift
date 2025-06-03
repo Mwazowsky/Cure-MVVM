@@ -7,13 +7,13 @@
 
 import UIKit
 
-class ChatContactsListVC: UIViewController, Alertable {
+class ChatContactListViewController: UIViewController, Alertable {
     var filteredContacts: [ChatContactsListItemViewModel] = []
     var isSearchBarEmpty: Bool {
       return searchController.searchBar.text?.isEmpty ?? true
     }
     
-    var didSendEventClosure: ((ChatContactsListVC.Event) -> Void)?
+    var didSendEventClosure: ((ChatContactListViewController.Event) -> Void)?
     
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -21,8 +21,8 @@ class ChatContactsListVC: UIViewController, Alertable {
     
     static func create(
         with viewModel: ChatContactsViewModel
-    ) -> ChatContactsListVC {
-        let view = ChatContactsListVC()
+    ) -> ChatContactListViewController {
+        let view = ChatContactListViewController()
         
         view.viewModel = viewModel
         
@@ -48,9 +48,15 @@ class ChatContactsListVC: UIViewController, Alertable {
         return view
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         if #available(iOS 13.0, *) {
             view.backgroundColor = .systemBackground
         } else {
@@ -161,7 +167,7 @@ class ChatContactsListVC: UIViewController, Alertable {
 }
 
 
-extension ChatContactsListVC: UISearchResultsUpdating {
+extension ChatContactListViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
         filterContentForSearchText(searchBar.text!)
@@ -169,7 +175,7 @@ extension ChatContactsListVC: UISearchResultsUpdating {
 }
 
 
-extension ChatContactsListVC: UISearchBarDelegate {
+extension ChatContactListViewController: UISearchBarDelegate {
     public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchText = searchBar.text, !searchText.isEmpty else { return }
         chatContactsTableViewController?.tableView.setContentOffset(CGPoint.zero, animated: false)
@@ -181,7 +187,7 @@ extension ChatContactsListVC: UISearchBarDelegate {
     }
 }
 
-extension ChatContactsListVC: UISearchControllerDelegate {
+extension ChatContactListViewController: UISearchControllerDelegate {
     public func willPresentSearchController(_ searchController: UISearchController) {
 //        updateQueriesSuggestionsVisibility()
     }
@@ -204,7 +210,7 @@ extension ChatContactsListVC: UISearchControllerDelegate {
 //}
 
 
-extension ChatContactsListVC {
+extension ChatContactListViewController {
     enum Event {
         case chats
     }

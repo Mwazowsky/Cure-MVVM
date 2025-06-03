@@ -18,11 +18,12 @@ final class AppAppearance {
             appearance.backgroundColor = DesignTokens.LegacyColors.primary
             appearance.shadowImage = UIImage()
             appearance.shadowColor = .clear
+            UINavigationBar.appearance().tintColor = DesignTokens.LegacyColors.lightBackground
             UINavigationBar.appearance().standardAppearance = appearance
             UINavigationBar.appearance().scrollEdgeAppearance = appearance
         } else {
             UINavigationBar.appearance().barTintColor = DesignTokens.LegacyColors.primary
-            UINavigationBar.appearance().tintColor = .white
+            UINavigationBar.appearance().tintColor = DesignTokens.LegacyColors.lightBackground
             UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         }
     }

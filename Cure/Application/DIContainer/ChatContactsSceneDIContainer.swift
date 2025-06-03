@@ -62,7 +62,7 @@ final class ChatContactsDIContainer: ChatContactsListFlowCoordinatorDependencies
         //            return UIHostingController(rootView: view)
         //        } else {
         // UIKit
-        return ChatContactsListVC.create(
+        return ChatContactListViewController.create(
             with: makeChatContactsListViewModel(actions: actions)
         )
         //        }
@@ -76,12 +76,17 @@ final class ChatContactsDIContainer: ChatContactsListFlowCoordinatorDependencies
         )
     }
     
+    func makeChattingListViewModel() -> ChatContactsViewModel {
+        DefaultChatContactsViewModel(
+            fetchChatContactsUseCase: makeFetchContactsUseCase(),
+            getUserTokenDataUseCase: makeGetCurrentUserTokenUseCase()
+        )
+    }
+    
     func makeChattingViewController(chatContact: ChatContact) -> UIViewController {
-        let vc = UIViewController()
-        vc.view.backgroundColor = DesignTokens.LegacyColors.textBackground
-        vc.hidesBottomBarWhenPushed = true
-        
-        return vc
+        return ChattingViewController.create(
+            with: makeChattingListViewModel()
+        )
     }
     
     func makeChatContactsDetailsViewController(chatContact: ChatContact) -> UIViewController {

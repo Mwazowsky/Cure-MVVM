@@ -94,8 +94,8 @@ final class ChatContactsListFlowCoordinator: Coordinator {
         navigationController?.pushViewController(vc, animated: true)
         navigationController?.isNavigationBarHidden = false
         vc.navigationController?.navigationBar.prefersLargeTitles = true
-        vc.navigationController?.addLogoImage(imagePath: "profile-placeholder", navItem: vc.navigationItem)
         navigationController?.navigationBar.prefersLargeTitles = true
+        vc.hidesBottomBarWhenPushed = true
     }
     
     private func showChatContactQueriesSuggestions(didSelect: @escaping (ChatContactQuery) -> Void) {

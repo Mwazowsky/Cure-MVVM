@@ -211,6 +211,10 @@
 		648D8CAC2DD3068500F59F33 /* TitleTxtCUREUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648D8CAB2DD3068500F59F33 /* TitleTxtCUREUIKit.swift */; };
 		648D8CAE2DD316C600F59F33 /* TextBtnCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648D8CAD2DD316C500F59F33 /* TextBtnCURE.swift */; };
 		648D8CB22DD31FC300F59F33 /* LoginFormCUREUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648D8CB12DD31FB800F59F33 /* LoginFormCUREUIKit.swift */; };
+		649B27472DEED13B004D5057 /* ChattingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649B27462DEED136004D5057 /* ChattingVC.swift */; };
+		649B274A2DEED845004D5057 /* ChattingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649B27492DEED833004D5057 /* ChattingTableViewController.swift */; };
+		649B274D2DEED871004D5057 /* ChattingMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649B274C2DEED86B004D5057 /* ChattingMessageCell.swift */; };
+		649B274F2DEED887004D5057 /* ChattingInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649B274E2DEED879004D5057 /* ChattingInfoCell.swift */; };
 		649D6D942DE6F26200BC72D6 /* ChatContactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649D6D932DE6F26200BC72D6 /* ChatContactsTableViewController.swift */; };
 		649ED1002DD477440062814F /* AuthBtnGroupCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649ED0FF2DD477440062814F /* AuthBtnGroupCURE.swift */; };
 		649ED1022DD478B80062814F /* AuthFieldsGroupCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649ED1012DD4789A0062814F /* AuthFieldsGroupCURE.swift */; };
@@ -502,6 +506,10 @@
 		648D8CAB2DD3068500F59F33 /* TitleTxtCUREUIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTxtCUREUIKit.swift; sourceTree = "<group>"; };
 		648D8CAD2DD316C500F59F33 /* TextBtnCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBtnCURE.swift; sourceTree = "<group>"; };
 		648D8CB12DD31FB800F59F33 /* LoginFormCUREUIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormCUREUIKit.swift; sourceTree = "<group>"; };
+		649B27462DEED136004D5057 /* ChattingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingVC.swift; sourceTree = "<group>"; };
+		649B27492DEED833004D5057 /* ChattingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingTableViewController.swift; sourceTree = "<group>"; };
+		649B274C2DEED86B004D5057 /* ChattingMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingMessageCell.swift; sourceTree = "<group>"; };
+		649B274E2DEED879004D5057 /* ChattingInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingInfoCell.swift; sourceTree = "<group>"; };
 		649D6D932DE6F26200BC72D6 /* ChatContactsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatContactsTableViewController.swift; sourceTree = "<group>"; };
 		649ED0FF2DD477440062814F /* AuthBtnGroupCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthBtnGroupCURE.swift; sourceTree = "<group>"; };
 		649ED1012DD4789A0062814F /* AuthFieldsGroupCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthFieldsGroupCURE.swift; sourceTree = "<group>"; };
@@ -1335,8 +1343,6 @@
 		641DF2FC2DC4BCC900EDAC97 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				6451F4B32DDAE48300A18E95 /* ChattingViewModel.swift */,
-				6451F4B52DDAE55900A18E95 /* ChattingListItemViewModel.swift */,
 				641DF2FD2DC4BD0700EDAC97 /* ChatContactsViewModel.swift */,
 				641DF2FF2DC4BE5200EDAC97 /* ChatContactsListItemViewModel.swift */,
 			);
@@ -1575,6 +1581,59 @@
 				647B5B122DCDDEDE0097AE34 /* DefaultTFCUREUIKit.swift */,
 			);
 			path = TextFields;
+			sourceTree = "<group>";
+		};
+		649B27422DEED09D004D5057 /* Chatting */ = {
+			isa = PBXGroup;
+			children = (
+				649B27442DEED0D7004D5057 /* View */,
+				649B27432DEED0C0004D5057 /* ViewModel */,
+			);
+			path = Chatting;
+			sourceTree = "<group>";
+		};
+		649B27432DEED0C0004D5057 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				6451F4B32DDAE48300A18E95 /* ChattingViewModel.swift */,
+				6451F4B52DDAE55900A18E95 /* ChattingListItemViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		649B27442DEED0D7004D5057 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				649B27452DEED0EB004D5057 /* UIKit */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		649B27452DEED0EB004D5057 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				649B27462DEED136004D5057 /* ChattingVC.swift */,
+				649B27482DEED811004D5057 /* ChattingTableView */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		649B27482DEED811004D5057 /* ChattingTableView */ = {
+			isa = PBXGroup;
+			children = (
+				649B27492DEED833004D5057 /* ChattingTableViewController.swift */,
+				649B274B2DEED856004D5057 /* Cells */,
+			);
+			path = ChattingTableView;
+			sourceTree = "<group>";
+		};
+		649B274B2DEED856004D5057 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				649B274C2DEED86B004D5057 /* ChattingMessageCell.swift */,
+				649B274E2DEED879004D5057 /* ChattingInfoCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		649D6D922DE6F24C00BC72D6 /* ChatContactsTableView */ = {
@@ -2042,6 +2101,7 @@
 			isa = PBXGroup;
 			children = (
 				64FB94662D94FAD100A5325D /* Flows */,
+				649B27422DEED09D004D5057 /* Chatting */,
 				64FB94692D94FAD100A5325D /* ChatContactList */,
 			);
 			path = ChatsScene;
@@ -2700,6 +2760,7 @@
 				1FFFC836221B0041007D99D2 /* IMoviesRepository.swift in Sources */,
 				1F57F8D223C656F600981E09 /* AccessibilityIdentifier.swift in Sources */,
 				642A92902D894E9F00E34BDA /* Authentication.swift in Sources */,
+				649B27472DEED13B004D5057 /* ChattingVC.swift in Sources */,
 				64BAAFED2D92804200B70EFF /* HomeView.swift in Sources */,
 				1F0CEFCF23436B67004141FA /* ConnectionError.swift in Sources */,
 				642A6E312DD4542A00B006F0 /* OAuthBtnGroupCURE.swift in Sources */,
@@ -2708,9 +2769,11 @@
 				1F05A6CC2220A2CB001E2801 /* SearchMoviesUseCase.swift in Sources */,
 				649ED1072DD47F5B0062814F /* AvatarIVCURE.swift in Sources */,
 				64FB942C2D93A42500A5325D /* HomeQueryListView.swift in Sources */,
+				649B274D2DEED871004D5057 /* ChattingMessageCell.swift in Sources */,
 				64FB942D2D93A42500A5325D /* HomeQueryListItemViewModel.swift in Sources */,
 				6458D0C72DAF8CA900A4E4CA /* CoreDataUserDetailsResponseStorage.swift in Sources */,
 				64FB945F2D94F47B00A5325D /* DashboardVC.swift in Sources */,
+				649B274A2DEED845004D5057 /* ChattingTableViewController.swift in Sources */,
 				645CDA062D9E86E1006E01F6 /* IUserRepository.swift in Sources */,
 				6451F4BC2DDB05E000A18E95 /* DefaultChattingRepository.swift in Sources */,
 				64706EB32DDB212000D4B199 /* DefaultChattingQueriesRepository.swift in Sources */,
@@ -2759,6 +2822,7 @@
 				648D8CAA2DD3065400F59F33 /* ValidationTxtCUREUIKit.swift in Sources */,
 				643A96F62DB9E20F001AAED1 /* IChatContactsRepository.swift in Sources */,
 				1FC5B7D0242634EB0086FA8C /* UIImageView+ImageSizeAfterAspectFit.swift in Sources */,
+				649B274F2DEED887004D5057 /* ChattingInfoCell.swift in Sources */,
 				643A96FD2DB9E341001AAED1 /* IChatContactsQueriesRepository.swift in Sources */,
 				1FE49D8C230AA7C200D1D42E /* MoviesListViewController.swift in Sources */,
 				64B740462D8A862300168646 /* AuthSceneDIContainer.swift in Sources */,
