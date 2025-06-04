@@ -143,8 +143,6 @@ final class ChattingViewController: UIViewController {
     
     // MARK: - Private methods
     private func setupUI() {
-        navigationController?.navigationBar.prefersLargeTitles = true
-        
         title = Const.navTitle
         
         guard let navigationBar = self.navigationController?.navigationBar else { return }

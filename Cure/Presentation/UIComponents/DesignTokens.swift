@@ -27,15 +27,20 @@ struct DesignTokens {
     
     struct LegacyColors {
         static let primary = UIColor.primaryCURE
-        static let dark = UIColor.black
+        static let secondary = UIColor.secondaryCURE
         
         static let textForeground = UIColor.textfieldFG
         static let textBackground = UIColor.textfieldBG
         
         static let textClickable = UIColor.systemBlue
+        static let textDisabled = UIColor.lightGray
         
         static let lightBackground = UIColor.white
         static let darkBackground = UIColor.black
+        
+        static let bottomBar = UIColor.bottomBar
+        static let companyChipBG = UIColor.companyChip
+        static let activeFilterChipBG = UIColor.primaryCURE.withAlphaComponent(0.7)
     }
     
     @available(iOS 13.0, *)

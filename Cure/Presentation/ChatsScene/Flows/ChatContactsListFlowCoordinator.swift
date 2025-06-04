@@ -91,11 +91,14 @@ final class ChatContactsListFlowCoordinator: Coordinator {
     // MARK: - View
     private func showChattingPage(chatContact: ChatContact) {
         let vc = dependencies.makeChattingViewController(chatContact: chatContact)
-        navigationController?.pushViewController(vc, animated: true)
         navigationController?.isNavigationBarHidden = false
-        vc.navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.navigationItem.largeTitleDisplayMode = .never
+        
         vc.hidesBottomBarWhenPushed = true
+        
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     private func showChatContactQueriesSuggestions(didSelect: @escaping (ChatContactQuery) -> Void) {

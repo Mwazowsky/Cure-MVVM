@@ -147,7 +147,7 @@ final class HomeFlowCoordinator: NSObject {
         tabBarController.setViewControllers(tabBarControllers, animated: true)
         tabBarController.selectedIndex = TabBarItem.chats.pageOrderNumber()
         tabBarController.tabBar.isTranslucent = true
-        tabBarController.tabBar.tintColor = DesignTokens.LegacyColors.primary
+        tabBarController.tabBar.tintColor = DesignTokens.LegacyColors.bottomBar
         
         if #available(iOS 15.0, *) {
             let tabBarAppearance = UITabBarAppearance()

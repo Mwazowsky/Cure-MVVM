@@ -46,7 +46,7 @@ final class ChatContactsListItemCell: UITableViewCell {
     
     private let companyLabelContainer: UIView = {
         let view = UIView()
-        view.backgroundColor = DesignTokens.LegacyColors.textClickable
+        view.backgroundColor = DesignTokens.LegacyColors.companyChipBG
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -55,7 +55,7 @@ final class ChatContactsListItemCell: UITableViewCell {
     private let companyLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12, weight: .semibold)
-        label.textColor = DesignTokens.LegacyColors.textBackground
+        label.textColor = DesignTokens.LegacyColors.lightBackground
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label

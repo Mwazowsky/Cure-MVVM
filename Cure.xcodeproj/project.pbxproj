@@ -110,6 +110,9 @@
 		640FB26D2DDEC8050058CFD1 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640FB26B2DDEC7F70058CFD1 /* TabBarItem.swift */; };
 		640FB26E2DDEC8050058CFD1 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640FB26B2DDEC7F70058CFD1 /* TabBarItem.swift */; };
 		641162C52DAF85A100142060 /* UserDetailsResponseEntityMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641162C42DAF85A100142060 /* UserDetailsResponseEntityMapping.swift */; };
+		64150D042DEFE78F00E99A30 /* FilterChipsItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64150D032DEFE78200E99A30 /* FilterChipsItemCell.swift */; };
+		64150D082DEFEE4C00E99A30 /* ChipFilterCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64150D072DEFEE3800E99A30 /* ChipFilterCollectionViewController.swift */; };
+		64150D0A2DEFEE6A00E99A30 /* ChipItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64150D092DEFEE5D00E99A30 /* ChipItemCollectionViewCell.swift */; };
 		641914502D8C05CC00807FDC /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6419144F2D8C05CC00807FDC /* WindowManager.swift */; };
 		641914512D8C05CC00807FDC /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6419144F2D8C05CC00807FDC /* WindowManager.swift */; };
 		641DF2E12DC4A59500EDAC97 /* DefaultChatContactsQueriesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641DF2E02DC4A59500EDAC97 /* DefaultChatContactsQueriesRepository.swift */; };
@@ -427,6 +430,9 @@
 		5ECB44A97EE37A0D4194E04B /* Pods-Cure.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cure.debug.xcconfig"; path = "Target Support Files/Pods-Cure/Pods-Cure.debug.xcconfig"; sourceTree = "<group>"; };
 		640FB26B2DDEC7F70058CFD1 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
 		641162C42DAF85A100142060 /* UserDetailsResponseEntityMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsResponseEntityMapping.swift; sourceTree = "<group>"; };
+		64150D032DEFE78200E99A30 /* FilterChipsItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterChipsItemCell.swift; sourceTree = "<group>"; };
+		64150D072DEFEE3800E99A30 /* ChipFilterCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChipFilterCollectionViewController.swift; sourceTree = "<group>"; };
+		64150D092DEFEE5D00E99A30 /* ChipItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChipItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		6419144F2D8C05CC00807FDC /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
 		641DF2E02DC4A59500EDAC97 /* DefaultChatContactsQueriesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChatContactsQueriesRepository.swift; sourceTree = "<group>"; };
 		641DF2E32DC4A66400EDAC97 /* ChatContactsQueriesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatContactsQueriesStorage.swift; sourceTree = "<group>"; };
@@ -1288,6 +1294,23 @@
 			path = EntityMapping;
 			sourceTree = "<group>";
 		};
+		64150D052DEFEE1E00E99A30 /* ChipFilterCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				64150D072DEFEE3800E99A30 /* ChipFilterCollectionViewController.swift */,
+				64150D062DEFEE3300E99A30 /* Cell */,
+			);
+			path = ChipFilterCollectionView;
+			sourceTree = "<group>";
+		};
+		64150D062DEFEE3300E99A30 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				64150D092DEFEE5D00E99A30 /* ChipItemCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		6419144E2D8C057E00807FDC /* UIWindow */ = {
 			isa = PBXGroup;
 			children = (
@@ -1454,6 +1477,7 @@
 			isa = PBXGroup;
 			children = (
 				64427EFE2DE7010200C02223 /* ChatContactsListItemCell.swift */,
+				64150D032DEFE78200E99A30 /* FilterChipsItemCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1677,6 +1701,7 @@
 			isa = PBXGroup;
 			children = (
 				64FB94672D94FAD100A5325D /* ChatListVC.swift */,
+				64150D052DEFEE1E00E99A30 /* ChipFilterCollectionView */,
 				649D6D922DE6F24C00BC72D6 /* ChatContactsTableView */,
 			);
 			path = UIKit;
@@ -2742,6 +2767,7 @@
 				64B740422D8A853100168646 /* LoginVC.swift in Sources */,
 				1F84DED023006BDA00139F73 /* FetchRecentMovieQueriesUseCase.swift in Sources */,
 				64FE0AF62DCC97940044A69C /* LoginPage.swift in Sources */,
+				64150D0A2DEFEE6A00E99A30 /* ChipItemCollectionViewCell.swift in Sources */,
 				1FFF12A42439F2E700937EE4 /* MoviesResponseStorage.swift in Sources */,
 				1F2AB951242789B80010DEEE /* MoviesResponseDTO+Mapping.swift in Sources */,
 				64DFE21C2DB8F6C100A64AEA /* FetchChatUC.swift in Sources */,
@@ -2770,6 +2796,7 @@
 				649ED1072DD47F5B0062814F /* AvatarIVCURE.swift in Sources */,
 				64FB942C2D93A42500A5325D /* HomeQueryListView.swift in Sources */,
 				649B274D2DEED871004D5057 /* ChattingMessageCell.swift in Sources */,
+				64150D042DEFE78F00E99A30 /* FilterChipsItemCell.swift in Sources */,
 				64FB942D2D93A42500A5325D /* HomeQueryListItemViewModel.swift in Sources */,
 				6458D0C72DAF8CA900A4E4CA /* CoreDataUserDetailsResponseStorage.swift in Sources */,
 				64FB945F2D94F47B00A5325D /* DashboardVC.swift in Sources */,
@@ -2898,6 +2925,7 @@
 				64FB94702D9533FC00A5325D /* Constants.swift in Sources */,
 				643A97052DB9F4C1001AAED1 /* ChatContactsResponseEntity+Mapping.swift in Sources */,
 				64FE0AB22DCC87170044A69C /* DesignTokens.swift in Sources */,
+				64150D082DEFEE4C00E99A30 /* ChipFilterCollectionViewController.swift in Sources */,
 				1FA5338D201E1FDE00747E55 /* AppDelegate.swift in Sources */,
 				1FA533B2201EE2A500747E55 /* Movie.swift in Sources */,
 				64427EFF2DE7010F00C02223 /* ChatContactsListItemCell.swift in Sources */,
