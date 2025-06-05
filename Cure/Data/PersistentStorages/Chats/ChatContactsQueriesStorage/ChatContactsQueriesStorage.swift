@@ -12,6 +12,7 @@ protocol ChatContactsQueriesStorage {
         maxCount: Int,
         completion: @escaping (Result<[ChatContactQuery], Error>) -> Void
     )
+    
     func saveRecentQuery(
         query: ChatContactQuery,
         completion: @escaping (Result<ChatContactQuery, Error>) -> Void

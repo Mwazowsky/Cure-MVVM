@@ -5,6 +5,8 @@
 !*.xcodeproj/project.pbxproj
 !*.xcodeproj/xcshareddata
 
+*.xcworkspace
+
 #
 # *.lock - this is used and abused by many editors for many different things.
 #    For the main ones I use (e.g. Eclipse), it should be excluded 
@@ -67,6 +69,7 @@ playground.xcworkspace
 # Add this line if you want to avoid checking in source code from Swift Package Manager dependencies.
 Packages/
 .build/
+build/
 
 # CocoaPods
 #
