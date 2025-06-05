@@ -9,6 +9,9 @@ import Foundation
 
 struct ChattingRequestDTO: Encodable {
     let filter: String
+    let companyHuntingNumberId: Int
+    let contactId: Int
+    let contactPairingID: Int
     let page: Int
     let size: Int
     let totalPages: Int

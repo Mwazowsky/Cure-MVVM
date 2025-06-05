@@ -31,7 +31,11 @@ final class DefaultFetchMessagesUseCase: FetchMessagesUseCase {
         completion: @escaping (Result<ChatMessagesPage, any Error>) -> Void
     ) -> (any Cancellable)? {
         return fetchMessageRepository.fetchMessages(
+            messageChannel: requestValue.messageChannel,
             query: requestValue.query,
+            companyHuntingNumberId: requestValue.companyHuntingNumberId,
+            contactId: requestValue.contactId,
+            contactPairingId: requestValue.contactPairingId,
             page: requestValue.page,
             size: requestValue.size,
             totalPages: requestValue.totalPages,
@@ -39,6 +43,7 @@ final class DefaultFetchMessagesUseCase: FetchMessagesUseCase {
             completion: { result in
                 switch result {
                 case .success(let page):
+                    print("Message Page in Execute: ", page)
                     completion(.success(page.toDomain()))
                 case .failure(let error):
                     completion(.failure(error))
@@ -52,7 +57,11 @@ final class DefaultFetchMessagesUseCase: FetchMessagesUseCase {
 
 
 struct FetchMessagesUseCaseRequestValue {
+    let messageChannel: String
     let query: ChattingQuery
+    let companyHuntingNumberId: Int
+    let contactId: Int
+    let contactPairingId: Int
     let page: Int
     let size: Int
     let totalPages: Int

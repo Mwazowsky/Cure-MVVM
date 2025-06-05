@@ -37,15 +37,13 @@ extension ChattingViewController {
 }
 
 final class ChattingViewController: UIViewController {
+    private var viewModel: ChattingViewModel!
+    
     private let imageview: UIImageView = UIImageView(image: UIImage(named: "profile-placeholder"))
-    private var shouldResize: Bool = true
+    private let parentView: UIView = UIView()
     
     private var chatingTableViewController: ChattingTableViewController?
-    
-    private var viewModel: ChatContactsViewModel!
-    
     private var emptyDataLabel: UILabel = UILabel()
-    
     private(set) var suggestionsListContainer: UIView = {
         let view = UIView()
         
@@ -58,10 +56,12 @@ final class ChattingViewController: UIViewController {
         return view
     }()
     
-    let parentView: UIView = UIView()
+    
+    
+    private var shouldResize: Bool = true
     
     static func create(
-        with viewModel: ChatContactsViewModel
+        with viewModel: ChattingViewModel
     ) -> ChattingViewController {
         let view = ChattingViewController()
         
@@ -174,7 +174,7 @@ final class ChattingViewController: UIViewController {
         }
     }
     
-    private func bind(to viewModel: ChatContactsViewModel) {
+    private func bind(to viewModel: ChattingViewModel) {
         viewModel.items.observe(on: self) { [weak self] _ in self?.updateItems() }
         viewModel.loading.observe(on: self) { [weak self] in self?.updateLoading($0) }
         viewModel.error.observe(on: self) { [weak self] in self?.showError($0) }
@@ -186,7 +186,7 @@ extension ChattingViewController: Alertable {
         chatingTableViewController?.reload()
     }
     
-    private func updateLoading(_ loading: ChatContactsViewModelLoading?) {
+    private func updateLoading(_ loading: ChattingViewModelLoading?) {
         emptyDataLabel.isHidden = true
         suggestionsListContainer.isHidden = true
     }

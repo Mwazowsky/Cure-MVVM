@@ -25,14 +25,26 @@ final class DefaultChattingRepository {
 
 extension DefaultChattingRepository: IChattingRepository {
     func fetchMessages(
+        messageChannel: String,
         query: ChattingQuery,
+        companyHuntingNumberId: Int,
+        contactId: Int,
+        contactPairingId: Int,
         page: Int,
         size: Int,
         totalPages: Int,
         cached: @escaping (MessagesPageDTO) -> Void,
         completion: @escaping (Result<MessagesPageDTO, any Error>) -> Void
     ) -> Cancellable? {
-        let requestDto = ChattingRequestDTO(filter: query.query, page: page, size: size, totalPages: totalPages)
+        let requestDto = ChattingRequestDTO(
+            filter: query.query,
+            companyHuntingNumberId: companyHuntingNumberId,
+            contactId: contactId,
+            contactPairingID: contactPairingId,
+            page: page,
+            size: size,
+            totalPages: totalPages
+        )
         let task = RepositoryTask()
         
         cache.getResponse(for: requestDto) { result in
@@ -45,22 +57,28 @@ extension DefaultChattingRepository: IChattingRepository {
             
             guard !task.isCancelled else { return }
             
-            let endpoint = APIEndpoints.getChatMessages(with: requestDto)
+            let endpoint = APIEndpoints.getChatMessages(with: requestDto, messageChannel: messageChannel)
+            
+            print("Message endpoint in Repository: ", endpoint)
             
             task.networkTask = self.newDataTransferService.request(
                 with: endpoint,
                 on: self.backgroundQueue
-            ) { [weak self] (result: Result<BaseResponse<[MessageResponseDTO]>, DataTransferError>) in
+            ) { [weak self] (result: Result<BaseResponse<MessageResponseDTO>, DataTransferError>) in
                 switch result {
                 case .success(let baseResponse):
+                    print("baseResponse.data ?? []: ", baseResponse.data)
+                    
                     let responseDTO = MessagesPageDTO(
                         filter: requestDto.filter,
                         timeStamp: Date(),
                         page: requestDto.page,
                         size: requestDto.size,
-                        totalPages: requestDto.totalPages,
-                        chatMessages: baseResponse.data ?? []
+                        totalPages: requestDto.totalPages
+//                        chatMessages: baseResponse.data ?? MessageResponseDTO(reply: nil, detail: nil, base: nil)
                     )
+                    
+                    print("Message response in Repository: ", baseResponse)
                     
                     self?.cache.save(responseDto: responseDTO, for: requestDto)
                     completion(.success(responseDTO))

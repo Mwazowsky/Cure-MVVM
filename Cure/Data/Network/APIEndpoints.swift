@@ -110,7 +110,7 @@ struct APIEndpoints {
     /// ...Additionally add function to fetch user profile image if needed
     
     /// Chat Messages in Chatting
-    static func getChatMessages(with chattingRequestDTO: ChattingRequestDTO) -> Endpoint<BaseResponse<[MessageResponseDTO]>> {
+    static func getChatMessages(with chattingRequestDTO: ChattingRequestDTO, messageChannel: String) -> Endpoint<BaseResponse<MessageResponseDTO>> {
         let headerParameters = [
             "accept": "*/*",
             "Content-Type": "application/json",
@@ -119,7 +119,7 @@ struct APIEndpoints {
         ]
         
         return Endpoint(
-            path: "api/contact/",
+            path: "api/\(messageChannel)/message",
             method: .get,
             headerParameters: headerParameters,
             queryParametersEncodable: chattingRequestDTO

@@ -1,6 +1,0 @@
-framework module Pods_Cure_CureUITests {
-  umbrella header "Pods-Cure-CureUITests-umbrella.h"
-
-  export *
-  module * { export * }
-}

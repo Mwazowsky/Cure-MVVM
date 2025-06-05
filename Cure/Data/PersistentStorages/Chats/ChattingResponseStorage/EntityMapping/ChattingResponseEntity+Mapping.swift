@@ -28,8 +28,8 @@ extension ChattingsResponseEntity {
             timeStamp: timeStamp ?? Date(),
             page: Int(page),
             size: Int(size),
-            totalPages: Int(totalPages),
-            chatMessages: (messages?.allObjects as? [ChattingResponseEntity])?.map { $0.toDTO() } ?? []
+            totalPages: Int(totalPages)
+//            chatMessages: (messages?.allObjects as? [ChattingResponseEntity])?.map { $0.toDTO() } ?? []
         )
     }
 }

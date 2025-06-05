@@ -13,7 +13,7 @@ final class ChattingTableViewController: UITableViewController {
     
     private var delegate: ChattingViewControllerDelegate?
     
-    var viewModel: ChatContactsViewModel! {
+    var viewModel: ChattingViewModel! {
         didSet {
             self.reload()
         }
@@ -31,13 +31,13 @@ final class ChattingTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    func updateLoading(_ loading: ChatContactsViewModelLoading?) {
+    func updateLoading(_ loading: ChattingViewModelLoading?) {
         switch loading {
         case .nextPage:
             nextPageLoadingSpinner?.removeFromSuperview()
             nextPageLoadingSpinner = makeActivityIndicator(size: .init(width: tableView.frame.width, height: 44))
             tableView.tableFooterView = nextPageLoadingSpinner
-        case .fullScreen, .none:
+        case .fullscreen, .none:
             tableView.tableFooterView = nil
         }
     }
@@ -47,7 +47,7 @@ final class ChattingTableViewController: UITableViewController {
         tableView.estimatedRowHeight = 55
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 78, bottom: 0, right: 16)
 
-        tableView.register(ChatContactsListItemCell.self, forCellReuseIdentifier: ChatContactsListItemCell.reuseIdentifier)
+        tableView.register(ChattingMessageCell.self, forCellReuseIdentifier: ChattingMessageCell.reuseIdentifier)
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -78,10 +78,10 @@ extension ChattingTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: ChatContactsListItemCell.reuseIdentifier,
+            withIdentifier: ChattingMessageCell.reuseIdentifier,
             for: indexPath
-        ) as? ChatContactsListItemCell else {
-            assertionFailure("Cannot dequeue reusable cell \(ChatContactsListItemCell.self) with reuseIdentifier: \(ChatContactsListItemCell.reuseIdentifier)")
+        ) as? ChattingMessageCell else {
+            assertionFailure("Cannot dequeue reusable cell \(ChattingMessageCell.self) with reuseIdentifier: \(ChattingMessageCell.reuseIdentifier)")
             return UITableViewCell()
         }
         

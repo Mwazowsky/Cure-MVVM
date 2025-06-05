@@ -54,6 +54,7 @@ final class DefaultChattingViewModel: ChattingViewModel {
     private let fetchMessagesUseCase: FetchMessagesUseCase
     private let getUserTokenDataUseCase: GetUserTokenUseCase
     private let actions: ChattingViewModelActions?
+    private let chatContact: ChatContact
     
     var currentPage: Int = 0
     var totalPageCount: Int = 1
@@ -77,11 +78,13 @@ final class DefaultChattingViewModel: ChattingViewModel {
     
     // MARK: - Init
     init(
+        chatContact: ChatContact,
         fetchMessagesUseCase: FetchMessagesUseCase,
         getUserTokenDataUseCase: GetUserTokenUseCase,
         actions: ChattingViewModelActions? = nil,
         mainQueue: DispatchQueueType = DispatchQueue.main
     ) {
+        self.chatContact = chatContact
         self.fetchMessagesUseCase = fetchMessagesUseCase
         self.getUserTokenDataUseCase = getUserTokenDataUseCase
         self.actions = actions
@@ -97,9 +100,9 @@ final class DefaultChattingViewModel: ChattingViewModel {
             .filter { $0.page != currentPage }
         + [messagesPage]
         
-        items.value = pages
-            .flatMap { $0.chatMessages }
-            .map(ChattingListItemViewModel.init)
+//        items.value = pages
+//            .flatMap { $0.chatMessages }
+//            .map(ChattingListItemViewModel.init)
     }
     
     private func resetPages() {
@@ -115,9 +118,13 @@ final class DefaultChattingViewModel: ChattingViewModel {
         
         chattingLoadTask = fetchMessagesUseCase.execute(
             requestValue: .init(
+                messageChannel: chatContact.channelName ?? "",
                 query: chattingQuery,
+                companyHuntingNumberId: chatContact.companyHuntingNumberID,
+                contactId: chatContact.contactID,
+                contactPairingId: chatContact.contactPairingID,
                 page: nextPage,
-                size: 30,
+                size: 100,
                 totalPages: totalPageCount),
             cached: { page in
                 //                self?.mainQueue.async {
@@ -197,8 +204,8 @@ extension DefaultChattingViewModel {
     }
     
     func didSelectItem(at index: Int) {
-        let allMessages = pages.flatMap { $0.chatMessages }
-        let _ = allMessages[index]
+//        let allMessages = pages.flatMap { $0.chatMessages }
+//        let _ = allMessages[index]
 //        actions?.showChatContactDetails(selectedMessage)
     }
 }

@@ -23,6 +23,22 @@ struct ChatMessage: Equatable, Identifiable, Codable {
     let base: BaseMessage?
 }
 
+struct ChatData: Equatable, Identifiable, Codable {
+    static func == (lhs: ChatData, rhs: ChatData) -> Bool {
+        return (lhs.id == rhs.id)
+    }
+    
+    typealias Identifier = String
+    
+    var id: Identifier
+    
+    let data: [ChatMessages]
+}
+
+struct ChatMessages: Codable {
+    let messages: [ChatMessage]
+}
+
 struct BaseMessage: Codable {
     let messageLogID: Int
     let channelID: Int
@@ -98,5 +114,5 @@ struct ChatMessagesPage: Codable {
     let page: Int
     let size: Int
     let totalPages: Int
-    let chatMessages: [ChatMessage]
+//    let chatMessages: [ChatMessage]
 }

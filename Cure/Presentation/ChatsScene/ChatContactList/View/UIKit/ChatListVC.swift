@@ -26,7 +26,7 @@ extension ChatContactListViewController {
         /// Margin from bottom anchor of NavBar to bottom anchor of Image for Small NavBar state
         static let ImageBottomMarginForSmallState: CGFloat = -28
         /// Image height/width for Small NavBar state
-        static let ImageSizeForSmallState: CGFloat = 50
+        static let ImageSizeForSmallState: CGFloat = 40
         /// Height of NavBar for Small state. Usually it's just 44
         static let NavBarHeightSmallState: CGFloat = 60
         /// Height of NavBar for Large state. Usually it's just 96.5 but if you have a custom font for the title, please make sure to edit this value since it changes the height for Large state of NavBar
@@ -39,39 +39,15 @@ extension ChatContactListViewController {
 }
 
 class ChatContactListViewController: UIViewController, Alertable {
-    private let imageview: UIImageView = UIImageView(image: UIImage(named: "profile-placeholder"))
-    private var shouldResize: Bool = true
-    
-    var filteredContacts: [ChatContactsListItemViewModel] = []
-    var isSearchBarEmpty: Bool {
-        return searchController.searchBar.text?.isEmpty ?? true
-    }
-    
-    var didSendEventClosure: ((ChatContactListViewController.Event) -> Void)?
-    
-    let searchController = UISearchController(searchResultsController: nil)
-    
     private var viewModel: ChatContactsViewModel!
     
-    var maxConsideredNavHeight: CGFloat = 96.5
-    
-    static func create(
-        with viewModel: ChatContactsViewModel
-    ) -> ChatContactListViewController {
-        let view = ChatContactListViewController()
-        
-        view.viewModel = viewModel
-        
-        return view
-    }
-    
-    let parentView: UIView = UIView()
-    
-    private var loadingView: UIActivityIndicatorView = UIActivityIndicatorView()
-    private var emptyDataLabel: UILabel = UILabel()
+    private let imageview: UIImageView = UIImageView(image: UIImage(named: "profile-placeholder"))
+    private let searchController = UISearchController(searchResultsController: nil)
+    private let parentView: UIView = UIView()
     
     private var chatContactsTableViewController: ChatContactsTableViewController?
-    
+    private var loadingView: UIActivityIndicatorView = UIActivityIndicatorView()
+    private var emptyDataLabel: UILabel = UILabel()
     private(set) var suggestionsListContainer: UIView = {
         let view = UIView()
         
@@ -83,6 +59,25 @@ class ChatContactListViewController: UIViewController, Alertable {
         
         return view
     }()
+    
+    var didSendEventClosure: ((ChatContactListViewController.Event) -> Void)?
+    var filteredContacts: [ChatContactsListItemViewModel] = []
+    var maxConsideredNavHeight: CGFloat = 96.5
+    
+    private var shouldResize: Bool = true
+    var isSearchBarEmpty: Bool {
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    static func create(
+        with viewModel: ChatContactsViewModel
+    ) -> ChatContactListViewController {
+        let view = ChatContactListViewController()
+        
+        view.viewModel = viewModel
+        
+        return view
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

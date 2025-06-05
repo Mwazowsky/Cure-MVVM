@@ -16,6 +16,10 @@ final class ChatContactsDIContainer: ChatContactsListFlowCoordinatorDependencies
     lazy var chatContactsQueriesStorage: ChatContactsQueriesStorage  = CoreDataChatContactsQueriesStorage(maxStorageLimit: 10)
     lazy var chatContactsResponseCache : ChatContactsResponseStorage = CoreDataChatContactsResponseStorage()
     
+    /// Chatting
+    lazy var chattingQueriesStorage: ChattingQueriesStorage  = CoreDataChattingsQueriesStorage(maxStorageLimit: 10)
+    lazy var chattingsResponseCache : ChattingResponseStorage = CoreDataChattingResponseStorage()
+    
     init(dependencies: Dependencies) {
         self.dependencies = dependencies       
     }
@@ -25,6 +29,13 @@ final class ChatContactsDIContainer: ChatContactsListFlowCoordinatorDependencies
         DefaultFetchChatContactsUseCase(
             chatContactsRepository: makeChatContactsRepository(),
             chatsContactsQueriesRepository: makeChatContactsQueriesRepository()
+        )
+    }
+    
+    func makeFetchMessagesUseCase() -> FetchMessagesUseCase {
+        DefaultFetchMessagesUseCase(
+            fetchMessageRepository: makeFetchMessageRepository(),
+            messagesQueryRepository: makeChattingQueriesRepository()
         )
     }
     
@@ -40,10 +51,22 @@ final class ChatContactsDIContainer: ChatContactsListFlowCoordinatorDependencies
         )
     }
     
+    func makeFetchMessageRepository() -> IChattingRepository {
+        DefaultChattingRepository(
+            newDataTransferService: dependencies.newApiDataTransferervice,
+            cache: chattingsResponseCache
+        )
+    }
     
     func makeChatContactsQueriesRepository() -> IChatContactsQueriesRepository {
         DefaultChatContactsQueriesRepository(
             chatContactsQueriesPersistentStorage: chatContactsQueriesStorage
+        )
+    }
+    
+    func makeChattingQueriesRepository() -> IChattingQueriesRepository {
+        DefaultChattingQueriesRepository(
+            chattingQueriesPersistentStorage: chattingQueriesStorage
         )
     }
     
@@ -76,16 +99,17 @@ final class ChatContactsDIContainer: ChatContactsListFlowCoordinatorDependencies
         )
     }
     
-    func makeChattingListViewModel() -> ChatContactsViewModel {
-        DefaultChatContactsViewModel(
-            fetchChatContactsUseCase: makeFetchContactsUseCase(),
+    func makeChattingListViewModel(chatContact: ChatContact) -> ChattingViewModel {
+        DefaultChattingViewModel(
+            chatContact: chatContact,
+            fetchMessagesUseCase: makeFetchMessagesUseCase(),
             getUserTokenDataUseCase: makeGetCurrentUserTokenUseCase()
         )
     }
     
     func makeChattingViewController(chatContact: ChatContact) -> UIViewController {
         return ChattingViewController.create(
-            with: makeChattingListViewModel()
+            with: makeChattingListViewModel(chatContact: chatContact)
         )
     }
     

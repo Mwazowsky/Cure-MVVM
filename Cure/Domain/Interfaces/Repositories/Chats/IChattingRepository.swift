@@ -8,7 +8,11 @@
 protocol IChattingRepository {
     @discardableResult
     func fetchMessages(
+        messageChannel: String,
         query: ChattingQuery,
+        companyHuntingNumberId: Int,
+        contactId: Int,
+        contactPairingId: Int,
         page: Int,
         size: Int,
         totalPages: Int,

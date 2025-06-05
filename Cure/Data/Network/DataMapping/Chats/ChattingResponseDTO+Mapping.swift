@@ -14,10 +14,18 @@ struct MessagesPageDTO: Codable {
     let page: Int
     let size: Int
     let totalPages: Int
-    let chatMessages: [MessageResponseDTO]
+//    let chatMessages: [MessageResponseDTO]
 }
 
 struct MessageResponseDTO: Codable {
+    let data: MessagesDTO
+}
+
+struct MessagesDTO: Codable {
+    let messages: [MessageDTO]
+}
+
+struct MessageDTO: Codable {
     let reply: MessageReplyDTO?
     let detail: MessageDetailDTO?
     let base: BaseMessageDTO?
@@ -95,18 +103,35 @@ extension MessagesPageDTO {
             timeStamp: timeStamp,
             page: page,
             size: size,
-            totalPages: totalPages,
-            chatMessages: chatMessages.map { $0.toDomain() }
+            totalPages: totalPages
+//            chatMessages: chatMessages.map { $0.toDomain() }
         )
     }
 }
 
-extension MessageResponseDTO {
+extension MessageDTO {
     func toDomain() -> ChatMessage {
         return .init(
             reply: reply?.toDomainModel(),
             detail: detail?.toDomainModel(),
-            base: base?.toDomainModel()
+            base: base?.toDomainModel())
+    }
+}
+
+extension MessageResponseDTO {
+    func toDomain() -> ChatData {
+        return .init(
+            id: UUID().,
+            data: data.toDomainModel()
+        )
+    }
+}
+
+extension MessagesDTO {
+    func toDomain() -> ChatData {
+        return .init(
+            id: UUID().,
+            data: data.toDomainModel()
         )
     }
 }
@@ -219,6 +244,14 @@ extension BaseMessageDTO {
             deliveredAt: self.deliveredAt,
             readAt: self.readAt,
             media: self.media
+        )
+    }
+}
+
+extension MessagesDTO {
+    func toDomainModel() -> ChatMessages {
+        return ChatMessages(
+            messages: self.messages
         )
     }
 }
