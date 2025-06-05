@@ -28,7 +28,6 @@ extension ChatContactListViewController {
         /// Image height/width for Small NavBar state
         static let ImageSizeForSmallState: CGFloat = 50
         /// Height of NavBar for Small state. Usually it's just 44
-        /// 
         static let NavBarHeightSmallState: CGFloat = 60
         /// Height of NavBar for Large state. Usually it's just 96.5 but if you have a custom font for the title, please make sure to edit this value since it changes the height for Large state of NavBar
         static let NavBarHeightLargeState: CGFloat = 96.5
