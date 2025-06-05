@@ -8,7 +8,7 @@
 protocol ChattingResponseStorage {
     func getResponse(
         for requestDto: ChattingRequestDTO,
-        completion: @escaping (Result<MessagesPageDTO, Error>) -> Void
+        completion: @escaping (Result<BaseResponse<MessagesDTO>, Error>) -> Void
     )
     
     func save(

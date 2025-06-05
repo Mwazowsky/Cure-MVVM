@@ -14,11 +14,7 @@ struct MessagesPageDTO: Codable {
     let page: Int
     let size: Int
     let totalPages: Int
-//    let chatMessages: [MessageResponseDTO]
-}
-
-struct MessageResponseDTO: Codable {
-    let data: MessagesDTO
+    let chatMessages: MessagesDTO?
 }
 
 struct MessagesDTO: Codable {
@@ -109,6 +105,28 @@ extension MessagesPageDTO {
     }
 }
 
+/// Transform individual message from MessagesDTO into ChatMessage
+/// data: { MessagesPageDTO
+///     ..., other properties
+///     messages: [ MessagesDTO
+///         { MessageDTO (This)
+///             reply:
+///             detail:
+///             base:
+///         }
+///     ]
+/// }
+///
+/// Into
+/// data: { MessagesPageDTO
+///     messages: [ MessagesDTO
+///         { ChatMessage(This)
+///             reply:
+///             detail:
+///             base:
+///         }
+///     ]
+/// }
 extension MessageDTO {
     func toDomain() -> ChatMessage {
         return .init(
@@ -118,20 +136,32 @@ extension MessageDTO {
     }
 }
 
-extension MessageResponseDTO {
-    func toDomain() -> ChatData {
-        return .init(
-            id: UUID().,
-            data: data.toDomainModel()
-        )
-    }
-}
-
+/// Transform array of messages from MessagesPageDTO into ChatMessages
+/// data: { MessagesPageDTO
+///     ..., other properties
+///     messages: [ ChatMessages (THIS)
+///         { MessageDTO
+///             reply:
+///             detail:
+///             base:
+///         }
+///     ]
+/// }
+///
+/// Into
+/// data: { MessagesPageDTO
+///     messages: [ ChatMessages (THIS)
+///         { ChatMessage
+///             reply:
+///             detail:
+///             base:
+///         }
+///     ]
+/// }
 extension MessagesDTO {
-    func toDomain() -> ChatData {
-        return .init(
-            id: UUID().,
-            data: data.toDomainModel()
+    func toDomain() -> ChatMessages {
+        return ChatMessages(
+            messages: messages.toDomainModel()
         )
     }
 }
@@ -248,13 +278,6 @@ extension BaseMessageDTO {
     }
 }
 
-extension MessagesDTO {
-    func toDomainModel() -> ChatMessages {
-        return ChatMessages(
-            messages: self.messages
-        )
-    }
-}
 
 /// To Entity
 extension BaseMessageDTO {
@@ -307,5 +330,12 @@ extension M_BaseMessageEntity {
             readAt: readAt,
             media: media
         )
+    }
+}
+
+
+extension Array where Element == MessageDTO {
+    func toDomainModel() -> [ChatMessage] {
+        return self.map { $0.toDomain() }
     }
 }

@@ -45,6 +45,10 @@ final class CoreDataChattingResponseStorage {
 }
 
 extension CoreDataChattingResponseStorage: ChattingResponseStorage {
+    func getResponse(for requestDto: ChattingRequestDTO, completion: @escaping (Result<BaseResponse<MessagesDTO>, any Error>) -> Void) {
+        <#code#>
+    }
+    
     func getResponse(
         for requestDto: ChattingRequestDTO,
         completion: @escaping (Result<MessagesPageDTO, any Error>) -> Void
