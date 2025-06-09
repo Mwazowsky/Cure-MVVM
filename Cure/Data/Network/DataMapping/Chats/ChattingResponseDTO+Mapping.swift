@@ -14,11 +14,7 @@ struct MessagesPageDTO: Codable {
     let page: Int
     let size: Int
     let totalPages: Int
-    let chatMessages: [MessagesDTO]
-}
-
-struct MessageResponseDTO: Codable {
-    let data: MessagesDTO
+    let chatMessages: MessagesDTO
 }
 
 struct MessagesDTO: Codable {
@@ -40,13 +36,13 @@ struct MessageReplyDTO: Codable {
 
 // MARK: - Detail DTO
 struct MessageDetailDTO: Codable {
-    let location: String?
+//    let location: String?
     let referral: String?
     let whatsappMessageLogID: Int
     let isForwarded: Bool
     let messageLogID: Int
-    let replyMessageID: Int
-    let template: String?
+    let replyMessageID: String?
+//    let template: String?
     let waMessageID: String
 }
 
@@ -66,11 +62,11 @@ struct BaseMessageDTO: Codable {
     let format: String
     let readLog: String?
     let errorLog: String?
-    let roomID: Int
+    let roomID: Int?
     let timestamp: String
     let deliveredAt: String?
     let readAt: String?
-    let media: String?
+//    let media: String?
     
     enum CodingKeys: String, CodingKey {
         case roomID = "roomId"
@@ -91,7 +87,7 @@ struct BaseMessageDTO: Codable {
         case timestamp
         case deliveredAt
         case readAt
-        case media
+//        case media
     }
 }
 
@@ -103,8 +99,8 @@ extension MessagesPageDTO {
             timeStamp: timeStamp,
             page: page,
             size: size,
-            totalPages: totalPages
-//            chatMessages: chatMessages.map { $0.toDomain() }
+            totalPages: totalPages,
+            chatMessages: chatMessages.toDomain().messages
         )
     }
 }
@@ -209,13 +205,13 @@ extension M_ReplyMessageEntity {
 extension MessageDetailDTO {
     func toDomainModel() -> MessageDetail {
         MessageDetail(
-            location: location,
+//            location: location,
             referral: referral,
             whatsappMessageLogID: whatsappMessageLogID,
             isForwarded: isForwarded,
             messageLogID: messageLogID,
             replyMessageID: replyMessageID,
-            template: template,
+//            template: template,
             waMessageID: waMessageID
         )
     }
@@ -225,13 +221,13 @@ extension MessageDetailDTO {
 extension MessageDetailDTO {
     func toEntity(in context: NSManagedObjectContext) -> M_DetailMessageEntity {
         let entity = M_DetailMessageEntity(context: context)
-        entity.location = location
+//        entity.location = location
         entity.referral = referral
         entity.whatsappMessageLogID = Int16(whatsappMessageLogID)
         entity.isForwarded = isForwarded
         entity.messageLogID = Int16(messageLogID)
-        entity.replyMessageID = Int16(replyMessageID)
-        entity.template = template
+        entity.replyMessageID = replyMessageID ?? ""
+//        entity.template = template
         entity.waMessageID = waMessageID
         return entity
     }
@@ -241,13 +237,13 @@ extension MessageDetailDTO {
 extension M_DetailMessageEntity {
     func toDTO() -> MessageDetailDTO {
         MessageDetailDTO(
-            location: location,
+//            location: location,
             referral: referral,
             whatsappMessageLogID: Int(whatsappMessageLogID),
             isForwarded: isForwarded,
             messageLogID: Int(messageLogID),
-            replyMessageID: Int(replyMessageID),
-            template: template,
+            replyMessageID: replyMessageID,
+//            template: template,
             waMessageID: waMessageID ?? ""
         )
     }
@@ -276,8 +272,8 @@ extension BaseMessageDTO {
             roomID: self.roomID,
             timestamp: self.timestamp,
             deliveredAt: self.deliveredAt,
-            readAt: self.readAt,
-            media: self.media
+            readAt: self.readAt
+//            media: self.media
         )
     }
 }
@@ -301,11 +297,11 @@ extension BaseMessageDTO {
         entity.format = format
         entity.readLog = readLog
         entity.errorLog = errorLog
-        entity.roomID = Int16(roomID)
+        entity.roomID = Int16(roomID ?? 0)
         entity.timestamp = timestamp
         entity.deliveredAt = deliveredAt
         entity.readAt = readAt
-        entity.media = media
+//        entity.media = media
         return entity
     }
 }
@@ -331,8 +327,8 @@ extension M_BaseMessageEntity {
             roomID: Int(roomID),
             timestamp: timestamp ?? "",
             deliveredAt: deliveredAt,
-            readAt: readAt,
-            media: media
+            readAt: readAt
+//            media: media
         )
     }
 }

@@ -54,11 +54,11 @@ struct BaseMessage: Codable {
     let format: String
     let readLog: String?
     let errorLog: String?
-    let roomID: Int
+    let roomID: Int?
     let timestamp: String
     let deliveredAt: String?
     let readAt: String?
-    let media: String?
+//    let media: String?
     
     enum CodingKeys: String, CodingKey {
         case messageLogID
@@ -79,18 +79,19 @@ struct BaseMessage: Codable {
         case timestamp
         case deliveredAt
         case readAt
-        case media
+//        case media
     }
 }
 
 // MARK: - Detail
 struct MessageDetail: Codable {
-    let location, referral: String?
+//    let location,
+    let referral: String?
     let whatsappMessageLogID: Int
     let isForwarded: Bool
     let messageLogID: Int
-    let replyMessageID: Int
-    let template: String?
+    let replyMessageID: String?
+//    let template: String?
     let waMessageID: String
 }
 
@@ -114,5 +115,11 @@ struct ChatMessagesPage: Codable {
     let page: Int
     let size: Int
     let totalPages: Int
-//    let chatMessages: [ChatMessage]
+    let chatMessages: [ChatMessage]
+}
+
+extension ChatMessage {
+    var direction: MessageDirection {
+        return base?.type == "IN" ? .incoming : .outgoing
+    }
 }

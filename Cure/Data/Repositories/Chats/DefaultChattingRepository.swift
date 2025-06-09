@@ -59,7 +59,7 @@ extension DefaultChattingRepository: IChattingRepository {
                     chatMessages: baseResponse.chatMessages
                 )
                 
-                cache.save(responseDto: responseDTO, for: requestDto)
+                self.cache.save(responseDto: responseDTO, for: requestDto)
                 cached(responseDTO)
 
             case .failure(let error):
@@ -73,14 +73,14 @@ extension DefaultChattingRepository: IChattingRepository {
             task.networkTask = self.newDataTransferService.request(
                 with: endpoint,
                 on: self.backgroundQueue
-            ) { [weak self] (result: Result<BaseResponse<MessageResponseDTO>, DataTransferError>) in
+            ) { [weak self] (result: Result<BaseResponse<MessagesDTO>, DataTransferError>) in
                 switch result {
                 case .success(let baseResponse):
-                    guard let messagesDTO = baseResponse.data?.data else {
+                    guard let messagesDTO = baseResponse.data else {
                         return
                     }
 
-                    let chatMessages = messagesDTO.messages
+                    let chatMessages = messagesDTO
 
                     let responseDTO = MessagesPageDTO(
                         filter: requestDto.filter,

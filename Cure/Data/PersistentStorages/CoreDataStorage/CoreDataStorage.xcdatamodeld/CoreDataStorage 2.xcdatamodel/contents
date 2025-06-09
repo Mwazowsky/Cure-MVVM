@@ -110,7 +110,6 @@
         <attribute name="employeeID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="errorLog" optional="YES" attributeType="String"/>
         <attribute name="format" optional="YES" attributeType="String"/>
-        <attribute name="media" optional="YES" attributeType="String"/>
         <attribute name="messageLogID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="readAt" optional="YES" attributeType="String"/>
         <attribute name="readLog" optional="YES" attributeType="String"/>
@@ -126,8 +125,7 @@
         <attribute name="location" optional="YES" attributeType="String"/>
         <attribute name="messageLogID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="referral" optional="YES" attributeType="String"/>
-        <attribute name="replyMessageID" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="template" optional="YES" attributeType="String"/>
+        <attribute name="replyMessageID" optional="YES" attributeType="String"/>
         <attribute name="waMessageID" attributeType="String"/>
         <attribute name="whatsappMessageLogID" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="chattingResponse" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChattingResponseEntity" inverseName="detail" inverseEntity="ChattingResponseEntity"/>

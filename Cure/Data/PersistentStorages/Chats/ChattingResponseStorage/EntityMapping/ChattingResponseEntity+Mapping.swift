@@ -10,15 +10,15 @@ import CoreData
 
 // Individual Message Data
 extension ChattingResponseEntity {
-    func toDTO() -> ChatMessage {
-        let replyDTO: MessageReplyDTO = self.reply?.toDTO() ?? MessageReplyDTO(content: "", messageLogID: 0, format: "")
-        let detailDTO: MessageDetailDTO = self.detail?.toDTO() ?? MessageDetailDTO(location: "", referral: "", whatsappMessageLogID: 0, isForwarded: true, messageLogID: 0, replyMessageID: 0, template: "", waMessageID: "")
-        let baseDTO: BaseMessageDTO = self.base?.toDTO() ?? BaseMessageDTO(messageLogID: 0, channelID: 0, waMessageID: "", companyHuntingNumberID: 0, contactID: 0, employeeID: 0, companyHuntingNumber: "", contactNumber: "", content: "", type: "", status: "", format: "", readLog: "", errorLog: "", roomID: 0, timestamp: "", deliveredAt: "", readAt: "", media: "")
+    func toDTO() -> MessageDTO {
+        let replyDTO: MessageReplyDTO? = self.reply?.toDTO()
+        let detailDTO: MessageDetailDTO? = self.detail?.toDTO()
+        let baseDTO: BaseMessageDTO? = self.base?.toDTO()
 
-        return ChatMessage(
-            reply: replyDTO.toDomainModel(),
-            detail: detailDTO.toDomainModel(),
-            base: baseDTO.toDomainModel()
+        return MessageDTO(
+            reply: replyDTO,
+            detail: detailDTO,
+            base: baseDTO
         )
     }
 }
@@ -29,7 +29,9 @@ extension ChattingResponseEntity {
 extension ChattingsResponseEntity {
     func toDTO() -> MessagesPageDTO {
         let chatEntities = (messages?.allObjects as? [ChattingResponseEntity]) ?? []
-        let chatMessages: [ChatMessage] = chatEntities.map { $0.toDTO() }
+        
+        let messageDTOs: [MessageDTO] = chatEntities.map { $0.toDTO() }
+        let messagesDTO = MessagesDTO(messages: messageDTOs)
 
         return MessagesPageDTO(
             filter: filter ?? "all",
@@ -37,10 +39,11 @@ extension ChattingsResponseEntity {
             page: Int(page),
             size: Int(size),
             totalPages: Int(totalPages),
-            chatMessages: chatMessages
+            chatMessages: messagesDTO
         )
     }
 }
+
 
 extension ChattingRequestDTO {
     func toEntity(in context: NSManagedObjectContext) -> ChattingsRequestEntity {

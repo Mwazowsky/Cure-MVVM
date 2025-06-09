@@ -211,8 +211,7 @@ extension DefaultChatContactsViewModel {
     func didSelectItem(at index: Int) {
         let allContacts = pages.flatMap { $0.chatContacts }
         let selectedContact = allContacts[index]
-        
-        print("SelectedContact in didSelectItem Viewmodel of ChatContacts: ", selectedContact)
+
         actions?.showChattingPage(selectedContact)
     }
 }

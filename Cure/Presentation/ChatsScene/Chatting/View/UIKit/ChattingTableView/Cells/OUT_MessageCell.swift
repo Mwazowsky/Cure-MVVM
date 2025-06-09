@@ -8,12 +8,12 @@
 import UIKit
 import Kingfisher
 
-final class ChattingMessageCell: UITableViewCell {
+final class OUT_MessageCell: UITableViewCell, MessageCell {
     
-    static let reuseIdentifier = String(describing: ChattingMessageCell.self)
-
+    static let reuseIdentifier = String(describing: OUT_MessageCell.self)
+    
     private var viewModel: ChattingListItemViewModel!
-
+    
     // MARK: - UI Components
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
@@ -50,7 +50,7 @@ final class ChattingMessageCell: UITableViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-
+    
     // MARK: - Labels
     private let companyLabel: UILabel = {
         let label = UILabel()
@@ -69,14 +69,14 @@ final class ChattingMessageCell: UITableViewCell {
         
         return label
     }()
-
+    
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18, weight: .semibold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
+    
     private let subtitleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13, weight: .regular)
@@ -84,24 +84,23 @@ final class ChattingMessageCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
+    
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupViews()
+                setupViews()
     }
-
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setupViews()
+                setupViews()
     }
-
+    
     // MARK: - Setup
     private func setupViews() {
         nameLabel.numberOfLines = 0
         subtitleLabel.numberOfLines = 0
         companyLabelContainer.setContentHuggingPriority(.required, for: .vertical)
-        companyLabelContainer.setContentCompressionResistancePriority(.required, for: .vertical)
         
         companyLabelContainer.layer.masksToBounds = false
         companyLabelContainer.layer.shadowRadius = 5
@@ -113,17 +112,15 @@ final class ChattingMessageCell: UITableViewCell {
         contentView.addSubview(profileImageView)
         contentView.addSubview(mainVStackView)
         contentView.addSubview(secondaryVStackView)
-
+        
         NSLayoutConstraint.activate([
             profileImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             profileImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             profileImageView.widthAnchor.constraint(equalToConstant: 50),
             profileImageView.heightAnchor.constraint(equalToConstant: 50),
-
+            
             mainVStackView.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 12),
             mainVStackView.trailingAnchor.constraint(equalTo: secondaryVStackView.trailingAnchor),
-            mainVStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
-            mainVStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
             
             secondaryVStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
             secondaryVStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
@@ -146,43 +143,42 @@ final class ChattingMessageCell: UITableViewCell {
         
         secondaryVStackView.addArrangedSubview(timeLabel)
     }
-
-    // MARK: - Fill Cell
-    func fill(with viewModel: ChattingListItemViewModel) {
-        self.viewModel = viewModel
+    
+    func configure(with messageViewModel: ChattingListItemViewModel) {
+        self.viewModel = messageViewModel
         nameLabel.text = viewModel.messageTime
         companyLabel.text = viewModel.messageDayDate
         subtitleLabel.text = viewModel.messageContent
-//        updateProfileImage()
+        //        updateProfileImage()
     }
-
-//    private func updateProfileImage() {
-//        profileImageView.image = UIImage(named: "profile-placeholder")
-//        
-//        guard let imagePath = viewModel. else { return }
-//        
-//        let profileImageUrl = URL(string: imagePath)
-//
-//        let processor = DownsamplingImageProcessor(size: profileImageView.bounds.size)
-//                     |> RoundCornerImageProcessor(cornerRadius: 20)
-//        profileImageView.kf.indicatorType = .activity
-//        profileImageView.kf.setImage(
-//            with: profileImageUrl,
-//            placeholder: UIImage(named: "profile-placeholder"),
-//            options: [
-//                .processor(processor),
-//                .scaleFactor(UIScreen.main.scale),
-//                .transition(.fade(1)),
-//                .cacheOriginalImage
-//            ])
-//        {
-//            result in
-//            switch result {
-//            case .success(let value):
-//                print("Task done for: \(value.source.url?.absoluteString ?? "")")
-//            case .failure(let error):
-//                print("Job failed: \(error.localizedDescription)")
-//            }
-//        }
-//    }
+    
+    //    private func updateProfileImage() {
+    //        profileImageView.image = UIImage(named: "profile-placeholder")
+    //
+    //        guard let imagePath = viewModel. else { return }
+    //
+    //        let profileImageUrl = URL(string: imagePath)
+    //
+    //        let processor = DownsamplingImageProcessor(size: profileImageView.bounds.size)
+    //                     |> RoundCornerImageProcessor(cornerRadius: 20)
+    //        profileImageView.kf.indicatorType = .activity
+    //        profileImageView.kf.setImage(
+    //            with: profileImageUrl,
+    //            placeholder: UIImage(named: "profile-placeholder"),
+    //            options: [
+    //                .processor(processor),
+    //                .scaleFactor(UIScreen.main.scale),
+    //                .transition(.fade(1)),
+    //                .cacheOriginalImage
+    //            ])
+    //        {
+    //            result in
+    //            switch result {
+    //            case .success(let value):
+    //                print("Task done for: \(value.source.url?.absoluteString ?? "")")
+    //            case .failure(let error):
+    //                print("Job failed: \(error.localizedDescription)")
+    //            }
+    //        }
+    //    }
 }

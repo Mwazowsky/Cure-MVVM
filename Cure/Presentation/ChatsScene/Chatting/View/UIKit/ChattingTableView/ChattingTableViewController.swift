@@ -8,6 +8,15 @@
 import Foundation
 import UIKit
 
+protocol MessageCell: UITableViewCell {
+    func configure(with messageViewModel: ChattingListItemViewModel)
+}
+
+enum MessageBubbleType: String {
+    case incoming = "IN_MessageCell"
+    case outgoing = "OUT_MessageCell"
+}
+
 final class ChattingTableViewController: UITableViewController {
     private var shouldResize: Bool = true
     
@@ -44,10 +53,10 @@ final class ChattingTableViewController: UITableViewController {
     
     // MARK: - Private
     private func setupViews() {
-        tableView.estimatedRowHeight = 55
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 78, bottom: 0, right: 16)
-
-        tableView.register(ChattingMessageCell.self, forCellReuseIdentifier: ChattingMessageCell.reuseIdentifier)
+        
+        tableView.register(IN_MessageCell.self, forCellReuseIdentifier: MessageBubbleType.incoming.rawValue)
+        tableView.register(OUT_MessageCell.self, forCellReuseIdentifier: MessageBubbleType.outgoing.rawValue)
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -59,6 +68,11 @@ final class ChattingTableViewController: UITableViewController {
         tableView.layer.cornerRadius = 25
         tableView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         tableView.layer.masksToBounds = true
+        
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
     
     // MARK: - Scroll View Delegates
@@ -77,15 +91,15 @@ extension ChattingTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: ChattingMessageCell.reuseIdentifier,
-            for: indexPath
-        ) as? ChattingMessageCell else {
-            assertionFailure("Cannot dequeue reusable cell \(ChattingMessageCell.self) with reuseIdentifier: \(ChattingMessageCell.reuseIdentifier)")
+        let message = viewModel.items.value[indexPath.row]
+        let identifier = message.direction == .incoming ? MessageBubbleType.incoming.rawValue : MessageBubbleType.outgoing.rawValue
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? MessageCell else {
+            assertionFailure("Cannot dequeue reusable cell \(identifier) with reuseIdentifier: \(identifier)")
             return UITableViewCell()
         }
         
-        cell.fill(with: viewModel.items.value[indexPath.row])
+        cell.configure(with: message)
         
         if indexPath.row == viewModel.items.value.count - 1 {
             viewModel.didLoadNextPage()
@@ -93,11 +107,11 @@ extension ChattingTableViewController {
         
         return cell
     }
-
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 85
+    
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
-
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.didSelectItem(at: indexPath.row)
     }

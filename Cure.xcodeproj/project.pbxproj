@@ -183,6 +183,8 @@
 		645CDA052D9E86E1006E01F6 /* IUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645CDA042D9E86C9006E01F6 /* IUserRepository.swift */; };
 		645CDA062D9E86E1006E01F6 /* IUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645CDA042D9E86C9006E01F6 /* IUserRepository.swift */; };
 		645CDA082D9E934B006E01F6 /* DefaultUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645CDA072D9E934B006E01F6 /* DefaultUserRepository.swift */; };
+		6460AB442DF684AA007E3D3F /* KeyedDecodingCOntainer+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6460AB432DF68497007E3D3F /* KeyedDecodingCOntainer+Helper.swift */; };
+		6460ADE42DF6BAF6007E3D3F /* OUT_MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6460ADE32DF6BAF6007E3D3F /* OUT_MessageCell.swift */; };
 		646CB71A2D91032C0009E8F2 /* Opensans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 646CB7132D91032C0009E8F2 /* Opensans-LightItalic.ttf */; };
 		646CB71B2D91032C0009E8F2 /* Opensans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 646CB70F2D91032C0009E8F2 /* Opensans-ExtraBold.ttf */; };
 		646CB71C2D91032C0009E8F2 /* Opensans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 646CB7142D91032C0009E8F2 /* Opensans-Medium.ttf */; };
@@ -216,7 +218,7 @@
 		648D8CB22DD31FC300F59F33 /* LoginFormCUREUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648D8CB12DD31FB800F59F33 /* LoginFormCUREUIKit.swift */; };
 		649B27472DEED13B004D5057 /* ChattingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649B27462DEED136004D5057 /* ChattingVC.swift */; };
 		649B274A2DEED845004D5057 /* ChattingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649B27492DEED833004D5057 /* ChattingTableViewController.swift */; };
-		649B274D2DEED871004D5057 /* ChattingMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649B274C2DEED86B004D5057 /* ChattingMessageCell.swift */; };
+		649B274D2DEED871004D5057 /* IN_MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649B274C2DEED86B004D5057 /* IN_MessageCell.swift */; };
 		649B274F2DEED887004D5057 /* ChattingInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649B274E2DEED879004D5057 /* ChattingInfoCell.swift */; };
 		649D6D942DE6F26200BC72D6 /* ChatContactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649D6D932DE6F26200BC72D6 /* ChatContactsTableViewController.swift */; };
 		649ED1002DD477440062814F /* AuthBtnGroupCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649ED0FF2DD477440062814F /* AuthBtnGroupCURE.swift */; };
@@ -484,6 +486,8 @@
 		645CDA002D9E8502006E01F6 /* FetchUserDetailsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUserDetailsUseCase.swift; sourceTree = "<group>"; };
 		645CDA042D9E86C9006E01F6 /* IUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IUserRepository.swift; sourceTree = "<group>"; };
 		645CDA072D9E934B006E01F6 /* DefaultUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUserRepository.swift; sourceTree = "<group>"; };
+		6460AB432DF68497007E3D3F /* KeyedDecodingCOntainer+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyedDecodingCOntainer+Helper.swift"; sourceTree = "<group>"; };
+		6460ADE32DF6BAF6007E3D3F /* OUT_MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OUT_MessageCell.swift; sourceTree = "<group>"; };
 		646CB70D2D91032C0009E8F2 /* Opensans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Opensans-Bold.ttf"; sourceTree = "<group>"; };
 		646CB70E2D91032C0009E8F2 /* Opensans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Opensans-BoldItalic.ttf"; sourceTree = "<group>"; };
 		646CB70F2D91032C0009E8F2 /* Opensans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Opensans-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -514,7 +518,7 @@
 		648D8CB12DD31FB800F59F33 /* LoginFormCUREUIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormCUREUIKit.swift; sourceTree = "<group>"; };
 		649B27462DEED136004D5057 /* ChattingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingVC.swift; sourceTree = "<group>"; };
 		649B27492DEED833004D5057 /* ChattingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingTableViewController.swift; sourceTree = "<group>"; };
-		649B274C2DEED86B004D5057 /* ChattingMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingMessageCell.swift; sourceTree = "<group>"; };
+		649B274C2DEED86B004D5057 /* IN_MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IN_MessageCell.swift; sourceTree = "<group>"; };
 		649B274E2DEED879004D5057 /* ChattingInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingInfoCell.swift; sourceTree = "<group>"; };
 		649D6D932DE6F26200BC72D6 /* ChatContactsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatContactsTableViewController.swift; sourceTree = "<group>"; };
 		649ED0FF2DD477440062814F /* AuthBtnGroupCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthBtnGroupCURE.swift; sourceTree = "<group>"; };
@@ -1011,6 +1015,7 @@
 		1FD2696524261A24005236FB /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				6460AB432DF68497007E3D3F /* KeyedDecodingCOntainer+Helper.swift */,
 				64C13D7E2DED9FF0007C7641 /* UINavigationController+AddLogoImage.swift */,
 				1FB090392437651700DBE132 /* UIViewController+AddBehaviors.swift */,
 				1F53E2B523125896008D6A05 /* UIViewController+AddChild.swift */,
@@ -1654,7 +1659,8 @@
 		649B274B2DEED856004D5057 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				649B274C2DEED86B004D5057 /* ChattingMessageCell.swift */,
+				649B274C2DEED86B004D5057 /* IN_MessageCell.swift */,
+				6460ADE32DF6BAF6007E3D3F /* OUT_MessageCell.swift */,
 				649B274E2DEED879004D5057 /* ChattingInfoCell.swift */,
 			);
 			path = Cells;
@@ -2729,6 +2735,7 @@
 				1FFF12AA243A022300937EE4 /* MoviesResponseEntity+Mapping.swift in Sources */,
 				1F1FC48922E3693100BCBA8D /* NetworkService.swift in Sources */,
 				649ED1092DD480BA0062814F /* NameTxtCURE.swift in Sources */,
+				6460ADE42DF6BAF6007E3D3F /* OUT_MessageCell.swift in Sources */,
 				1FA20490242F528E000C4B56 /* LoadingView.swift in Sources */,
 				646CB98A2D91402C0009E8F2 /* SaveUserTokenUseCase.swift in Sources */,
 				FC74081A2165574400FE52A5 /* MovieQuery.swift in Sources */,
@@ -2795,7 +2802,7 @@
 				1F05A6CC2220A2CB001E2801 /* SearchMoviesUseCase.swift in Sources */,
 				649ED1072DD47F5B0062814F /* AvatarIVCURE.swift in Sources */,
 				64FB942C2D93A42500A5325D /* HomeQueryListView.swift in Sources */,
-				649B274D2DEED871004D5057 /* ChattingMessageCell.swift in Sources */,
+				649B274D2DEED871004D5057 /* IN_MessageCell.swift in Sources */,
 				64150D042DEFE78F00E99A30 /* FilterChipsItemCell.swift in Sources */,
 				64FB942D2D93A42500A5325D /* HomeQueryListItemViewModel.swift in Sources */,
 				6458D0C72DAF8CA900A4E4CA /* CoreDataUserDetailsResponseStorage.swift in Sources */,
@@ -2900,6 +2907,7 @@
 				644A27472DD5C24E00185DE5 /* AsyncImage.swift in Sources */,
 				64FE0AEE2DCC965D0044A69C /* MainLayoutCURE.swift in Sources */,
 				64B740252D8A64C600168646 /* GetUserTokenUseCase.swift in Sources */,
+				6460AB442DF684AA007E3D3F /* KeyedDecodingCOntainer+Helper.swift in Sources */,
 				64B7403F2D8A801E00168646 /* LoginViewModel.swift in Sources */,
 				641DF2E42DC4A67100EDAC97 /* ChatContactsQueriesStorage.swift in Sources */,
 				6451F4BE2DDB08B100A18E95 /* ChattingRequestDTO+Mapping.swift in Sources */,

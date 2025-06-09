@@ -13,6 +13,10 @@ import Foundation
 /// MessagesPage -> Base response from api with data containing array of ChatMessage
 ///
 
+enum MessageDirection {
+    case incoming
+    case outgoing
+}
 
 struct ChattingViewModelActions {
     let showChatContactDetails: (ChatContact) -> Void
@@ -100,9 +104,9 @@ final class DefaultChattingViewModel: ChattingViewModel {
             .filter { $0.page != currentPage }
         + [messagesPage]
         
-//        items.value = pages
-//            .flatMap { $0.chatMessages }
-//            .map(ChattingListItemViewModel.init)
+        items.value = pages
+            .flatMap { $0.chatMessages }
+            .map(ChattingListItemViewModel.init)
     }
     
     private func resetPages() {
@@ -124,7 +128,7 @@ final class DefaultChattingViewModel: ChattingViewModel {
                 contactId: chatContact.contactID,
                 contactPairingId: chatContact.contactPairingID,
                 page: nextPage,
-                size: 100,
+                size: 20,
                 totalPages: totalPageCount),
             cached: { page in
                 //                self?.mainQueue.async {
@@ -137,6 +141,7 @@ final class DefaultChattingViewModel: ChattingViewModel {
                 self?.mainQueue.async {
                     switch result {
                     case .success(let page):
+                        print("Message Page in ViewModel:", page)
                         let pageDM = page
                         self?.appendPage(pageDM)
                     case .failure(let error):
