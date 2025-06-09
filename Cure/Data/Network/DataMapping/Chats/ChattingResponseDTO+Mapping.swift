@@ -14,7 +14,11 @@ struct MessagesPageDTO: Codable {
     let page: Int
     let size: Int
     let totalPages: Int
-    let chatMessages: MessagesDTO?
+    let chatMessages: [MessagesDTO]
+}
+
+struct MessageResponseDTO: Codable {
+    let data: MessagesDTO
 }
 
 struct MessagesDTO: Codable {

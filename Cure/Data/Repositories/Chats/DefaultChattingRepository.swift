@@ -50,22 +50,17 @@ extension DefaultChattingRepository: IChattingRepository {
         cache.getResponse(for: requestDto) { result in
             switch result {
             case .success(let baseResponse):
-                guard let messages = baseResponse.data?.messages.toDomainModel() else {
-                    
-                    return
-                }
-
                 let responseDTO = MessagesPageDTO(
                     filter: requestDto.filter,
                     timeStamp: Date(),
                     page: requestDto.page,
                     size: requestDto.size,
                     totalPages: requestDto.totalPages,
-                    chatMessages: messages
+                    chatMessages: baseResponse.chatMessages
                 )
                 
-                self?.cache.save(responseDto: responseDTO, for: requestDto)
-                completion(.success(responseDTO))
+                cache.save(responseDto: responseDTO, for: requestDto)
+                cached(responseDTO)
 
             case .failure(let error):
                 print("Failed to fetch cached chat contacts: \(error)")
@@ -78,21 +73,26 @@ extension DefaultChattingRepository: IChattingRepository {
             task.networkTask = self.newDataTransferService.request(
                 with: endpoint,
                 on: self.backgroundQueue
-            ) { [weak self] (result: Result<BaseResponse<MessagesDTO>, DataTransferError>) in
+            ) { [weak self] (result: Result<BaseResponse<MessageResponseDTO>, DataTransferError>) in
                 switch result {
                 case .success(let baseResponse):
+                    guard let messagesDTO = baseResponse.data?.data else {
+                        return
+                    }
+
+                    let chatMessages = messagesDTO.messages
+
                     let responseDTO = MessagesPageDTO(
                         filter: requestDto.filter,
                         timeStamp: Date(),
                         page: requestDto.page,
                         size: requestDto.size,
                         totalPages: requestDto.totalPages,
-                        chatMessages: baseResponse.data?.messages.toDomainModel()
+                        chatMessages: chatMessages
                     )
                     
                     self?.cache.save(responseDto: responseDTO, for: requestDto)
                     completion(.success(responseDTO))
-
                 case .failure(let error):
                     completion(.failure(error))
                 }

@@ -45,28 +45,23 @@ final class CoreDataChattingResponseStorage {
 }
 
 extension CoreDataChattingResponseStorage: ChattingResponseStorage {
-    func getResponse(for requestDto: ChattingRequestDTO, completion: @escaping (Result<BaseResponse<MessagesDTO>, any Error>) -> Void) {
-        <#code#>
-    }
-    
     func getResponse(
         for requestDto: ChattingRequestDTO,
-        completion: @escaping (Result<MessagesPageDTO, any Error>) -> Void
-    ) {
-        coreDataStorage.performBackgroundTask { context in
-            do {
-                let fetchRequest = self.fetchRequest(for: requestDto)
-                let requestEntity = try context.fetch(fetchRequest).first
+        completion: @escaping (Result<MessagesPageDTO, any Error>) -> Void) {
+            coreDataStorage.performBackgroundTask { context in
+                do {
+                    let fetchRequest = self.fetchRequest(for: requestDto)
+                    let requestEntity = try context.fetch(fetchRequest).first
 
-                if let responseDTO = requestEntity?.response?.toDTO() {
-                    completion(.success(responseDTO))
-                } else {
-                    completion(.failure(CoreDataStorageError.readError(NSError(domain: "No cached data found", code: 0))))
+                    if let responseDTO = requestEntity?.response?.toDTO() {
+                        completion(.success(responseDTO))
+                    } else {
+                        completion(.failure(CoreDataStorageError.readError(NSError(domain: "No cached data found", code: 0))))
+                    }
+                } catch {
+                    completion(.failure(CoreDataStorageError.readError(error)))
                 }
-            } catch {
-                completion(.failure(CoreDataStorageError.readError(error)))
             }
-        }
     }
     
     func save(
