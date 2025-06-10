@@ -61,9 +61,7 @@ final class DefaultChattingViewModel: ChattingViewModel {
     private let chatContact: ChatContact
     
     var currentPage: Int = 0
-    var totalPageCount: Int = 1
-    var hasMorePages: Bool { currentPage < totalPageCount }
-    var nextPage: Int { hasMorePages ? currentPage + 1 : currentPage }
+    var nextPage: Int { currentPage + 1 }
     
     private var pages: [ChatMessagesPage] = []
     private var chattingLoadTask: Cancellable? { willSet { chattingLoadTask?.cancel() } }
@@ -98,12 +96,12 @@ final class DefaultChattingViewModel: ChattingViewModel {
     // MARK: - Private
     private func appendPage(_ messagesPage: ChatMessagesPage) {
         currentPage = messagesPage.page
-        totalPageCount = messagesPage.totalPages
         
-        pages = pages
-            .filter { $0.page != currentPage }
-        + [messagesPage]
+        // Filter out the current page if it exists and prepend the new page
+        pages = [messagesPage]
+            + pages.filter { $0.page != currentPage }
         
+        // Sort messages in descending order (newest first) and map to view models
         items.value = pages
             .flatMap { $0.chatMessages }
             .map(ChattingListItemViewModel.init)
@@ -111,7 +109,6 @@ final class DefaultChattingViewModel: ChattingViewModel {
     
     private func resetPages() {
         currentPage = 0
-        totalPageCount = 1
         pages.removeAll()
         items.value.removeAll()
     }
@@ -127,21 +124,18 @@ final class DefaultChattingViewModel: ChattingViewModel {
                 companyHuntingNumberId: chatContact.companyHuntingNumberID,
                 contactId: chatContact.contactID,
                 contactPairingId: chatContact.contactPairingID,
-                page: nextPage,
-                size: 20,
-                totalPages: totalPageCount),
+                page: nextPage
+            ),
             cached: { page in
-                //                self?.mainQueue.async {
-                //                    /// Error: Execute Cached completion return dto of chat contact
-                //                    /// instead of the entire page that contain its metadata
-                //                    self?.appendChatContactPage(page)
-                //                }
+                self.mainQueue.async {
+                    let pageDM = page.toDomain()
+                    self.appendPage(pageDM)
+                }
             },
             completion: { [weak self] result in
                 self?.mainQueue.async {
                     switch result {
                     case .success(let page):
-                        print("Message Page in ViewModel:", page)
                         let pageDM = page
                         self?.appendPage(pageDM)
                     case .failure(let error):
@@ -181,7 +175,7 @@ extension DefaultChattingViewModel {
     }
     
     func didLoadNextPage() {
-        guard hasMorePages, loading.value == .none else { return }
+        guard loading.value == .none else { return }
         
         load(
             chattingQuery: .init(query: query.value),
@@ -209,8 +203,8 @@ extension DefaultChattingViewModel {
     }
     
     func didSelectItem(at index: Int) {
-//        let allMessages = pages.flatMap { $0.chatMessages }
-//        let _ = allMessages[index]
-//        actions?.showChatContactDetails(selectedMessage)
+        //        let allMessages = pages.flatMap { $0.chatMessages }
+        //        let _ = allMessages[index]
+        //        actions?.showChatContactDetails(selectedMessage)
     }
 }

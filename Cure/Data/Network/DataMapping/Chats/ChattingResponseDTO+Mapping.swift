@@ -13,12 +13,13 @@ struct MessagesPageDTO: Codable {
     let timeStamp: Date
     let page: Int
     let size: Int
-    let totalPages: Int
     let chatMessages: MessagesDTO
 }
 
 struct MessagesDTO: Codable {
     let messages: [MessageDTO]
+    let page: Int
+    let total: Int
 }
 
 struct MessageDTO: Codable {
@@ -99,7 +100,6 @@ extension MessagesPageDTO {
             timeStamp: timeStamp,
             page: page,
             size: size,
-            totalPages: totalPages,
             chatMessages: chatMessages.toDomain().messages
         )
     }

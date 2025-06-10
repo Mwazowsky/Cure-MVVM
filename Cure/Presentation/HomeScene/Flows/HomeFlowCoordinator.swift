@@ -58,7 +58,7 @@ final class HomeFlowCoordinator: NSObject {
         navigationController?.navigationBar.isHidden = true
         navigationController?.setNavigationBarHidden(true, animated: true)
         
-        let pages: [TabBarItem] = [.dashboard, .chats, .account]
+        let pages: [TabBarItem] = [.dashboard, .chats, .account, .movies]
             .sorted(
                 by: {$0.pageOrderNumber() < $1.pageOrderNumber()}
             )
@@ -98,6 +98,18 @@ final class HomeFlowCoordinator: NSObject {
         childCoordinators.append(accountFlowCoordinator)
     }
     
+    private func showMoviesFlow(navigationController: UINavigationController) {
+        let moviesSceneDIContainer = appDIContainer.makeMoviesSceneDIContainer()
+        let moviesFlowCoordinator = moviesSceneDIContainer.makeMoviesSearchFlowCoordinator(
+            navigationController: navigationController
+        )
+        
+        moviesFlowCoordinator.parentCoordinator = self
+        moviesFlowCoordinator.start()
+        
+        childCoordinators.append(moviesFlowCoordinator)
+    }
+    
     private func showForgotPasswordFlow() {
 //                let vc = dependencies.makeMoviesDetailsViewController(movie: movie)
 //                navigationController?.pushViewController(vc, animated: true)
@@ -108,13 +120,6 @@ final class HomeFlowCoordinator: NSObject {
         let navController = UINavigationController()
         
         navController.setNavigationBarHidden(false, animated: true)
-        
-//        navController.navigationItem.largeTitleDisplayMode = .always
-//        navController.navigationBar.prefersLargeTitles = true
-//        
-//        UIView.animate(withDuration: 0.4) {
-//            navController.navigationBar.prefersLargeTitles = false
-//        }
         
         navController.tabBarItem = UITabBarItem.init(
             title: item.pageeTitleValue(),
@@ -137,6 +142,8 @@ final class HomeFlowCoordinator: NSObject {
             showChatContactsFlow(navigationController: navController)
         case .account:
             showAccountFlow(navigationController: navController)
+        case .movies:
+            showMoviesFlow(navigationController: navController)
         }
         
         return navController

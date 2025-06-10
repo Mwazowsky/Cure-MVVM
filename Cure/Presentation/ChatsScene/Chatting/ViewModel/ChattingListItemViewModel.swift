@@ -15,6 +15,8 @@ struct ChattingListItemViewModel: Equatable, Identifiable {
     let messageTime: String
     let messageDayDate: String
     let direction: MessageDirection
+    let contentFormat: MessageContentFormat
+    let recievedAt: String
     
     let status: DeliveryStatus
     
@@ -35,10 +37,20 @@ extension ChattingListItemViewModel {
         } else {
             messageTime = ""
         }
-
+        
+        var timeString: String = ""
+        
+        if let timeStampString = message.base?.timestamp,
+           let date = ChatContactsListItemViewModel.formatter.date(from: timeStampString) {
+            timeString  = date.stringHour24()
+        }
+        
+        self.recievedAt = timeString
+        
         messageDayDate = String(messageTime.split(separator: "T").first ?? "")
         
         direction = message.direction
+        contentFormat = message.contentFormat
         
         status = DeliveryStatus(rawValue: message.base?.status ?? "") ?? .sent
     }

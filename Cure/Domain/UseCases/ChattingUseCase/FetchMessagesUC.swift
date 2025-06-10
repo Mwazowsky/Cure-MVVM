@@ -37,8 +37,6 @@ final class DefaultFetchMessagesUseCase: FetchMessagesUseCase {
             contactId: requestValue.contactId,
             contactPairingId: requestValue.contactPairingId,
             page: requestValue.page,
-            size: requestValue.size,
-            totalPages: requestValue.totalPages,
             cached: cached,
             completion: { result in
                 switch result {
@@ -63,6 +61,4 @@ struct FetchMessagesUseCaseRequestValue {
     let contactId: Int
     let contactPairingId: Int
     let page: Int
-    let size: Int
-    let totalPages: Int
 }

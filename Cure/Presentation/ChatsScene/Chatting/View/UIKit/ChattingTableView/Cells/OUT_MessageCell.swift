@@ -9,7 +9,6 @@ import UIKit
 import Kingfisher
 
 final class OUT_MessageCell: UITableViewCell, MessageCell {
-    
     static let reuseIdentifier = String(describing: OUT_MessageCell.self)
     
     private var viewModel: ChattingListItemViewModel!
@@ -24,38 +23,23 @@ final class OUT_MessageCell: UITableViewCell, MessageCell {
         return imageView
     }()
     
-    private let mainVStackView: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.spacing = 4
-        stack.alignment = .leading
-        stack.distribution = .fillProportionally
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
-    
-    private let secondaryVStackView: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.spacing = 4
-        stack.alignment = .trailing
-        stack.distribution = .fill
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
-    
-    private let companyLabelContainer: UIView = {
+    private let bubbleShadowContainer: UIView = {
         let view = UIView()
-        view.backgroundColor = DesignTokens.LegacyColors.companyChipBG
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let messageBubble: UIView = {
+        let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     // MARK: - Labels
-    private let companyLabel: UILabel = {
+    private let messageLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 12, weight: .semibold)
-        label.textColor = DesignTokens.LegacyColors.lightBackground
+        label.font = .systemFont(ofSize: 12, weight: .regular)
+        label.textColor = DesignTokens.LegacyColors.textForeground
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -63,122 +47,71 @@ final class OUT_MessageCell: UITableViewCell, MessageCell {
     
     private let timeLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 13, weight: .regular)
+        label.font = .systemFont(ofSize: 9, weight: .thin)
         label.textColor = .gray
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
     }()
-    
-    private let nameLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 18, weight: .semibold)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private let subtitleLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 13, weight: .regular)
-        label.textColor = .gray
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    // MARK: - Init
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-                setupViews()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-                setupViews()
-    }
     
     // MARK: - Setup
-    private func setupViews() {
-        nameLabel.numberOfLines = 0
-        subtitleLabel.numberOfLines = 0
-        companyLabelContainer.setContentHuggingPriority(.required, for: .vertical)
+    private func setupViews(direction: MessageDirection, format: MessageContentFormat) {
+        contentView.addSubview(bubbleShadowContainer)
+        bubbleShadowContainer.addSubview(messageBubble)
+        messageBubble.addSubview(messageLabel)
         
-        companyLabelContainer.layer.masksToBounds = false
-        companyLabelContainer.layer.shadowRadius = 5
-        companyLabelContainer.layer.shadowOpacity = 1
-        companyLabelContainer.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.05).cgColor
-        companyLabelContainer.layer.shadowOffset = CGSize(width: 0 , height: 1)
-        companyLabelContainer.layer.cornerRadius = 10
+        bubbleShadowContainer.translatesAutoresizingMaskIntoConstraints = false
+        messageBubble.translatesAutoresizingMaskIntoConstraints = false
+        messageLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        contentView.addSubview(profileImageView)
-        contentView.addSubview(mainVStackView)
-        contentView.addSubview(secondaryVStackView)
+        messageBubble.backgroundColor = DesignTokens.LegacyColors.primary.withAlphaComponent(0.8)
+        messageBubble.layer.maskedCorners = [
+            .layerMinXMinYCorner,  // top-left
+            .layerMaxXMinYCorner,  // top-right
+            .layerMinXMaxYCorner   // bottom-left
+        ]
         
-        NSLayoutConstraint.activate([
-            profileImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            profileImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            profileImageView.widthAnchor.constraint(equalToConstant: 50),
-            profileImageView.heightAnchor.constraint(equalToConstant: 50),
+        messageBubble.layer.cornerRadius = 14
+        messageBubble.layer.masksToBounds = true
+        
+        
+        messageLabel.numberOfLines = 0
+        
+        let constraints: [NSLayoutConstraint] = [
+            messageLabel.topAnchor.constraint(equalTo: messageBubble.topAnchor, constant: 12),
+            messageLabel.bottomAnchor.constraint(equalTo: messageBubble.bottomAnchor, constant: -12),
+            messageLabel.leadingAnchor.constraint(equalTo: messageBubble.leadingAnchor, constant: 12),
+            messageLabel.trailingAnchor.constraint(equalTo: messageBubble.trailingAnchor, constant: -12),
             
-            mainVStackView.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 12),
-            mainVStackView.trailingAnchor.constraint(equalTo: secondaryVStackView.trailingAnchor),
+            // Time label constraints (bottom-right with padding)
+            timeLabel.trailingAnchor.constraint(equalTo: messageBubble.trailingAnchor, constant: -8),
+            timeLabel.bottomAnchor.constraint(equalTo: messageBubble.bottomAnchor, constant: -6),
             
-            secondaryVStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            secondaryVStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            secondaryVStackView.leadingAnchor.constraint(equalTo: mainVStackView.leadingAnchor, constant: 4),
-            secondaryVStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
-        ])
+            // Make sure timeLabel doesn't overlap message text
+            timeLabel.leadingAnchor.constraint(greaterThanOrEqualTo: messageLabel.leadingAnchor),
+            
+            messageBubble.topAnchor.constraint(equalTo: bubbleShadowContainer.topAnchor),
+            messageBubble.bottomAnchor.constraint(equalTo: bubbleShadowContainer.bottomAnchor),
+            messageBubble.leadingAnchor.constraint(equalTo: bubbleShadowContainer.leadingAnchor),
+            messageBubble.trailingAnchor.constraint(equalTo: bubbleShadowContainer.trailingAnchor),
+            
+            bubbleShadowContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
+            bubbleShadowContainer.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4),
+            
+            bubbleShadowContainer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            
+            bubbleShadowContainer.widthAnchor.constraint(greaterThanOrEqualToConstant: 80),
+            bubbleShadowContainer.heightAnchor.constraint(greaterThanOrEqualToConstant: 30)
+        ]
         
-        companyLabelContainer.addSubview(companyLabel)
-        
-        NSLayoutConstraint.activate([
-            companyLabel.topAnchor.constraint(equalTo: companyLabelContainer.topAnchor, constant: 4),
-            companyLabel.bottomAnchor.constraint(equalTo: companyLabelContainer.bottomAnchor, constant: -4),
-            companyLabel.leadingAnchor.constraint(equalTo: companyLabelContainer.leadingAnchor, constant: 8),
-            companyLabel.trailingAnchor.constraint(equalTo: companyLabelContainer.trailingAnchor, constant: -8)
-        ])
-        
-        mainVStackView.addArrangedSubview(nameLabel)
-        mainVStackView.addArrangedSubview(companyLabelContainer)
-        mainVStackView.addArrangedSubview(subtitleLabel)
-        
-        secondaryVStackView.addArrangedSubview(timeLabel)
+        NSLayoutConstraint.activate(constraints)
     }
     
     func configure(with messageViewModel: ChattingListItemViewModel) {
         self.viewModel = messageViewModel
-        nameLabel.text = viewModel.messageTime
-        companyLabel.text = viewModel.messageDayDate
-        subtitleLabel.text = viewModel.messageContent
-        //        updateProfileImage()
+        
+        messageLabel.text = messageViewModel.messageContent
+        timeLabel.text = messageViewModel.recievedAt
+        setupViews(direction: messageViewModel.direction, format: messageViewModel.contentFormat)
     }
-    
-    //    private func updateProfileImage() {
-    //        profileImageView.image = UIImage(named: "profile-placeholder")
-    //
-    //        guard let imagePath = viewModel. else { return }
-    //
-    //        let profileImageUrl = URL(string: imagePath)
-    //
-    //        let processor = DownsamplingImageProcessor(size: profileImageView.bounds.size)
-    //                     |> RoundCornerImageProcessor(cornerRadius: 20)
-    //        profileImageView.kf.indicatorType = .activity
-    //        profileImageView.kf.setImage(
-    //            with: profileImageUrl,
-    //            placeholder: UIImage(named: "profile-placeholder"),
-    //            options: [
-    //                .processor(processor),
-    //                .scaleFactor(UIScreen.main.scale),
-    //                .transition(.fade(1)),
-    //                .cacheOriginalImage
-    //            ])
-    //        {
-    //            result in
-    //            switch result {
-    //            case .success(let value):
-    //                print("Task done for: \(value.source.url?.absoluteString ?? "")")
-    //            case .failure(let error):
-    //                print("Job failed: \(error.localizedDescription)")
-    //            }
-    //        }
-    //    }
 }

@@ -22,8 +22,7 @@ final class CoreDataChattingResponseStorage {
         let request: NSFetchRequest = ChattingsRequestEntity.fetchRequest()
         request.predicate = NSPredicate(format: "%K = %@ AND %K = %d",
                                         #keyPath(ChattingsRequestEntity.filter), requestDto.filter,
-                                        #keyPath(ChattingsRequestEntity.page), requestDto.page,
-                                        #keyPath(ChattingsRequestEntity.size), requestDto.size)
+                                        #keyPath(ChattingsRequestEntity.page), requestDto.page)
         
         return request
     }

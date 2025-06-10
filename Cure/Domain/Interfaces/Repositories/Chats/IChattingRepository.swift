@@ -14,8 +14,6 @@ protocol IChattingRepository {
         contactId: Int,
         contactPairingId: Int,
         page: Int,
-        size: Int,
-        totalPages: Int,
         cached: @escaping (MessagesPageDTO) -> Void,
         completion: @escaping (Result<MessagesPageDTO, Error>) -> Void
     ) -> Cancellable?

@@ -81,12 +81,14 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
     
     private func appendPage(_ moviesPage: MoviesPage) {
         currentPage = moviesPage.page
+        print("Current age after appendPage: \(moviesPage.page)")
         totalPageCount = moviesPage.totalPages
         
         pages = pages
             .filter { $0.page != moviesPage.page }
         + [moviesPage]
         
+        print("Pages after appended: \(pages)")
         items.value = pages.movies.map(MoviesListItemViewModel.init)
     }
     
@@ -105,6 +107,7 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
             requestValue: .init(query: movieQuery, page: nextPage),
             cached: { [weak self] page in
                 self?.mainQueue.async {
+                    print("page from fetch [CAHCED]: ", page)
                     self?.appendPage(page)
                 }
             },
@@ -112,6 +115,7 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
                 self?.mainQueue.async {
                     switch result {
                     case .success(let page):
+                        print("page from fetch [NETWORK]: ", page)
                         self?.appendPage(page)
                     case .failure(let error):
                         self?.handle(error: error)
@@ -145,7 +149,10 @@ extension DefaultMoviesListViewModel {
     }
     
     func didLoadNextPage() {
+        print("hasMorePages: \(hasMorePages), loading.value: \(loading.value as Any)")
         guard hasMorePages, loading.value == .none else { return }
+        
+        print("query.value: \(query.value)")
         load(movieQuery: .init(query: query.value),
              loading: .nextPage)
     }

@@ -31,8 +31,6 @@ extension DefaultChattingRepository: IChattingRepository {
         contactId: Int,
         contactPairingId: Int,
         page: Int,
-        size: Int,
-        totalPages: Int,
         cached: @escaping (MessagesPageDTO) -> Void,
         completion: @escaping (Result<MessagesPageDTO, any Error>) -> Void
     ) -> Cancellable? {
@@ -41,9 +39,7 @@ extension DefaultChattingRepository: IChattingRepository {
             companyHuntingNumberId: companyHuntingNumberId,
             contactId: contactId,
             contactPairingID: contactPairingId,
-            page: page,
-            size: size,
-            totalPages: totalPages
+            page: page
         )
         let task = RepositoryTask()
         
@@ -54,8 +50,7 @@ extension DefaultChattingRepository: IChattingRepository {
                     filter: requestDto.filter,
                     timeStamp: Date(),
                     page: requestDto.page,
-                    size: requestDto.size,
-                    totalPages: requestDto.totalPages,
+                    size: baseResponse.size,
                     chatMessages: baseResponse.chatMessages
                 )
                 
@@ -86,8 +81,7 @@ extension DefaultChattingRepository: IChattingRepository {
                         filter: requestDto.filter,
                         timeStamp: Date(),
                         page: requestDto.page,
-                        size: requestDto.size,
-                        totalPages: requestDto.totalPages,
+                        size: baseResponse.data?.total ?? 0,
                         chatMessages: chatMessages
                     )
                     

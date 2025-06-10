@@ -1523,6 +1523,13 @@
 			path = User;
 			sourceTree = "<group>";
 		};
+		6463630A2DF7CEA700658E72 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
 		646CB7192D91032C0009E8F2 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -2259,17 +2266,10 @@
 		64FE0AC82DCC8CC20044A69C /* Molecules */ = {
 			isa = PBXGroup;
 			children = (
-				64FE0ACC2DCC8D010044A69C /* UIKit */,
+				6463630A2DF7CEA700658E72 /* UIKit */,
 				64FE0AD32DCC8D010044A69C /* SwiftUI */,
 			);
 			path = Molecules;
-			sourceTree = "<group>";
-		};
-		64FE0ACC2DCC8D010044A69C /* UIKit */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = UIKit;
 			sourceTree = "<group>";
 		};
 		64FE0AD32DCC8D010044A69C /* SwiftUI */ = {

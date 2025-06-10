@@ -31,14 +31,13 @@ extension ChattingsResponseEntity {
         let chatEntities = (messages?.allObjects as? [ChattingResponseEntity]) ?? []
         
         let messageDTOs: [MessageDTO] = chatEntities.map { $0.toDTO() }
-        let messagesDTO = MessagesDTO(messages: messageDTOs)
+        let messagesDTO = MessagesDTO(messages: messageDTOs, page: Int(page), total: Int(totalPages))
 
         return MessagesPageDTO(
             filter: filter ?? "all",
             timeStamp: timeStamp ?? Date(),
             page: Int(page),
             size: Int(size),
-            totalPages: Int(totalPages),
             chatMessages: messagesDTO
         )
     }
@@ -50,8 +49,6 @@ extension ChattingRequestDTO {
         let entity: ChattingsRequestEntity = .init(context: context)
         entity.filter = filter
         entity.page = Int16(page)
-        entity.size = Int16(size)
-        entity.totalPages = Int16(totalPages)
         return entity
     }
 }

@@ -15,12 +15,37 @@ protocol MessageCell: UITableViewCell {
 enum MessageBubbleType: String {
     case incoming = "IN_MessageCell"
     case outgoing = "OUT_MessageCell"
+    case info     = "ChattingInfoCell"
+}
+
+enum MessageContentFormat: String {
+    case sessionBubble      = "bubble"
+    case textMessage        = "text"
+    case audioMessage       = "audio"
+    case stickerMessage     = "sticker"
+    case templateMessage    = "template"
 }
 
 final class ChattingTableViewController: UITableViewController {
-    private var shouldResize: Bool = true
-    
     private var delegate: ChattingViewControllerDelegate?
+    
+    // MARK: - Labels
+    private let countLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 12, weight: .regular)
+        label.textColor = DesignTokens.LegacyColors.textForeground
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        return label
+    }()
+    
+    public var grouping: Bool = true
+    public var grouping_interval: Double = 60
+    public var scrollHeader = true
+    public var showWeekDayHeader = true
+    public var showNickName = true
+    
+    fileprivate var NICK_NAME_HEIGHT:CGFloat = 24
     
     var viewModel: ChattingViewModel! {
         didSet {
@@ -37,7 +62,54 @@ final class ChattingTableViewController: UITableViewController {
     }
     
     func reload() {
-        tableView.reloadData()
+        guard self.tableView.dataSource != nil else { return super.tableView.reloadData() }
+        let numberOfRows = viewModel.items.value.count
+        print("Number of data: \(numberOfRows)")
+        if numberOfRows > 0 {
+            
+//            var datas = [LynnBubbleData]()
+            
+//            for index in 0 ..< numberOfRows {
+//                let bubbleData = self.bubbleDataSource!.bubbleTableView(dataAt: index , bubbleTableView: self)
+//                datas.append(bubbleData)
+//            }
+//            
+//            datas.sort(by: {$0.date.timeIntervalSinceNow < $1.date.timeIntervalSinceNow})
+//            
+//            var arrBubbleDatasGroupByDay = [LynnBubbleData]()
+//            self.arrBubbleSection = [[]]
+//            
+//            let tempData:LynnBubbleData = datas[0]
+//            arrBubbleDatasGroupByDay.append(tempData)
+//            
+//            if datas.count > 1 {
+//                
+//                var compareDate = tempData.date
+//                
+//                for index in 1 ..< numberOfRows {
+//                    let comparedData = datas[index]
+//                    let textOrigin = comparedData.date._stringFromDateFormat("yyyy-MM-dd")
+//                    let textCompare = compareDate._stringFromDateFormat("yyyy-MM-dd")
+//                    
+//                    if textOrigin != textCompare {
+//                        self.arrBubbleSection.append(arrBubbleDatasGroupByDay)
+//                        arrBubbleDatasGroupByDay = []
+//                        compareDate = comparedData.date
+//                    }
+//                    arrBubbleDatasGroupByDay.append(comparedData)
+//                    
+//                    if index == numberOfRows-1 {
+//                        self.arrBubbleSection.append(arrBubbleDatasGroupByDay)
+//                    }
+//                }
+//                
+//            }else{
+//                self.arrBubbleSection.append(arrBubbleDatasGroupByDay)
+//            }
+            
+        }
+        
+        super.tableView.reloadData()
     }
     
     func updateLoading(_ loading: ChattingViewModelLoading?) {
@@ -53,33 +125,33 @@ final class ChattingTableViewController: UITableViewController {
     
     // MARK: - Private
     private func setupViews() {
-        tableView.separatorInset = UIEdgeInsets(top: 0, left: 78, bottom: 0, right: 16)
+        tableView.rowHeight = UITableView.automaticDimension
+        
+        tableView.tableHeaderView?.addSubview(countLabel)
+        
+        countLabel.text = "\(viewModel.items.value.count)"
         
         tableView.register(IN_MessageCell.self, forCellReuseIdentifier: MessageBubbleType.incoming.rawValue)
         tableView.register(OUT_MessageCell.self, forCellReuseIdentifier: MessageBubbleType.outgoing.rawValue)
+        tableView.register(ChattingInfoCell.self, forCellReuseIdentifier: MessageBubbleType.info.rawValue)
         
         tableView.dataSource = self
         tableView.delegate = self
         
+        tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
+        tableView.separatorStyle = .none
         
         tableView.layer.cornerRadius = 25
-        tableView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        tableView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         tableView.layer.masksToBounds = true
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-    }
-    
-    // MARK: - Scroll View Delegates
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if shouldResize {
-            self.delegate?.moveAndResizeImageForPortrait()
-        }
     }
 }
 
@@ -91,13 +163,25 @@ extension ChattingTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let message = viewModel.items.value[indexPath.row]
-        let identifier = message.direction == .incoming ? MessageBubbleType.incoming.rawValue : MessageBubbleType.outgoing.rawValue
+        let reversedIndex = viewModel.items.value.count - 1 - indexPath.row
+        let message = viewModel.items.value[reversedIndex]
+        
+        let contentFormat = message.contentFormat
+        
+        var identifier: String
+        
+        if contentFormat == .sessionBubble {
+            identifier = MessageBubbleType.info.rawValue
+        } else {
+            identifier = message.direction == .incoming ? MessageBubbleType.incoming.rawValue : MessageBubbleType.outgoing.rawValue
+        }
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? MessageCell else {
             assertionFailure("Cannot dequeue reusable cell \(identifier) with reuseIdentifier: \(identifier)")
             return UITableViewCell()
         }
+        
+        cell.transform = CGAffineTransform(scaleX: 1, y: -1)
         
         cell.configure(with: message)
         
@@ -107,10 +191,7 @@ extension ChattingTableViewController {
         
         return cell
     }
-    
-    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
+
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.didSelectItem(at: indexPath.row)

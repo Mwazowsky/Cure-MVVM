@@ -13,6 +13,4 @@ struct ChattingRequestDTO: Encodable {
     let contactId: Int
     let contactPairingID: Int
     let page: Int
-    let size: Int
-    let totalPages: Int
 }

@@ -11,6 +11,7 @@ enum TabBarItem {
     case dashboard
     case chats
     case account
+    case movies
     
     init?(index: Int) {
         switch index {
@@ -20,6 +21,8 @@ enum TabBarItem {
             self = .chats
         case 2:
             self = .account
+        case 3:
+            self = .movies
         default:
             return nil
         }
@@ -33,6 +36,8 @@ enum TabBarItem {
             return "Chats".localiz()
         case .account:
             return "Account".localiz()
+        case .movies:
+            return "Movies".localiz()
         }
     }
     
@@ -44,6 +49,8 @@ enum TabBarItem {
             return 1
         case .account:
             return 2
+        case .movies:
+            return 3
         }
     }
     
@@ -54,6 +61,8 @@ enum TabBarItem {
         case .chats:
             return "IconTabChat"
         case .account:
+            return "IconTabAccount"
+        case .movies:
             return "IconTabAccount"
         }
     }
