@@ -14,6 +14,13 @@ final class OUT_MessageCell: UITableViewCell, MessageCell {
     private var viewModel: ChattingListItemViewModel!
     
     // MARK: - UI Components
+    /// Custom UI
+    private var contactAvatar: AvatarNameCUREUIKit? {
+        didSet {
+            oldValue?.removeFromSuperview()
+        }
+    }
+    
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 25
@@ -56,9 +63,12 @@ final class OUT_MessageCell: UITableViewCell, MessageCell {
     
     // MARK: - Setup
     private func setupViews(direction: MessageDirection, format: MessageContentFormat) {
+        guard let avatarUI = contactAvatar else { return }
         contentView.addSubview(bubbleShadowContainer)
+        contentView.addSubview(avatarUI)
         bubbleShadowContainer.addSubview(messageBubble)
         messageBubble.addSubview(messageLabel)
+        messageBubble.addSubview(timeLabel)
         
         bubbleShadowContainer.translatesAutoresizingMaskIntoConstraints = false
         messageBubble.translatesAutoresizingMaskIntoConstraints = false
@@ -78,30 +88,32 @@ final class OUT_MessageCell: UITableViewCell, MessageCell {
         messageLabel.numberOfLines = 0
         
         let constraints: [NSLayoutConstraint] = [
-            messageLabel.topAnchor.constraint(equalTo: messageBubble.topAnchor, constant: 12),
-            messageLabel.bottomAnchor.constraint(equalTo: messageBubble.bottomAnchor, constant: -12),
-            messageLabel.leadingAnchor.constraint(equalTo: messageBubble.leadingAnchor, constant: 12),
-            messageLabel.trailingAnchor.constraint(equalTo: messageBubble.trailingAnchor, constant: -12),
-            
-            // Time label constraints (bottom-right with padding)
-            timeLabel.trailingAnchor.constraint(equalTo: messageBubble.trailingAnchor, constant: -8),
-            timeLabel.bottomAnchor.constraint(equalTo: messageBubble.bottomAnchor, constant: -6),
-            
-            // Make sure timeLabel doesn't overlap message text
-            timeLabel.leadingAnchor.constraint(greaterThanOrEqualTo: messageLabel.leadingAnchor),
+            avatarUI.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
+            avatarUI.bottomAnchor.constraint(equalTo: bubbleShadowContainer.topAnchor, constant: -16),
+            avatarUI.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -4),
             
             messageBubble.topAnchor.constraint(equalTo: bubbleShadowContainer.topAnchor),
             messageBubble.bottomAnchor.constraint(equalTo: bubbleShadowContainer.bottomAnchor),
             messageBubble.leadingAnchor.constraint(equalTo: bubbleShadowContainer.leadingAnchor),
             messageBubble.trailingAnchor.constraint(equalTo: bubbleShadowContainer.trailingAnchor),
             
-            bubbleShadowContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
+            bubbleShadowContainer.topAnchor.constraint(equalTo: avatarUI.topAnchor, constant: 16),
             bubbleShadowContainer.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4),
-            
             bubbleShadowContainer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
             bubbleShadowContainer.widthAnchor.constraint(greaterThanOrEqualToConstant: 80),
-            bubbleShadowContainer.heightAnchor.constraint(greaterThanOrEqualToConstant: 30)
+            bubbleShadowContainer.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor, multiplier: 0.75),
+            bubbleShadowContainer.heightAnchor.constraint(greaterThanOrEqualToConstant: 30),
+            
+            messageLabel.topAnchor.constraint(equalTo: messageBubble.topAnchor, constant: 12),
+            messageLabel.leadingAnchor.constraint(equalTo: messageBubble.leadingAnchor, constant: 12),
+            messageLabel.trailingAnchor.constraint(lessThanOrEqualTo: messageBubble.trailingAnchor, constant: -40),
+            messageLabel.bottomAnchor.constraint(lessThanOrEqualTo: messageBubble.bottomAnchor, constant: -8),
+            
+            timeLabel.trailingAnchor.constraint(equalTo: messageBubble.trailingAnchor, constant: -8),
+            timeLabel.bottomAnchor.constraint(equalTo: messageBubble.bottomAnchor, constant: -6),
+            timeLabel.leadingAnchor.constraint(greaterThanOrEqualTo: messageLabel.trailingAnchor, constant: 4),
+            timeLabel.leadingAnchor.constraint(greaterThanOrEqualTo: messageLabel.leadingAnchor)
         ]
         
         NSLayoutConstraint.activate(constraints)
@@ -109,6 +121,14 @@ final class OUT_MessageCell: UITableViewCell, MessageCell {
     
     func configure(with messageViewModel: ChattingListItemViewModel) {
         self.viewModel = messageViewModel
+        
+        self.contactAvatar = AvatarNameCUREUIKit(name: viewModel.id)
+        
+        // Make sure to add to contentView if not already done
+        if let avatar = contactAvatar, avatar.superview == nil {
+            contentView.addSubview(avatar)
+            // Set up avatar constraints relative to bubbleShadowContainer
+        }
         
         messageLabel.text = messageViewModel.messageContent
         timeLabel.text = messageViewModel.recievedAt

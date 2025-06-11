@@ -62,6 +62,8 @@ final class ChattingInfoCell: UITableViewCell, MessageCell {
         messageBubble.translatesAutoresizingMaskIntoConstraints = false
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         
+        messageLabel.textAlignment = .center
+        
         messageBubble.backgroundColor = UIColor(white: 0.93, alpha: 0.8)
         
         messageBubble.layer.cornerRadius = 8

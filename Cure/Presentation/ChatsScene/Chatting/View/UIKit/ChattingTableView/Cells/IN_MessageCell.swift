@@ -61,9 +61,8 @@ final class IN_MessageCell: UITableViewCell, MessageCell {
         messageBubble.addSubview(messageLabel)
         messageBubble.addSubview(timeLabel)
         
-        // Configure timeLabel appearance (like WhatsApp)
         timeLabel.font = UIFont.systemFont(ofSize: 11, weight: .regular)
-        timeLabel.textColor = UIColor(white: 0.6, alpha: 1.0) // Light gray color similar to WhatsApp
+        timeLabel.textColor = UIColor(white: 0.6, alpha: 1.0)
         timeLabel.textAlignment = .right
         
         bubbleShadowContainer.translatesAutoresizingMaskIntoConstraints = false
@@ -83,32 +82,29 @@ final class IN_MessageCell: UITableViewCell, MessageCell {
         messageLabel.numberOfLines = 0
         
         let constraints: [NSLayoutConstraint] = [
-            // Message label constraints (with space for timeLabel at bottom-right)
-            messageLabel.topAnchor.constraint(equalTo: messageBubble.topAnchor, constant: 12),
-            messageLabel.leadingAnchor.constraint(equalTo: messageBubble.leadingAnchor, constant: 12),
-            messageLabel.trailingAnchor.constraint(equalTo: messageBubble.trailingAnchor, constant: -12),
-            messageLabel.bottomAnchor.constraint(equalTo: messageBubble.bottomAnchor, constant: -20), // Extra space at bottom for timeLabel
-            
-            // Time label constraints (bottom-right with padding)
-            timeLabel.trailingAnchor.constraint(equalTo: messageBubble.trailingAnchor, constant: -8),
-            timeLabel.bottomAnchor.constraint(equalTo: messageBubble.bottomAnchor, constant: -6),
-            
-            // Make sure timeLabel doesn't overlap message text
-            timeLabel.leadingAnchor.constraint(greaterThanOrEqualTo: messageLabel.leadingAnchor),
-            
-            // Bubble container constraints
             messageBubble.topAnchor.constraint(equalTo: bubbleShadowContainer.topAnchor),
             messageBubble.bottomAnchor.constraint(equalTo: bubbleShadowContainer.bottomAnchor),
             messageBubble.leadingAnchor.constraint(equalTo: bubbleShadowContainer.leadingAnchor),
             messageBubble.trailingAnchor.constraint(equalTo: bubbleShadowContainer.trailingAnchor),
             
-            // Outer constraints
             bubbleShadowContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
             bubbleShadowContainer.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4),
             bubbleShadowContainer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             
             bubbleShadowContainer.widthAnchor.constraint(greaterThanOrEqualToConstant: 80),
-            bubbleShadowContainer.heightAnchor.constraint(greaterThanOrEqualToConstant: 30)
+            bubbleShadowContainer.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor, multiplier: 0.75),
+            bubbleShadowContainer.heightAnchor.constraint(greaterThanOrEqualToConstant: 30),
+            
+            messageLabel.topAnchor.constraint(equalTo: messageBubble.topAnchor, constant: 12),
+            messageLabel.leadingAnchor.constraint(equalTo: messageBubble.leadingAnchor, constant: 12),
+            messageLabel.trailingAnchor.constraint(lessThanOrEqualTo: messageBubble.trailingAnchor, constant: -40),
+            messageLabel.bottomAnchor.constraint(lessThanOrEqualTo: messageBubble.bottomAnchor, constant: -8),
+            
+            timeLabel.trailingAnchor.constraint(equalTo: messageBubble.trailingAnchor, constant: -8),
+            timeLabel.bottomAnchor.constraint(equalTo: messageBubble.bottomAnchor, constant: -6),
+            timeLabel.leadingAnchor.constraint(greaterThanOrEqualTo: messageLabel.trailingAnchor, constant: 4),
+            
+            timeLabel.leadingAnchor.constraint(greaterThanOrEqualTo: messageLabel.leadingAnchor)
         ]
         
         NSLayoutConstraint.activate(constraints)

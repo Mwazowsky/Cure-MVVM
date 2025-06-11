@@ -127,6 +127,7 @@
 		642151142DD6E692007417E9 /* MainNavbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642151132DD6E687007417E9 /* MainNavbar.swift */; };
 		642151172DD6E9A8007417E9 /* ListLayoutCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642151162DD6E9A0007417E9 /* ListLayoutCURE.swift */; };
 		642151192DD710FB007417E9 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642151182DD710F1007417E9 /* Date.swift */; };
+		64266A9F2DF957A700CA5697 /* AvatarNameCUREUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64266A9E2DF9578900CA5697 /* AvatarNameCUREUIKit.swift */; };
 		642A6E282DD44E4E00B006F0 /* SignupFormCUREUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642A6E272DD44E4E00B006F0 /* SignupFormCUREUIKit.swift */; };
 		642A6E2B2DD44E8D00B006F0 /* SignupFormCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642A6E2A2DD44E8D00B006F0 /* SignupFormCURE.swift */; };
 		642A6E2F2DD4513A00B006F0 /* IconBtnCURE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642A6E2E2DD4512F00B006F0 /* IconBtnCURE.swift */; };
@@ -448,6 +449,7 @@
 		642151132DD6E687007417E9 /* MainNavbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavbar.swift; sourceTree = "<group>"; };
 		642151162DD6E9A0007417E9 /* ListLayoutCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListLayoutCURE.swift; sourceTree = "<group>"; };
 		642151182DD710F1007417E9 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		64266A9E2DF9578900CA5697 /* AvatarNameCUREUIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarNameCUREUIKit.swift; sourceTree = "<group>"; };
 		642A6E272DD44E4E00B006F0 /* SignupFormCUREUIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupFormCUREUIKit.swift; sourceTree = "<group>"; };
 		642A6E2A2DD44E8D00B006F0 /* SignupFormCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupFormCURE.swift; sourceTree = "<group>"; };
 		642A6E2E2DD4512F00B006F0 /* IconBtnCURE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconBtnCURE.swift; sourceTree = "<group>"; };
@@ -1385,6 +1387,14 @@
 			path = List;
 			sourceTree = "<group>";
 		};
+		64266A9D2DF9576300CA5697 /* Profiles */ = {
+			isa = PBXGroup;
+			children = (
+				64266A9E2DF9578900CA5697 /* AvatarNameCUREUIKit.swift */,
+			);
+			path = Profiles;
+			sourceTree = "<group>";
+		};
 		642A6E292DD44E7E00B006F0 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
@@ -1526,6 +1536,7 @@
 		6463630A2DF7CEA700658E72 /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				64266A9D2DF9576300CA5697 /* Profiles */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -2853,6 +2864,7 @@
 				642A6E2B2DD44E8D00B006F0 /* SignupFormCURE.swift in Sources */,
 				642A92962D89526300E34BDA /* LoginUseCase.swift in Sources */,
 				1FE49D87230AA7C200D1D42E /* MovieDetailsViewController.swift in Sources */,
+				64266A9F2DF957A700CA5697 /* AvatarNameCUREUIKit.swift in Sources */,
 				648D8CAA2DD3065400F59F33 /* ValidationTxtCUREUIKit.swift in Sources */,
 				643A96F62DB9E20F001AAED1 /* IChatContactsRepository.swift in Sources */,
 				1FC5B7D0242634EB0086FA8C /* UIImageView+ImageSizeAfterAspectFit.swift in Sources */,
