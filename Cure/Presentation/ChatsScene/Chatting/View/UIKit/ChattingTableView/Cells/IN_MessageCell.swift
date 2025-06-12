@@ -13,6 +13,8 @@ final class IN_MessageCell: UITableViewCell, MessageCell {
     
     private var viewModel: ChattingListItemViewModel!
     
+    private var hasSetupConstraints: Bool = false
+    
     // MARK: - UI Components
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
@@ -36,10 +38,15 @@ final class IN_MessageCell: UITableViewCell, MessageCell {
     }()
     
     // MARK: - Labels
-    private let messageLabel: UILabel = {
-        let label = UILabel()
+    private let messageLabel: UITextView = {
+        let label =  UITextView()
         label.font = .systemFont(ofSize: 12, weight: .regular)
+        label.textAlignment = .left
+        label.dataDetectorTypes = UIDataDetectorTypes.all
         label.textColor = DesignTokens.LegacyColors.textForeground
+        label.backgroundColor = .clear
+        label.isEditable = false
+        label.isScrollEnabled = false
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -54,8 +61,30 @@ final class IN_MessageCell: UITableViewCell, MessageCell {
         return label
     }()
     
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupViews(format: .textMessage) // Use default or pass later
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupViews(format: .textMessage)
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        messageLabel.text = nil
+        timeLabel.text = nil
+    }
+    
     // MARK: - Setup
-    private func setupViews(direction: MessageDirection, format: MessageContentFormat) {
+    private func setupViews(format: MessageContentFormat) {
+        guard !hasSetupConstraints else {
+            print("hasSetupConstraints: \(hasSetupConstraints)")
+            return
+        }
+        hasSetupConstraints = true
+        
         contentView.addSubview(bubbleShadowContainer)
         bubbleShadowContainer.addSubview(messageBubble)
         messageBubble.addSubview(messageLabel)
@@ -79,7 +108,14 @@ final class IN_MessageCell: UITableViewCell, MessageCell {
         messageBubble.layer.cornerRadius = 14
         messageBubble.layer.masksToBounds = true
         
-        messageLabel.numberOfLines = 0
+        messageLabel.textContainerInset = .zero
+        messageLabel.textContainer.lineFragmentPadding = 0
+        
+        messageLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        messageLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
+        
+        timeLabel.setContentHuggingPriority(.required, for: .horizontal)
+        timeLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
         
         let constraints: [NSLayoutConstraint] = [
             messageBubble.topAnchor.constraint(equalTo: bubbleShadowContainer.topAnchor),
@@ -115,6 +151,5 @@ final class IN_MessageCell: UITableViewCell, MessageCell {
         
         messageLabel.text = messageViewModel.messageContent
         timeLabel.text = messageViewModel.recievedAt
-        setupViews(direction: messageViewModel.direction, format: messageViewModel.contentFormat)
     }
 }

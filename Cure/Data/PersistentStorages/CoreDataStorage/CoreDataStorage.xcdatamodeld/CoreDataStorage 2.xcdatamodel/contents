@@ -50,6 +50,7 @@
         <relationship name="base" maxCount="1" deletionRule="Nullify" destinationEntity="M_BaseMessageEntity" inverseName="chattingResponse" inverseEntity="M_BaseMessageEntity"/>
         <relationship name="chattingResponse" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChattingsResponseEntity" inverseName="messages" inverseEntity="ChattingsResponseEntity"/>
         <relationship name="detail" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="M_DetailMessageEntity" inverseName="chattingResponse" inverseEntity="M_DetailMessageEntity"/>
+        <relationship name="employee" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="M_EmployeeMessageEntity" inverseName="chattingResponse" inverseEntity="M_EmployeeMessageEntity"/>
         <relationship name="reply" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="M_ReplyMessageEntity" inverseName="chattingResponse" inverseEntity="M_ReplyMessageEntity"/>
     </entity>
     <entity name="ChattingsRequestEntity" representedClassName="ChattingsRequestEntity" syncable="YES" codeGenerationType="class">
@@ -99,6 +100,15 @@
         <attribute name="waMessageID" optional="YES" attributeType="String"/>
         <relationship name="chatContact" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChatContactResponseEntity" inverseName="lastMessage" inverseEntity="ChatContactResponseEntity"/>
     </entity>
+    <entity name="M_Base_MediaEntity" representedClassName="M_Base_MediaEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="fileName" optional="YES" attributeType="String"/>
+        <attribute name="messageLogID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="messageMediaID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="mimetype" optional="YES" attributeType="String"/>
+        <attribute name="url" optional="YES" attributeType="String"/>
+        <attribute name="waMediaId" optional="YES" attributeType="String"/>
+        <relationship name="base" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="M_BaseMessageEntity" inverseName="media" inverseEntity="M_BaseMessageEntity"/>
+    </entity>
     <entity name="M_BaseMessageEntity" representedClassName="M_BaseMessageEntity" syncable="YES" codeGenerationType="class">
         <attribute name="channelID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="companyHuntingNumber" optional="YES" attributeType="String"/>
@@ -119,6 +129,7 @@
         <attribute name="type" optional="YES" attributeType="String"/>
         <attribute name="waMessageID" optional="YES" attributeType="String"/>
         <relationship name="chattingResponse" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChattingResponseEntity" inverseName="base" inverseEntity="ChattingResponseEntity"/>
+        <relationship name="media" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="M_Base_MediaEntity" inverseName="base" inverseEntity="M_Base_MediaEntity"/>
     </entity>
     <entity name="M_DetailMessageEntity" representedClassName="M_DetailMessageEntity" syncable="YES" codeGenerationType="class">
         <attribute name="isForwarded" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -129,6 +140,12 @@
         <attribute name="waMessageID" attributeType="String"/>
         <attribute name="whatsappMessageLogID" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="chattingResponse" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChattingResponseEntity" inverseName="detail" inverseEntity="ChattingResponseEntity"/>
+    </entity>
+    <entity name="M_EmployeeMessageEntity" representedClassName="M_EmployeeMessageEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="photoUrl" optional="YES" attributeType="String"/>
+        <relationship name="chattingResponse" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChattingResponseEntity" inverseName="employee" inverseEntity="ChattingResponseEntity"/>
     </entity>
     <entity name="M_ReplyMessageEntity" representedClassName="M_ReplyMessageEntity" syncable="YES" codeGenerationType="class">
         <attribute name="content" attributeType="String"/>

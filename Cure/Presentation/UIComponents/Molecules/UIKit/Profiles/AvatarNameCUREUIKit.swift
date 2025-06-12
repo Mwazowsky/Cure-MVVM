@@ -10,14 +10,18 @@ import UIKit
 final class AvatarNameCUREUIKit: UIView {
     private let avatar: UIImageView = {
         let iv = UIImageView(image: UIImage(named: "profile-placeholder"))
-        
         iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.contentMode = .scaleAspectFill
+        iv.clipsToBounds = true
+        iv.layer.cornerRadius = 20 // Half of 24 to make it circular
         return iv
     }()
     
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        label.setContentCompressionResistancePriority(.required, for: .horizontal)
         return label
     }()
     
@@ -31,24 +35,28 @@ final class AvatarNameCUREUIKit: UIView {
     }
     
     private func configure(name: String) {
-        translatesAutoresizingMaskIntoConstraints = false
-        layer.cornerRadius = 10
-        
+        self.translatesAutoresizingMaskIntoConstraints = false
         avatar.image = UIImage(named: "profile-placeholder")
         nameLabel.text = name
         
         addSubview(avatar)
         addSubview(nameLabel)
         
+        nameLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        avatar.setContentHuggingPriority(.required, for: .horizontal)
+        
         NSLayoutConstraint.activate([
+            trailingAnchor.constraint(equalTo: avatar.trailingAnchor),
+            heightAnchor.constraint(greaterThanOrEqualToConstant: 40),
+            
+            nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            nameLabel.trailingAnchor.constraint(equalTo: avatar.leadingAnchor, constant: -8),
+            nameLabel.centerYAnchor.constraint(equalTo: avatar.centerYAnchor),
+            
             avatar.topAnchor.constraint(equalTo: topAnchor, constant: 8),
             avatar.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
-            avatar.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 4),
-            avatar.widthAnchor.constraint(equalTo: avatar.heightAnchor),
-            avatar.trailingAnchor.constraint(equalTo: nameLabel.leadingAnchor, constant: -4),
-            
-            nameLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -4)
+            avatar.widthAnchor.constraint(equalToConstant: 40),
+            avatar.heightAnchor.constraint(equalToConstant: 40),
         ])
     }
 }

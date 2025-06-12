@@ -62,54 +62,9 @@ final class ChattingTableViewController: UITableViewController {
     }
     
     func reload() {
-        guard self.tableView.dataSource != nil else { return super.tableView.reloadData() }
-        let numberOfRows = viewModel.items.value.count
-        print("Number of data: \(numberOfRows)")
-        if numberOfRows > 0 {
-            
-//            var datas = [LynnBubbleData]()
-            
-//            for index in 0 ..< numberOfRows {
-//                let bubbleData = self.bubbleDataSource!.bubbleTableView(dataAt: index , bubbleTableView: self)
-//                datas.append(bubbleData)
-//            }
-//            
-//            datas.sort(by: {$0.date.timeIntervalSinceNow < $1.date.timeIntervalSinceNow})
-//            
-//            var arrBubbleDatasGroupByDay = [LynnBubbleData]()
-//            self.arrBubbleSection = [[]]
-//            
-//            let tempData:LynnBubbleData = datas[0]
-//            arrBubbleDatasGroupByDay.append(tempData)
-//            
-//            if datas.count > 1 {
-//                
-//                var compareDate = tempData.date
-//                
-//                for index in 1 ..< numberOfRows {
-//                    let comparedData = datas[index]
-//                    let textOrigin = comparedData.date._stringFromDateFormat("yyyy-MM-dd")
-//                    let textCompare = compareDate._stringFromDateFormat("yyyy-MM-dd")
-//                    
-//                    if textOrigin != textCompare {
-//                        self.arrBubbleSection.append(arrBubbleDatasGroupByDay)
-//                        arrBubbleDatasGroupByDay = []
-//                        compareDate = comparedData.date
-//                    }
-//                    arrBubbleDatasGroupByDay.append(comparedData)
-//                    
-//                    if index == numberOfRows-1 {
-//                        self.arrBubbleSection.append(arrBubbleDatasGroupByDay)
-//                    }
-//                }
-//                
-//            }else{
-//                self.arrBubbleSection.append(arrBubbleDatasGroupByDay)
-//            }
-            
-        }
-        
-        super.tableView.reloadData()
+        DispatchQueue.main.async(execute: { () -> Void in
+            self.tableView.reloadData()
+        })
     }
     
     func updateLoading(_ loading: ChattingViewModelLoading?) {
@@ -191,7 +146,7 @@ extension ChattingTableViewController {
         
         return cell
     }
-
+    
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.didSelectItem(at: indexPath.row)

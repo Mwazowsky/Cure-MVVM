@@ -21,6 +21,7 @@ struct ChatMessage: Equatable, Identifiable, Codable {
     let reply: MessageReply?
     let detail: MessageDetail?
     let base: BaseMessage?
+    let employee: MessageEmployee?
 }
 
 struct ChatData: Equatable, Identifiable, Codable {
@@ -58,7 +59,7 @@ struct BaseMessage: Codable {
     let timestamp: String
     let deliveredAt: String?
     let readAt: String?
-    //    let media: String?
+    let media: MediaMessage?
     
     enum CodingKeys: String, CodingKey {
         case messageLogID
@@ -79,7 +80,25 @@ struct BaseMessage: Codable {
         case timestamp
         case deliveredAt
         case readAt
-        //        case media
+        case media
+    }
+}
+
+struct MediaMessage: Codable {
+    let messageMediaID: Int
+    let messageLogID: Int
+    let waMediaID: String?
+    let filename: String?
+    let url: String
+    let mimetype: String
+    
+    enum CodingKeys: String, CodingKey {
+        case messageMediaID
+        case messageLogID
+        case waMediaID = "waMediaId"
+        case filename
+        case url
+        case mimetype
     }
 }
 
@@ -97,8 +116,8 @@ struct MessageDetail: Codable {
 
 // MARK: - Employee
 struct MessageEmployee: Codable {
-    let id: Int
-    let name: String
+    let id: Int?
+    let name: String?
     let photourl: String?
 }
 

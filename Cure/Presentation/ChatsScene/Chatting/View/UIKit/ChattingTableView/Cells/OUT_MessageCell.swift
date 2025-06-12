@@ -21,32 +21,62 @@ final class OUT_MessageCell: UITableViewCell, MessageCell {
         }
     }
     
-    private let profileImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.layer.cornerRadius = 25
-        imageView.clipsToBounds = true
-        imageView.contentMode = .scaleAspectFill
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    
     private let bubbleShadowContainer: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        
         return view
     }()
+    
+    private let mainStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 8
+        stack.alignment = .top
+        stack.distribution = .fill
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
     
     private let messageBubble: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        
         return view
     }()
     
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupViews(format: .textMessage)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupViews(format: .textMessage)
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        messageLabel.text = nil
+        timeLabel.text = nil
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        setupViews(format: viewModel.contentFormat)
+    }
+    
     // MARK: - Labels
-    private let messageLabel: UILabel = {
-        let label = UILabel()
+    private let messageLabel: UITextView = {
+        let label =  UITextView()
         label.font = .systemFont(ofSize: 12, weight: .regular)
+        label.textAlignment = .left
+        label.dataDetectorTypes = UIDataDetectorTypes.all
         label.textColor = DesignTokens.LegacyColors.textForeground
+        label.backgroundColor = .clear
+        label.isEditable = false
+        label.isScrollEnabled = false
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -61,49 +91,30 @@ final class OUT_MessageCell: UITableViewCell, MessageCell {
         return label
     }()
     
-    // MARK: - Setup
-    private func setupViews(direction: MessageDirection, format: MessageContentFormat) {
+    private func setupViews(format: MessageContentFormat) {
         guard let avatarUI = contactAvatar else { return }
-        contentView.addSubview(bubbleShadowContainer)
-        contentView.addSubview(avatarUI)
-        bubbleShadowContainer.addSubview(messageBubble)
-        messageBubble.addSubview(messageLabel)
-        messageBubble.addSubview(timeLabel)
+        
+        avatarUI.translatesAutoresizingMaskIntoConstraints = false
         
         bubbleShadowContainer.translatesAutoresizingMaskIntoConstraints = false
         messageBubble.translatesAutoresizingMaskIntoConstraints = false
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
+        timeLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        messageBubble.backgroundColor = DesignTokens.LegacyColors.primary.withAlphaComponent(0.8)
-        messageBubble.layer.maskedCorners = [
-            .layerMinXMinYCorner,  // top-left
-            .layerMaxXMinYCorner,  // top-right
-            .layerMinXMaxYCorner   // bottom-left
-        ]
+        bubbleShadowContainer.addSubview(messageBubble)
+        messageBubble.addSubview(messageLabel)
+        messageBubble.addSubview(timeLabel)
         
-        messageBubble.layer.cornerRadius = 14
-        messageBubble.layer.masksToBounds = true
+        messageLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        messageLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
         
+        timeLabel.setContentHuggingPriority(.required, for: .horizontal)
+        timeLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
         
-        messageLabel.numberOfLines = 0
-        
-        let constraints: [NSLayoutConstraint] = [
-            avatarUI.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
-            avatarUI.bottomAnchor.constraint(equalTo: bubbleShadowContainer.topAnchor, constant: -16),
-            avatarUI.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -4),
-            
+        NSLayoutConstraint.activate([
             messageBubble.topAnchor.constraint(equalTo: bubbleShadowContainer.topAnchor),
             messageBubble.bottomAnchor.constraint(equalTo: bubbleShadowContainer.bottomAnchor),
-            messageBubble.leadingAnchor.constraint(equalTo: bubbleShadowContainer.leadingAnchor),
             messageBubble.trailingAnchor.constraint(equalTo: bubbleShadowContainer.trailingAnchor),
-            
-            bubbleShadowContainer.topAnchor.constraint(equalTo: avatarUI.topAnchor, constant: 16),
-            bubbleShadowContainer.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4),
-            bubbleShadowContainer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            
-            bubbleShadowContainer.widthAnchor.constraint(greaterThanOrEqualToConstant: 80),
-            bubbleShadowContainer.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor, multiplier: 0.75),
-            bubbleShadowContainer.heightAnchor.constraint(greaterThanOrEqualToConstant: 30),
             
             messageLabel.topAnchor.constraint(equalTo: messageBubble.topAnchor, constant: 12),
             messageLabel.leadingAnchor.constraint(equalTo: messageBubble.leadingAnchor, constant: 12),
@@ -112,26 +123,55 @@ final class OUT_MessageCell: UITableViewCell, MessageCell {
             
             timeLabel.trailingAnchor.constraint(equalTo: messageBubble.trailingAnchor, constant: -8),
             timeLabel.bottomAnchor.constraint(equalTo: messageBubble.bottomAnchor, constant: -6),
-            timeLabel.leadingAnchor.constraint(greaterThanOrEqualTo: messageLabel.trailingAnchor, constant: 4),
-            timeLabel.leadingAnchor.constraint(greaterThanOrEqualTo: messageLabel.leadingAnchor)
-        ]
+            timeLabel.leadingAnchor.constraint(greaterThanOrEqualTo: messageLabel.trailingAnchor, constant: 4)
+        ])
         
-        NSLayoutConstraint.activate(constraints)
+        messageBubble.backgroundColor = DesignTokens.LegacyColors.primary.withAlphaComponent(0.8)
+        messageBubble.layer.cornerRadius = 14
+        messageBubble.layer.maskedCorners = [
+            .layerMinXMinYCorner,
+            .layerMaxXMinYCorner,
+            .layerMinXMaxYCorner
+        ]
+        messageBubble.layer.masksToBounds = true
+        
+        messageLabel.textContainerInset = .zero
+        messageLabel.textContainer.lineFragmentPadding = 0
+        
+//        mainStackView.addArrangedSubview(avatarUI)
+        mainStackView.addArrangedSubview(bubbleShadowContainer)
+        
+        contentView.addSubview(mainStackView)
+        
+        NSLayoutConstraint.activate([
+            mainStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            mainStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            mainStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            
+            bubbleShadowContainer.trailingAnchor.constraint(equalTo: mainStackView.trailingAnchor),
+            
+            messageLabel.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor, multiplier: 0.65),
+        ])
     }
+    
     
     func configure(with messageViewModel: ChattingListItemViewModel) {
         self.viewModel = messageViewModel
         
-        self.contactAvatar = AvatarNameCUREUIKit(name: viewModel.id)
         
-        // Make sure to add to contentView if not already done
-        if let avatar = contactAvatar, avatar.superview == nil {
-            contentView.addSubview(avatar)
-            // Set up avatar constraints relative to bubbleShadowContainer
+        if let employeeName = viewModel.employeeName {
+            self.contactAvatar = AvatarNameCUREUIKit(name: employeeName)
+            
+            if let avatar = contactAvatar, avatar.superview == nil {
+                mainStackView.addArrangedSubview(avatar)
+            }
+        } else {
+//            contactAvatar?.removeFromSuperview()
+            contactAvatar = nil
         }
         
         messageLabel.text = messageViewModel.messageContent
         timeLabel.text = messageViewModel.recievedAt
-        setupViews(direction: messageViewModel.direction, format: messageViewModel.contentFormat)
+        setupViews(format: messageViewModel.contentFormat)
     }
 }

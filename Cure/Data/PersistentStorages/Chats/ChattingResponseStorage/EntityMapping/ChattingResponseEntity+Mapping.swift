@@ -13,12 +13,14 @@ extension ChattingResponseEntity {
     func toDTO() -> MessageDTO {
         let replyDTO: MessageReplyDTO? = self.reply?.toDTO()
         let detailDTO: MessageDetailDTO? = self.detail?.toDTO()
-        let baseDTO: BaseMessageDTO? = self.base?.toDTO()
+        let baseDTO: MessageBaseDTO? = self.base?.toDTO()
+        let employeeDTO: MessageEmployeeDTO? = self.employee?.toDTO()
 
         return MessageDTO(
             reply: replyDTO,
             detail: detailDTO,
-            base: baseDTO
+            base: baseDTO,
+            employee: employeeDTO
         )
     }
 }

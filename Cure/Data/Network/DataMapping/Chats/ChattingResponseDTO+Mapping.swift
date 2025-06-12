@@ -16,39 +16,24 @@ struct MessagesPageDTO: Codable {
     let chatMessages: MessagesDTO
 }
 
+// MARK: - Array of Message Object
 struct MessagesDTO: Codable {
     let messages: [MessageDTO]
     let page: Int
     let total: Int
 }
 
+// MARK: - Single Message Object
 struct MessageDTO: Codable {
     let reply: MessageReplyDTO?
     let detail: MessageDetailDTO?
-    let base: BaseMessageDTO?
+    let base: MessageBaseDTO?
+    let employee: MessageEmployeeDTO?
 }
 
-// MARK: - Reply DTO
-struct MessageReplyDTO: Codable {
-    let content: String
-    let messageLogID: Int
-    let format: String
-}
-
-// MARK: - Detail DTO
-struct MessageDetailDTO: Codable {
-//    let location: String?
-    let referral: String?
-    let whatsappMessageLogID: Int
-    let isForwarded: Bool
-    let messageLogID: Int
-    let replyMessageID: String?
-//    let template: String?
-    let waMessageID: String
-}
-
-// MARK: - Base DTO
-struct BaseMessageDTO: Codable {
+// MARK: - Entity in Single Message Object
+/// Base Object
+struct MessageBaseDTO: Codable {
     let messageLogID: Int
     let channelID: Int
     let waMessageID: String?
@@ -67,7 +52,7 @@ struct BaseMessageDTO: Codable {
     let timestamp: String
     let deliveredAt: String?
     let readAt: String?
-//    let media: String?
+    let media: MediaDTO?
     
     enum CodingKeys: String, CodingKey {
         case roomID = "roomId"
@@ -88,7 +73,75 @@ struct BaseMessageDTO: Codable {
         case timestamp
         case deliveredAt
         case readAt
-//        case media
+        case media
+    }
+}
+
+/// base.media Object
+struct MediaDTO: Codable {
+    let messageMediaID: Int
+    let messageLogID: Int
+    let waMediaID: String?
+    let filename: String?
+    let url: String
+    let mimetype: String
+
+    enum CodingKeys: String, CodingKey {
+        case messageMediaID
+        case messageLogID
+        case waMediaID = "waMediaId"
+        case filename
+        case url
+        case mimetype
+    }
+}
+
+/// Detail Object
+struct MessageDetailDTO: Codable {
+//    let location: String?
+    let referral: String?
+    let whatsappMessageLogID: Int
+    let isForwarded: Bool
+    let messageLogID: Int
+    let replyMessageID: String?
+//    let template: String?
+    let waMessageID: String
+
+    enum CodingKeys: String, CodingKey {
+        // case location
+        case referral
+        case whatsappMessageLogID
+        case isForwarded
+        case messageLogID
+        case replyMessageID
+        // case template
+        case waMessageID
+    }
+}
+
+/// Reply Object
+struct MessageReplyDTO: Codable {
+    let content: String
+    let messageLogID: Int
+    let format: String
+
+    enum CodingKeys: String, CodingKey {
+        case content
+        case messageLogID
+        case format
+    }
+}
+
+/// Employee Object
+struct MessageEmployeeDTO: Codable {
+    let id: Int?
+    let name: String?
+    let photoUrl: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case photoUrl
     }
 }
 
@@ -132,7 +185,9 @@ extension MessageDTO {
         return .init(
             reply: reply?.toDomainModel(),
             detail: detail?.toDomainModel(),
-            base: base?.toDomainModel())
+            base: base?.toDomainModel(),
+            employee: employee?.toDomainModel()
+        )
     }
 }
 
@@ -167,7 +222,7 @@ extension MessagesDTO {
 }
 
 // MARK: - ReplyMessageDTO
-/// To Domain
+/// Dto To Domain
 extension MessageReplyDTO {
     func toDomainModel() -> MessageReply {
         MessageReply(
@@ -178,7 +233,7 @@ extension MessageReplyDTO {
     }
 }
 
-/// To Entity
+/// Dto To Entity
 extension MessageReplyDTO {
     func toEntity(in context: NSManagedObjectContext) -> M_ReplyMessageEntity {
         let entity = M_ReplyMessageEntity(context: context)
@@ -189,7 +244,7 @@ extension MessageReplyDTO {
     }
 }
 
-/// To DTO
+/// Entity To DTO
 extension M_ReplyMessageEntity {
     func toDTO() -> MessageReplyDTO {
         MessageReplyDTO(
@@ -201,7 +256,7 @@ extension M_ReplyMessageEntity {
 }
 
 // MARK: - DetailMessageDTO
-/// To Domain
+/// Dto To Domain
 extension MessageDetailDTO {
     func toDomainModel() -> MessageDetail {
         MessageDetail(
@@ -217,7 +272,7 @@ extension MessageDetailDTO {
     }
 }
 
-/// To Entity
+/// Dto To Entity
 extension MessageDetailDTO {
     func toEntity(in context: NSManagedObjectContext) -> M_DetailMessageEntity {
         let entity = M_DetailMessageEntity(context: context)
@@ -233,7 +288,7 @@ extension MessageDetailDTO {
     }
 }
 
-/// To DTO
+/// Entity To DTO
 extension M_DetailMessageEntity {
     func toDTO() -> MessageDetailDTO {
         MessageDetailDTO(
@@ -251,8 +306,8 @@ extension M_DetailMessageEntity {
 
 
 // MARK: - BaseMessageDTO
-/// To Domain
-extension BaseMessageDTO {
+/// Dto To Domain
+extension MessageBaseDTO {
     func toDomainModel() -> BaseMessage {
         return BaseMessage(
             messageLogID: self.messageLogID,
@@ -272,15 +327,15 @@ extension BaseMessageDTO {
             roomID: self.roomID,
             timestamp: self.timestamp,
             deliveredAt: self.deliveredAt,
-            readAt: self.readAt
-//            media: self.media
+            readAt: self.readAt,
+            media: self.media?.toDomainModel()
         )
     }
 }
 
 
-/// To Entity
-extension BaseMessageDTO {
+/// Dto To Entity
+extension MessageBaseDTO {
     func toEntity(in context: NSManagedObjectContext) -> M_BaseMessageEntity {
         let entity = M_BaseMessageEntity(context: context)
         entity.messageLogID = Int16(messageLogID)
@@ -301,15 +356,15 @@ extension BaseMessageDTO {
         entity.timestamp = timestamp
         entity.deliveredAt = deliveredAt
         entity.readAt = readAt
-//        entity.media = media
+        entity.media = media?.toEntity(in: context)
         return entity
     }
 }
 
-/// To DTO
+/// Entity To DTO
 extension M_BaseMessageEntity {
-    func toDTO() -> BaseMessageDTO {
-        BaseMessageDTO(
+    func toDTO() -> MessageBaseDTO {
+        MessageBaseDTO(
             messageLogID: Int(messageLogID),
             channelID: Int(channelID),
             waMessageID: waMessageID,
@@ -327,13 +382,93 @@ extension M_BaseMessageEntity {
             roomID: Int(roomID),
             timestamp: timestamp ?? "",
             deliveredAt: deliveredAt,
-            readAt: readAt
-//            media: media
+            readAt: readAt,
+            media: media?.toDTO()
+        )
+    }
+}
+
+// MARK: - BaseMessageDTO -> MediaDTO
+/// Dto To Domain
+extension MediaDTO {
+    func toDomainModel() -> MediaMessage {
+        return MediaMessage(
+            messageMediaID: self.messageMediaID,
+            messageLogID: self.messageLogID,
+            waMediaID: self.waMediaID,
+            filename: self.filename,
+            url: self.url,
+            mimetype: self.mimetype
+        )
+    }
+}
+
+/// Dto To Entity
+extension MediaDTO {
+    func toEntity(in context: NSManagedObjectContext) -> M_Base_MediaEntity {
+        let entity = M_Base_MediaEntity(context: context)
+        entity.messageMediaID = Int32(messageMediaID)
+        entity.messageLogID = Int32(messageLogID)
+        entity.waMediaId = waMediaID
+        entity.fileName = filename
+        entity.url = url
+        entity.mimetype = mimetype
+        
+        return entity
+    }
+}
+
+/// Entity To DTO
+extension M_Base_MediaEntity {
+    func toDTO() -> MediaDTO {
+        MediaDTO(
+            messageMediaID: Int(messageMediaID),
+            messageLogID: Int(messageLogID),
+            waMediaID: waMediaId,
+            filename: fileName,
+            url: url ?? "",
+            mimetype: mimetype ?? ""
+        )
+    }
+}
+
+// MARK: - EmployeeMessageDTO -> MediaDTO
+/// Dto To Domain
+extension MessageEmployeeDTO {
+    func toDomainModel() -> MessageEmployee {
+        return MessageEmployee(
+            id: self.id,
+            name: self.name,
+            photourl: self.photoUrl
+        )
+    }
+}
+
+/// Dto To Entity
+extension MessageEmployeeDTO {
+    func toEntity(in context: NSManagedObjectContext) -> M_EmployeeMessageEntity {
+        let entity = M_EmployeeMessageEntity(context: context)
+        entity.id = Int32(id ?? 0)
+        entity.name = name
+        entity.photoUrl = photoUrl
+        
+        return entity
+    }
+}
+
+/// Entity To Dto
+extension M_EmployeeMessageEntity {
+    func toDTO() -> MessageEmployeeDTO {
+        MessageEmployeeDTO(
+            id: Int(id),
+            name: name,
+            photoUrl: photoUrl
         )
     }
 }
 
 
+// MARK: Helper Extension
 extension Array where Element == MessageDTO {
     func toDomainModel() -> [ChatMessage] {
         return self.map { $0.toDomain() }
