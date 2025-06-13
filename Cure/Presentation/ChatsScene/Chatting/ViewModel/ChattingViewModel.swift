@@ -41,6 +41,7 @@ protocol ChattingViewModelInput {
 }
 
 protocol ChattingViewModelOutput {
+    var chatContact: ChatContact { get }
     var items: Observable<[ChattingListItemViewModel]> { get }
     var loading: Observable<ChattingViewModelLoading?> { get }
     var query: Observable<String> { get }
@@ -52,13 +53,23 @@ protocol ChattingViewModelOutput {
     var searchBarPlaceholder: String { get }
 }
 
+/// Grouped chats by date
+struct ChatSection {
+    let date: Date
+    let messageGroups: [MessageGroup]
+}
+
+struct MessageGroup {
+    let senderId: String
+    let messages: [ChatMessage]
+}
+
 typealias ChattingViewModel = ChattingViewModelInput & ChattingViewModelOutput
 
 final class DefaultChattingViewModel: ChattingViewModel {
     private let fetchMessagesUseCase: FetchMessagesUseCase
     private let getUserTokenDataUseCase: GetUserTokenUseCase
     private let actions: ChattingViewModelActions?
-    private let chatContact: ChatContact
     
     var currentPage: Int = 0
     var nextPage: Int { currentPage + 1 }
@@ -68,7 +79,9 @@ final class DefaultChattingViewModel: ChattingViewModel {
     private let mainQueue: DispatchQueueType
     
     // MARK: - Output
+    let chatContact: ChatContact
     let items: Observable<[ChattingListItemViewModel]> = Observable([])
+    let groupedItems: Observable
     let loading: Observable<ChattingViewModelLoading?> = Observable(.none)
     let query: Observable<String> = Observable("")
     let error: Observable<String> = Observable("")
@@ -206,5 +219,40 @@ extension DefaultChattingViewModel {
         //        let allMessages = pages.flatMap { $0.chatMessages }
         //        let _ = allMessages[index]
         //        actions?.showChatContactDetails(selectedMessage)
+    }
+}
+
+extension DefaultChattingViewModel {
+    func groupMessages(_ messages: [ChatMessage]) -> ChatSection {
+        let calendar: Calendar
+        
+        let dateFormatter = DateFormatter()
+          dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+          dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+
+        let groupedByDate = Dictionary(grouping: messages) {
+            calendar.startOfDay(for: dateFormatter.date(from: $0.base?.timestamp ?? "") ?? Date())
+        }
+        
+        let sortedDates = groupedByDate.keys.sorted()
+        
+        var result: [ChatSection] = []
+        
+        for date in sortedDates {
+            let dayMessages = groupedByDate[date]?.sorted(
+                by: {
+                    dateFormatter.date(from: $0.base?.timestamp ?? "") ?? Date() <
+                        dateFormatter.date(from: $1.base?.timestamp ?? "") ?? Date()
+                }
+            ) ?? []
+            
+            var messageGroups: [MessageGroup] = []
+            var currentGroup: [ChatMessage] = []
+            
+            for message in dayMessages {
+                <#body#>
+            }
+        }
+        
     }
 }

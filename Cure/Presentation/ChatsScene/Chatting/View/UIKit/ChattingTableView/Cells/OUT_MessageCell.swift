@@ -46,25 +46,11 @@ final class OUT_MessageCell: UITableViewCell, MessageCell {
         return view
     }()
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupViews(format: .textMessage)
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setupViews(format: .textMessage)
-    }
-    
     override func prepareForReuse() {
         super.prepareForReuse()
         messageLabel.text = nil
         timeLabel.text = nil
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        setupViews(format: viewModel.contentFormat)
+        contactAvatar = nil
     }
     
     // MARK: - Labels
@@ -92,10 +78,7 @@ final class OUT_MessageCell: UITableViewCell, MessageCell {
     }()
     
     private func setupViews(format: MessageContentFormat) {
-        guard let avatarUI = contactAvatar else { return }
-        
-        avatarUI.translatesAutoresizingMaskIntoConstraints = false
-        
+        contactAvatar?.translatesAutoresizingMaskIntoConstraints = false
         bubbleShadowContainer.translatesAutoresizingMaskIntoConstraints = false
         messageBubble.translatesAutoresizingMaskIntoConstraints = false
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -137,41 +120,54 @@ final class OUT_MessageCell: UITableViewCell, MessageCell {
         
         messageLabel.textContainerInset = .zero
         messageLabel.textContainer.lineFragmentPadding = 0
-        
-//        mainStackView.addArrangedSubview(avatarUI)
-        mainStackView.addArrangedSubview(bubbleShadowContainer)
-        
-        contentView.addSubview(mainStackView)
-        
-        NSLayoutConstraint.activate([
-            mainStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            mainStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
-            mainStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            
-            bubbleShadowContainer.trailingAnchor.constraint(equalTo: mainStackView.trailingAnchor),
-            
-            messageLabel.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor, multiplier: 0.65),
-        ])
-    }
-    
-    
-    func configure(with messageViewModel: ChattingListItemViewModel) {
-        self.viewModel = messageViewModel
-        
+
+        mainStackView.arrangedSubviews.forEach { mainStackView.removeArrangedSubview($0); $0.removeFromSuperview() }
         
         if let employeeName = viewModel.employeeName {
             self.contactAvatar = AvatarNameCUREUIKit(name: employeeName)
             
             if let avatar = contactAvatar, avatar.superview == nil {
                 mainStackView.addArrangedSubview(avatar)
+                mainStackView.addArrangedSubview(bubbleShadowContainer)
+                
+                contentView.addSubview(mainStackView)
+                
+                NSLayoutConstraint.activate([
+                    mainStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+                    mainStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+                    mainStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+                    
+                    bubbleShadowContainer.trailingAnchor.constraint(equalTo: mainStackView.trailingAnchor),
+                    
+                    avatar.heightAnchor.constraint(greaterThanOrEqualToConstant: 40),
+                    
+                    messageLabel.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor, multiplier: 0.65),
+                ])
             }
         } else {
-//            contactAvatar?.removeFromSuperview()
-            contactAvatar = nil
+            mainStackView.addArrangedSubview(bubbleShadowContainer)
+            
+            contentView.addSubview(mainStackView)
+            
+            NSLayoutConstraint.activate([
+                mainStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+                mainStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+                mainStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+                
+                bubbleShadowContainer.trailingAnchor.constraint(equalTo: mainStackView.trailingAnchor),
+                
+                messageLabel.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor, multiplier: 0.65),
+            ])
         }
+    }
+    
+    func configure(with messageViewModel: ChattingListItemViewModel) {
+        self.viewModel = messageViewModel
         
         messageLabel.text = messageViewModel.messageContent
         timeLabel.text = messageViewModel.recievedAt
         setupViews(format: messageViewModel.contentFormat)
+        
+        print("Message Media: ", messageViewModel.media as Any)
     }
 }

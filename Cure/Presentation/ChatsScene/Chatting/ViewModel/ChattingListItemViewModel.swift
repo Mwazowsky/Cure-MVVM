@@ -19,6 +19,7 @@ struct ChattingListItemViewModel: Equatable, Identifiable {
     let recievedAt: String
     let status: DeliveryStatus
     
+    var media: MediaMessage?
     let employeeName: String?
     let employeeId: Int?
     let employeePhoto: String?
@@ -54,6 +55,12 @@ extension ChattingListItemViewModel {
         direction = message.direction
         contentFormat = message.contentFormat
         status = DeliveryStatus(rawValue: message.base?.status ?? "") ?? .sent
+        
+        media = nil
+        
+        if let msgMedia = message.base?.media {
+            media = msgMedia
+        }
         
         employeeName = message.employee?.name
         employeeId = message.employee?.id

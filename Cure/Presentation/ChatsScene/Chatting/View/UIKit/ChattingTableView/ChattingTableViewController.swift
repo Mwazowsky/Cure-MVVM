@@ -49,7 +49,9 @@ final class ChattingTableViewController: UITableViewController {
     
     var viewModel: ChattingViewModel! {
         didSet {
-            self.reload()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.reload()
+            }
         }
     }
     
@@ -62,9 +64,9 @@ final class ChattingTableViewController: UITableViewController {
     }
     
     func reload() {
-        DispatchQueue.main.async(execute: { () -> Void in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             self.tableView.reloadData()
-        })
+        }
     }
     
     func updateLoading(_ loading: ChattingViewModelLoading?) {
@@ -81,6 +83,7 @@ final class ChattingTableViewController: UITableViewController {
     // MARK: - Private
     private func setupViews() {
         tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 60
         
         tableView.tableHeaderView?.addSubview(countLabel)
         
@@ -114,6 +117,7 @@ final class ChattingTableViewController: UITableViewController {
 extension ChattingTableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("Tabel Loaded with row count: \(viewModel.items.value.count)")
         return viewModel.items.value.count
     }
     
@@ -152,3 +156,5 @@ extension ChattingTableViewController {
         viewModel.didSelectItem(at: indexPath.row)
     }
 }
+
+

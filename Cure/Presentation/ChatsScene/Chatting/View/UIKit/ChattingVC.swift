@@ -16,7 +16,6 @@ protocol ChattingViewControllerDelegate: AnyObject {
 extension ChattingViewController {
     /// WARNING: Change these constants according to your project's design
     private struct Const {
-        static let navTitle: String = "Abdul Dudu"
         /// Image height/width for Large NavBar state
         static let ImageSizeForLargeState: CGFloat = 60
         /// Margin from right anchor of safe area to right anchor of Image
@@ -37,7 +36,13 @@ extension ChattingViewController {
 }
 
 final class ChattingViewController: UIViewController {
-    private var viewModel: ChattingViewModel!
+    private var viewModel: ChattingViewModel! {
+        didSet {
+            self.navTitle = viewModel.chatContact.contactName
+        }
+    }
+    
+    var navTitle: String?
     
     private let imageview: UIImageView = UIImageView(image: UIImage(named: "profile-placeholder"))
     private let parentView: UIView = UIView()
@@ -73,6 +78,10 @@ final class ChattingViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        viewModel.viewDidLoad()
+        print("Tabel Data Sources Loaded")
+        
         setupUI()
         observeAndHandleOrientationMode()
         
@@ -86,8 +95,6 @@ final class ChattingViewController: UIViewController {
         
         self.chatingTableViewController = ChattingTableViewController()
         chatingTableViewController?.viewModel = viewModel
-        
-        viewModel.viewDidLoad()
         
         guard let chattingTVController = chatingTableViewController else { return }
         
@@ -143,7 +150,7 @@ final class ChattingViewController: UIViewController {
     
     // MARK: - Private methods
     private func setupUI() {
-        title = Const.navTitle
+        title = self.navTitle
         
         guard let navigationBar = self.navigationController?.navigationBar else { return }
         navigationBar.addSubview(imageview)
@@ -163,11 +170,11 @@ final class ChattingViewController: UIViewController {
         NotificationCenter.default.addObserver(forName: UIDevice.orientationDidChangeNotification, object: nil, queue: OperationQueue.current) { [weak self] _ in
             
             if UIDevice.current.orientation.isPortrait {
-                self?.title = Const.navTitle
+                self?.title = self?.navTitle
                 self?.moveAndResizeImageForPortrait()
                 self?.shouldResize = true
             } else if UIDevice.current.orientation.isLandscape {
-                self?.title = "Non 🙅🏽‍♂️ resizing image"
+                self?.title = self?.navTitle
                 self?.resizeImageForLandscape()
                 self?.shouldResize = false
             }

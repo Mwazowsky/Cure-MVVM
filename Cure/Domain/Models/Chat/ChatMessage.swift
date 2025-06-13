@@ -84,7 +84,7 @@ struct BaseMessage: Codable {
     }
 }
 
-struct MediaMessage: Codable {
+struct MediaMessage: Codable, Equatable {
     let messageMediaID: Int
     let messageLogID: Int
     let waMediaID: String?

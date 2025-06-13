@@ -20,7 +20,7 @@ final class AvatarNameCUREUIKit: UIView {
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: UIFont.labelFontSize)
         label.setContentCompressionResistancePriority(.required, for: .horizontal)
         return label
     }()
@@ -47,14 +47,11 @@ final class AvatarNameCUREUIKit: UIView {
         
         NSLayoutConstraint.activate([
             trailingAnchor.constraint(equalTo: avatar.trailingAnchor),
-            heightAnchor.constraint(greaterThanOrEqualToConstant: 40),
             
             nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             nameLabel.trailingAnchor.constraint(equalTo: avatar.leadingAnchor, constant: -8),
-            nameLabel.centerYAnchor.constraint(equalTo: avatar.centerYAnchor),
+            nameLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             
-            avatar.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            avatar.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
             avatar.widthAnchor.constraint(equalToConstant: 40),
             avatar.heightAnchor.constraint(equalToConstant: 40),
         ])
